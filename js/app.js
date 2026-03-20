@@ -114,43 +114,61 @@ const State = {
 // ══════════════════════════════════════════
 const Plan = {
   schedule: (function () {
-    // 60-entry schedule: {day, topic, section, part}
-    // Groups of days per topic (to be expanded with real FCE content)
+    // 60-entry schedule calibrated on real tag frequencies from 252 exercises (Part 1–7)
+    // Analysis: database/tag_frequency_analysis.md (2026-03-20)
+    // Giorni ∝ frequenza tag reali, sequenza: base → complesso, spaced review integrata
     const entries = [];
     const topics = [
-      { key: 'verb_tenses',       label: 'Tempi Verbali',                   part: 'Part 1', days: 7  },
-      { key: 'modals',            label: 'Verbi Modali',                    part: 'Part 2', days: 7  },
-      { key: 'conditionals',      label: 'Condizionali & Wish',             part: 'Part 4', days: 7  },
-      { key: 'passive',           label: 'Forma Passiva',                   part: 'Part 1', days: 6  },
-      { key: 'reported_speech',   label: 'Discorso Indiretto',              part: 'Part 4', days: 6  },
-      { key: 'gerund_infinitive', label: 'Gerundio & Infinito',             part: 'Part 1', days: 6  },
-      { key: 'word_formation',    label: 'Word Formation',                  part: 'Part 3', days: 7  },
-      { key: 'collocations',      label: 'Collocazioni & Phrasal Verbs',    part: 'Part 1', days: 7  },
-      { key: 'linking_words',     label: 'Connettori',                      part: 'Part 2', days: 7  },
-      { key: 'prepositions',      label: 'Preposizioni',                    part: 'Part 2', days: 0  },
+      // Gg 1–6   (6gg) — auxiliary_verbs, verb_tenses
+      { key: 'verb_tenses',       label: 'Tempi Verbali',              part: 'Part 1+2', days: 6 },
+      // Gg 7–10  (4gg) — coll_make/do/have/take (16.8% dei tag, topic #1)
+      { key: 'collocations',      label: 'Collocazioni I',             part: 'Part 1',   days: 4 },
+      // Gg 11–14 (4gg) — coll_adv_deeply/highly/widely, coll_adj_noun
+      { key: 'collocations2',     label: 'Collocazioni II',            part: 'Part 1',   days: 4 },
+      // Gg 15–18 (4gg) — vprep_*, prep_place_*, fixed_* (7.7%, topic #2 in P2)
+      { key: 'prepositions',      label: 'Preposizioni',               part: 'Part 2',   days: 4 },
+      // Gg 19–22 (4gg) — rule_verb_to_noun_tion/ness/ity/ment
+      { key: 'word_formation',    label: 'Word Formation I',           part: 'Part 3',   days: 4 },
+      // Gg 23–26 (4gg) — rule_prefix_un/dis/im, rule_noun_to_adj_ful/less/ive
+      { key: 'word_formation2',   label: 'Word Formation II',          part: 'Part 3',   days: 4 },
+      // Gg 27–29 (3gg) — pp_for_since, pp_yet_already_just, pp_never
+      { key: 'present_perfect',   label: 'Present Perfect',            part: 'Part 4',   days: 3 },
+      // Gg 30–33 (4gg) — causative_have/get, passive_reporting_said/believed
+      { key: 'passive',           label: 'Forma Passiva & Causativo',  part: 'Part 4',   days: 4 },
+      // Gg 34–36 (3gg) — modal_should_have, modal_must_have, modal_cant_have
+      { key: 'modals',            label: 'Verbi Modali & Modal Perf.', part: 'Part 1+4', days: 3 },
+      // Gg 37–39 (3gg) — reporting_verb_remind/advise/suggest/deny
+      { key: 'reported_speech',   label: 'Discorso Indiretto',         part: 'Part 4',   days: 3 },
+      // Gg 40–42 (3gg) — wish_past_regret, wish_would_annoyance, if_only
+      { key: 'wish',              label: 'Wish / If only / Desideri',  part: 'Part 4',   days: 3 },
+      // Gg 43–45 (3gg) — verb_gerund_mind/deny/suggest, be_used_to, worth_gerund
+      { key: 'gerund_infinitive', label: 'Gerundio & Infinito',        part: 'Part 1+4', days: 3 },
+      // Gg 46–48 (3gg) — link_contrast_although, link_add_furthermore, link_result
+      { key: 'linking_words',     label: 'Connettori',                 part: 'Part 1+2', days: 3 },
+      // Gg 49–50 (2gg) — comparative_as_as, superlative, comparative_fraction
+      { key: 'comparatives',      label: 'Comparativi & Superlativi',  part: 'Part 4',   days: 2 },
+      // Gg 51–52 (2gg) — rel_defining_vs_non_defining, which vs that (trappola virgola)
+      { key: 'relative_clauses',  label: 'Relative Clauses',           part: 'Part 2',   days: 2 },
+      // Gg 53–54 (2gg) — conditional_2/3, inversion_not_until/never/had
+      { key: 'conditionals',      label: 'Condizionali & Inversione',  part: 'Part 4',   days: 2 },
+      // Gg 55–56 (2gg) — quant_few/many/much/any, article_the_zero
+      { key: 'quantifiers',       label: 'Quantificatori & Articoli',  part: 'Part 2',   days: 2 },
+      // Gg 57–58 (2gg) — false_friend_italian (8 tag), pv_call_off/set_up
+      { key: 'phrasal_verbs',     label: 'Phrasal Verbs & Confusables',part: 'Part 1+4', days: 2 },
+      // Gg 59–60 (2gg) — ripasso adattivo su tutti i tag
+      { key: 'review',            label: 'Ripasso & Simulazione',      part: 'Part 1–4', days: 2 },
     ];
     let day = 1;
     for (const t of topics) {
-      const count = t.key === 'prepositions' ? 60 - day + 1 : t.days;
-      for (let i = 0; i < count && day <= 60; i++, day++) {
+      for (let i = 0; i < t.days && day <= 60; i++, day++) {
         entries.push({
           day,
-          topic:   t.label,
+          topic:    t.label,
           topicKey: t.key,
-          section: `Giorno ${day} — ${t.label}`,
-          part:    t.part
+          section:  `Giorno ${day} — ${t.label}`,
+          part:     t.part
         });
       }
-    }
-    // Pad to 60 if needed
-    while (entries.length < 60) {
-      entries.push({
-        day:     entries.length + 1,
-        topic:   'Ripasso Generale',
-        topicKey: 'prepositions',
-        section: `Giorno ${entries.length + 1} — Ripasso`,
-        part:    'Part 1'
-      });
     }
     return entries;
   })(),
@@ -288,13 +306,22 @@ const UI = {
 // Topic label map (used by Adaptive)
 const TOPIC_LABELS = {
   verb_tenses:       'Tempi Verbali',
-  modals:            'Verbi Modali',
-  conditionals:      'Condizionali & Wish',
-  passive:           'Forma Passiva',
-  reported_speech:   'Discorso Indiretto',
-  gerund_infinitive: 'Gerundio & Infinito',
-  word_formation:    'Word Formation',
-  collocations:      'Collocazioni & Phrasal Verbs',
-  linking_words:     'Connettori',
+  collocations:      'Collocazioni I (make/do/have/take)',
+  collocations2:     'Collocazioni II (avverbi/aggettivi)',
   prepositions:      'Preposizioni',
+  word_formation:    'Word Formation I (suffissi)',
+  word_formation2:   'Word Formation II (prefissi)',
+  present_perfect:   'Present Perfect',
+  passive:           'Forma Passiva & Causativo',
+  modals:            'Verbi Modali & Modal Perfects',
+  reported_speech:   'Discorso Indiretto',
+  wish:              'Wish / If only',
+  gerund_infinitive: 'Gerundio & Infinito',
+  linking_words:     'Connettori',
+  comparatives:      'Comparativi & Superlativi',
+  relative_clauses:  'Relative Clauses',
+  conditionals:      'Condizionali & Inversione',
+  quantifiers:       'Quantificatori & Articoli',
+  phrasal_verbs:     'Phrasal Verbs & Confusables',
+  review:            'Ripasso & Simulazione',
 };

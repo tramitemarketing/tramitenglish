@@ -20,16 +20,26 @@ const TOPIC_KEYS = {
 };
 
 function topicKeyForDay(day) {
-  if (day <= 7)  return 'verb_tenses';
-  if (day <= 14) return 'modals';
-  if (day <= 21) return 'conditionals';
-  if (day <= 27) return 'passive';
-  if (day <= 33) return 'reported_speech';
-  if (day <= 39) return 'gerund_infinitive';
-  if (day <= 46) return 'word_formation';
-  if (day <= 53) return 'collocations';
-  if (day <= 59) return 'linking_words';
-  return 'prepositions';
+  // Calibrated on real tag frequencies from 252 FCE exercises (2026-03-20)
+  if (day <=  6) return 'verb_tenses';
+  if (day <= 10) return 'collocations';
+  if (day <= 14) return 'collocations2';
+  if (day <= 18) return 'prepositions';
+  if (day <= 22) return 'word_formation';
+  if (day <= 26) return 'word_formation2';
+  if (day <= 29) return 'present_perfect';
+  if (day <= 33) return 'passive';
+  if (day <= 36) return 'modals';
+  if (day <= 39) return 'reported_speech';
+  if (day <= 42) return 'wish';
+  if (day <= 45) return 'gerund_infinitive';
+  if (day <= 48) return 'linking_words';
+  if (day <= 50) return 'comparatives';
+  if (day <= 52) return 'relative_clauses';
+  if (day <= 54) return 'conditionals';
+  if (day <= 56) return 'quantifiers';
+  if (day <= 58) return 'phrasal_verbs';
+  return 'review';
 }
 
 function getTheoryFor(day) {
