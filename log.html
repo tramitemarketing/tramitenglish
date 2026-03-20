@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Log Errori</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .log-meta {
+      font-size: 11px;
+      color: var(--subtext);
+      margin-bottom: 6px;
+    }
+
+    .answer-row {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    .answer-label {
+      font-weight: 700;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .answer-wrong {
+      color: var(--error);
+    }
+
+    .answer-correct {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .empty-log {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .empty-log .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .empty-log p {
+      font-size: 14px;
+      color: var(--subtext);
+      line-height: 1.6;
+    }
+
+    .log-count {
+      font-size: 12px;
+      color: var(--subtext);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="topbar-title">Log Errori</span>
+    <span id="errorCount" class="badge" style="font-size:11px">0</span>
+  </header>
+
+  <!-- Main content -->
+  <main class="page-content">
+
+    <!-- Filter chips -->
+    <div class="chips-row" id="filterChips">
+      <span class="chip active" data-filter="all">Tutti</span>
+      <span class="chip" data-filter="Part 1">Part 1</span>
+      <span class="chip" data-filter="Part 2">Part 2</span>
+      <span class="chip" data-filter="Part 3">Part 3</span>
+      <span class="chip" data-filter="Part 4">Part 4</span>
+      <span class="chip" data-filter="Part 5">Part 5</span>
+    </div>
+
+    <div id="logList"></div>
+
+  </main>
+
+  <!-- FAB -->
+  <a href="review.html" class="fab" id="reviewFab" style="display:none">
+    &#x21BA; Ripassa errori
+  </a>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <span class="nav-icon">&#x1F3E0;</span>
+      <span>Home</span>
+    </a>
+    <a href="session.html" class="nav-item">
+      <span class="nav-icon">&#9654;</span>
+      <span>Sessione</span>
+    </a>
+    <a href="library.html" class="nav-item">
+      <span class="nav-icon">&#x1F4D6;</span>
+      <span>Libreria</span>
+    </a>
+    <a href="log.html" class="nav-item active">
+      <span class="nav-icon">&#x1F4CB;</span>
+      <span>Log</span>
+    </a>
+    <a href="stats.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CA;</span>
+      <span>Stats</span>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var state       = State.load();
+      var errors      = state.sessionErrors || [];
+      var activeFilter = 'all';
+
+      document.getElementById('errorCount').textContent = errors.length;
+
+      if (errors.length > 0) {
+        document.getElementById('reviewFab').style.display = '';
+      }
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: '2-digit' });
+      }
+
+      function renderLog(filter) {
+        var listEl  = document.getElementById('logList');
+        var filtered = filter === 'all'
+          ? errors
+          : errors.filter(function (e) { return e.part === filter; });
+
+        if (filtered.length === 0) {
+          listEl.innerHTML = '<div class="empty-log">'
+            + '<div class="empty-icon">&#x2705;</div>'
+            + '<p>' + (filter === 'all'
+                ? 'Nessun errore registrato ancora.<br>Completa alcune sessioni per vedere i tuoi errori qui.'
+                : 'Nessun errore per ' + filter + '.') + '</p>'
+            + '</div>';
+          return;
+        }
+
+        listEl.innerHTML = '<div class="log-count">' + filtered.length + ' error' + (filtered.length === 1 ? 'e' : 'i') + '</div>';
+
+        filtered.forEach(function (e) {
+          var card = document.createElement('div');
+          card.className = 'card error-card';
+
+          card.innerHTML = '<div class="log-meta">'
+            + '<span class="badge">' + (e.part || 'N/D') + '</span>'
+            + ' &nbsp; Giorno ' + (e.day || '?')
+            + (e.date ? ' &middot; ' + formatDate(e.date) : '')
+            + '</div>'
+            + '<div class="error-question">' + (e.question || '') + '</div>'
+            + '<div class="error-answers">'
+            + '<div class="answer-row"><span class="answer-label">La tua risposta:</span> <span class="answer-wrong">' + (e.userAnswer || '—') + '</span></div>'
+            + '<div class="answer-row"><span class="answer-label">Risposta corretta:</span> <span class="answer-correct">' + (e.correct || '—') + '</span></div>'
+            + '</div>'
+            + '<div class="error-explanation">' + (e.explanation || '') + '</div>';
+
+          listEl.appendChild(card);
+        });
+      }
+
+      renderLog('all');
+
+      // Filter chips
+      document.getElementById('filterChips').addEventListener('click', function (ev) {
+        var chip = ev.target.closest('.chip');
+        if (!chip) return;
+
+        document.querySelectorAll('#filterChips .chip').forEach(function (c) {
+          c.classList.remove('active');
+        });
+        chip.classList.add('active');
+        activeFilter = chip.dataset.filter;
+        renderLog(activeFilter);
+      });
+
+    })();
+  </script>
+</body>
+</html>

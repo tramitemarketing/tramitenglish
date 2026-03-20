@@ -1,0 +1,461 @@
+================================================================================
+TRAMITENGLISH — ARGOMENTI GRAMMATICALI E TIPI DI ESERCIZIO
+Aggiornato: 2026-03-19
+================================================================================
+
+
+════════════════════════════════════════════════════════════════════════════════
+SEZIONE 1 — ARGOMENTI GRAMMATICALI E LESSICALI (con frequenza FCE)
+════════════════════════════════════════════════════════════════════════════════
+
+────────────────────────────────────────────────────────────────────────────────
+PART 1 — MULTIPLE CHOICE CLOZE (grammatica + vocabolario)
+────────────────────────────────────────────────────────────────────────────────
+
+Argomento                              | Freq | Priorità
+---------------------------------------|------|----------
+Collocazioni (make/do/have/take)       |  22% | ★★★★★
+Preposizioni (frasi fisse)             |  17% | ★★★★★
+Phrasal verbs                          |  15% | ★★★★★
+Congiunzioni / linker                  |  12% | ★★★★
+Pattern verbali (gerund/inf)           |  10% | ★★★★
+Confusables (word choice)              |   9% | ★★★★
+Articoli / determiners                 |   7% | ★★★
+Scelta aggettivo/avverbio              |   6% | ★★★
+Modali ausiliari                       |   2% | ★★
+
+TAG SPECIFICI USATI IN PART 1:
+  coll_make, coll_do, coll_have, coll_take
+  coll_adv_highly / coll_adv_deeply / coll_adv_strongly / coll_adv_widely
+  phrasal_verb_carry_out, phrasal_verb_set_up, phrasal_verb_come_across
+  link_contrast_although_though, link_contrast_despite_in_spite_of
+  link_result_therefore, link_reason_because_of, link_purpose_in_order_to
+  link_addition_moreover_furthermore, link_time_once_as_soon_as
+  conf_fewer_less, conf_adj_historic_historical, conf_adj_farther_further
+  conf_verb_preserve_protect, conf_noun_people_groups, conf_noun_aim_goal_purpose
+  conf_lie_lay, conf_verb_raise_rise
+  fixed_expression_known_as, fixed_expression_around_the_clock
+  fixed_expression_out_of, fixed_expression_in_front_of
+  aprep_fascinated_by, aprep_interested_in, aprep_keen_on
+  modal_have_to_obligation
+  indirect_question_to_inf
+  noun_prep_of
+  register_formal
+  false_friend_italian (es. "eventually" ≠ "eventualmente")
+
+
+────────────────────────────────────────────────────────────────────────────────
+PART 2 — OPEN CLOZE (grammatica pura)
+────────────────────────────────────────────────────────────────────────────────
+
+Argomento                              | Freq | Priorità
+---------------------------------------|------|----------
+Relative clauses (that/which/who)      |  17% | ★★★★★
+Articoli (a/an/the)                    |  15% | ★★★★★
+Preposizioni                           |  14% | ★★★★★
+Congiunzioni / linker                  |  12% | ★★★★
+Ausiliari (do/have/be)                 |  11% | ★★★★
+Pronomi (riflessivi, relativi)         |  10% | ★★★★
+Quantificatori (few/many/much/any)     |   9% | ★★★
+Comparativi (than/as)                  |   6% | ★★★
+Passivo (be/been)                      |   5% | ★★★
+
+TAG SPECIFICI USATI IN PART 2:
+  rel_defining_that_which, rel_non_defining_which, rel_where_when_why
+  art_zero_article, art_definite_the, art_indefinite_a_an
+  prep_in_on_at_time, prep_in_on_at_place, prep_by_until_till
+  link_subordinating_that, link_contrast_while_whereas
+  link_mc_contrast_pair (both…and, either…or, neither…nor)
+  aux_have_has_had_perfect, aux_be_continuous, aux_do_emphasis
+  pron_reflexive, pron_relative_whom
+  quant_few_little, quant_each_every, quant_both_all_whole
+  comp_as_as, comp_than, comp_the_more_the_more
+  passive_be_past_participle
+  modal_have_to_obligation, indirect_question_to_inf
+  fixed_expression_in_condition, fixed_expression_in_front_of
+  conf_lie_lay
+
+
+────────────────────────────────────────────────────────────────────────────────
+PART 3 — WORD FORMATION
+────────────────────────────────────────────────────────────────────────────────
+
+Trasformazione                         | Freq | Priorità
+---------------------------------------|------|----------
+Prefisso negativo (un-/im-/in-/dis-)   |  27% | ★★★★★
+Nome da verbo/agg (-tion/-ness/-ity)   |  22% | ★★★★★
+Avverbio da aggettivo (-ly)            |  17% | ★★★★★
+Aggettivo da nome/verbo (-ful/-less)   |  15% | ★★★★
+Prefissi over-/under-                  |   6% | ★★★
+Nomi composti                          |   5% | ★★★
+Verbi da agg (-ise/-ize/-en)           |   4% | ★★
+Prefisso re-                           |   2% | ★★
+
+REGOLE DI SPELLING (tag rule_*):
+  rule_verb_to_noun_ment        (achieve → achievement)
+  rule_verb_to_noun_tion        (communicate → communication)
+  rule_verb_to_noun_ance_ence   (perform → performance)
+  rule_adj_to_noun_ness         (happy → happiness)
+  rule_adj_to_noun_ity          (able → ability)
+  rule_adj_to_adv_ly            (careful → carefully)
+  rule_noun_to_adj_ful_less     (care → careful/careless)
+  rule_noun_to_adj_ive          (create → creative)
+  rule_noun_to_adj_ous          (fame → famous)
+  rule_prefix_un                (happy → unhappy)
+  rule_prefix_im_in             (possible → impossible, patient → impatient)
+  rule_prefix_dis               (agree → disagree)
+  rule_prefix_mis               (understand → misunderstand)
+  rule_prefix_over_under        (estimate → overestimate)
+  rule_prefix_re                (write → rewrite)
+  rule_spelling_drop_e          (love → loving, care → caring)
+  rule_spelling_double_consonant (run → running, big → biggest)
+  rule_spelling_y_to_i          (happy → happiness, busy → business)
+  rule_double_transformation    (due passaggi: es. verbo → nome → aggettivo)
+  rule_compound_noun            (nomi composti: fireman, bookshelf)
+
+
+────────────────────────────────────────────────────────────────────────────────
+PART 4 — KEY WORD TRANSFORMATION
+────────────────────────────────────────────────────────────────────────────────
+
+Struttura                              | Freq | Priorità
+---------------------------------------|------|----------
+Passivo                                |  18% | ★★★★★
+Reported speech                        |  15% | ★★★★★
+Wish / If only                         |  12% | ★★★★★
+Present perfect (for/since/yet)        |  12% | ★★★★★
+Causativo (have/get sth done)          |  10% | ★★★★
+Condizionali II/III                    |   8% | ★★★★
+Modal perfects (should have, needn't)  |   8% | ★★★★
+Gerund/infinitivo alternativo          |   7% | ★★★
+Inversione (not only/never/seldom)     |   5% | ★★★
+Comparativi (as…as / than)            |   5% | ★★★
+
+TAG SPECIFICI USATI IN PART 4:
+  passive_simple_present_past
+  passive_reporting_believed_said_thought
+  passive_causative_have_get
+  reported_statement_backshift
+  reported_question_to_infinitive
+  reported_command_told_to
+  wish_past_simple_unreal_present
+  wish_past_perfect_regret
+  wish_would_annoyance
+  if_only_regret
+  pres_perfect_for_since
+  pres_perfect_yet_already_just
+  pres_perfect_ever_never
+  causative_have_sth_done
+  causative_get_sth_done
+  cond_second_would
+  cond_third_would_have
+  cond_mixed
+  cond_inversion_had_were_should
+  modal_should_have_criticism
+  modal_neednt_have_unnecessary
+  modal_must_have_deduction
+  modal_cant_have_impossibility
+  modal_could_have_possibility
+  gerund_inf_stop_remember_forget
+  gerund_after_preposition
+  inf_to_purpose
+  inversion_not_only_but_also
+  inversion_never_seldom_rarely
+  inversion_no_sooner
+  comp_as_adj_as
+  comp_too_adj_to_inf
+  comp_adj_enough_to_inf
+  comp_the_more_the_more
+
+
+════════════════════════════════════════════════════════════════════════════════
+SEZIONE 2 — ARGOMENTI GRAMMATICALI PER LE SPIEGAZIONI (22 strutture)
+════════════════════════════════════════════════════════════════════════════════
+
+Lista concordata per le spiegazioni grammaticali da creare:
+
+ 1. Verb Tenses — panoramica present/past/future + aspetto
+ 2. Modal Verbs — must/should/could/might/would + modal perfects
+ 3. Conditionals — tipo 0, I, II, III, misto + inversione
+ 4. Wish / If only / It's time — unreal present, past regret, annoyance
+ 5. Passive Voice — tutte le forme + causativo have/get
+ 6. Reported Speech — statements, questions, commands, backshift
+ 7. Gerund & Infinitive — patterns, verbi che cambiano significato
+ 8. Relative Clauses — defining/non-defining, who/which/that/where/when
+ 9. Present Perfect vs Past Simple — for/since/just/already/yet/ever
+10. Comparatives & Superlatives — as…as, than, too…to, enough…to
+11. Articles — a/an/the/zero article (regole + eccezioni)
+12. Prepositions — in/on/at (tempo e luogo), fixed phrases
+13. Phrasal Verbs — i 50 più frequenti FCE con esempi in contesto
+14. Collocations — make/do/have/take + adjective collocations
+15. Word Formation — tutte le regole prefissi/suffissi + spelling
+16. Quantifiers — few/little/many/much/some/any/both/all/whole/each/every
+17. Linkers & Connectors — contrasto, risultato, scopo, aggiunta, tempo
+18. Inversion — not only, never, no sooner, had I known (Part 4)
+19. Indirect Questions & Infinitive Structures — ask to/want to/offer to
+20. Confusables — false friends italiani + word choice classici FCE
+21. Adjective Order & Intensifiers — opinion/size/age/colour/origin/material
+22. Register & Formal Language — differenze formal/informal per Writing
+
+
+════════════════════════════════════════════════════════════════════════════════
+SEZIONE 3 — TIPI DI ESERCIZIO: ANALISI E CLASSIFICA PER EFFICACIA
+════════════════════════════════════════════════════════════════════════════════
+
+Criteri di valutazione:
+  ★★★★★ = massima efficacia didattica (supportata da ricerca su spaced repetition,
+           retrieval practice, interleaving — Roediger & Butler 2011, Kornell 2009)
+  ★★★★  = alta efficacia
+  ★★★   = media efficacia
+  ★★    = bassa efficacia
+  ★     = minima efficacia (passiva, nessun retrieval)
+
+────────────────────────────────────────────────────────────────────────────────
+1. SPACED REPETITION (ripetizione spaziata)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★★ (5/5)
+Descrizione:
+  Mostrare di nuovo gli esercizi sbagliati a intervalli crescenti (1 giorno → 3 → 7 → 14).
+  L'algoritmo SM-2 (base di Anki) calcola quando ogni esercizio va riproposto in base
+  alla difficoltà percepita dall'utente (Easy/Hard/Again).
+Perché funziona:
+  - Sfrutta il "forgetting curve" di Ebbinghaus: ripetere prima che si dimentichi
+    consolida la memoria a lungo termine molto più che ripetere subito.
+  - Meta-analisi: +200% retention rispetto allo studio massivo (Cepeda et al. 2006).
+Implementazione nell'app:
+  - Ogni errore salvato in user_errors con timestamp + tag
+  - Review session pesca esercizi con tag simili ordinati per "più vecchio non rivisto"
+  - Difficoltà: Easy = +7gg, Hard = +1gg, Again = domani
+Adatto a: tutti i tipi di esercizio FCE, specialmente Part 3 e Part 4.
+
+────────────────────────────────────────────────────────────────────────────────
+2. RETRIEVAL PRACTICE / TESTING EFFECT (richiamo attivo)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★★ (5/5)
+Descrizione:
+  Chiudere il libro e rispondere senza guardare (no hint, no opzioni per fill-in).
+  L'atto stesso di recuperare l'informazione dalla memoria la rafforza più della
+  semplice rilettura.
+Perché funziona:
+  - "Testing effect": rispondere a domande aumenta retention +50% vs rileggere
+    (Roediger & Karpicke 2006).
+  - Funziona anche quando si sbaglia: l'errore con feedback immediato è più
+    efficace della risposta corretta senza sforzo.
+Implementazione nell'app:
+  - Fill-in senza suggerimenti (Part 2, Part 3, Part 4 type exercises)
+  - Transform senza mostrare la risposta prima
+  - Feedback mostrato DOPO la risposta, non prima
+Adatto a: Part 2 (open cloze), Part 3 (word formation), Part 4 (transformation).
+
+────────────────────────────────────────────────────────────────────────────────
+3. MULTIPLE CHOICE (scelta multipla contestualizzata)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★ (4/5)
+Descrizione:
+  4 opzioni di cui 1 corretta, in contesto di frase/paragrafo. Le opzioni sbagliate
+  (distractors) devono essere plausibili: confusables reali, non parole inventate.
+Perché funziona:
+  - Forza il ragionamento discriminativo (perché A e non B?).
+  - I distractors plausibili attivano la conoscenza implicita.
+  - Con spiegazione post-risposta diventa molto efficace.
+Limite:
+  - Riconoscimento ≠ produzione: più facile del fill-in. Non prepara al writing.
+  - Con 4 opzioni c'è 25% di probabilità casuale → rischio di imparare per
+    eliminazione senza capire.
+Implementazione nell'app:
+  - Part 1 (Multiple Choice Cloze) — formato nativo FCE
+  - Options sempre in ordine: 3 distractors grammaticalmente plausibili
+  - Spiegazione per ogni opzione sbagliata (non solo per quella giusta)
+Adatto a: Part 1, teoria di recap.
+
+────────────────────────────────────────────────────────────────────────────────
+4. FILL-IN-THE-BLANK / GAP FILL (riempimento libero)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★★ (5/5 con retrieval libero) / ★★★ (con word bank)
+Descrizione:
+  Completare una frase con 1 parola (Part 2) o la forma corretta di una parola
+  data (Part 3). Senza bank = retrieval puro; con bank = riconoscimento guidato.
+Perché funziona:
+  - Senza word bank: massimo sforzo cognitivo, massima retention.
+  - Con word bank (per principianti): riduce frustrazione, utile nelle prime sessioni.
+Varianti:
+  a) Open gap — 1 parola, zero aiuto (Part 2 FCE)
+  b) Word given — parola base fornita, da trasformare (Part 3 FCE)
+  c) Sentence gap — frase intera da completare
+  d) Word bank — scegliere da lista fornita (più facile, per warm-up)
+Implementazione nell'app:
+  - type: 'fill' con answer: ['risposta1', 'risposta2'] per accettare varianti
+  - Input text validato case-insensitive + trim whitespace
+  - Mostra risposta corretta + spiegazione dopo ogni tentativo
+Adatto a: Part 2, Part 3, vocabolario tematico.
+
+────────────────────────────────────────────────────────────────────────────────
+5. KEY WORD TRANSFORMATION (trasformazione con parola chiave)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★★ (5/5)
+Descrizione:
+  Data una frase + una parola chiave (keyword), riscrivere la frase con stesso
+  significato usando obbligatoriamente la keyword. 2–5 parole (no contractions
+  contano come 2). Formato FCE nativo Part 4.
+Perché funziona:
+  - Attiva produzione attiva e non solo riconoscimento.
+  - Richiede comprensione profonda della struttura grammaticale (non basta
+    ricordare la regola, bisogna applicarla in contesto).
+  - Il vincolo della keyword forza il trasferimento della struttura target.
+  - Alta correlazione con writing score (Weir 2005).
+Limite:
+  - Difficile per principianti: serve prima esposizione alla struttura target.
+  - Correzione automatica difficile per trasformazioni con varianti multiple.
+Implementazione nell'app:
+  - type: 'transform' con keyword: '...' e answer: ['variante1', 'variante2']
+  - Validazione: case-insensitive, trim, contraction count
+  - Hint opzionale: mostrare numero di parole richieste (es. "usa 3–5 parole")
+Adatto a: Part 4, revisione strutture grammaticali avanzate.
+
+────────────────────────────────────────────────────────────────────────────────
+6. ERROR CORRECTION (trova e correggi l'errore)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★ (4/5)
+Descrizione:
+  Una frase contiene 1 errore (o nessun errore — "correct" è opzione valida).
+  L'utente identifica l'errore e scrive la forma corretta.
+  Variante: sottolineare la parte sbagliata tra 4 parti evidenziate (A/B/C/D).
+Perché funziona:
+  - Sviluppa l'editing skill fondamentale per FCE Writing Part 1 (email formale).
+  - Attiva attenzione metalinguistica (noticing): forza a notare ciò che è sbagliato.
+  - Errori plausibili = gli stessi che fa il candidato → autodiagnostica.
+Implementazione nell'app:
+  - Non ancora implementato come type — TODO: aggiungere type: 'error_correction'
+  - Struttura proposta: { type: 'error_correction', sentence: '...',
+    error_part: '...', correction: '...' }
+Adatto a: Writing preparation, confusables, spelling rules.
+
+────────────────────────────────────────────────────────────────────────────────
+7. SENTENCE REORDERING (riordina le parole)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★ (3/5)
+Descrizione:
+  Data una lista di parole mescolate, ricostruire la frase corretta.
+  Utile per strutture con ordine fisso (inversione, domande indirette).
+Perché funziona:
+  - Utile per sintassi: inversione (Never have I seen…), passive, reported speech.
+  - Basso threshold cognitivo: aiuta chi non ricorda la regola dall'inizio.
+Limite:
+  - Non simula il vero FCE (nessuna parte FCE ha questo formato).
+  - Può diventare un puzzle meccanico senza comprensione.
+Implementazione:
+  - Utile come warm-up o come esercizio di rinforzo dopo la spiegazione teorica.
+  - Non prioritario — da implementare dopo i tipi 1-5.
+Adatto a: inversione, domande indirette, ordine aggettivi.
+
+────────────────────────────────────────────────────────────────────────────────
+8. MATCHING (abbina elementi)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★ (3/5)
+Descrizione:
+  Abbinare parole/frasi a definizioni, sinonimi, o completamenti.
+  FCE Part 7 (Multiple Matching) è la versione reading.
+  Variante lessicale: abbinare collocazione a verbo (make/do/have/take + noun).
+Perché funziona:
+  - Efficace per vocabolario e collocazioni (veloce, coprire molte parole).
+  - Riduce carico cognitivo rispetto a fill-in → utile per introduzione topic.
+Limite:
+  - Riconoscimento puro: non sviluppa produzione.
+  - Meno efficace della spaced repetition per memorizzazione a lungo termine.
+Implementazione:
+  - Utile per collocazioni (make/do/have/take), phrasal verbs, sinonimi.
+  - Part 7 format già in exercises_part7.yaml.
+Adatto a: collocazioni, phrasal verbs, vocabolario tematico.
+
+────────────────────────────────────────────────────────────────────────────────
+9. GAPPED TEXT / PARAGRAPH INSERTION (Part 6 FCE)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★ (4/5 per reading comprehension)
+Descrizione:
+  Un testo con 6 frasi/paragrafi rimossi. 7 opzioni fornite (1 extra).
+  Scegliere quale frase va in quale gap basandosi su coesione e coerenza testuale.
+Perché funziona:
+  - Sviluppa text coherence awareness: pronomi, connettori, riferimenti anaforici.
+  - Alta correlazione con writing score (comprende testo come struttura).
+  - Non si può risolvere con grammatica di frase — serve visione d'insieme.
+Implementazione:
+  - exercises_part6.yaml già creato con 3 set.
+  - In app: mostrare testo con gap numerati + 7 opzioni A-G drag&drop (o select).
+Adatto a: reading comprehension, discourse markers, text structure.
+
+────────────────────────────────────────────────────────────────────────────────
+10. TIMED READING + MCQ (Part 5 FCE)
+────────────────────────────────────────────────────────────────────────────────
+Efficacia: ★★★★ (4/5 per reading skills)
+Descrizione:
+  Testo di 500-700 parole con 6 domande a scelta multipla (A/B/C/D).
+  Ogni domanda testa: inference, vocabulary in context, detail, main idea, attitude.
+Perché funziona:
+  - Simula esattamente il formato d'esame.
+  - Le domande di inference richiedono comprensione profonda (non solo scanning).
+  - Il timer sviluppa time management (75 minuti per tutto il Reading & Use of English).
+Implementazione:
+  - exercises_part5.yaml già creato con 3 passaggi.
+  - In app: timer opzionale, highlight della risposta corretta nel testo dopo.
+Adatto a: reading comprehension, vocabulary in context, exam simulation.
+
+
+════════════════════════════════════════════════════════════════════════════════
+SEZIONE 4 — CLASSIFICA FINALE PER EFFICACIA DIDATTICA
+════════════════════════════════════════════════════════════════════════════════
+
+Rank | Tipo di esercizio              | Efficacia | Nota
+-----|--------------------------------|-----------|------------------------------
+  1  | Spaced Repetition              | ★★★★★    | Sistema, non tipo — va sotto tutto
+  2  | Key Word Transformation        | ★★★★★    | Produzione attiva + struttura
+  3  | Fill-in libero (no bank)       | ★★★★★    | Retrieval puro
+  4  | Retrieval Practice (testing)   | ★★★★★    | Principio, non formato
+  5  | Error Correction               | ★★★★     | Sviluppa editing + noticing
+  6  | Multiple Choice (con explain.) | ★★★★     | Buono se spiegazione dettagliata
+  7  | Gapped Text (Part 6)           | ★★★★     | Text coherence, discourse
+  8  | Timed Reading MCQ (Part 5)     | ★★★★     | Exam simulation
+  9  | Matching (collocazioni)        | ★★★      | Solo per vocabolario bulk
+ 10  | Fill-in con word bank          | ★★★      | Warm-up / primo contatto
+ 11  | Sentence Reordering            | ★★★      | Utile solo per sintassi fissa
+ 12  | Rileggere spiegazioni          | ★         | Passivo, bassa retention
+
+RACCOMANDAZIONE PER L'APP:
+  Mix ottimale per sessione (45 min):
+  - 10 min teoria (spiegazione con esempi + errori italiani)
+  - 20 min esercizi misti (fill-in + transform + MC)
+  - 10 min review errori passati (spaced repetition)
+  -  5 min ricapitolo + note personali
+
+
+════════════════════════════════════════════════════════════════════════════════
+SEZIONE 5 — TAG SYSTEM COMPLETO (6 livelli)
+════════════════════════════════════════════════════════════════════════════════
+
+Struttura tag per ogni esercizio:
+  tags[0] = parte FCE      (part1_mc_cloze, part2_open_cloze, part3_word_formation,
+                             part4_transformation, part5_reading_mc, part6_gapped_text,
+                             part7_multiple_matching)
+  tags[1] = topic macro    (collocations, prepositions, phrasal_verbs, linkers,
+                             verb_patterns, confusables, articles, word_formation,
+                             passive, reported_speech, conditionals, wish_if_only,
+                             present_perfect, causative, modal_perfects, inversion,
+                             comparatives, quantifiers, relative_clauses, auxiliaries)
+  tags[2] = regola specifica (coll_make, prep_in_at_on, link_contrast_although,
+                             rule_prefix_un, rule_verb_to_noun_tion, etc.)
+  tags[3] = cross-tag       (collega strutture diverse: es. passive+reported_speech)
+  tags[4] = false friend IT (false_friend_italian — per errori tipici degli italiani)
+
+Storage: PostgreSQL text[] + GIN index
+  CREATE INDEX exercises_tags_gin ON exercises USING gin(tags);
+  Query: SELECT * FROM exercises WHERE tags @> ARRAY['coll_make']::text[];
+
+Algoritmo adaptive review (priorità):
+  1. Stesso tag[2] (regola specifica identica)
+  2. Stesso tag[1] (topic macro)
+  3. Stesso tag[0] (stessa parte FCE)
+  4. Fallback: esercizi più vecchi non rivisti
+
+
+================================================================================
+Fine documento — tramitenglish/database/topics_and_exercise_types.txt
+================================================================================

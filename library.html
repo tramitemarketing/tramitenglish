@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Libreria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-wrap input {
+      padding-left: 40px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--subtext);
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .accordion-body ul {
+      padding-left: 18px;
+      margin: 8px 0;
+    }
+
+    .accordion-body li {
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .accordion-body h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+
+    .accordion-body h4:first-child {
+      margin-top: 0;
+    }
+
+    .accordion-body p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .accordion-body code {
+      background: var(--surface2);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    .accordion-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .accordion-body th {
+      background: var(--surface2);
+      color: var(--text2);
+      font-weight: 700;
+      padding: 6px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-body td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border2);
+      color: var(--text2);
+    }
+
+    .part-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-right: 8px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      color: var(--subtext);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="topbar-title">Libreria</span>
+    <span></span>
+  </header>
+
+  <!-- Main content -->
+  <main class="page-content">
+
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="searchInput" placeholder="Cerca nella libreria...">
+    </div>
+
+    <div id="accordionList"></div>
+    <div class="no-results" id="noResults" style="display:none">Nessun risultato trovato.</div>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <span class="nav-icon">&#x1F3E0;</span>
+      <span>Home</span>
+    </a>
+    <a href="session.html" class="nav-item">
+      <span class="nav-icon">&#9654;</span>
+      <span>Sessione</span>
+    </a>
+    <a href="library.html" class="nav-item active">
+      <span class="nav-icon">&#x1F4D6;</span>
+      <span>Libreria</span>
+    </a>
+    <a href="log.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CB;</span>
+      <span>Log</span>
+    </a>
+    <a href="stats.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CA;</span>
+      <span>Stats</span>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/content.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var sections = [
+        {
+          title: 'Part 1 — Multiple Choice Cloze',
+          badge: 'PART 1',
+          content: `
+            <p>Un testo di circa 150 parole con 8 spazi. Per ogni spazio scegli tra 4 opzioni (A, B, C, D).</p>
+            <h4>Focalizzati su:</h4>
+            <ul>
+              <li>Phrasal verbs: <code>carry out</code>, <code>come across</code>, <code>give up</code></li>
+              <li>Collocazioni fisse: <code>make a decision</code>, <code>do research</code></li>
+              <li>Preposizioni dopo verbi/aggettivi: <code>depend on</code>, <code>interested in</code></li>
+              <li>Linking words: <code>although</code>, <code>despite</code>, <code>however</code></li>
+              <li>Verbi di stato vs. azione</li>
+            </ul>
+            <h4>Strategia:</h4>
+            <ul>
+              <li>Leggi il testo completo prima di iniziare</li>
+              <li>Controlla il contesto prima e dopo ogni spazio</li>
+              <li>Elimina le opzioni palesemente errate</li>
+            </ul>`
+        },
+        {
+          title: 'Part 2 — Open Cloze',
+          badge: 'PART 2',
+          content: `
+            <p>Un testo con 8 spazi da completare con una sola parola. Non hai opzioni: devi trovare la parola corretta.</p>
+            <h4>Categorie frequenti:</h4>
+            <ul>
+              <li>Preposizioni: <code>in spite of</code>, <code>due to</code>, <code>as a result of</code></li>
+              <li>Articoli: <code>a / an / the</code></li>
+              <li>Pronomi relativi: <code>which, who, whose, where</code></li>
+              <li>Verbi ausiliari e modali: <code>have, been, would</code></li>
+              <li>Congiunzioni: <code>although, unless, provided</code></li>
+              <li>Quantificatori: <code>few, little, much, many</code></li>
+            </ul>
+            <h4>Strategia:</h4>
+            <ul>
+              <li>Individua la categoria grammaticale mancante</li>
+              <li>Non inserire mai due parole (tranne phrasal verb composto)</li>
+              <li>Controlla sempre accordo e tempo verbale</li>
+            </ul>`
+        },
+        {
+          title: 'Part 3 — Word Formation',
+          badge: 'PART 3',
+          content: `
+            <p>Un testo con 8 spazi. Ogni spazio ha una parola base in maiuscolo; devi formare la parola derivata corretta.</p>
+            <h4>Suffissi comuni:</h4>
+            <table>
+              <tr><th>Categoria</th><th>Suffisso</th><th>Esempio</th></tr>
+              <tr><td>Sostantivo</td><td>-tion, -ness, -ment, -ity</td><td>solution, happiness</td></tr>
+              <tr><td>Aggettivo</td><td>-ful, -less, -ous, -ive, -al</td><td>careful, famous</td></tr>
+              <tr><td>Avverbio</td><td>-ly</td><td>carefully, quickly</td></tr>
+              <tr><td>Negativo</td><td>un-, in-, dis-, im-</td><td>unusual, impossible</td></tr>
+            </table>
+            <h4>Strategia:</h4>
+            <ul>
+              <li>Decidi prima la categoria grammaticale necessaria</li>
+              <li>Controlla se serve un prefisso negativo</li>
+              <li>Attenzione alle forme irregolari: <code>STRONG &rarr; strength</code></li>
+            </ul>`
+        },
+        {
+          title: 'Part 4 — Key-Word Transformations',
+          badge: 'PART 4',
+          content: `
+            <p>6 coppie di frasi: riscrivi la seconda frase usando la parola chiave data, mantenendo il significato della prima. Usa 2–5 parole inclusa la parola chiave.</p>
+            <h4>Strutture più testate:</h4>
+            <ul>
+              <li>Condizionali: <code>Unless / If not</code></li>
+              <li>Passivo: <code>was built / has been seen</code></li>
+              <li>Reported speech: <code>said that / told me to</code></li>
+              <li>Causativi: <code>have something done</code></li>
+              <li>Comparativi: <code>not as... as / less than</code></li>
+              <li>Modal perfects: <code>should have / must have</code></li>
+              <li>Wish / If only: <code>wish I had studied</code></li>
+            </ul>
+            <h4>Regole:</h4>
+            <ul>
+              <li>2 punti per risposta: 1 se parzialmente corretta</li>
+              <li>Non cambiare mai la parola chiave (non plurale, non coniugata)</li>
+              <li>Conta sempre le parole: massimo 5</li>
+            </ul>`
+        },
+        {
+          title: 'Part 5 — Reading (Multiple Choice)',
+          badge: 'PART 5',
+          content: `
+            <p>Un testo di circa 550 parole con 6 domande a scelta multipla (A, B, C, D).</p>
+            <h4>Strategia di lettura:</h4>
+            <ul>
+              <li>Leggi prima le domande, poi il testo</li>
+              <li>Le risposte seguono l'ordine del testo</li>
+              <li>Cerca il paragrafo di riferimento prima di scegliere</li>
+              <li>Elimina le opzioni chiaramente sbagliate</li>
+              <li>Attenzione ai distrattori: spesso veri ma non rispondono alla domanda</li>
+            </ul>
+            <h4>Tipi di domande:</h4>
+            <ul>
+              <li>Dettaglio specifico</li>
+              <li>Scopo dell'autore</li>
+              <li>Opinione / atteggiamento dell'autore</li>
+              <li>Significato di parola/frase nel contesto</li>
+              <li>Idea principale del paragrafo</li>
+            </ul>`
+        },
+        {
+          title: 'Grammar Quick Reference',
+          badge: 'GRAM',
+          content: `
+            <h4>Tempi verbali — usi chiave</h4>
+            <table>
+              <tr><th>Tempo</th><th>Uso principale</th></tr>
+              <tr><td>Present Simple</td><td>Abitudini, fatti generali, stati</td></tr>
+              <tr><td>Present Continuous</td><td>Azioni in corso, tendenze temporanee</td></tr>
+              <tr><td>Past Simple</td><td>Azioni completate nel passato</td></tr>
+              <tr><td>Past Continuous</td><td>Azione di sfondo / in corso nel passato</td></tr>
+              <tr><td>Present Perfect</td><td>Risultati presenti di azioni passate</td></tr>
+              <tr><td>Past Perfect</td><td>Anteriorità rispetto a un momento passato</td></tr>
+            </table>
+
+            <h4>Condizionali</h4>
+            <ul>
+              <li><strong>Tipo 0</strong>: If + Present, Present (verità universale)</li>
+              <li><strong>Tipo 1</strong>: If + Present, will (reale/futuro)</li>
+              <li><strong>Tipo 2</strong>: If + Past, would (ipotetico presente)</li>
+              <li><strong>Tipo 3</strong>: If + Past Perfect, would have (ipotetico passato)</li>
+            </ul>
+
+            <h4>Passivo — formazione</h4>
+            <p>Ausiliare <strong>be</strong> (nel tempo corretto) + <strong>participio passato</strong></p>
+            <ul>
+              <li>Present: <code>is made</code></li>
+              <li>Past: <code>was made</code></li>
+              <li>Present Perfect: <code>has been made</code></li>
+              <li>Modal: <code>could be made</code></li>
+            </ul>
+
+            <h4>Reported Speech — trasformazioni</h4>
+            <table>
+              <tr><th>Diretto</th><th>Indiretto</th></tr>
+              <tr><td>Present Simple</td><td>&rarr; Past Simple</td></tr>
+              <tr><td>Past Simple</td><td>&rarr; Past Perfect</td></tr>
+              <tr><td>will</td><td>&rarr; would</td></tr>
+              <tr><td>can</td><td>&rarr; could</td></tr>
+              <tr><td>must</td><td>&rarr; had to</td></tr>
+            </table>`
+        }
+      ];
+
+      var listEl = document.getElementById('accordionList');
+
+      function buildAccordions(filter) {
+        filter = (filter || '').toLowerCase();
+        listEl.innerHTML = '';
+        var found = 0;
+
+        sections.forEach(function (sec, i) {
+          if (filter && sec.title.toLowerCase().indexOf(filter) === -1
+              && sec.content.toLowerCase().indexOf(filter) === -1) {
+            return;
+          }
+          found++;
+
+          var item = document.createElement('div');
+          item.className = 'accordion-item';
+
+          var header = document.createElement('div');
+          header.className = 'accordion-header';
+          header.innerHTML = '<span><span class="part-badge">' + sec.badge + '</span>' + sec.title + '</span>'
+            + '<span class="accordion-arrow">&#9660;</span>';
+
+          var body = document.createElement('div');
+          body.className = 'accordion-body';
+          body.innerHTML = sec.content;
+
+          // Open first item by default
+          if (i === 0 && !filter) {
+            body.classList.add('open');
+            header.querySelector('.accordion-arrow').style.transform = 'rotate(180deg)';
+          }
+
+          header.addEventListener('click', function () {
+            var isOpen = body.classList.contains('open');
+            // Close all
+            listEl.querySelectorAll('.accordion-body').forEach(function (b) {
+              b.classList.remove('open');
+            });
+            listEl.querySelectorAll('.accordion-arrow').forEach(function (a) {
+              a.style.transform = '';
+            });
+            if (!isOpen) {
+              body.classList.add('open');
+              header.querySelector('.accordion-arrow').style.transform = 'rotate(180deg)';
+            }
+          });
+
+          item.appendChild(header);
+          item.appendChild(body);
+          listEl.appendChild(item);
+        });
+
+        document.getElementById('noResults').style.display = found === 0 ? '' : 'none';
+      }
+
+      buildAccordions('');
+
+      // Search
+      var searchTimeout;
+      document.getElementById('searchInput').addEventListener('input', function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function () {
+          buildAccordions(document.getElementById('searchInput').value);
+          // Open all when searching
+          if (document.getElementById('searchInput').value) {
+            listEl.querySelectorAll('.accordion-body').forEach(function (b) {
+              b.classList.add('open');
+            });
+            listEl.querySelectorAll('.accordion-arrow').forEach(function (a) {
+              a.style.transform = 'rotate(180deg)';
+            });
+          }
+        }, 250);
+      });
+
+    })();
+  </script>
+</body>
+</html>

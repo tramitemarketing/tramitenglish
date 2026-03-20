@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Anteprima Stili</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── NAV STILI ── */
+    .style-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; gap: 8px; justify-content: center; align-items: center;
+      padding: 10px 16px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .style-nav a {
+      color: #aaa; text-decoration: none; font-family: Inter, sans-serif;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+      padding: 5px 14px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .style-nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .style-nav span { color: #555; font-family: Inter, sans-serif; font-size: 11px; }
+
+    /* ── COMMON RESET ── */
+    section { min-height: 100vh; display: flex; flex-direction: column; scroll-margin-top: 52px; }
+
+    /* ══════════════════════════════════════════
+       STILE 1 — SLATE  (Dark Minimal)
+    ══════════════════════════════════════════ */
+    #slate {
+      background: #0a0a0f;
+      font-family: 'Inter', sans-serif;
+      color: #e2e2ee;
+    }
+    #slate .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid #1e1e2c;
+    }
+    #slate .logo { font-size: 17px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+    #slate .logo span { color: #7c6af7; }
+    #slate .toggle-pill {
+      display: flex; background: #16161e; border-radius: 20px;
+      border: 1px solid #2a2a3a; overflow: hidden;
+    }
+    #slate .toggle-pill button {
+      border: none; background: none; color: #888; font-size: 11px;
+      padding: 5px 14px; cursor: pointer; font-family: inherit;
+      font-weight: 500; letter-spacing: 0.04em;
+    }
+    #slate .toggle-pill button.active { background: #7c6af7; color: #fff; }
+    #slate .dash { flex: 1; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px; margin: 0 auto; width: 100%; }
+    @media (max-width: 640px) { #slate .dash { grid-template-columns: 1fr; } }
+
+    #slate .card {
+      background: #13131c; border: 1px solid #1e1e2c;
+      border-radius: 14px; padding: 22px;
+    }
+    #slate .card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #555; text-transform: uppercase; margin-bottom: 10px; }
+    #slate .day-big { font-size: 48px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -2px; }
+    #slate .day-sub { font-size: 13px; color: #666; margin-top: 6px; }
+    #slate .streak-row { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+    #slate .streak-num { font-size: 28px; font-weight: 700; color: #7c6af7; }
+    #slate .streak-label { font-size: 12px; color: #666; }
+    #slate .btn-session {
+      margin-top: 22px; width: 100%; padding: 14px;
+      background: #7c6af7; color: #fff; border: none;
+      border-radius: 10px; font-family: inherit; font-size: 14px;
+      font-weight: 600; cursor: pointer; letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    #slate .btn-session:hover { opacity: 0.85; }
+
+    #slate .topic-tag {
+      display: inline-block; padding: 4px 10px;
+      background: rgba(124,106,247,0.12); color: #7c6af7;
+      border-radius: 6px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.04em; margin-bottom: 14px;
+    }
+    #slate .topic-title { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    #slate .topic-sub { font-size: 12px; color: #555; line-height: 1.5; }
+
+    #slate .progress-bar { height: 4px; background: #1e1e2c; border-radius: 4px; margin-top: 18px; overflow: hidden; }
+    #slate .progress-fill { height: 100%; width: 40%; background: linear-gradient(90deg, #7c6af7, #a78bfa); border-radius: 4px; }
+
+    #slate .topic-list { display: flex; flex-direction: column; gap: 8px; }
+    #slate .topic-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; background: #0f0f18;
+      border: 1px solid #1e1e2c; border-radius: 10px;
+    }
+    #slate .topic-name { font-size: 13px; font-weight: 500; color: #ccc; }
+    #slate .topic-pct { font-size: 12px; font-weight: 600; }
+    #slate .pct-good { color: #34d399; }
+    #slate .pct-mid  { color: #fbbf24; }
+    #slate .pct-bad  { color: #f87171; }
+
+    #slate .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
+    #slate .cal-day {
+      aspect-ratio: 1; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 500; color: #444;
+      background: #0f0f18; border: 1px solid #1e1e2c;
+    }
+    #slate .cal-day.done { background: rgba(124,106,247,0.2); color: #7c6af7; border-color: rgba(124,106,247,0.3); }
+    #slate .cal-day.today { background: #7c6af7; color: #fff; border-color: #7c6af7; }
+    #slate .cal-day.future { opacity: 0.3; }
+
+    #slate .palette { display: flex; padding: 14px 28px; gap: 8px; border-top: 1px solid #1e1e2c; align-items: center; }
+    #slate .swatch { width: 28px; height: 28px; border-radius: 6px; }
+    #slate .style-id { font-size: 11px; color: #444; margin-left: auto; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ══════════════════════════════════════════
+       STILE 2 — CANVAS  (Clean Light)
+    ══════════════════════════════════════════ */
+    #canvas {
+      background: #f6f8fc;
+      font-family: 'Inter', sans-serif;
+      color: #111827;
+    }
+    #canvas .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px; background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    #canvas .logo { font-size: 17px; font-weight: 700; color: #111827; letter-spacing: -0.5px; }
+    #canvas .logo span { color: #2563eb; }
+    #canvas .toggle-pill {
+      display: flex; background: #f3f4f6; border-radius: 20px;
+      border: 1px solid #e5e7eb; overflow: hidden;
+    }
+    #canvas .toggle-pill button {
+      border: none; background: none; color: #9ca3af; font-size: 11px;
+      padding: 5px 14px; cursor: pointer; font-family: inherit; font-weight: 500;
+    }
+    #canvas .toggle-pill button.active { background: #2563eb; color: #fff; }
+    #canvas .dash { flex: 1; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px; margin: 0 auto; width: 100%; }
+    @media (max-width: 640px) { #canvas .dash { grid-template-columns: 1fr; } }
+
+    #canvas .card {
+      background: #fff; border-radius: 16px; padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
+    }
+    #canvas .card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #9ca3af; text-transform: uppercase; margin-bottom: 10px; }
+    #canvas .day-big { font-size: 48px; font-weight: 800; color: #111827; line-height: 1; letter-spacing: -2px; }
+    #canvas .day-sub { font-size: 13px; color: #9ca3af; margin-top: 6px; }
+    #canvas .streak-row { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+    #canvas .streak-num { font-size: 28px; font-weight: 700; color: #2563eb; }
+    #canvas .streak-label { font-size: 12px; color: #9ca3af; }
+    #canvas .btn-session {
+      margin-top: 22px; width: 100%; padding: 14px;
+      background: #2563eb; color: #fff; border: none;
+      border-radius: 12px; font-family: inherit; font-size: 14px;
+      font-weight: 600; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+      transition: box-shadow 0.2s;
+    }
+    #canvas .btn-session:hover { box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+
+    #canvas .topic-tag {
+      display: inline-block; padding: 4px 10px;
+      background: #eff6ff; color: #2563eb;
+      border-radius: 6px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.04em; margin-bottom: 14px;
+    }
+    #canvas .topic-title { font-size: 19px; font-weight: 700; color: #111827; margin-bottom: 6px; }
+    #canvas .topic-sub { font-size: 12px; color: #9ca3af; line-height: 1.5; }
+    #canvas .progress-bar { height: 5px; background: #f3f4f6; border-radius: 4px; margin-top: 18px; overflow: hidden; }
+    #canvas .progress-fill { height: 100%; width: 40%; background: #2563eb; border-radius: 4px; }
+
+    #canvas .topic-list { display: flex; flex-direction: column; gap: 8px; }
+    #canvas .topic-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; background: #f9fafb;
+      border-radius: 10px; border: 1px solid #f3f4f6;
+    }
+    #canvas .topic-name { font-size: 13px; font-weight: 500; color: #374151; }
+    #canvas .topic-pct { font-size: 12px; font-weight: 600; }
+    #canvas .pct-good { color: #059669; }
+    #canvas .pct-mid  { color: #d97706; }
+    #canvas .pct-bad  { color: #dc2626; }
+
+    #canvas .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
+    #canvas .cal-day {
+      aspect-ratio: 1; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 500; color: #d1d5db;
+      background: #f9fafb; border: 1px solid #f3f4f6;
+    }
+    #canvas .cal-day.done { background: #dbeafe; color: #2563eb; border-color: #bfdbfe; }
+    #canvas .cal-day.today { background: #2563eb; color: #fff; border-color: #2563eb; }
+    #canvas .cal-day.future { opacity: 0.4; }
+
+    #canvas .palette { display: flex; padding: 14px 28px; gap: 8px; border-top: 1px solid #e5e7eb; background: #fff; align-items: center; }
+    #canvas .swatch { width: 28px; height: 28px; border-radius: 6px; }
+    #canvas .style-id { font-size: 11px; color: #d1d5db; margin-left: auto; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ══════════════════════════════════════════
+       STILE 3 — VIVID  (Colorful Cards)
+    ══════════════════════════════════════════ */
+    #vivid {
+      background: #f0f4ff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1e1b4b;
+    }
+    #vivid .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px; background: #fff;
+      border-bottom: 1px solid #e8e8ff;
+    }
+    #vivid .logo { font-size: 17px; font-weight: 800; color: #1e1b4b; letter-spacing: -0.5px; }
+    #vivid .logo span { color: #4f46e5; }
+    #vivid .toggle-pill {
+      display: flex; background: #f0f4ff; border-radius: 20px;
+      border: 1px solid #c7d2fe; overflow: hidden;
+    }
+    #vivid .toggle-pill button {
+      border: none; background: none; color: #a5b4fc; font-size: 11px;
+      padding: 5px 14px; cursor: pointer; font-family: inherit; font-weight: 600;
+    }
+    #vivid .toggle-pill button.active { background: #4f46e5; color: #fff; }
+    #vivid .dash { flex: 1; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; margin: 0 auto; width: 100%; }
+    @media (max-width: 640px) { #vivid .dash { grid-template-columns: 1fr; } }
+
+    #vivid .card-day {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      border-radius: 18px; padding: 24px; color: #fff;
+    }
+    #vivid .card-day .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 8px; }
+    #vivid .day-big { font-size: 48px; font-weight: 800; line-height: 1; letter-spacing: -2px; }
+    #vivid .day-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; }
+    #vivid .streak-row { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
+    #vivid .streak-num { font-size: 26px; font-weight: 800; }
+    #vivid .streak-label { font-size: 12px; color: rgba(255,255,255,0.65); }
+    #vivid .btn-session {
+      margin-top: 20px; width: 100%; padding: 13px;
+      background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px; font-family: inherit; font-size: 14px;
+      font-weight: 700; cursor: pointer; backdrop-filter: blur(4px);
+      transition: background 0.2s;
+    }
+    #vivid .btn-session:hover { background: rgba(255,255,255,0.3); }
+
+    #vivid .topic-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    #vivid .topic-card {
+      border-radius: 14px; padding: 16px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    #vivid .tc-grammar  { background: #dbeafe; }
+    #vivid .tc-verbs    { background: #d1fae5; }
+    #vivid .tc-wordform { background: #fef3c7; }
+    #vivid .tc-vocab    { background: #fce7f3; }
+    #vivid .tc-icon { font-size: 20px; }
+    #vivid .tc-name { font-size: 12px; font-weight: 700; color: #1e1b4b; }
+    #vivid .tc-pct { font-size: 20px; font-weight: 800; }
+    #vivid .tc-grammar  .tc-pct { color: #1d4ed8; }
+    #vivid .tc-verbs    .tc-pct { color: #065f46; }
+    #vivid .tc-wordform .tc-pct { color: #92400e; }
+    #vivid .tc-vocab    .tc-pct { color: #9d174d; }
+    #vivid .tc-bar { height: 4px; border-radius: 4px; background: rgba(0,0,0,0.1); overflow: hidden; }
+    #vivid .tc-bar-fill { height: 100%; border-radius: 4px; }
+    #vivid .tc-grammar  .tc-bar-fill { background: #1d4ed8; width: 78%; }
+    #vivid .tc-verbs    .tc-bar-fill { background: #065f46; width: 65%; }
+    #vivid .tc-wordform .tc-bar-fill { background: #d97706; width: 45%; }
+    #vivid .tc-vocab    .tc-bar-fill { background: #9d174d; width: 82%; }
+
+    #vivid .card-white { background: #fff; border-radius: 18px; padding: 22px; box-shadow: 0 2px 12px rgba(79,70,229,0.08); }
+    #vivid .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #a5b4fc; text-transform: uppercase; margin-bottom: 10px; }
+    #vivid .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    #vivid .cal-day {
+      aspect-ratio: 1; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: #c7d2fe;
+      background: #f0f4ff;
+    }
+    #vivid .cal-day.done { background: #c7d2fe; color: #4f46e5; }
+    #vivid .cal-day.today { background: #4f46e5; color: #fff; }
+    #vivid .cal-day.future { opacity: 0.3; }
+
+    #vivid .palette { display: flex; padding: 14px 28px; gap: 8px; border-top: 1px solid #e8e8ff; background: #fff; align-items: center; }
+    #vivid .swatch { width: 28px; height: 28px; border-radius: 6px; }
+    #vivid .style-id { font-size: 11px; color: #c7d2fe; margin-left: auto; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ══════════════════════════════════════════
+       STILE 4 — TERRA  (Warm & Earthy)
+    ══════════════════════════════════════════ */
+    #terra {
+      background: #faf6f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1c1917;
+    }
+    #terra .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 28px; background: #fffcf8;
+      border-bottom: 1px solid #e7e0d8;
+    }
+    #terra .logo { font-size: 17px; font-weight: 700; color: #1c1917; letter-spacing: -0.5px; }
+    #terra .logo span { color: #b45309; }
+    #terra .toggle-pill {
+      display: flex; background: #f5ece0; border-radius: 20px;
+      border: 1px solid #e7d9c8; overflow: hidden;
+    }
+    #terra .toggle-pill button {
+      border: none; background: none; color: #a8887a; font-size: 11px;
+      padding: 5px 14px; cursor: pointer; font-family: inherit; font-weight: 600;
+    }
+    #terra .toggle-pill button.active { background: #b45309; color: #fff; }
+    #terra .dash { flex: 1; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px; margin: 0 auto; width: 100%; }
+    @media (max-width: 640px) { #terra .dash { grid-template-columns: 1fr; } }
+
+    #terra .card {
+      background: #fffcf8; border-radius: 16px; padding: 24px;
+      border: 1px solid #e7ddd0;
+      box-shadow: 0 2px 8px rgba(180,83,9,0.06);
+    }
+    #terra .card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #a8887a; text-transform: uppercase; margin-bottom: 10px; }
+    #terra .day-big { font-size: 48px; font-weight: 800; color: #1c1917; line-height: 1; letter-spacing: -2px; }
+    #terra .day-sub { font-size: 13px; color: #a8887a; margin-top: 6px; }
+    #terra .streak-row { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+    #terra .streak-num { font-size: 28px; font-weight: 700; color: #b45309; }
+    #terra .streak-label { font-size: 12px; color: #a8887a; }
+    #terra .btn-session {
+      margin-top: 22px; width: 100%; padding: 14px;
+      background: #b45309; color: #fff; border: none;
+      border-radius: 12px; font-family: inherit; font-size: 14px;
+      font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(180,83,9,0.25);
+      transition: box-shadow 0.2s;
+    }
+    #terra .btn-session:hover { box-shadow: 0 6px 20px rgba(180,83,9,0.35); }
+
+    #terra .topic-tag {
+      display: inline-block; padding: 4px 10px;
+      background: #fef3c7; color: #b45309;
+      border-radius: 6px; font-size: 11px; font-weight: 600; margin-bottom: 14px;
+    }
+    #terra .topic-title { font-size: 19px; font-weight: 700; color: #1c1917; margin-bottom: 6px; }
+    #terra .topic-sub { font-size: 12px; color: #a8887a; line-height: 1.6; }
+    #terra .progress-bar { height: 5px; background: #f5ece0; border-radius: 4px; margin-top: 18px; overflow: hidden; }
+    #terra .progress-fill { height: 100%; width: 40%; background: #b45309; border-radius: 4px; }
+
+    #terra .topic-list { display: flex; flex-direction: column; gap: 8px; }
+    #terra .topic-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; border-radius: 10px;
+    }
+    #terra .topic-row:nth-child(1) { background: #fef3c7; }
+    #terra .topic-row:nth-child(2) { background: #fde8d8; }
+    #terra .topic-row:nth-child(3) { background: #fef9ee; border: 1px solid #f5ece0; }
+    #terra .topic-row:nth-child(4) { background: #ecfdf5; }
+    #terra .topic-name { font-size: 13px; font-weight: 600; color: #44403c; }
+    #terra .topic-pct { font-size: 12px; font-weight: 700; }
+    #terra .pct-good { color: #065f46; }
+    #terra .pct-mid  { color: #b45309; }
+    #terra .pct-bad  { color: #b91c1c; }
+
+    #terra .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
+    #terra .cal-day {
+      aspect-ratio: 1; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 600; color: #d6c5b4;
+      background: #f5ece0;
+    }
+    #terra .cal-day.done { background: #fde8d8; color: #b45309; }
+    #terra .cal-day.today { background: #b45309; color: #fff; }
+    #terra .cal-day.future { opacity: 0.35; }
+
+    #terra .palette { display: flex; padding: 14px 28px; gap: 8px; border-top: 1px solid #e7ddd0; background: #fffcf8; align-items: center; }
+    #terra .swatch { width: 28px; height: 28px; border-radius: 6px; }
+    #terra .style-id { font-size: 11px; color: #d6c5b4; margin-left: auto; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ── STYLE LABEL ── */
+    .style-label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 28px 0;
+    }
+    .style-name { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; }
+    .style-desc { font-size: 11px; opacity: 0.25; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="style-nav">
+    <span>TrainEnglish</span>
+    <a href="#slate">1 · Slate</a>
+    <a href="#canvas">2 · Canvas</a>
+    <a href="#vivid">3 · Vivid</a>
+    <a href="#terra">4 · Terra</a>
+  </nav>
+
+  <!-- ════════════ SLATE ════════════ -->
+  <section id="slate" style="padding-top:52px">
+    <div class="style-label" style="margin-top:8px">
+      <span class="style-name" style="color:#7c6af7">Stile 1 — Slate</span>
+      <span class="style-desc" style="color:#7c6af7">Dark · Minimal · Focus</span>
+    </div>
+    <div class="topbar">
+      <div class="logo">Train<span>English</span></div>
+      <div class="toggle-pill">
+        <button>☀︎</button>
+        <button class="active">◗ Dark</button>
+      </div>
+    </div>
+    <div class="dash">
+      <!-- Card sinistra -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Progresso</div>
+          <div class="day-big">12<span style="font-size:22px;color:#444;font-weight:400">/60</span></div>
+          <div class="day-sub">Settimana 2 · Condizionali</div>
+          <div class="streak-row">
+            <div class="streak-num">🔥 5</div>
+            <div class="streak-label">giorni di fila<br><span style="color:#333;font-size:11px">28 min ieri</span></div>
+          </div>
+          <button class="btn-session">▶  Inizia sessione di oggi</button>
+        </div>
+        <div class="card">
+          <div class="card-label">Oggi</div>
+          <div class="topic-tag">PART 4</div>
+          <div class="topic-title">Condizionali & Wish</div>
+          <div class="topic-sub">If clauses tipo 2 e 3 · Mixed conditionals · Wish + past perfect</div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span style="font-size:11px;color:#555">4 / 10 esercizi</span>
+            <span style="font-size:11px;color:#555">12 min</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card destra -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Aree · % correttezza</div>
+          <div class="topic-list">
+            <div class="topic-row"><span class="topic-name">Word Formation</span><span class="topic-pct pct-bad">48%</span></div>
+            <div class="topic-row"><span class="topic-name">Part 4 Trasformazioni</span><span class="topic-pct pct-mid">61%</span></div>
+            <div class="topic-row"><span class="topic-name">Open Cloze</span><span class="topic-pct pct-mid">75%</span></div>
+            <div class="topic-row"><span class="topic-name">Vocabolario</span><span class="topic-pct pct-good">83%</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Calendario · Giorni 1–14</div>
+          <div class="cal-row">
+            <div class="cal-day done">1</div><div class="cal-day done">2</div>
+            <div class="cal-day done">3</div><div class="cal-day done">4</div>
+            <div class="cal-day done">5</div><div class="cal-day done">6</div>
+            <div class="cal-day done">7</div><div class="cal-day done">8</div>
+            <div class="cal-day done">9</div><div class="cal-day done">10</div>
+            <div class="cal-day done">11</div><div class="cal-day today">12</div>
+            <div class="cal-day future">13</div><div class="cal-day future">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0a0a0f;border:1px solid #2a2a3a"></div>
+      <div class="swatch" style="background:#13131c"></div>
+      <div class="swatch" style="background:#1e1e2c"></div>
+      <div class="swatch" style="background:#7c6af7"></div>
+      <div class="swatch" style="background:#34d399"></div>
+      <div class="swatch" style="background:#f87171"></div>
+      <div class="style-id">Slate — Dark Minimal</div>
+    </div>
+  </section>
+
+  <!-- ════════════ CANVAS ════════════ -->
+  <section id="canvas">
+    <div class="style-label" style="padding-top:16px">
+      <span class="style-name" style="color:#2563eb">Stile 2 — Canvas</span>
+      <span class="style-desc" style="color:#2563eb">Light · Clean · Professionale</span>
+    </div>
+    <div class="topbar">
+      <div class="logo">Train<span>English</span></div>
+      <div class="toggle-pill">
+        <button class="active">☀︎ Light</button>
+        <button>◗</button>
+      </div>
+    </div>
+    <div class="dash">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Progresso</div>
+          <div class="day-big">12<span style="font-size:22px;color:#d1d5db;font-weight:400">/60</span></div>
+          <div class="day-sub">Settimana 2 · Condizionali</div>
+          <div class="streak-row">
+            <div class="streak-num">🔥 5</div>
+            <div class="streak-label">giorni di fila<br><span style="color:#d1d5db;font-size:11px">28 min ieri</span></div>
+          </div>
+          <button class="btn-session">▶  Inizia sessione di oggi</button>
+        </div>
+        <div class="card">
+          <div class="card-label">Oggi</div>
+          <div class="topic-tag">PART 4</div>
+          <div class="topic-title">Condizionali & Wish</div>
+          <div class="topic-sub">If clauses tipo 2 e 3 · Mixed conditionals · Wish + past perfect</div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span style="font-size:11px;color:#9ca3af">4 / 10 esercizi</span>
+            <span style="font-size:11px;color:#9ca3af">12 min</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Aree · % correttezza</div>
+          <div class="topic-list">
+            <div class="topic-row"><span class="topic-name">Word Formation</span><span class="topic-pct pct-bad">48%</span></div>
+            <div class="topic-row"><span class="topic-name">Part 4 Trasformazioni</span><span class="topic-pct pct-mid">61%</span></div>
+            <div class="topic-row"><span class="topic-name">Open Cloze</span><span class="topic-pct pct-mid">75%</span></div>
+            <div class="topic-row"><span class="topic-name">Vocabolario</span><span class="topic-pct pct-good">83%</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Calendario · Giorni 1–14</div>
+          <div class="cal-row">
+            <div class="cal-day done">1</div><div class="cal-day done">2</div>
+            <div class="cal-day done">3</div><div class="cal-day done">4</div>
+            <div class="cal-day done">5</div><div class="cal-day done">6</div>
+            <div class="cal-day done">7</div><div class="cal-day done">8</div>
+            <div class="cal-day done">9</div><div class="cal-day done">10</div>
+            <div class="cal-day done">11</div><div class="cal-day today">12</div>
+            <div class="cal-day future">13</div><div class="cal-day future">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#f6f8fc;border:1px solid #e5e7eb"></div>
+      <div class="swatch" style="background:#ffffff;border:1px solid #e5e7eb"></div>
+      <div class="swatch" style="background:#f3f4f6"></div>
+      <div class="swatch" style="background:#2563eb"></div>
+      <div class="swatch" style="background:#059669"></div>
+      <div class="swatch" style="background:#dc2626"></div>
+      <div class="style-id">Canvas — Clean Light</div>
+    </div>
+  </section>
+
+  <!-- ════════════ VIVID ════════════ -->
+  <section id="vivid">
+    <div class="style-label" style="padding-top:16px">
+      <span class="style-name" style="color:#4f46e5">Stile 3 — Vivid</span>
+      <span class="style-desc" style="color:#4f46e5">Colorato · Energico · Card per topic</span>
+    </div>
+    <div class="topbar">
+      <div class="logo">Train<span>English</span></div>
+      <div class="toggle-pill">
+        <button class="active">☀︎ Light</button>
+        <button>◗</button>
+      </div>
+    </div>
+    <div class="dash">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card-day">
+          <div class="card-label">Progresso</div>
+          <div class="day-big">12<span style="font-size:20px;opacity:0.5;font-weight:400">/60</span></div>
+          <div class="day-sub">Settimana 2 · Condizionali</div>
+          <div class="streak-row">
+            <div class="streak-num">🔥 5</div>
+            <div class="streak-label">giorni di fila<br><span style="opacity:0.5;font-size:11px">28 min ieri</span></div>
+          </div>
+          <button class="btn-session">▶  Inizia sessione di oggi</button>
+        </div>
+        <div class="card-white">
+          <div class="card-label">Topic Cards · % correttezza</div>
+          <div class="topic-cards">
+            <div class="topic-card tc-grammar">
+              <div class="tc-icon">📐</div>
+              <div class="tc-name">Grammatica</div>
+              <div class="tc-pct">78%</div>
+              <div class="tc-bar"><div class="tc-bar-fill"></div></div>
+            </div>
+            <div class="topic-card tc-verbs">
+              <div class="tc-icon">⚡</div>
+              <div class="tc-name">Verbi & Tempi</div>
+              <div class="tc-pct">65%</div>
+              <div class="tc-bar"><div class="tc-bar-fill"></div></div>
+            </div>
+            <div class="topic-card tc-wordform">
+              <div class="tc-icon">🔤</div>
+              <div class="tc-name">Word Form.</div>
+              <div class="tc-pct">45%</div>
+              <div class="tc-bar"><div class="tc-bar-fill"></div></div>
+            </div>
+            <div class="topic-card tc-vocab">
+              <div class="tc-icon">📖</div>
+              <div class="tc-name">Vocabolario</div>
+              <div class="tc-pct">82%</div>
+              <div class="tc-bar"><div class="tc-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card-white">
+          <div class="card-label">Sessione di oggi</div>
+          <div style="display:inline-block;padding:4px 10px;background:#e0e7ff;color:#4f46e5;border-radius:6px;font-size:11px;font-weight:700;margin-bottom:12px">PART 4</div>
+          <div style="font-size:18px;font-weight:800;color:#1e1b4b;margin-bottom:6px">Condizionali & Wish</div>
+          <div style="font-size:12px;color:#a5b4fc;line-height:1.5">If clauses tipo 2 e 3 · Mixed conditionals · Wish + past perfect</div>
+          <div style="height:5px;background:#e0e7ff;border-radius:4px;margin-top:16px;overflow:hidden">
+            <div style="height:100%;width:40%;background:#4f46e5;border-radius:4px"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span style="font-size:11px;color:#a5b4fc">4 / 10 esercizi</span>
+            <span style="font-size:11px;color:#a5b4fc">12 min</span>
+          </div>
+        </div>
+        <div class="card-white">
+          <div class="card-label">Calendario · Giorni 1–14</div>
+          <div class="cal-row">
+            <div class="cal-day done">1</div><div class="cal-day done">2</div>
+            <div class="cal-day done">3</div><div class="cal-day done">4</div>
+            <div class="cal-day done">5</div><div class="cal-day done">6</div>
+            <div class="cal-day done">7</div><div class="cal-day done">8</div>
+            <div class="cal-day done">9</div><div class="cal-day done">10</div>
+            <div class="cal-day done">11</div><div class="cal-day today">12</div>
+            <div class="cal-day future">13</div><div class="cal-day future">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#f0f4ff"></div>
+      <div class="swatch" style="background:#ffffff;border:1px solid #e8e8ff"></div>
+      <div class="swatch" style="background:linear-gradient(135deg,#4f46e5,#7c3aed)"></div>
+      <div class="swatch" style="background:#3b82f6"></div>
+      <div class="swatch" style="background:#10b981"></div>
+      <div class="swatch" style="background:#f59e0b"></div>
+      <div class="swatch" style="background:#f43f5e"></div>
+      <div class="style-id">Vivid — Colorful Cards</div>
+    </div>
+  </section>
+
+  <!-- ════════════ TERRA ════════════ -->
+  <section id="terra">
+    <div class="style-label" style="padding-top:16px">
+      <span class="style-name" style="color:#b45309">Stile 4 — Terra</span>
+      <span class="style-desc" style="color:#b45309">Caldo · Naturale · Relax</span>
+    </div>
+    <div class="topbar">
+      <div class="logo">Train<span>English</span></div>
+      <div class="toggle-pill">
+        <button class="active">☀︎ Light</button>
+        <button>◗</button>
+      </div>
+    </div>
+    <div class="dash">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Progresso</div>
+          <div class="day-big">12<span style="font-size:22px;color:#d6c5b4;font-weight:400">/60</span></div>
+          <div class="day-sub">Settimana 2 · Condizionali</div>
+          <div class="streak-row">
+            <div class="streak-num">🔥 5</div>
+            <div class="streak-label">giorni di fila<br><span style="color:#d6c5b4;font-size:11px">28 min ieri</span></div>
+          </div>
+          <button class="btn-session">▶  Inizia sessione di oggi</button>
+        </div>
+        <div class="card">
+          <div class="card-label">Oggi</div>
+          <div class="topic-tag">PART 4</div>
+          <div class="topic-title">Condizionali & Wish</div>
+          <div class="topic-sub">If clauses tipo 2 e 3 · Mixed conditionals · Wish + past perfect</div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span style="font-size:11px;color:#a8887a">4 / 10 esercizi</span>
+            <span style="font-size:11px;color:#a8887a">12 min</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-label">Aree · % correttezza</div>
+          <div class="topic-list">
+            <div class="topic-row"><span class="topic-name">Word Formation</span><span class="topic-pct pct-bad">48%</span></div>
+            <div class="topic-row"><span class="topic-name">Part 4 Trasformazioni</span><span class="topic-pct pct-mid">61%</span></div>
+            <div class="topic-row"><span class="topic-name">Open Cloze</span><span class="topic-pct pct-mid">75%</span></div>
+            <div class="topic-row"><span class="topic-name">Vocabolario</span><span class="topic-pct pct-good">83%</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Calendario · Giorni 1–14</div>
+          <div class="cal-row">
+            <div class="cal-day done">1</div><div class="cal-day done">2</div>
+            <div class="cal-day done">3</div><div class="cal-day done">4</div>
+            <div class="cal-day done">5</div><div class="cal-day done">6</div>
+            <div class="cal-day done">7</div><div class="cal-day done">8</div>
+            <div class="cal-day done">9</div><div class="cal-day done">10</div>
+            <div class="cal-day done">11</div><div class="cal-day today">12</div>
+            <div class="cal-day future">13</div><div class="cal-day future">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#faf6f0;border:1px solid #e7ddd0"></div>
+      <div class="swatch" style="background:#fffcf8;border:1px solid #e7ddd0"></div>
+      <div class="swatch" style="background:#f5ece0"></div>
+      <div class="swatch" style="background:#b45309"></div>
+      <div class="swatch" style="background:#fef3c7"></div>
+      <div class="swatch" style="background:#065f46"></div>
+      <div class="style-id">Terra — Warm Earthy</div>
+    </div>
+  </section>
+
+</body>
+</html>

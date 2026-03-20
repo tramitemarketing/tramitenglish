@@ -1,0 +1,159 @@
+# FCE B2 — Part 7: Multiple Matching
+# Format: 10 questions matched to one of 4–5 people/sections
+# Students match statements to the correct person/section
+
+sets:
+
+  - id: p7_001
+    source: esl-lounge
+    title: "Four Letters to Neighbours"
+    difficulty: B2
+    people: [Darren, Samantha, Terry, Debbie]
+    texts:
+      Darren: |
+        I have lived next door for six years now and I have generally been happy
+        here. However, I have noticed a marked increase in noise levels over the
+        past three months. The music from next door begins in the afternoon and
+        continues until midnight on weekdays. I work early shifts and this
+        situation is making my life very difficult. I have knocked on the door
+        twice but received no response. I am writing now as a last resort.
+      Samantha: |
+        I want to start by saying how much I appreciate having such pleasant
+        neighbours on the whole. The street is generally quiet and well-kept.
+        My only concern is the parking situation. Someone has been leaving a
+        vehicle across my driveway on weekday mornings, which prevents me from
+        leaving for work. I do not wish to cause any trouble, but I would be
+        grateful if this could be resolved without involving the council.
+      Terry: |
+        This is not the first time I have had to write to you about this matter.
+        On three separate occasions I have found rubbish left outside my gate.
+        The bags are left on the pavement rather than in the communal bin area
+        provided by the council. I have also noticed that your dog is left
+        outside for long periods and disturbs the peace with constant barking.
+        I would ask you to deal with both of these issues urgently.
+      Debbie: |
+        I'm not one to complain normally, but the situation with the shared
+        garden has become unacceptable. We agreed at the start of the tenancy
+        to share responsibility for maintenance, but I have been doing all the
+        work alone for the past four months. I have also noticed that the hedge
+        along the side boundary has not been trimmed, which is now affecting
+        the light in my kitchen. I would appreciate some assistance as soon as
+        possible.
+    questions:
+      - q: 1
+        text: "This person mentions having tried to contact their neighbour before writing."
+        answer: Darren
+        tags: [detail, inference]
+      - q: 2
+        text: "This person refers to a previous agreement that is not being kept."
+        answer: Debbie
+        tags: [detail]
+      - q: 3
+        text: "This person expresses a preference for resolving the issue without official help."
+        answer: Samantha
+        tags: [detail, inference]
+      - q: 4
+        text: "This person mentions more than one problem they want resolved."
+        answer: Terry
+        tags: [detail]
+      - q: 5
+        text: "This person's problem affects their ability to leave their home."
+        answer: Samantha
+        tags: [detail]
+      - q: 6
+        text: "This person says this is not the first time they have written about this."
+        answer: Terry
+        tags: [detail]
+      - q: 7
+        text: "This person's problem affects their sleep or rest."
+        answer: Darren
+        tags: [inference]
+      - q: 8
+        text: "This person's problem involves a physical structure needing attention."
+        answer: Debbie
+        tags: [detail, inference]
+      - q: 9
+        text: "This person begins by saying something positive about the neighbourhood."
+        answer: Samantha
+        tags: [detail]
+      - q: 10
+        text: "This person describes a problem with an animal."
+        answer: Terry
+        tags: [detail]
+
+  - id: p7_002
+    source: esl-lounge
+    title: "Four Readers on Healthy Eating"
+    difficulty: B2
+    people: [Amy, Boris, Carla, David]
+    texts:
+      Amy: |
+        I changed my diet completely two years ago and have never felt better.
+        I eliminated processed foods and now cook everything from fresh ingredients.
+        It takes more time, but the difference in how I feel is remarkable. I lost
+        weight without even trying and my energy levels have been consistently higher.
+        The hardest part was the first month, when I kept reaching for convenient
+        snacks. Now those habits have completely disappeared and I honestly don't
+        miss them at all.
+      Boris: |
+        I've tried every diet going and none of them worked long-term for me. The
+        problem with strict regimes is that they create a sense of deprivation.
+        The moment you feel you're being denied something, you want it more. I
+        now follow the 80/20 principle — eating well 80% of the time and not
+        worrying about the other 20%. This approach has finally allowed me to
+        maintain a healthy weight without feeling stressed about what I eat.
+      Carla: |
+        As a nutritionist, I see clients every week who are confused by conflicting
+        advice. One week fats are the enemy; the next it's carbohydrates. The
+        reality is that the science of nutrition is genuinely complicated, and we
+        don't have all the answers yet. What we do know is that a varied diet with
+        plenty of vegetables, adequate protein, and limited sugar is beneficial for
+        most people. I advise my clients to ignore trends and focus on these basics.
+      David: |
+        I became interested in nutrition after a health scare three years ago.
+        My doctor told me I needed to reduce my cholesterol significantly or face
+        serious consequences. Rather than relying on medication alone, I decided to
+        research the dietary changes that could help. Within six months of changing
+        my eating habits, my cholesterol had dropped to a healthy level. I wish I
+        had paid more attention to my diet earlier in life.
+    questions:
+      - q: 1
+        text: "This person changed their diet as a result of medical advice."
+        answer: David
+        tags: [detail]
+      - q: 2
+        text: "This person says that strict diets are counterproductive."
+        answer: Boris
+        tags: [detail, inference]
+      - q: 3
+        text: "This person works professionally in the field of diet and nutrition."
+        answer: Carla
+        tags: [detail]
+      - q: 4
+        text: "This person found the initial stage of their new diet the most difficult."
+        answer: Amy
+        tags: [detail]
+      - q: 5
+        text: "This person says that nutritional science does not have all the answers."
+        answer: Carla
+        tags: [detail]
+      - q: 6
+        text: "This person describes success without setting out to lose weight specifically."
+        answer: Amy
+        tags: [inference]
+      - q: 7
+        text: "This person recommends a flexible approach to eating."
+        answer: Boris
+        tags: [detail]
+      - q: 8
+        text: "This person expresses regret about past behaviour."
+        answer: David
+        tags: [detail, inference]
+      - q: 9
+        text: "This person gives advice about ignoring food trends."
+        answer: Carla
+        tags: [detail]
+      - q: 10
+        text: "This person achieved measurable health improvement through diet."
+        answer: David
+        tags: [detail]

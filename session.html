@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Sessione</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    #mainContent {
+      padding: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* Theory */
+    .theory-body {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    /* Progress dots */
+    .exercise-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .dot.done     { background: var(--success); border-color: var(--success); }
+    .dot.current  { background: var(--accent);  border-color: var(--accent); }
+    .dot.wrong    { background: var(--error);   border-color: var(--error); }
+
+    /* Fill input */
+    .fill-input {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* Recap */
+    .recap-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .recap-errors-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+
+    .recap-error-item {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .recap-error-item strong {
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Session topbar -->
+  <header class="session-topbar">
+    <a href="dashboard.html" class="topbar-back" id="backBtn">&#8592;</a>
+    <span class="session-title" id="sessionTitle">Caricamento...</span>
+    <span class="session-timer" id="timerEl">0:00</span>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- STEP 0: Theory -->
+    <div class="step active" id="stepTheory">
+      <div class="card">
+        <div class="card-label" id="theoryLabel">Teoria del giorno</div>
+        <div class="theory-body" id="theoryBody"></div>
+      </div>
+      <div class="mt-16">
+        <button class="btn btn-primary" id="startExercisesBtn">Inizia esercizi</button>
+      </div>
+      <div class="mt-8">
+        <button class="btn btn-secondary" id="skipToRecapBtn">Salta agli esercizi &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: Exercise -->
+    <div class="step" id="stepExercise">
+      <div class="exercise-dots" id="exerciseDots"></div>
+
+      <div class="card" id="exerciseCard">
+        <div class="exercise-part" id="exPart"></div>
+        <div class="exercise-question" id="exQuestion"></div>
+
+        <!-- Multiple choice options -->
+        <div id="optionsArea"></div>
+
+        <!-- Fill / Transform input -->
+        <div id="fillArea" style="display:none">
+          <div id="keywordBadge" style="display:none;margin-bottom:12px">
+            <span style="font-size:11px;font-weight:600;color:var(--subtext)">Parola chiave: </span>
+            <span class="badge" id="keywordText"></span>
+          </div>
+          <input type="text" class="fill-input" id="fillInput" placeholder="Scrivi la tua risposta...">
+        </div>
+
+        <!-- Feedback -->
+        <div class="feedback" id="feedbackArea">
+          <strong id="feedbackTitle"></strong>
+          <span id="feedbackExplanation"></span>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <button class="btn btn-primary" id="confirmBtn" disabled>Conferma</button>
+      </div>
+      <div class="mt-8" id="nextBtnWrap" style="display:none">
+        <button class="btn btn-secondary" id="nextBtn">Prossimo esercizio &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Recap -->
+    <div class="step" id="stepRecap">
+      <div class="card" style="text-align:center">
+        <div class="card-label">Sessione completata</div>
+        <div class="recap-circle" id="recapCircle">
+          <div class="recap-score" id="recapScore">-</div>
+          <div class="recap-label" id="recapLabel">punteggio</div>
+        </div>
+        <p id="recapMessage" style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px"></p>
+        <div class="divider"></div>
+        <div style="display:flex;gap:12px;justify-content:center">
+          <div>
+            <div class="stat-num" id="recapCorrect" style="font-size:28px">0</div>
+            <div class="stat-label">Corrette</div>
+          </div>
+          <div>
+            <div class="stat-num" id="recapWrong" style="font-size:28px;color:var(--error)">0</div>
+            <div class="stat-label">Errate</div>
+          </div>
+          <div>
+            <div class="stat-num" id="recapTime" style="font-size:28px">0</div>
+            <div class="stat-label">Minuti</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="recapErrorsList" style="margin-top:16px;display:none">
+        <div class="recap-errors-title">Errori da ripassare</div>
+        <div id="recapErrorsItems"></div>
+      </div>
+
+      <div class="mt-16">
+        <button class="btn btn-primary" id="completeDayBtn">Completa giornata &#10003;</button>
+      </div>
+      <div class="mt-8">
+        <a href="log.html" class="btn btn-secondary">Vedi log errori</a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/content.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      const state    = State.load();
+      const plan     = Plan.today();
+      const day      = state.currentDay || 1;
+      const topicKey = topicKeyForDay(day);
+
+      // Update topbar
+      document.getElementById('sessionTitle').textContent = plan ? plan.topic : 'Sessione';
+
+      // Start timer
+      Timer.start(document.getElementById('timerEl'));
+
+      // Load theory
+      document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Teoria del giorno';
+      document.getElementById('theoryBody').innerHTML     = getTheoryFor(day);
+
+      // Step switching
+      function showStep(id) {
+        document.querySelectorAll('.step').forEach(function (el) {
+          el.classList.remove('active');
+        });
+        document.getElementById(id).classList.add('active');
+      }
+
+      // ── Theory step ──
+      document.getElementById('startExercisesBtn').addEventListener('click', function () {
+        const exercises = getExercisesFor(day);
+        if (exercises && exercises.length) {
+          initExercises(exercises);
+          showStep('stepExercise');
+        } else {
+          showStep('stepRecap');
+          initRecap(0, 0, []);
+        }
+      });
+
+      document.getElementById('skipToRecapBtn').addEventListener('click', function () {
+        showStep('stepRecap');
+        initRecap(0, 0, []);
+      });
+
+      // ── Exercise step ──
+      var exercises   = getExercisesFor(day) || [];
+      var exIndex     = 0;
+      var correctCount = 0;
+      var wrongCount   = 0;
+      var sessionErrs  = [];
+      var answered     = false;
+
+      function initExercises(exList) {
+        exercises = exList;
+        exIndex   = 0;
+        buildDots();
+        renderExercise();
+      }
+
+      function buildDots() {
+        var dots = document.getElementById('exerciseDots');
+        dots.innerHTML = '';
+        exercises.forEach(function (_, i) {
+          var d = document.createElement('div');
+          d.className = 'dot' + (i === 0 ? ' current' : '');
+          d.id = 'dot-' + i;
+          dots.appendChild(d);
+        });
+      }
+
+      function updateDot(index, cls) {
+        var d = document.getElementById('dot-' + index);
+        if (d) { d.className = 'dot ' + cls; }
+      }
+
+      function renderExercise() {
+        if (exIndex >= exercises.length) {
+          showStep('stepRecap');
+          initRecap(correctCount, wrongCount, sessionErrs);
+          return;
+        }
+
+        answered = false;
+        var ex   = exercises[exIndex];
+
+        document.getElementById('exPart').textContent     = ex.part || '';
+        document.getElementById('exQuestion').textContent = ex.question;
+
+        var feedback = document.getElementById('feedbackArea');
+        feedback.className = 'feedback';
+        feedback.style.display = 'none';
+
+        document.getElementById('nextBtnWrap').style.display = 'none';
+
+        var confirmBtn = document.getElementById('confirmBtn');
+        confirmBtn.disabled   = true;
+        confirmBtn.textContent = 'Conferma';
+
+        if (ex.type === 'multiple') {
+          document.getElementById('fillArea').style.display    = 'none';
+          document.getElementById('optionsArea').style.display = '';
+          renderOptions(ex);
+        } else {
+          document.getElementById('optionsArea').style.display = 'none';
+          document.getElementById('fillArea').style.display    = '';
+          renderFill(ex);
+        }
+      }
+
+      function renderOptions(ex) {
+        var area = document.getElementById('optionsArea');
+        area.innerHTML = '';
+        ex.options.forEach(function (opt, i) {
+          var btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.textContent = opt;
+          btn.addEventListener('click', function () {
+            if (answered) return;
+            area.querySelectorAll('.option-btn').forEach(function (b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            document.getElementById('confirmBtn').disabled = false;
+            document.getElementById('confirmBtn').dataset.selected = i;
+          });
+          area.appendChild(btn);
+        });
+      }
+
+      function renderFill(ex) {
+        var fillInput   = document.getElementById('fillInput');
+        var keywordBadge = document.getElementById('keywordBadge');
+        var keywordText  = document.getElementById('keywordText');
+
+        fillInput.value = '';
+        fillInput.disabled = false;
+
+        if (ex.type === 'transform' && ex.keyword) {
+          keywordBadge.style.display = '';
+          keywordText.textContent    = ex.keyword;
+        } else {
+          keywordBadge.style.display = 'none';
+        }
+
+        fillInput.addEventListener('input', function () {
+          document.getElementById('confirmBtn').disabled = fillInput.value.trim().length === 0;
+        });
+      }
+
+      document.getElementById('confirmBtn').addEventListener('click', function () {
+        if (answered) return;
+        answered = true;
+
+        var ex      = exercises[exIndex];
+        var correct = false;
+
+        if (ex.type === 'multiple') {
+          var selected = parseInt(this.dataset.selected);
+          correct = selected === ex.correct;
+          // Mark options
+          var btns = document.getElementById('optionsArea').querySelectorAll('.option-btn');
+          btns.forEach(function (b, i) {
+            b.disabled = true;
+            if (i === ex.correct) b.classList.add('correct');
+            else if (i === selected && !correct) b.classList.add('wrong');
+            b.classList.remove('selected');
+          });
+        } else {
+          var userAnswer = document.getElementById('fillInput').value.trim().toLowerCase();
+          var accepted   = Array.isArray(ex.answer) ? ex.answer : [ex.answer];
+          correct = accepted.some(function (a) {
+            return a.toLowerCase() === userAnswer;
+          });
+          document.getElementById('fillInput').disabled = true;
+          document.getElementById('fillInput').style.borderColor = correct ? '#6ee7b7' : '#fca5a5';
+          document.getElementById('fillInput').style.background  = correct ? '#ecfdf5' : '#fef2f2';
+        }
+
+        // Show feedback
+        var feedback   = document.getElementById('feedbackArea');
+        var fbTitle    = document.getElementById('feedbackTitle');
+        var fbExplain  = document.getElementById('feedbackExplanation');
+
+        if (correct) {
+          correctCount++;
+          feedback.className = 'feedback feedback-correct show';
+          fbTitle.textContent = 'Corretto! ';
+          updateDot(exIndex, 'done');
+          State.updateTopicScore(topicKey, true);
+        } else {
+          wrongCount++;
+          feedback.className = 'feedback feedback-wrong show';
+          fbTitle.textContent = 'Errato. ';
+          updateDot(exIndex, 'wrong');
+          State.updateTopicScore(topicKey, false);
+
+          var errObj = {
+            day:       day,
+            topicKey:  topicKey,
+            part:      ex.part,
+            question:  ex.question,
+            userAnswer: ex.type === 'multiple'
+              ? ex.options[parseInt(document.getElementById('confirmBtn').dataset.selected)]
+              : document.getElementById('fillInput').value,
+            correct:   Array.isArray(ex.answer) ? ex.answer[0] : (ex.options ? ex.options[ex.correct] : ex.answer),
+            explanation: ex.explanation,
+            date:      new Date().toISOString()
+          };
+          sessionErrs.push(errObj);
+          State.recordError(errObj);
+        }
+
+        fbExplain.textContent = ex.explanation || '';
+        feedback.style.display = 'block';
+
+        document.getElementById('confirmBtn').disabled = true;
+        document.getElementById('nextBtnWrap').style.display = '';
+      });
+
+      document.getElementById('nextBtn').addEventListener('click', function () {
+        exIndex++;
+        renderExercise();
+      });
+
+      // ── Recap step ──
+      function initRecap(correct, wrong, errors) {
+        var minutes  = Timer.stop();
+        var total    = correct + wrong;
+        var pct      = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+        document.getElementById('recapScore').textContent   = pct + '%';
+        document.getElementById('recapCorrect').textContent = correct;
+        document.getElementById('recapWrong').textContent   = wrong;
+        document.getElementById('recapTime').textContent    = minutes;
+
+        var msg = '';
+        if (pct >= 80) msg = 'Ottimo lavoro! Continua cos\u00ec.';
+        else if (pct >= 60) msg = 'Buon risultato. Ripassare gli errori aiuta molto.';
+        else if (total === 0) msg = 'Hai letto la teoria. Torna per fare gli esercizi.';
+        else msg = 'Qualche difficolt\u00e0 oggi. Ripassare fa parte del metodo.';
+        document.getElementById('recapMessage').textContent = msg;
+
+        if (errors.length) {
+          document.getElementById('recapErrorsList').style.display = '';
+          var items = document.getElementById('recapErrorsItems');
+          items.innerHTML = errors.map(function (e) {
+            return '<div class="recap-error-item">'
+              + '<strong>' + e.question + '</strong><br>'
+              + '<span style="color:var(--subtext)">Risposta corretta: </span><em>' + e.correct + '</em>'
+              + '</div>';
+          }).join('');
+        }
+      }
+
+      document.getElementById('completeDayBtn').addEventListener('click', function () {
+        var minutes = 0;
+        State.markDayComplete(day, minutes);
+        UI.toast('Giornata completata!', 'success');
+        setTimeout(function () {
+          window.location.replace('dashboard.html');
+        }, 800);
+      });
+
+    })();
+  </script>
+</body>
+</html>

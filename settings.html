@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Impostazioni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .settings-content {
+      padding-top: calc(var(--topbar-h) + 16px);
+      padding-bottom: 32px;
+      padding-left: 16px;
+      padding-right: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .user-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0 auto 12px;
+    }
+
+    .user-email {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .user-role {
+      text-align: center;
+      font-size: 12px;
+      color: var(--subtext);
+      margin-bottom: 24px;
+    }
+
+    .settings-section {
+      margin-bottom: 24px;
+    }
+
+    .readonly-field {
+      padding: 12px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--subtext);
+    }
+
+    .version-tag {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <a href="dashboard.html" class="topbar-back">&#8592;</a>
+    <span class="topbar-title">Impostazioni</span>
+    <span style="width:36px"></span>
+  </header>
+
+  <!-- Main content (no bottom nav on this page) -->
+  <main class="settings-content">
+
+    <!-- User profile -->
+    <div class="user-avatar" id="userAvatar">?</div>
+    <div class="user-email" id="userEmail">caricamento...</div>
+    <div class="user-role">Piano 60 giorni — FCE B2</div>
+
+    <!-- Account section -->
+    <div class="settings-section">
+      <div class="form-section-title">Account</div>
+      <div class="card">
+        <div class="input-group">
+          <label>Email</label>
+          <div class="readonly-field" id="emailField">—</div>
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <label>Stato account</label>
+          <div class="readonly-field">Attivo &#10003;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Change password section -->
+    <div class="settings-section">
+      <div class="form-section-title">Cambia Password</div>
+      <div class="card">
+        <div id="pwAlert" style="display:none;margin-bottom:12px"></div>
+        <div class="input-group">
+          <label for="currentPw">Password attuale</label>
+          <input type="password" id="currentPw" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="input-group">
+          <label for="newPw">Nuova password</label>
+          <input type="password" id="newPw" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <label for="confirmPw">Conferma nuova password</label>
+          <input type="password" id="confirmPw" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="mt-16">
+          <button class="btn btn-secondary" id="changePwBtn">Aggiorna password</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress section -->
+    <div class="settings-section">
+      <div class="form-section-title">Progresso</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span style="font-size:13px;font-weight:600;color:var(--text2)">Giorno corrente</span>
+          <span class="badge" id="currentDayBadge">1 / 60</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:13px;font-weight:600;color:var(--text2)">Giorni completati</span>
+          <span class="badge" id="completedBadge">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications (future) -->
+    <div class="settings-section">
+      <div class="form-section-title">Notifiche</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text2)">Promemoria giornaliero</div>
+            <div style="font-size:12px;color:var(--subtext);margin-top:2px">Prossimamente disponibile</div>
+          </div>
+          <div class="tag">Presto</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="settings-section">
+      <div class="form-section-title">Sessione</div>
+      <button class="btn btn-danger" id="logoutBtn">Esci dall'account</button>
+    </div>
+
+    <div class="version-tag">TrainEnglish v0.1.0 &mdash; 60 giorni al B2 FCE</div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var user  = Auth.getUser();
+      var state = State.load();
+
+      // Fill user info
+      var email   = user ? user.email : '—';
+      var initials = email ? email.charAt(0).toUpperCase() : '?';
+      document.getElementById('userAvatar').textContent  = initials;
+      document.getElementById('userEmail').textContent   = email;
+      document.getElementById('emailField').textContent  = email;
+      document.getElementById('currentDayBadge').textContent = (state.currentDay || 1) + ' / 60';
+      document.getElementById('completedBadge').textContent  = (state.completedDays || []).length;
+
+      // Change password (stub — wire up Supabase)
+      document.getElementById('changePwBtn').addEventListener('click', function () {
+        var curr    = document.getElementById('currentPw').value;
+        var newPw   = document.getElementById('newPw').value;
+        var confirm = document.getElementById('confirmPw').value;
+        var alertEl = document.getElementById('pwAlert');
+
+        alertEl.style.display = 'none';
+
+        if (!curr || !newPw || !confirm) {
+          alertEl.className = 'alert alert-error';
+          alertEl.textContent = 'Compila tutti i campi.';
+          alertEl.style.display = '';
+          return;
+        }
+
+        if (newPw !== confirm) {
+          alertEl.className = 'alert alert-error';
+          alertEl.textContent = 'Le nuove password non coincidono.';
+          alertEl.style.display = '';
+          return;
+        }
+
+        if (newPw.length < 8) {
+          alertEl.className = 'alert alert-error';
+          alertEl.textContent = 'La password deve essere di almeno 8 caratteri.';
+          alertEl.style.display = '';
+          return;
+        }
+
+        // TODO: await _supabase.auth.updateUser({ password: newPw })
+        alertEl.className = 'alert alert-success';
+        alertEl.textContent = 'Password aggiornata con successo. (stub)';
+        alertEl.style.display = '';
+
+        document.getElementById('currentPw').value = '';
+        document.getElementById('newPw').value     = '';
+        document.getElementById('confirmPw').value = '';
+      });
+
+      // Logout
+      document.getElementById('logoutBtn').addEventListener('click', function () {
+        if (!confirm('Sei sicuro di voler uscire?')) return;
+        Auth.logout();
+      });
+
+    })();
+  </script>
+</body>
+</html>

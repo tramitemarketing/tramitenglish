@@ -1,0 +1,464 @@
+# FCE B2 — Part 3: Word Formation
+# Format: 8 gaps per set, base word given → student forms correct word
+#
+# Tag system — ogni gap ha 3-5 tag:
+#   [0] word_formation          — topic macro (sempre presente)
+#   [1] part3_word_formation    — part FCE (sempre presente)
+#   [2] rule_*                  — regola morfologica principale (suffisso/prefisso)
+#   [3] rule_*                  — seconda regola se combinazione (es. prefisso + suffisso)
+#   [4] rule_spelling_*         — regola ortografica se c'è un cambio di spelling
+
+sets:
+
+  - id: p3_001
+    source: flo-joe
+    title: "Garlic"
+    difficulty: B2
+    text: |
+      Garlic is one of the world's largest food crop (1)_____. Research has shown
+      that garlic can help prevent (2)_____. It is particularly (3)_____ against
+      colds and flu. (4)_____ now believe that garlic contains many beneficial
+      compounds. In (5)_____ to its health benefits, garlic is widely used in
+      cooking. It can lower blood (6)_____ in some people. However, eating garlic
+      in large quantities does have its (7)_____. Despite this, garlic is
+      considered one of the least (8)_____ foods you can eat.
+    gaps:
+      - number: 1
+        base: PRODUCE
+        answer: producers
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_er_or       # produce → producer (agente)
+      - number: 2
+        base: ILL
+        answer: illness
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_adj_to_noun_ness         # ill → illness
+      - number: 3
+        base: EFFECT
+        answer: effective
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ive          # effect → effective
+      - number: 4
+        base: SCIENCE
+        answer: scientists
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_noun_ist         # science → scientist
+      - number: 5
+        base: ADD
+        answer: addition
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_tion        # add → addition
+      - number: 6
+        base: PRESS
+        answer: pressure
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_ure         # press → pressure
+      - number: 7
+        base: ADVANTAGE
+        answer: disadvantages
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_dis               # dis + advantage
+      - number: 8
+        base: HARM
+        answer: harmful
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ful          # harm → harmful
+
+  - id: p3_002
+    source: esl-lounge
+    title: "A Luxury Hotel"
+    difficulty: B2
+    text: |
+      The hotel's interior was truly (1)_____. A secret passage had been
+      (2)_____ beneath the building. The history of the hotel was
+      (3)_____ linked to several famous guests. The porter greeted us with
+      (4)_____ when we said we had not booked. The staff were (5)_____
+      throughout our stay. We were (6)_____ for using the minibar.
+      (7)_____, the hotel itself was outstanding. The design was
+      (8)_____ from any other hotel we had visited.
+    gaps:
+      - number: 1
+        base: LUXURY
+        answer: luxurious
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ious         # luxury → luxurious
+          - rule_spelling_drop_y          # luxury → luxuri- (y → i prima di -ous)
+      - number: 2
+        base: COVER
+        answer: uncovered
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_un                # un + covered
+      - number: 3
+        base: SUPPOSE
+        answer: supposedly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ed           # suppose → supposed (participio aggettivale)
+          - rule_adj_to_adv_ly            # supposed → supposedly
+          - rule_double_transformation    # due passaggi: verbo → aggettivo → avverbio
+      - number: 4
+        base: BELIEVE
+        answer: disbelief
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_ance        # believe → belief (irregolare)
+          - rule_prefix_dis               # dis + belief
+          - rule_double_transformation    # due passaggi: prefisso + cambio forma
+      - number: 5
+        base: HELP
+        answer: helpful
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ful          # help → helpful
+      - number: 6
+        base: CHARGE
+        answer: overcharged
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_over              # over + charged
+      - number: 7
+        base: SURPRISE
+        answer: surprisingly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ing          # surprise → surprising
+          - rule_adj_to_adv_ly            # surprising → surprisingly
+          - rule_double_transformation    # due passaggi: verbo → aggettivo → avverbio
+          - rule_spelling_drop_e          # surprise → surpris- (drop e prima di -ing)
+      - number: 8
+        base: DIFFER
+        answer: different
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_ence        # differ → difference
+          - rule_verb_to_adj_ent          # differ → different (forma aggettivale diretta)
+
+  - id: p3_003
+    source: esl-lounge
+    title: "Homelessness"
+    difficulty: B2
+    text: |
+      The charity director seemed (1)_____ when asked about the figures. The
+      number of (2)_____ people has risen sharply this year. (3)_____, the
+      government has done little to help. The conditions these people face are
+      (4)_____. Life on the street is (5)_____ at the best of times. A return
+      to normal life seems (6)_____. Volunteers hand out (7)_____ of soup each
+      evening. Finding a (8)_____ solution requires political will.
+    gaps:
+      - number: 1
+        base: PATIENT
+        answer: impatient
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_im                # im + patient (davanti a p/b/m)
+      - number: 2
+        base: HOME
+        answer: homeless
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_less         # home → homeless
+      - number: 3
+        base: ASTONISH
+        answer: astonishingly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ing          # astonish → astonishing
+          - rule_adj_to_adv_ly            # astonishing → astonishingly
+          - rule_double_transformation
+      - number: 4
+        base: PROTECT
+        answer: protective
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ive          # protect → protective
+          - rule_spelling_drop_t          # protect → protecti- (silent t pattern)
+      - number: 5
+        base: PLEASANT
+        answer: unpleasant
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_un                # un + pleasant
+      - number: 6
+        base: LIKE
+        answer: unlikely
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_un                # un + likely
+          - rule_adj_to_adj_ly_careful    # like → likely (aggettivo, non avverbio)
+      - number: 7
+        base: SPOON
+        answer: spoonfuls
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_compound_noun            # spoon + ful (misura di quantità)
+      - number: 8
+        base: MEDICINE
+        answer: medical
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_al           # medicine → medical
+          - rule_spelling_drop_e          # medicine → medic- (drop -ine)
+
+  - id: p3_004
+    source: esl-lounge
+    title: "Business Growth"
+    difficulty: B2
+    text: |
+      The new business model proved highly (1)_____. The company had clearly
+      (2)_____ the difficulty of breaking into new markets. The director
+      responded (3)_____ when journalists questioned the accounts. The
+      products were designed (4)_____, with great attention to packaging.
+      Critics felt the company had been treated (5)_____. One brand
+      suddenly (6)_____ from the market without explanation. The range
+      became (7)_____ quickly. Scientists described the growth as being
+      (8)_____ proven.
+    gaps:
+      - number: 1
+        base: PROFIT
+        answer: profitable
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_able         # profit → profitable
+      - number: 2
+        base: ESTIMATE
+        answer: underestimated
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_under             # under + estimated
+      - number: 3
+        base: CROSS
+        answer: crossly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_adj_to_adv_ly            # cross → crossly
+      - number: 4
+        base: WONDER
+        answer: wonderfully
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ful          # wonder → wonderful
+          - rule_adj_to_adv_ly            # wonderful → wonderfully
+          - rule_double_transformation
+      - number: 5
+        base: FAIR
+        answer: unfairly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_un                # un + fair
+          - rule_adj_to_adv_ly            # unfair → unfairly
+          - rule_prefix_un_suffix_adv     # combinazione prefisso negativo + avverbio
+          - rule_double_transformation
+      - number: 6
+        base: APPEAR
+        answer: disappeared
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_dis               # dis + appeared
+      - number: 7
+        base: FASHION
+        answer: unfashionable
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_un                # un + fashionable
+          - rule_verb_to_adj_able         # fashion → fashionable
+          - rule_prefix_un_suffix_able    # combinazione un- + -able
+          - rule_double_transformation
+      - number: 8
+        base: SCIENCE
+        answer: scientifically
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_al           # science → scientific (irregolare)
+          - rule_adj_to_adv_ically        # scientific → scientifically
+          - rule_double_transformation
+
+  - id: p3_005
+    source: esl-lounge
+    title: "Technology Trends"
+    difficulty: B2
+    text: |
+      It seems (1)_____ that technology will continue to change rapidly. Living
+      (2)_____ without modern technology is becoming harder. The pace of
+      change is (3)_____. People show great (4)_____ for new gadgets. There
+      is sometimes (5)_____ between generations on this issue. Technology has
+      (6)_____ many industries. New devices have (7)_____ many processes.
+      The world is increasingly (8)_____.
+    gaps:
+      - number: 1
+        base: LIKE
+        answer: likely
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_adj_to_adj_ly_careful    # like → likely (aggettivo, non avverbio — trappola!)
+      - number: 2
+        base: DANGER
+        answer: dangerously
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ous          # danger → dangerous
+          - rule_adj_to_adv_ly            # dangerous → dangerously
+          - rule_double_transformation
+      - number: 3
+        base: VARY
+        answer: variety
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_ety         # vary → variety (irregolare)
+          - rule_spelling_y_to_i          # vary → vari- (y → i)
+      - number: 4
+        base: CHILD
+        answer: childhood
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_noun_hood        # child → childhood
+      - number: 5
+        base: AGREE
+        answer: disagreement
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_prefix_dis               # dis + agreement
+          - rule_verb_to_noun_ment        # agree → agreement
+          - rule_prefix_dis_suffix_ment   # combinazione dis- + -ment
+          - rule_double_transformation
+      - number: 6
+        base: REVOLUTION
+        answer: revolutionised
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_verb_ise_ize     # revolution → revolutionise
+      - number: 7
+        base: CHARACTER
+        answer: characterised
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_verb_ise_ize     # character → characterise
+      - number: 8
+        base: COMPUTER
+        answer: computerised
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_verb_ise_ize     # computer → computerise
+
+  - id: p3_006
+    source: englishrevealed
+    title: "Luxembourg"
+    difficulty: B2
+    text: |
+      Luxembourg is a country known for its (1)_____ of spirit. The country has
+      a strong (2)_____ sector. Many (3)_____ of the country speak three languages
+      fluently. It is (4)_____ that Luxembourg is one of the world's wealthiest
+      nations. The country is highly (5)_____. What is (6)_____ surprising is its
+      small size. Luxembourg attracts many (7)_____ each year. It has a strong
+      (8)_____ identity.
+    gaps:
+      - number: 1
+        base: STRONG
+        answer: strength
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_adj_to_noun_th           # strong → strength (irregolare con cambio vocalico)
+          - rule_spelling_irregular       # strong → streng- (cambio consonante)
+      - number: 2
+        base: FINANCE
+        answer: financial
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ial          # finance → financial
+          - rule_spelling_drop_e          # finance → financ- (drop -e)
+      - number: 3
+        base: RESIDE
+        answer: residents
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_ence        # reside → residence → resident
+          - rule_verb_to_adj_ent          # reside → resident (usato come sostantivo)
+      - number: 4
+        base: IMPORTANCE
+        answer: important
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_ant          # importance → important
+          - rule_spelling_drop_ce         # importance → import- + -ant
+      - number: 5
+        base: COMPETE
+        answer: competitive
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_adj_ive          # compete → competitive
+          - rule_spelling_drop_e          # compete → competi- (drop -e)
+      - number: 6
+        base: PARTICULAR
+        answer: particularly
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_adj_to_adv_ly            # particular → particularly
+      - number: 7
+        base: VISIT
+        answer: visitors
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_verb_to_noun_er_or       # visit → visitor (agente con -or)
+      - number: 8
+        base: NATION
+        answer: national
+        tags:
+          - word_formation
+          - part3_word_formation
+          - rule_noun_to_adj_al           # nation → national

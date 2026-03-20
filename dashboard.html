@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .day-fraction {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .week-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--subtext);
+      margin-top: 2px;
+    }
+
+    .topic-card-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .topic-card-inner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .topic-card-inner p {
+      font-size: 12px;
+      color: var(--subtext);
+      line-height: 1.5;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 6px;
+    }
+
+    .week-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 20px;
+      color: var(--subtext);
+      font-size: 13px;
+    }
+
+    .section-block {
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <a href="dashboard.html" class="topbar-logo">Tram<span>it</span>English</a>
+    <a href="settings.html" class="topbar-icon" title="Impostazioni">&#9881;</a>
+  </header>
+
+  <!-- Main content -->
+  <main class="page-content" id="mainContent">
+
+    <!-- Streak & Day card -->
+    <div class="card" id="progressCard">
+      <div class="card-label">Progresso</div>
+      <div>
+        <span class="day-big" id="dayNum">1</span>
+        <span class="day-fraction">/60</span>
+      </div>
+      <div class="week-label" id="weekLabel">Settimana 1</div>
+
+      <div class="streak-row">
+        <div class="streak-num" id="streakNum">&#x1F525; 0</div>
+        <div class="streak-label" id="streakLabel">giorni di fila</div>
+      </div>
+
+      <div class="mt-16">
+        <a href="session.html" class="btn btn-primary" id="sessionBtn">&#9654; Inizia sessione di oggi</a>
+      </div>
+    </div>
+
+    <!-- Today topic card -->
+    <div class="card mt-12" id="todayCard">
+      <div class="card-label">Sessione di oggi</div>
+      <span class="badge" id="todayPart">Part 1</span>
+      <div class="topic-card-inner mt-8">
+        <h3 id="todayTopic">Tempi Verbali</h3>
+        <p id="todaySection">Present Simple & Continuous</p>
+      </div>
+      <div class="progress-bar mt-12">
+        <div class="progress-fill" id="todayProgress" style="width: 0%"></div>
+      </div>
+      <div class="progress-meta">
+        <span id="progressText">0 esercizi completati</span>
+        <span id="progressMinutes">0 min oggi</span>
+      </div>
+    </div>
+
+    <!-- Weak topics -->
+    <div class="section-block">
+      <div class="section-title">Argomenti da ripassare</div>
+      <div id="weakTopicsList">
+        <div class="empty-state">Completa alcune sessioni per vedere le aree deboli.</div>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="section-block">
+      <div class="section-title">Calendario 2026</div>
+      <div class="week-chips" id="weekChips"></div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item active">
+      <span class="nav-icon">&#x1F3E0;</span>
+      <span>Home</span>
+    </a>
+    <a href="session.html" class="nav-item">
+      <span class="nav-icon">&#9654;</span>
+      <span>Sessione</span>
+    </a>
+    <a href="library.html" class="nav-item">
+      <span class="nav-icon">&#x1F4D6;</span>
+      <span>Libreria</span>
+    </a>
+    <a href="log.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CB;</span>
+      <span>Log</span>
+    </a>
+    <a href="stats.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CA;</span>
+      <span>Stats</span>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/content.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      const state   = State.load();
+      const today   = Plan.today();
+      const weekNum = Math.ceil((state.currentDay || 1) / 7);
+
+      // Progress card
+      document.getElementById('dayNum').textContent    = state.currentDay || 1;
+      document.getElementById('weekLabel').textContent = 'Settimana ' + weekNum + (today ? ' \u00b7 ' + today.topic : '');
+      document.getElementById('streakNum').textContent = '\u1F525 ' + (state.streak || 0);
+
+      // Today card
+      if (today) {
+        document.getElementById('todayPart').textContent    = today.part;
+        document.getElementById('todayTopic').textContent   = today.topic;
+        document.getElementById('todaySection').textContent = today.section;
+      }
+
+      // Weak topics
+      const weak     = Adaptive.weakTopics(4);
+      const weakList = document.getElementById('weakTopicsList');
+      if (weak.length) {
+        weakList.innerHTML = weak.map(function (t) {
+          const cls = UI.pctClass(t.pct);
+          return '<div class="topic-row" style="background:var(--surface2)">'
+            + '<span class="topic-name">' + t.label + '</span>'
+            + '<span class="topic-pct ' + cls + '">' + t.pct + '%</span>'
+            + '</div>';
+        }).join('');
+      }
+
+      // Calendar week chips + grid
+      const chipsEl  = document.getElementById('weekChips');
+      const calEl    = document.getElementById('calGrid');
+      let activeWeek = weekNum;
+
+      function renderCalWeek(week) {
+        activeWeek = week;
+        // Update chip active state
+        chipsEl.querySelectorAll('.chip').forEach(function (c) {
+          c.classList.toggle('active', parseInt(c.dataset.week) === week);
+        });
+        const offset = (week - 1) * 7 + 1;
+        UI.buildCalendar(calEl, state.completedDays, state.currentDay, offset, 7);
+      }
+
+      // Build week chips (9 weeks covers 60 days)
+      var totalWeeks = Math.ceil(60 / 7);
+      for (var w = 1; w <= totalWeeks; w++) {
+        var chip = document.createElement('span');
+        chip.className = 'chip' + (w === weekNum ? ' active' : '');
+        chip.dataset.week = w;
+        chip.textContent = 'Sett. ' + w;
+        chip.addEventListener('click', (function (wk) {
+          return function () { renderCalWeek(wk); };
+        })(w));
+        chipsEl.appendChild(chip);
+      }
+
+      renderCalWeek(weekNum);
+
+      // Session button — if day already completed, show review option
+      if (state.completedDays && state.completedDays.includes(state.currentDay)) {
+        var btn = document.getElementById('sessionBtn');
+        btn.textContent = '\u2713 Sessione completata \u2014 Ripassa';
+        btn.style.background = 'var(--success)';
+      }
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+# FCE B2 — Part 5: Reading Multiple Choice
+# Format: passage with 6 questions, 4 options (A/B/C/D), answer is letter
+
+sets:
+
+  - id: p5_001
+    source: flo-joe
+    title: "Island Life"
+    difficulty: B2
+    passage: |
+      Living on a small island has a particular appeal for many people. The sense
+      of community is strong, and residents feel connected to the natural world
+      around them. However, island life also brings significant challenges. Basic
+      services such as healthcare and education often require residents to travel
+      to the mainland, sometimes at considerable cost and inconvenience.
+
+      For those who have grown up on islands, the pull of the mainland is often
+      irresistible. Young people frequently leave to study and rarely return,
+      creating a persistent demographic problem. Island communities must
+      continually attract new residents to replace those who have left.
+
+      Tourism offers one solution, but it brings its own difficulties. In summer,
+      islands can become crowded with visitors seeking an 'authentic' experience.
+      The irony is that too many tourists can destroy the very atmosphere that
+      attracted them. Some islanders resent the intrusion, while others welcome
+      the economic benefits that visitors bring.
+
+      Advances in technology have made remote island living more sustainable.
+      High-speed internet connections allow residents to work from home,
+      reducing the need to relocate for work. This has attracted a new kind of
+      resident: professionals seeking a quieter life, who bring skills and
+      income that help to sustain island communities.
+    questions:
+      - q: 1
+        text: "What does the writer say about island services?"
+        options:
+          A: "They are generally better than on the mainland."
+          B: "Residents must often travel to access them."
+          C: "They have improved significantly in recent years."
+          D: "They are provided free of charge to residents."
+        answer: B
+        tags: [detail, inference]
+      - q: 2
+        text: "The writer uses the phrase 'irresistible pull' to suggest that young people..."
+        options:
+          A: "are forced to leave by economic necessity."
+          B: "choose to stay despite difficulties."
+          C: "feel strongly drawn to leave."
+          D: "are encouraged to leave by their families."
+        answer: C
+        tags: [vocabulary_in_context, inference]
+      - q: 3
+        text: "What problem with tourism does the writer identify?"
+        options:
+          A: "Tourists are generally unwelcome on islands."
+          B: "Tourism brings too little economic benefit."
+          C: "It can damage what makes islands special."
+          D: "Summer tourists are increasingly disruptive."
+        answer: C
+        tags: [detail, main_idea]
+      - q: 4
+        text: "According to the writer, how has technology helped island communities?"
+        options:
+          A: "It has made education easier to access."
+          B: "It allows islanders to take more holidays."
+          C: "It has improved healthcare facilities."
+          D: "It enables people to work without moving away."
+        answer: D
+        tags: [detail]
+      - q: 5
+        text: "What type of people has technology attracted to islands?"
+        options:
+          A: "Retired professionals seeking quiet lives."
+          B: "Working professionals who can work remotely."
+          C: "Young people returning after studying."
+          D: "Tourists wanting a longer experience."
+        answer: B
+        tags: [detail]
+      - q: 6
+        text: "What is the writer's overall attitude to island life?"
+        options:
+          A: "Strongly positive — island life is ideal."
+          B: "Strongly negative — it is unsustainable."
+          C: "Balanced — acknowledging both appeal and challenges."
+          D: "Uncertain — the future of islands is unclear."
+        answer: C
+        tags: [main_idea, writers_attitude]
+
+  - id: p5_002
+    source: esl-lounge
+    title: "Earth's Tectonic Plates"
+    difficulty: B2
+    passage: |
+      The surface of the Earth is not one solid piece. It is divided into large
+      sections called tectonic plates, which float on a layer of semi-molten rock
+      called the mantle. These plates move extremely slowly — typically only a few
+      centimetres per year — but over millions of years, this movement reshapes
+      continents and creates dramatic geological features.
+
+      Where two plates meet, the results can be spectacular. When oceanic plates
+      collide with continental plates, the denser oceanic plate is pushed beneath
+      the lighter continental plate in a process called subduction. This can
+      produce deep ocean trenches and volcanic mountain chains. The Andes mountains
+      in South America were formed this way.
+
+      Where plates move apart, magma rises from the mantle to fill the gap, forming
+      new ocean floor. The Mid-Atlantic Ridge, which runs along the floor of the
+      Atlantic Ocean, is an example of this process. Iceland sits on top of this
+      ridge and is slowly being pulled in two directions.
+
+      Earthquakes most commonly occur along plate boundaries. As plates grind
+      against each other, pressure builds up over centuries. When it is finally
+      released, the ground shakes violently. Scientists can predict the likelihood
+      of earthquakes in certain zones, but cannot yet predict exactly when they
+      will occur.
+    questions:
+      - q: 1
+        text: "What is the mantle?"
+        options:
+          A: "The solid outer surface of the Earth."
+          B: "The layer beneath the tectonic plates."
+          C: "A type of tectonic plate boundary."
+          D: "The central core of the Earth."
+        answer: B
+        tags: [detail, vocabulary_in_context]
+      - q: 2
+        text: "What happens during subduction?"
+        options:
+          A: "Two plates of equal weight slide past each other."
+          B: "A plate rises above both other plates."
+          C: "A denser plate goes beneath a lighter one."
+          D: "Magma rises to form new land."
+        answer: C
+        tags: [detail]
+      - q: 3
+        text: "What does the writer say about the Mid-Atlantic Ridge?"
+        options:
+          A: "It is located above the ocean surface."
+          B: "It is where the Atlantic Ocean is shrinking."
+          C: "It is an example of plates moving apart."
+          D: "It is similar to the Andes mountains."
+        answer: C
+        tags: [detail, reference]
+      - q: 4
+        text: "Why is Iceland described as being 'pulled in two directions'?"
+        options:
+          A: "It lies on the boundary of two subducting plates."
+          B: "It is positioned where two plates are separating."
+          C: "It is affected by earthquakes on both sides."
+          D: "Its plates are moving in opposite directions."
+        answer: B
+        tags: [inference, detail]
+      - q: 5
+        text: "What causes earthquakes, according to the writer?"
+        options:
+          A: "Plates suddenly subducting beneath each other."
+          B: "Magma bursting through plate boundaries."
+          C: "Pressure building and then releasing at boundaries."
+          D: "Plates moving apart too quickly."
+        answer: C
+        tags: [detail]
+      - q: 6
+        text: "What do scientists currently know about earthquakes?"
+        options:
+          A: "They can predict both location and timing."
+          B: "They cannot predict where earthquakes will occur."
+          C: "They can identify likely areas but not exact timing."
+          D: "They have no reliable information about earthquakes."
+        answer: C
+        tags: [detail]
+      - q: 7
+        text: "What is the main purpose of this text?"
+        options:
+          A: "To warn about the dangers of earthquakes."
+          B: "To explain how plate tectonics works."
+          C: "To describe the history of geological research."
+          D: "To argue for better earthquake prediction systems."
+        answer: B
+        tags: [main_idea, writers_purpose]
+
+  - id: p5_003
+    source: esl-lounge
+    title: "The Domestication of Cats"
+    difficulty: B2
+    passage: |
+      For many years, scientists assumed that cats were domesticated much later
+      than dogs. New research has changed this view considerably. Genetic studies
+      now suggest that cats began living alongside humans as long as 10,000 years
+      ago, around the same time that farming began in the Fertile Crescent region
+      of the Middle East.
+
+      The process was almost certainly driven by mutual benefit. As humans stored
+      grain, mice and rats were attracted to settlements. Wildcats, in turn, were
+      attracted by the rodents. Humans soon realised that these animals were useful
+      and tolerated — even encouraged — their presence.
+
+      Unlike dogs, which were selectively bred to fulfil specific tasks such as
+      herding or hunting, cats appear to have domesticated themselves. They chose
+      to live near humans because it was advantageous, not because humans needed
+      them for a specific purpose. As a result, domestic cats remain much closer
+      in behaviour and genetics to their wild ancestors than most domestic dogs.
+
+      Modern genetic research has revealed another surprising detail. The domestic
+      cat spread across the world in two main waves. The first followed early
+      farmers as they moved out of the Middle East. The second, much later wave
+      occurred when cats became popular on sea-going vessels as a means of pest
+      control.
+    questions:
+      - q: 1
+        text: "What has recent research changed about our understanding of cats?"
+        options:
+          A: "When cats were first kept as pets for pleasure."
+          B: "When cats began living alongside humans."
+          C: "Which species of wildcat became the domestic cat."
+          D: "How cats were different from dogs in ancient times."
+        answer: A
+        tags: [main_idea, detail]
+      - q: 2
+        text: "Why did wildcats begin living near human settlements?"
+        options:
+          A: "They were captured and tamed by humans."
+          B: "Humans bred them for pest control."
+          C: "They were attracted by the rodents eating stored grain."
+          D: "Humans provided them with food and shelter."
+        answer: C
+        tags: [detail, inference]
+      - q: 3
+        text: "How does the writer compare cat domestication to dog domestication?"
+        options:
+          A: "Dogs domesticated themselves just like cats."
+          B: "Cats were domesticated by humans for specific tasks."
+          C: "Dogs were more successful at living near humans."
+          D: "Unlike dogs, cats effectively chose to be domesticated."
+        answer: D
+        tags: [detail, comparison]
+      - q: 4
+        text: "What does the writer mean by saying cats are 'closer to their wild ancestors'?"
+        options:
+          A: "Cats still live in the wild in most regions."
+          B: "Cats have changed less through domestication than dogs."
+          C: "Cats are more dangerous than dogs."
+          D: "Cats cannot be fully trained like dogs."
+        answer: B
+        tags: [vocabulary_in_context, inference]
+      - q: 5
+        text: "How did the second wave of cat domestication spread?"
+        options:
+          A: "Through early farming communities moving outward."
+          B: "Through traders carrying cats on sailing ships."
+          C: "Through deliberate breeding programmes."
+          D: "Through cats following human migration on land."
+        answer: B
+        tags: [detail]

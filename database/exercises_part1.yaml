@@ -1,0 +1,394 @@
+# FCE B2 — Part 1: Multiple Choice Cloze
+# Format: 8 questions per set, 4 options (A/B/C/D), answer = index 0–3
+#
+# Tag system — ogni domanda ha 3–5 tag:
+#   [0] part1_mc_cloze             — part FCE (sempre presente)
+#   [1] topic macro                — collocations / phrasal_verbs / linkers / etc.
+#   [2] sotto-tag specifico        — coll_do / conf_fewer_less / link_contrast_although / etc.
+#   [3] cross-tag opzionale        — struttura secondaria o altra trappola coinvolta
+#   [4] false_friend_italian       — se è trappola specifica per parlanti italiani
+
+sets:
+
+  - id: p1_001
+    source: flo-joe
+    title: "Genealogy"
+    difficulty: B2
+    questions:
+      - q: 1
+        text: "It was not _____ after the Second World War that genealogy became popular."
+        options: [until, rather, only, just]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - linkers                          # topic macro
+          - link_mc_time_pair                # until vs only vs just vs rather: strutture diverse
+          - fixed_expression_idiomatic       # not until X that Y = struttura fissa enfatica
+          - inversion_not_until              # cross: stessa struttura della Part 4 con inversione
+      - q: 2
+        text: "As a _____ of this interest, the number of genealogy websites has grown enormously."
+        options: [result, cause, consequence, effect]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_noun_result_consequence     # result (neutro) vs consequence (spesso negativo) vs cause (sbagliata direzione) vs effect
+          - fixed_prep_as_a_result_of        # as a result of = espressione fissa completa
+      - q: 3
+        text: "They were able to _____ many records about their ancestors."
+        options: [access, reach, arrive, approach]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_verb_reach_arrive_get_to    # access = oggetto diretto / reach = oggetto diretto ma fisico / arrive at/in = +prep / approach = avvicinarsi
+          - vprep_refer_to                   # cross: reach/arrive/approach richiedono prep, access no — trappola transitività
+      - q: 4
+        text: "The _____ of researching your family tree can be very high."
+        options: [expense, price, cost, value]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_noun_price_cost_value_worth # expense (non contabile, onere) / price (etichetta) / cost (spesa) / value (valore percepito)
+      - q: 5
+        text: "It is _____ that so many people are now interested in their family history."
+        options: [remarkable, noticeable, obvious, evident]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_adj_noun_strong_powerful    # remarkable (= straordinario) vs obvious/evident (= ovvio) vs noticeable (= percepibile)
+          - struct_it_dummy_subject          # it is + adj + that-clause
+          - register_formal                  # remarkable = registro formale/scritto
+      - q: 6
+        text: "The research often _____ surprising facts about family members."
+        options: [reveals, discovers, finds, shows]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - choice_verb_show_group           # reveal (portare alla luce) / discover (trovare per la prima volta) / show (dimostrare) / find (trovare fisicamente)
+          - coll_adv_widely                  # cross: research reveals = collocazione accademica tipica
+      - q: 7
+        text: "The internet has _____ increased the ease of such research."
+        options: [further, more, extra, added]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_verb_adverb                 # further increased = avverbio + verbo: further = "additionally/even more"
+          - link_add_furthermore             # cross: further qui = inoltre/in aggiunta (≠ "more" come grado)
+      - q: 8
+        text: "Many people have _____ in projects to research their family history."
+        options: [participated, taken, joined, entered]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - vprep_participate_in             # participate in = verbo + preposizione fissa
+          - coll_take                        # cross: take part in = equivalente frasale (ma "taken" senza "part" non funziona)
+
+  - id: p1_002
+    source: englishrevealed
+    title: "The Netherlands"
+    difficulty: B2
+    questions:
+      - q: 1
+        text: "_____ the Netherlands is famous for tulips, it has much more to offer."
+        options: [Although, Despite, However, Even]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - linkers                          # topic macro
+          - link_mc_contrast_pair            # although + frase / despite + nome-gerundio / however = avverbio (non congiunzione!)
+          - link_contrast_although           # although richiede soggetto + verbo dopo
+      - q: 2
+        text: "As a _____ of centuries of trade, the Dutch became very wealthy."
+        options: [result, reason, cause, product]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_noun_result_consequence     # result (effetto) / reason (spiegazione) / cause (origine) / product (prodotto fisico)
+          - fixed_prep_as_a_result_of        # as a result of = collocation fissa
+      - q: 3
+        text: "Windmills were _____ used to drain water from low-lying areas."
+        options: [commonly, usually, generally, normally]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_adv_widely                  # commonly used / widely used = collocazione passivo + avverbio frequenza
+          - coll_verb_adverb                 # avverbio + past participle passivo: commonly è il più naturale con "used to drain"
+      - q: 4
+        text: "The Netherlands suffers _____ frequent flooding."
+        options: [from, with, by, of]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - prepositions                     # topic macro
+          - vprep_suffer_from                # suffer from = unica preposizione corretta (non with/by/of)
+      - q: 5
+        text: "The country has a rich _____ heritage dating back centuries."
+        options: [historic, historical, history, historian]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - word_choice                      # topic macro
+          - conf_adj_historic_historical     # historic = famoso/di grande importanza / historical = relativo al passato
+          - false_friend_italian             # "storico" in italiano copre entrambi — trappola per italiani
+      - q: 6
+        text: "The Dutch economy relies heavily _____ international trade."
+        options: [on, in, at, for]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - prepositions                     # topic macro
+          - vprep_depend_on                  # rely on = depend on = stessa preposizione "on"
+          - vprep_refer_to                   # cross: tutti i verbi di dipendenza/riferimento usano "on" o "to"
+      - q: 7
+        text: "Many visitors _____ the mistake of thinking Amsterdam is the capital."
+        options: [make, do, take, have]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_make                        # make a mistake = collocazione fissa (non do/take/have!)
+      - q: 8
+        text: "There are _____ visitors to the Netherlands each year than expected."
+        options: [fewer, less, little, few]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - quantifiers                      # topic macro
+          - conf_fewer_less                  # fewer (countable: visitors) vs less (uncountable) — errore frequentissimo
+          - quant_few_countable_negative     # cross: few (senza articolo) = quasi nessuno / fewer = comparativo
+          - false_friend_italian             # italiano usa "meno" per entrambi — trappola
+
+  - id: p1_003
+    source: esl-lounge
+    title: "The Amazon River"
+    difficulty: B2
+    questions:
+      - q: 1
+        text: "The Amazon provides water for the forest; _____, it also provides food."
+        options: [furthermore, however, nevertheless, although]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - linkers                          # topic macro
+          - link_mc_addition_pair            # furthermore (aggiunta) vs however (contrasto) vs nevertheless (contrasto) vs although (congiunzione — non va dopo punto!)
+          - link_add_furthermore             # furthermore = aggiunta di punto ulteriore, dopo punto/virgola
+      - q: 2
+        text: "The river has to _____ with a huge variety of fish species."
+        options: [deal, cope, manage, handle]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - vprep_deal_with                  # deal with = gestire situazione specifica
+          - vprep_cope_with                  # cross: cope with = farcela con difficoltà (sfumatura emotiva)
+      - q: 3
+        text: "The Amazon basin represents a _____ challenge to scientists."
+        options: [real, true, actual, genuine]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_adj_noun_strong_powerful    # real challenge = collocazione naturale / true = più filosofico / genuine = più autentico
+          - conf_adj_actual_current          # actual ≠ "attuale" — falso amico: actual = reale/vero
+          - false_friend_italian             # "attuale" in italiano = current, non actual
+      - q: 4
+        text: "Scientists have been working _____ the clock to catalogue species."
+        options: [around, round, by, about]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - fixed_expression_idiomatic       # around the clock = 24 ore su 24 (idioma puro — non sostituibile)
+      - q: 5
+        text: "The deforestation problem is getting worse _____ the government acts."
+        options: [unless, until, if, so]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - linkers                          # topic macro
+          - link_mc_condition_pair           # unless (= if not) vs until (= fino a quando) vs if (condizione) vs so (risultato)
+          - link_cond_unless                 # unless = if not: la condizione negativa cambia significato
+      - q: 6
+        text: "Scientists are _____ about the rate of species extinction."
+        options: [concerned, worried, alarmed, troubled]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - aprep_worried_about              # concerned/worried/alarmed/troubled about: tutti + about, ma concerned = registro formale-scientifico
+          - coll_adv_deeply                  # cross: deeply concerned = intensificatore fisso
+          - register_formal                  # concerned = registro accademico/formale
+      - q: 7
+        text: "The river is _____ as the 'lungs of the earth'."
+        options: [known, called, named, described]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - fixed_expression_known_as        # known as = espressione fissa passiva per soprannomi/titoli
+          - passive_reporting_known          # cross: known as / described as / referred to as = strutture passive di definizione
+      - q: 8
+        text: "The forest stretches _____ thousands of kilometres."
+        options: [across, over, through, from]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - prepositions                     # topic macro
+          - prep_movement_across             # across = estendersi su una superficie (stretch across)
+          - prep_movement_through            # cross: through = passare dall'interno / over = sopra fisicamente
+
+  - id: p1_004
+    source: esl-lounge
+    title: "Urban Sprawl"
+    difficulty: B2
+    questions:
+      - q: 1
+        text: "Cities must grow upwards, not outwards, to _____ green spaces."
+        options: [preserve, protect, save, keep]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_verb_preserve_protect       # preserve (mantenere intatto nel tempo) / protect (difendere da danno) / save (salvare da pericolo) / keep (mantenere stato attuale)
+      - q: 2
+        text: "Urban sprawl has spread _____ the surrounding countryside."
+        options: [into, across, over, through]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - prepositions                     # topic macro
+          - prep_movement_into               # spread into = penetrare in nuovo spazio (direzione)
+          - prep_movement_across             # cross: spread across = su superficie / through = dall'interno
+      - q: 3
+        text: "Planners _____ that many residents prefer suburban living."
+        options: [suspect, believe, think, consider]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - choice_verb_think_group          # suspect (credere con dubbio) / believe (credere fermamente) / think (opinione) / consider (valutare)
+      - q: 4
+        text: "The population of cities _____ as people move in from rural areas."
+        options: [grows, rises, increases, expands]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_rise_raise                  # grows/rises/increases = intransitivi / expands = si espande (più fisico)
+          - coll_adj_noun_strong_powerful    # cross: population grows = collocazione più naturale di "population rises"
+      - q: 5
+        text: "City authorities must _____ adequate transport links."
+        options: [provide, offer, give, supply]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_give                        # provide (mettere a disposizione strutturale) / offer (proporre volontariamente) / give (dare fisicamente) / supply (rifornire)
+          - register_formal                  # provide = registro formale/ufficiale
+      - q: 6
+        text: "The problem _____ not been solved by previous governments."
+        options: [has, had, is, was]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - auxiliary_verbs                  # topic macro
+          - aux_have_has_had_perfect         # has not been solved = present perfect passive (situazione attuale irrisolta)
+      - q: 7
+        text: "Public transport should be _____ a priority by planners."
+        options: [made, given, set, turned]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_make                        # make sth a priority → be made a priority (passivo)
+          - passive_active_to_passive        # cross: make X a priority → X be made a priority
+      - q: 8
+        text: "Building on steep hillsides involves fitting doors and windows at _____ angles."
+        options: [awkward, difficult, strange, odd]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_adj_noun_strong_powerful    # awkward angles = collocazione tecnica (difficile ma non "difficult" — awkward = scomodo/non standard)
+
+  - id: p1_005
+    source: esl-lounge
+    title: "Early Explorers"
+    difficulty: B2
+    questions:
+      - q: 1
+        text: "Early explorers were _____ by the vast unknown territories."
+        options: [fascinated, interested, attracted, intrigued]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - aprep_surprised_at_by            # fascinated BY / interested IN / attracted BY / intrigued BY — preposizioni diverse!
+          - coll_adv_deeply                  # cross: deeply fascinated = intensificatore naturale
+      - q: 2
+        text: "Most sailors _____ to travel on long ocean voyages."
+        options: [preferred, wanted, chose, decided]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_verb_prefer_pattern         # prefer + to inf (confronto implicito tra opzioni) / want = generico / chose = scelta attiva / decided = decisione
+      - q: 3
+        text: "The _____ of some islands had never seen Europeans before."
+        options: [inhabitants, residents, citizens, population]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_noun_people_groups          # inhabitants (persone legate a luogo fisico/remoto) / residents (chi vive stabilmente) / citizens (con diritti civili) / population (collettivo numerico)
+      - q: 4
+        text: "The explorers lost _____ of land after sailing for weeks."
+        options: [sight, view, look, watch]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_look_see_watch              # lose sight of = espressione fissa / view = panorama / look = atto di guardare / watch = osservazione prolungata
+          - fixed_expression_out_of          # cross: lose sight of / out of sight = famiglia di espressioni fisse con sight
+      - q: 5
+        text: "The number of crew _____ dramatically during the voyage."
+        options: [fell, dropped, decreased, reduced]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_rise_raise                  # fell/dropped/decreased = intransitivi (corretti) / reduced = transitivo (richiede oggetto — trappola!)
+          - false_friend_italian             # "si ridusse" in italiano = intransitivo, ma "reduced" in inglese è transitivo
+      - q: 6
+        text: "The expedition's _____ was to reach the spice islands."
+        options: [aim, goal, target, purpose]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - conf_noun_aim_goal_purpose       # aim (intenzione formale di impresa) / goal (obiettivo da raggiungere) / target (obiettivo misurabile) / purpose (ragione d'essere)
+      - q: 7
+        text: "The captain was _____ responsible for the safety of his crew."
+        options: [entirely, wholly, completely, fully]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_adv_entirely_wholly         # entirely/wholly/completely/fully responsible: tutti sinonimi ma entirely = registro formale con responsible
+          - register_formal                  # entirely responsible = collocazione formale-legale
+      - q: 8
+        text: "They decided to _____ a risk and sail into unknown waters."
+        options: [take, make, do, run]
+        answer: 0
+        tags:
+          - part1_mc_cloze
+          - collocations                     # topic macro
+          - coll_take                        # take a risk = collocazione primaria / run a risk = esiste ma meno comune / make/do a risk = non esistono

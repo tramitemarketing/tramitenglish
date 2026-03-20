@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Ripasso Errori</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    #mainContent {
+      padding: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .exercise-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .dot.done  { background: var(--success); border-color: var(--success); }
+    .dot.current { background: var(--accent);  border-color: var(--accent); }
+    .dot.wrong { background: var(--error);   border-color: var(--error); }
+
+    .fill-input {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .empty-review {
+      text-align: center;
+      padding: 48px 16px;
+    }
+
+    .empty-review .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .empty-review p {
+      font-size: 14px;
+      color: var(--subtext);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Session topbar -->
+  <header class="session-topbar">
+    <a href="log.html" class="topbar-back">&#8592;</a>
+    <span class="session-title">Ripasso Errori</span>
+    <span class="session-timer" id="timerEl">0:00</span>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- No errors state -->
+    <div class="step active" id="stepEmpty">
+      <div class="card">
+        <div class="empty-review">
+          <div class="icon">&#x2705;</div>
+          <p>Nessun errore da ripassare! Completa alcune sessioni per accumulare errori da rivedere.</p>
+          <a href="session.html" class="btn btn-primary">Vai alla sessione</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise step -->
+    <div class="step" id="stepExercise">
+      <div style="font-size:12px;color:var(--subtext);text-align:center;margin-bottom:12px" id="reviewSubtitle"></div>
+      <div class="exercise-dots" id="exerciseDots"></div>
+
+      <div class="card" id="exerciseCard">
+        <div class="exercise-part" id="exPart"></div>
+        <div class="exercise-question" id="exQuestion"></div>
+        <div id="optionsArea"></div>
+        <div id="fillArea" style="display:none">
+          <div id="keywordBadge" style="display:none;margin-bottom:12px">
+            <span style="font-size:11px;font-weight:600;color:var(--subtext)">Parola chiave: </span>
+            <span class="badge" id="keywordText"></span>
+          </div>
+          <input type="text" class="fill-input" id="fillInput" placeholder="Scrivi la tua risposta...">
+        </div>
+        <div class="feedback" id="feedbackArea">
+          <strong id="feedbackTitle"></strong>
+          <span id="feedbackExplanation"></span>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <button class="btn btn-primary" id="confirmBtn" disabled>Conferma</button>
+      </div>
+      <div class="mt-8" id="nextBtnWrap" style="display:none">
+        <button class="btn btn-secondary" id="nextBtn">Prossimo &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Recap step -->
+    <div class="step" id="stepRecap">
+      <div class="card" style="text-align:center">
+        <div class="card-label">Ripasso completato</div>
+        <div style="font-size:52px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-2px;margin:12px 0" id="recapScore">-</div>
+        <p id="recapMessage" style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6"></p>
+        <div class="divider"></div>
+        <div style="display:flex;gap:12px;justify-content:center">
+          <div>
+            <div class="stat-num" id="recapCorrect" style="font-size:28px">0</div>
+            <div class="stat-label">Corrette</div>
+          </div>
+          <div>
+            <div class="stat-num" id="recapWrong" style="font-size:28px;color:var(--error)">0</div>
+            <div class="stat-label">Errate</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-16">
+        <a href="dashboard.html" class="btn btn-primary">Torna alla dashboard</a>
+      </div>
+      <div class="mt-8">
+        <a href="log.html" class="btn btn-secondary">Vedi tutti gli errori</a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var state  = State.load();
+      var errors = (state.sessionErrors || []).slice();
+
+      if (!errors.length) {
+        return; // stepEmpty is already shown
+      }
+
+      Timer.start(document.getElementById('timerEl'));
+
+      // Build exercise-like objects from error log
+      var exercises = errors.slice(0, 20).map(function (e) {
+        return {
+          type:        'fill',
+          part:        e.part || 'Part ?',
+          question:    e.question,
+          answer:      e.correct,
+          explanation: e.explanation,
+          _original:   e
+        };
+      });
+
+      document.getElementById('stepEmpty').classList.remove('active');
+      document.getElementById('stepExercise').classList.add('active');
+      document.getElementById('reviewSubtitle').textContent = 'Ripasso di ' + exercises.length + ' errori recenti';
+
+      // Dots
+      function buildDots() {
+        var dotsEl = document.getElementById('exerciseDots');
+        dotsEl.innerHTML = '';
+        exercises.forEach(function (_, i) {
+          var d = document.createElement('div');
+          d.className = 'dot' + (i === 0 ? ' current' : '');
+          d.id = 'dot-' + i;
+          dotsEl.appendChild(d);
+        });
+      }
+
+      function updateDot(i, cls) {
+        var d = document.getElementById('dot-' + i);
+        if (d) d.className = 'dot ' + cls;
+      }
+
+      buildDots();
+
+      var exIndex      = 0;
+      var correctCount = 0;
+      var wrongCount   = 0;
+      var answered     = false;
+
+      function renderExercise() {
+        if (exIndex >= exercises.length) {
+          showRecap();
+          return;
+        }
+
+        answered = false;
+        var ex   = exercises[exIndex];
+
+        document.getElementById('exPart').textContent     = ex.part;
+        document.getElementById('exQuestion').textContent = ex.question;
+
+        var feedback = document.getElementById('feedbackArea');
+        feedback.className    = 'feedback';
+        feedback.style.display = 'none';
+
+        document.getElementById('optionsArea').style.display = 'none';
+        document.getElementById('fillArea').style.display    = '';
+        document.getElementById('keywordBadge').style.display = 'none';
+        document.getElementById('nextBtnWrap').style.display  = 'none';
+
+        var fillInput = document.getElementById('fillInput');
+        fillInput.value    = '';
+        fillInput.disabled = false;
+        fillInput.style.borderColor = '';
+        fillInput.style.background  = '';
+
+        var confirmBtn = document.getElementById('confirmBtn');
+        confirmBtn.disabled    = true;
+        confirmBtn.textContent = 'Conferma';
+
+        fillInput.addEventListener('input', function () {
+          confirmBtn.disabled = fillInput.value.trim().length === 0;
+        });
+      }
+
+      document.getElementById('confirmBtn').addEventListener('click', function () {
+        if (answered) return;
+        answered = true;
+
+        var ex         = exercises[exIndex];
+        var userAnswer = document.getElementById('fillInput').value.trim().toLowerCase();
+        var accepted   = Array.isArray(ex.answer) ? ex.answer : [ex.answer];
+        var correct    = accepted.some(function (a) {
+          return a.toLowerCase() === userAnswer;
+        });
+
+        var fillInput  = document.getElementById('fillInput');
+        fillInput.disabled = true;
+        fillInput.style.borderColor = correct ? '#6ee7b7' : '#fca5a5';
+        fillInput.style.background  = correct ? '#ecfdf5' : '#fef2f2';
+
+        if (correct) {
+          correctCount++;
+          updateDot(exIndex, 'done');
+        } else {
+          wrongCount++;
+          updateDot(exIndex, 'wrong');
+        }
+
+        var feedback  = document.getElementById('feedbackArea');
+        feedback.className    = 'feedback ' + (correct ? 'feedback-correct' : 'feedback-wrong') + ' show';
+        feedback.style.display = 'block';
+        document.getElementById('feedbackTitle').textContent      = correct ? 'Corretto! ' : 'Errato. Risposta: ' + (Array.isArray(ex.answer) ? ex.answer[0] : ex.answer) + '. ';
+        document.getElementById('feedbackExplanation').textContent = ex.explanation || '';
+
+        document.getElementById('confirmBtn').disabled    = true;
+        document.getElementById('nextBtnWrap').style.display = '';
+      });
+
+      document.getElementById('nextBtn').addEventListener('click', function () {
+        exIndex++;
+        renderExercise();
+      });
+
+      function showRecap() {
+        document.getElementById('stepExercise').classList.remove('active');
+        document.getElementById('stepRecap').classList.add('active');
+
+        Timer.stop();
+
+        var total = correctCount + wrongCount;
+        var pct   = total > 0 ? Math.round(correctCount / total * 100) : 0;
+
+        document.getElementById('recapScore').textContent   = pct + '%';
+        document.getElementById('recapCorrect').textContent = correctCount;
+        document.getElementById('recapWrong').textContent   = wrongCount;
+
+        var msg = pct >= 80
+          ? 'Ottimo ripasso! Stai migliorando.'
+          : pct >= 60
+            ? 'Buon risultato. Continua a ripassare.'
+            : 'Questi argomenti hanno bisogno di pi\u00f9 pratica.';
+        document.getElementById('recapMessage').textContent = msg;
+      }
+
+      renderExercise();
+
+    })();
+  </script>
+</body>
+</html>

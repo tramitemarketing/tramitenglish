@@ -1,0 +1,109 @@
+# FCE B2 — Part 6: Gapped Text (Paragraphs)
+# Format: passage with 6 gaps + 7 paragraphs (one extra), answer = letter
+
+sets:
+
+  - id: p6_001
+    source: flo-joe
+    title: "The History of Ballet"
+    difficulty: B2
+    passage_intro: |
+      Ballet is one of the world's most technically demanding art forms.
+      [1] The earliest ballets were elaborate court entertainments rather
+      than theatrical performances.
+      [2] The technique developed rapidly in France and Italy, where the
+      first professional dancers were trained.
+      [3] By the nineteenth century, ballet had evolved into the classical
+      form we recognise today, with its strict vocabulary of movements.
+      [4] The costume also changed dramatically, with the introduction of
+      the romantic tutu allowing audiences to see the dancer's footwork.
+      [5] The twentieth century brought radical change, as choreographers
+      began to challenge classical conventions.
+      [6] Today, ballet continues to evolve, blending classical technique
+      with modern movement styles and multimedia elements.
+    removed_paragraphs:
+      A: "This change allowed greater freedom of movement and made the physical demands of dancing even clearer to watch."
+      B: "These performances were sponsored by wealthy nobles and designed to display their power and sophistication."
+      C: "It emerged in the Italian Renaissance courts of the fifteenth century, before spreading across Europe."
+      D: "By introducing narrative and emotion, these innovators transformed ballet into a vehicle for storytelling."
+      E: "The training required to master these movements typically begins in early childhood and continues for many years."
+      F: "They replaced the formal codes of classical dance with personal and often political expression."
+      G: "This vocabulary, codified in France, gave ballet its universal technical language."
+    answers:
+      1: C
+      2: B
+      3: G
+      4: A
+      5: F
+      6: D
+    tags: [text_structure, cohesion, reference]
+
+  - id: p6_002
+    source: esl-lounge
+    title: "Space Junk"
+    difficulty: B2
+    passage_intro: |
+      The amount of debris orbiting Earth is now a serious concern for space
+      agencies around the world.
+      [1] Since the first satellite was launched in 1957, humans have left
+      thousands of objects in orbit.
+      [2] Unlike Earth's surface, space has no wind or rain to clear away
+      unwanted objects.
+      [3] The problem is made worse by collisions between pieces of debris,
+      which can create thousands of new fragments.
+      [4] These fragments travel at extremely high speeds — up to 28,000
+      kilometres per hour — making even tiny pieces potentially dangerous.
+      [5] Scientists are now developing several technologies designed to
+      remove the most dangerous debris from orbit.
+      The long-term goal is to create a sustainable environment for future
+      space exploration.
+    removed_paragraphs:
+      A: "At such speeds, even a paint fleck can damage a spacecraft's window."
+      B: "These include robotic arms, nets, and harpoons designed to capture and de-orbit large objects."
+      C: "Larger objects can be tracked by radar, but fragments smaller than 10cm are nearly impossible to monitor."
+      D: "This cascade effect, known as the Kessler Syndrome, could eventually make certain orbits unusable."
+      E: "This debris ranges from defunct satellites to fragments smaller than a fingernail."
+      F: "Once in orbit, there is nothing to slow objects down unless a specific effort is made to remove them."
+    answers:
+      1: E
+      2: F
+      3: D
+      4: A
+      5: B
+    tags: [text_structure, cohesion, reference]
+
+  - id: p6_003
+    source: esl-lounge
+    title: "The History of Chocolate"
+    difficulty: B2
+    passage_intro: |
+      Chocolate has a long history stretching back thousands of years.
+      [1] The ancient Mayans and Aztecs prized cacao beans highly, using
+      them both as currency and as an ingredient in bitter ceremonial drinks.
+      [2] When Spanish explorers brought cacao back to Europe in the
+      sixteenth century, the drink was sweetened with sugar and became
+      popular among the aristocracy.
+      [3] By the seventeenth century, chocolate houses had appeared in
+      London, where wealthy people gathered to enjoy the fashionable drink.
+      [4] The invention of the cocoa press in 1828 changed everything,
+      making it possible to separate cocoa butter from roasted cacao beans.
+      [5] Solid chocolate bars as we know them today appeared shortly after,
+      when manufacturers combined the pressed cocoa with sugar and cocoa butter.
+      [6] In the twentieth century, chocolate became an affordable mass-market
+      product, enjoyed by people of all backgrounds around the world.
+    removed_paragraphs:
+      A: "These chocolate establishments were as important socially as coffee houses, and were places for debate and business."
+      B: "It was the Olmec civilisation that is thought to have first cultivated the cacao plant over 3,000 years ago."
+      C: "This process led to the smooth, solid chocolate that could be moulded into the shapes we recognise today."
+      D: "Milk chocolate was invented later, in the 1870s, when Daniel Peter added condensed milk to the mixture."
+      E: "At first it was kept secret from ordinary Europeans, as the nobility wanted to keep this luxury to themselves."
+      F: "This powder could be mixed more easily with water, producing a drink with a milder, less fatty flavour."
+      G: "Global chocolate production now generates over 130 billion dollars in revenue each year."
+    answers:
+      1: B
+      2: E
+      3: A
+      4: F
+      5: C
+      6: D
+    tags: [text_structure, cohesion, reference]

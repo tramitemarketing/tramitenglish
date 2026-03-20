@@ -1,0 +1,573 @@
+# FCE B2 — Part 4: Key Word Transformation
+# Format: 6 items per set, rewrite the sentence using the key word (2–5 words)
+#
+# Tag system — ogni item ha 2–4 tag:
+#   [0] part4_transformation       — part FCE (sempre presente)
+#   [1] topic macro                — es. passive / reported_speech / present_perfect
+#   [2] sotto-struttura specifica  — es. passive_reporting_believed / pp_ago_to_for_since
+#   [3] cross-tag opzionale        — struttura secondaria coinvolta
+
+sets:
+
+  - id: p4_001
+    source: flo-joe
+    title: "Mixed Structures A"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "Going to the concert is a good idea."
+        key: IDEA
+        answer: "It is a good IDEA to go"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # gerundio → infinito
+          - it_is_adj_to_inf           # struttura: It is a good idea to do
+      - q: 2
+        original: "She has so much talent that everyone admires her."
+        key: THAT
+        answer: "She is so talented THAT everyone"
+        tags:
+          - part4_transformation
+          - so_such_that               # so + aggettivo + that
+          - comparative_degree         # cross: grado intensità
+      - q: 3
+        original: "She would study harder if she knew the exam date."
+        key: IF
+        answer: "IF she knew the exam"
+        tags:
+          - part4_transformation
+          - conditional_2_would        # condizionale tipo 2
+      - q: 4
+        original: "It has been a long time since I last saw him."
+        key: LONG
+        answer: "It was a LONG time ago"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_its_been_ages           # struttura: it's been a long time
+          - time_expressions           # cross: espressioni di tempo
+      - q: 5
+        original: "People say that he is a good doctor."
+        key: SAID
+        answer: "He is SAID to be"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_reporting_said     # said to be / said to have
+          - passive_personal           # It is said that → He is said to
+      - q: 6
+        original: "They decided not to cancel the match."
+        key: CALL
+        answer: "They decided not to CALL off"
+        tags:
+          - part4_transformation
+          - phrasal_verbs              # topic macro
+          - pv_call_off_cancel         # call off = cancel
+
+  - id: p4_002
+    source: englishrevealed
+    title: "Mixed Structures B"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "I was sure the film was very good."
+        key: COULDN'T
+        answer: "The film COULDN'T HAVE BEEN"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_cant_have_deduction  # deduzione negativa nel passato
+      - q: 2
+        original: "She was going to leave when he arrived."
+        key: ABOUT
+        answer: "She was ABOUT TO leave"
+        tags:
+          - part4_transformation
+          - collocation_be_about_to    # be about to = imminenza
+      - q: 3
+        original: "She didn't complete the project on time."
+        key: FAILED
+        answer: "She FAILED TO COMPLETE"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # topic macro
+          - verb_infinitive_fail       # fail + to infinitive
+      - q: 4
+        original: "Only after she had waited an hour did she begin to worry."
+        key: DID
+        answer: "Not until an hour later DID SHE BEGIN"
+        tags:
+          - part4_transformation
+          - inversion                  # topic macro
+          - inversion_not_until        # Not until... did she
+      - q: 5
+        original: "That happened five years ago."
+        key: AGO
+        answer: "It WAS FIVE YEARS AGO THAT"
+        tags:
+          - part4_transformation
+          - cleft_it_was_that          # cleft sentence: It was X that
+          - time_expressions
+      - q: 6
+        original: "She completely ignored what I said."
+        key: ATTENTION
+        answer: "She didn't pay ANY ATTENTION TO"
+        tags:
+          - part4_transformation
+          - collocation_pay_attention  # pay attention to = notare/ascoltare
+
+  - id: p4_003
+    source: esl-lounge
+    title: "Passive Voice"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "Everyone believes he stole the money."
+        key: BELIEVED
+        answer: "He is BELIEVED to have stolen"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_reporting_believed # believed to have + past participle
+          - passive_personal           # Everyone believes → He is believed to
+      - q: 2
+        original: "A storm blew down the old oak tree."
+        key: BLOWN
+        answer: "The old oak tree was BLOWN down"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_past_simple        # was/were + past participle
+          - phrasal_verbs              # cross: blow down è phrasal verb
+      - q: 3
+        original: "The police watched the suspects all day."
+        key: WATCHED
+        answer: "The suspects were WATCHED all day"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_past_simple        # was/were + past participle
+          - passive_active_to_passive  # direzione: attivo → passivo
+      - q: 4
+        original: "The gardener had already cut the grass when we arrived."
+        key: LANDSCAPED
+        answer: "We had the garden LANDSCAPED"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_have             # have + oggetto + past participle
+      - q: 5
+        original: "They are going to build a new hospital here."
+        key: BUILT
+        answer: "A new hospital is going to be BUILT"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_future_going_to    # is going to be + past participle
+      - q: 6
+        original: "Somebody told him the news yesterday."
+        key: TOLD
+        answer: "He was TOLD the news"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - passive_past_simple        # was + past participle
+          - passive_indirect_object    # oggetto indiretto diventa soggetto
+
+  - id: p4_004
+    source: esl-lounge
+    title: "Present Perfect / Time"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "I last visited Paris three years ago."
+        key: FOR
+        answer: "I haven't visited Paris FOR three years"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_ago_to_for_since        # X ago → haven't ... for X
+          - pp_for_duration            # for + periodo di tempo
+      - q: 2
+        original: "She started working here in 2018."
+        key: SINCE
+        answer: "She has been working here SINCE 2018"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_since_point             # since + punto nel tempo
+          - pp_continuous_for_since    # present perfect continuous
+      - q: 3
+        original: "He hasn't eaten anything today."
+        key: YET
+        answer: "He hasn't eaten anything YET today"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_yet_already_still       # yet in frasi negative
+      - q: 4
+        original: "This is my first time in Japan."
+        key: NEVER
+        answer: "I have NEVER been to Japan"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_never_ever              # first time → have never
+      - q: 5
+        original: "How long is it since you passed your test?"
+        key: WHEN
+        answer: "WHEN did you last pass"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_how_long_since          # how long → when did you last
+          - time_expressions
+      - q: 6
+        original: "I haven't seen a good film recently."
+        key: AGES
+        answer: "It's been AGES since I saw"
+        tags:
+          - part4_transformation
+          - present_perfect            # topic macro
+          - pp_its_been_ages           # it's been ages since
+          - time_expressions
+
+  - id: p4_005
+    source: esl-lounge
+    title: "Wish / Conditionals"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "I regret that I didn't study harder at school."
+        key: WISH
+        answer: "I WISH I had studied harder"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - wish_past_regret           # wish + past perfect = rimpianto passato
+      - q: 2
+        original: "I would like you to stop making so much noise."
+        key: WISH
+        answer: "I WISH you would stop"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - wish_would_annoyance       # wish + would = fastidio presente
+      - q: 3
+        original: "It's a pity she doesn't live near us."
+        key: ONLY
+        answer: "If ONLY she lived near"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - if_only_present            # if only + past simple = desiderio presente
+      - q: 4
+        original: "He would have passed if he had revised."
+        key: REVISED
+        answer: "Had he REVISED, he would"
+        tags:
+          - part4_transformation
+          - conditionals               # topic macro
+          - conditional_3_would_have   # condizionale tipo 3
+          - conditional_inversion_had  # Had he... (inversione senza if)
+          - inversion                  # cross: struttura di inversione
+      - q: 5
+        original: "I'm sorry I didn't call you sooner."
+        key: WISH
+        answer: "I WISH I had called"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - wish_past_regret           # wish + past perfect = rimpianto passato
+      - q: 6
+        original: "She'd prefer it if you didn't smoke inside."
+        key: RATHER
+        answer: "She'd RATHER you didn't smoke"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - would_rather_different_subject  # would rather + soggetto diverso + past simple
+
+  - id: p4_006
+    source: esl-lounge
+    title: "Reported Speech"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "'Don't forget to lock the door,' she told me."
+        key: REMINDED
+        answer: "She REMINDED me to lock"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reporting_verb_remind_to   # remind + oggetto + to infinitive
+      - q: 2
+        original: "'I'll finish the report by Friday,' he said."
+        key: PROMISED
+        answer: "He PROMISED to finish"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reporting_verb_promise_to  # promise + to infinitive
+      - q: 3
+        original: "'You should see a doctor,' she told him."
+        key: ADVISED
+        answer: "She ADVISED him to see"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reporting_verb_advise_to   # advise + oggetto + to infinitive
+      - q: 4
+        original: "'Why don't you apply for the job?' he said."
+        key: SUGGESTED
+        answer: "He SUGGESTED applying for"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reporting_verb_suggest_gerund  # suggest + gerundio (no to!)
+          - verb_gerund_suggest        # cross: suggest richiede sempre gerundio
+      - q: 5
+        original: "'I didn't steal anything,' she said."
+        key: DENIED
+        answer: "She DENIED stealing anything"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reporting_verb_deny_gerund # deny + gerundio (no to!)
+          - verb_gerund_deny           # cross: deny richiede sempre gerundio
+      - q: 6
+        original: "'Please don't tell anyone,' he said to me."
+        key: ASKED
+        answer: "He ASKED me not to tell"
+        tags:
+          - part4_transformation
+          - reported_speech            # topic macro
+          - reported_request_ask_to    # ask + oggetto + not to infinitive
+          - reported_command_not_to    # cross: comando negativo riportato
+
+  - id: p4_007
+    source: esl-lounge
+    title: "Modal Perfects"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "It was wrong of you to leave without telling anyone."
+        key: SHOULD
+        answer: "You SHOULD have told someone"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_should_have          # critica azione passata
+      - q: 2
+        original: "I'm sure they have already arrived."
+        key: MUST
+        answer: "They MUST have arrived already"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_must_have_deduction  # deduzione positiva nel passato
+      - q: 3
+        original: "It wasn't necessary for her to wait so long."
+        key: NEEDN'T
+        answer: "She NEEDN'T have waited so long"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_neednt_have          # azione passata inutile (ma fatta)
+      - q: 4
+        original: "Perhaps he took the wrong road."
+        key: MIGHT
+        answer: "He MIGHT have taken the wrong"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_might_have           # possibilità nel passato
+      - q: 5
+        original: "I'm sure she didn't see us."
+        key: COULDN'T
+        answer: "She COULDN'T have seen us"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_cant_have_deduction  # deduzione negativa nel passato
+      - q: 6
+        original: "It was possible for them to finish earlier."
+        key: COULD
+        answer: "They COULD have finished earlier"
+        tags:
+          - part4_transformation
+          - modal_perfect              # topic macro
+          - modal_could_have           # possibilità non realizzata nel passato
+
+  - id: p4_008
+    source: esl-lounge
+    title: "Causative Have/Get"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "A plumber fixed our boiler last week."
+        key: HAD
+        answer: "We HAD our boiler fixed"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_have             # have + oggetto + past participle
+      - q: 2
+        original: "A mechanic is going to service my car tomorrow."
+        key: SERVICED
+        answer: "I'm getting my car SERVICED"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_get              # get + oggetto + past participle
+      - q: 3
+        original: "Someone stole her laptop last night."
+        key: HAD
+        answer: "She HAD her laptop stolen"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_have             # have + oggetto + past participle
+          - causative_negative_experience  # esperienza subita senza controllo
+      - q: 4
+        original: "They paid someone to paint their house."
+        key: PAINTED
+        answer: "They got their house PAINTED"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_get              # get + oggetto + past participle
+      - q: 5
+        original: "A dentist is going to remove her tooth."
+        key: REMOVED
+        answer: "She is going to have her tooth REMOVED"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_have             # have + oggetto + past participle
+          - passive_future_going_to    # cross: forma futura
+      - q: 6
+        original: "The manager told an assistant to book the flights."
+        key: BOOKED
+        answer: "The manager had the flights BOOKED"
+        tags:
+          - part4_transformation
+          - passive                    # topic macro
+          - causative_have             # have + oggetto + past participle
+          - causative_get_sb_to_do     # cross: variante con get sb to do
+
+  - id: p4_009
+    source: esl-lounge
+    title: "Gerund vs Infinitive"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "She started to cry when she heard the news."
+        key: BURST
+        answer: "She BURST into tears when"
+        tags:
+          - part4_transformation
+          - collocation_make_do_take_have  # burst into tears = espressione fissa
+          - gerund_infinitive          # cross: cambio struttura verbale
+      - q: 2
+        original: "He regrets not having studied medicine."
+        key: WISHES
+        answer: "He WISHES he had studied"
+        tags:
+          - part4_transformation
+          - wish_regret                # topic macro
+          - wish_past_regret           # wish + past perfect
+          - verb_gerund_deny           # cross: regret + gerundio → wish + past perf
+      - q: 3
+        original: "Please remember to post that letter."
+        key: FORGET
+        answer: "Don't FORGET to post that"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # topic macro
+          - verb_both_forget           # forget + to inf (futuro) vs forget + gerundio (passato)
+          - verb_both_remember         # cross: stesso pattern di remember
+      - q: 4
+        original: "It is not worth trying to fix this old machine."
+        key: POINT
+        answer: "There is no POINT in trying"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # topic macro
+          - no_point_in_gerund         # there's no point in + gerundio
+          - worth_gerund               # cross: worth + gerundio ha stesso significato
+      - q: 5
+        original: "She is used to getting up early."
+        key: USED
+        answer: "Getting up early is something she is USED to"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # topic macro
+          - be_used_to_gerund          # be used to + gerundio (abitudine presente)
+      - q: 6
+        original: "Could you stop making so much noise?"
+        key: MIND
+        answer: "Would you MIND not making"
+        tags:
+          - part4_transformation
+          - gerund_infinitive          # topic macro
+          - verb_gerund_mind           # mind + gerundio (richiesta cortese)
+
+  - id: p4_010
+    source: esl-lounge
+    title: "Comparison"
+    difficulty: B2
+    items:
+      - q: 1
+        original: "She runs faster than her brother."
+        key: AS
+        answer: "Her brother doesn't run AS fast as her"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - comparative_as_as          # as + aggettivo + as
+          - comparative_not_as_less_than  # negativo: not as fast as
+      - q: 2
+        original: "No other mountain in Europe is higher than Mont Blanc."
+        key: HIGHEST
+        answer: "Mont Blanc is the HIGHEST mountain"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - superlative                # the + superlativo
+          - comparative_no_other       # no other X is + comparativo → the + superlativo
+      - q: 3
+        original: "The more you practise, the better you get."
+        key: BETTER
+        answer: "You get BETTER the more you"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - comparative_double         # the more... the more/better
+      - q: 4
+        original: "This book is not nearly as interesting as the last one."
+        key: FAR
+        answer: "The last book was FAR more interesting"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - comparative_far_much_degree  # far/much + comparativo (intensificatore)
+          - comparative_not_as_less_than  # cross: not as interesting → less interesting
+      - q: 5
+        original: "She earns twice as much as her husband."
+        key: HALF
+        answer: "Her husband earns HALF as much"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - comparative_fraction       # twice as much ↔ half as much
+      - q: 6
+        original: "It's the longest film I have ever seen."
+        key: SUCH
+        answer: "I have never seen SUCH a long film"
+        tags:
+          - part4_transformation
+          - comparatives               # topic macro
+          - so_such_that               # such + a + aggettivo + sostantivo
+          - superlative                # cross: superlativo ↔ never + such
+          - pp_never_ever              # cross: present perfect con never

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Statistiche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: center;
+      padding: 16px 8px;
+      box-shadow: 0 2px 8px rgba(180, 83, 9, 0.06);
+    }
+
+    .accuracy-fill-good  { background: var(--success); }
+    .accuracy-fill-mid   { background: var(--warning); }
+    .accuracy-fill-bad   { background: var(--error); }
+
+    .notes-save-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .notes-save-btn {
+      padding: 8px 18px;
+      font-size: 12px;
+    }
+
+    .last-studied {
+      font-size: 12px;
+      color: var(--subtext);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .empty-accuracy {
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .notes-hint {
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="topbar-title">Statistiche</span>
+    <span></span>
+  </header>
+
+  <!-- Main content -->
+  <main class="page-content">
+
+    <!-- Last studied -->
+    <div class="last-studied" id="lastStudied"></div>
+
+    <!-- Stat cards row -->
+    <div class="stat-row">
+      <div class="stat-card-item">
+        <div class="stat-num" id="statDays">0</div>
+        <div class="stat-label">Giorni<br>completati</div>
+      </div>
+      <div class="stat-card-item">
+        <div class="stat-num" id="statMinutes">0</div>
+        <div class="stat-label">Minuti<br>totali</div>
+      </div>
+      <div class="stat-card-item">
+        <div class="stat-num" id="statStreak">0</div>
+        <div class="stat-label">Streak<br>attuale</div>
+      </div>
+    </div>
+
+    <!-- Accuracy per topic -->
+    <div class="section-title">Accuratezza per argomento</div>
+    <div id="accuracyList">
+      <div class="empty-accuracy">Completa alcune sessioni per vedere le statistiche di accuratezza.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Personal notes -->
+    <div class="section-title">Note personali</div>
+    <div class="input-group">
+      <textarea id="notesArea" rows="6" placeholder="Scrivi qui le tue note, promemoria, trucchi che vuoi ricordare..."></textarea>
+      <div class="notes-hint">Le note vengono salvate automaticamente.</div>
+    </div>
+    <div class="notes-save-row">
+      <button class="btn btn-secondary notes-save-btn" id="saveNotesBtn">Salva note</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Danger zone -->
+    <div class="section-title" style="color:var(--error)">Zona dati</div>
+    <button class="btn btn-secondary" id="resetStatsBtn" style="color:var(--error);border-color:var(--error)">
+      Azzera statistiche
+    </button>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <span class="nav-icon">&#x1F3E0;</span>
+      <span>Home</span>
+    </a>
+    <a href="session.html" class="nav-item">
+      <span class="nav-icon">&#9654;</span>
+      <span>Sessione</span>
+    </a>
+    <a href="library.html" class="nav-item">
+      <span class="nav-icon">&#x1F4D6;</span>
+      <span>Libreria</span>
+    </a>
+    <a href="log.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CB;</span>
+      <span>Log</span>
+    </a>
+    <a href="stats.html" class="nav-item active">
+      <span class="nav-icon">&#x1F4CA;</span>
+      <span>Stats</span>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/content.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var state = State.load();
+
+      // Stat numbers
+      document.getElementById('statDays').textContent    = (state.completedDays || []).length;
+      document.getElementById('statMinutes').textContent = state.totalMinutes || 0;
+      document.getElementById('statStreak').textContent  = state.streak || 0;
+
+      // Last studied
+      if (state.lastStudied) {
+        var d = new Date(state.lastStudied);
+        document.getElementById('lastStudied').textContent = 'Ultima sessione: ' + d.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+      }
+
+      // Accuracy bars
+      var scores    = state.topicScores || {};
+      var accList   = document.getElementById('accuracyList');
+      var scoreKeys = Object.keys(scores);
+
+      if (scoreKeys.length > 0) {
+        accList.innerHTML = '';
+        scoreKeys
+          .filter(function (k) { return scores[k].total > 0; })
+          .sort(function (a, b) {
+            var pctA = Math.round(scores[a].correct / scores[a].total * 100);
+            var pctB = Math.round(scores[b].correct / scores[b].total * 100);
+            return pctA - pctB;
+          })
+          .forEach(function (key) {
+            var s   = scores[key];
+            var pct = Math.round((s.correct / s.total) * 100);
+            var cls = pct >= 75 ? 'accuracy-fill-good' : (pct >= 50 ? 'accuracy-fill-mid' : 'accuracy-fill-bad');
+            var colorCls = pct >= 75 ? 'pct-good' : (pct >= 50 ? 'pct-mid' : 'pct-bad');
+
+            var row = document.createElement('div');
+            row.className = 'accuracy-row';
+            row.innerHTML = '<div class="accuracy-label">'
+              + '<span>' + (TOPIC_LABELS[key] || key) + '</span>'
+              + '<span class="accuracy-pct ' + colorCls + '">' + pct + '%</span>'
+              + '</div>'
+              + '<div class="progress-bar"><div class="progress-fill ' + cls + '" style="width:' + pct + '%"></div></div>'
+              + '<div style="font-size:11px;color:var(--subtext);margin-top:3px">' + s.correct + ' corrette su ' + s.total + '</div>';
+            accList.appendChild(row);
+          });
+      }
+
+      // Notes
+      var notesArea = document.getElementById('notesArea');
+      var notes     = state.notes || [];
+      notesArea.value = notes.length ? notes[0] : '';
+
+      var saveTimeout;
+      notesArea.addEventListener('input', function () {
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(function () {
+          State.update({ notes: [notesArea.value] });
+          UI.toast('Note salvate', 'success');
+        }, 1500);
+      });
+
+      document.getElementById('saveNotesBtn').addEventListener('click', function () {
+        State.update({ notes: [notesArea.value] });
+        UI.toast('Note salvate', 'success');
+      });
+
+      // Reset stats
+      document.getElementById('resetStatsBtn').addEventListener('click', function () {
+        if (!confirm('Sei sicuro di voler azzerare tutte le statistiche? I dati non possono essere recuperati.')) return;
+        State.save(State._defaults);
+        UI.toast('Statistiche azzerate.', 'info');
+        setTimeout(function () { window.location.replace('dashboard.html'); }, 800);
+      });
+
+    })();
+  </script>
+</body>
+</html>

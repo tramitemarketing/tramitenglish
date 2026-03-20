@@ -1,0 +1,407 @@
+# FCE B2 — Part 2: Open Cloze
+# Format: 8 gaps per set, una sola parola corretta (a volte 2 alternative accettate)
+#
+# Tag system — ogni gap ha 3–5 tag:
+#   [0] part2_open_cloze           — part FCE (sempre presente)
+#   [1] topic macro                — relative_clauses / prepositions / linkers / etc.
+#   [2] sotto-tag specifico        — rel_which_non_defining / prep_place_in / modal_have_to / etc.
+#   [3] cross-tag opzionale        — struttura secondaria coinvolta
+#   [4] false_friend_italian       — se è trappola specifica per parlanti italiani
+
+sets:
+
+  - id: p2_001
+    source: flo-joe
+    title: "Motorbike Journeys"
+    difficulty: B2
+    text: |
+      The best way to see a country is from the back of a motorbike. That is
+      (1)_____ I decided to ride from London to Istanbul. I had to do all the
+      repairs (2)_____, which was difficult at first. I kept the bike (3)_____
+      good condition throughout the trip. I arrived (4)_____ Istanbul after three
+      weeks. It was a journey (5)_____ I will never forget. The trip depended
+      (6)_____ good weather, which fortunately held. I travelled away (7)_____ the
+      main roads whenever possible, avoiding (8)_____ motorways.
+    gaps:
+      - number: 1
+        answer: [where]
+        tags:
+          - part2_open_cloze
+          - relative_clauses               # topic macro
+          - rel_where_place                # "that is where" = luogo astratto/figurato (dove ho preso la decisione)
+      - number: 2
+        answer: [myself]
+        tags:
+          - part2_open_cloze
+          - pronouns                       # topic macro
+          - pron_reflexive_myself_yourself_etc  # myself = da solo, senza aiuto esterno
+      - number: 3
+        answer: [in]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - fixed_expression_in_condition  # in good condition = espressione fissa (non "at/on good condition")
+      - number: 4
+        answer: [in]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - prep_place_in                  # arrive in + città (non "at" — at = luogo piccolo/specifico)
+      - number: 5
+        answer: [that, which]
+        tags:
+          - part2_open_cloze
+          - relative_clauses               # topic macro
+          - rel_which_defining             # defining: that/which (oggetto della relativa)
+          - rel_omitted                    # cross: relativo oggetto = omissibile ("a journey I will never forget")
+      - number: 6
+        answer: [on]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - vprep_depend_on                # depend on = unica preposizione possibile
+      - number: 7
+        answer: [from]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - prep_movement_from             # away from = lontano da (espressione direzionale fissa)
+      - number: 8
+        answer: [any]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_some_any_no              # any + contesto di evitamento/negazione implicita (avoiding any)
+
+  - id: p2_002
+    source: englishrevealed
+    title: "The Domestic Cat"
+    difficulty: B2
+    text: |
+      Cats have lived with humans for (1)_____ thousands of years. Scientists
+      believe (2)_____ cats first came to live near humans because of grain stores,
+      (3)_____ attracted mice. The relationship was good for both species.
+      (4)_____, unlike dogs, cats were never fully domesticated. They still retain
+      instincts (5)_____ how to hunt and survive alone. Cats became popular (6)_____
+      quickly that they were brought to new continents by sailors. Some cats are
+      (7)_____ independent that they live entirely outdoors. They rarely need help
+      (8)_____ their human owners.
+    gaps:
+      - number: 1
+        answer: [many]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_many_countable           # many thousands = many + countable noun
+      - number: 2
+        answer: [that]
+        tags:
+          - part2_open_cloze
+          - linkers                        # topic macro
+          - link_subordinating_that        # believe THAT = congiunzione subordinante dopo verbo di opinione (non "which")
+      - number: 3
+        answer: [which]
+        tags:
+          - part2_open_cloze
+          - relative_clauses               # topic macro
+          - rel_which_non_defining         # virgola prima → non-defining → solo "which", mai "that"
+          - rel_defining_vs_non_defining   # cross: la virgola è la chiave per scegliere which vs that
+      - number: 4
+        answer: [However]
+        tags:
+          - part2_open_cloze
+          - linkers                        # topic macro
+          - link_contrast_however          # however = avverbio di contrasto (dopo punto/virgola, virgola dopo)
+          - link_mc_contrast_pair          # cross: however ≠ although (although è congiunzione, non avverbio)
+      - number: 5
+        answer: [of]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - noun_prep_of                   # instincts OF how = noun + of + question word (knowledge of / awareness of / sense of)
+      - number: 6
+        answer: [so]
+        tags:
+          - part2_open_cloze
+          - linkers                        # topic macro
+          - struct_so_adj_that             # so + avverbio (quickly) + that = struttura grado + risultato
+      - number: 7
+        answer: [too, so]
+        tags:
+          - part2_open_cloze
+          - linkers                        # topic macro
+          - struct_so_adj_that             # so independent that = grado + risultato
+          - struct_too_adj_to              # cross: too independent to need help (simile ma diversa struttura)
+      - number: 8
+        answer: [from]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - prep_movement_from             # help from = ricevere da (provenienza) — non "by/of"
+
+  - id: p2_003
+    source: esl-lounge
+    title: "City Cycling"
+    difficulty: B2
+    text: |
+      There are (1)_____ cities in the world where cycling is truly safe. Most
+      urban cyclists have (2)_____ deal with aggressive drivers and poor road
+      surfaces. The key is (3)_____ use dedicated cycle paths whenever possible.
+      Helmets are worth (4)_____ even on short journeys. Cyclists should travel at
+      roughly 15 kilometres (5)_____ hour to keep pace with traffic. Commuters who
+      cycle ought (6)_____ arrive at work feeling energised. You should avoid
+      (7)_____ busy junction at rush hour. Locking your bike correctly at
+      (8)_____ times is essential.
+    gaps:
+      - number: 1
+        answer: [few]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_few_countable_negative   # few = quasi nessuno (countable, negativo implicito senza "not")
+          - quant_a_few_countable_positive # cross: trappola — a few (positivo) vs few (negativo)
+          - false_friend_italian           # italiano usa "poche" per entrambi — non distingue il significato negativo
+      - number: 2
+        answer: [to]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - modal_have_to_obligation       # have TO = obbligo esterno (≠ present perfect — "to" completa il modale)
+      - number: 3
+        answer: [to]
+        tags:
+          - part2_open_cloze
+          - gerund_infinitive              # topic macro
+          - struct_it_dummy_subject        # the key is TO do = noun + is + to infinitive (predicato nominale)
+      - number: 4
+        answer: [wearing]
+        tags:
+          - part2_open_cloze
+          - gerund_infinitive              # topic macro
+          - worth_gerund                   # worth + gerundio (non infinito — trappola frequente!)
+          - false_friend_italian           # italiano: "vale la pena di indossare" → studenti tendono a mettere "to wear"
+      - number: 5
+        answer: [per, an]
+        tags:
+          - part2_open_cloze
+          - articles                       # topic macro
+          - article_a_an_indefinite        # an hour = articolo indeterminativo usato come "per" in velocità/frequenza
+          - prep_time_at                   # cross: 15 km an/per hour — "an" sostituisce "per" in registro standard
+      - number: 6
+        answer: [to]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - aux_modal_must_should_ought    # ought TO (modale: obbligatoriamente + "to" — differisce da must/should)
+      - number: 7
+        answer: [any, every]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_every_each               # every busy junction = ogni singolo incrocio (totalità)
+          - quant_some_any_no              # cross: any in contesto di evitamento (avoid any)
+      - number: 8
+        answer: [all]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_all_whole                # at all times = espressione fissa (non "every times" — times non si pluralizza così)
+
+  - id: p2_004
+    source: esl-lounge
+    title: "Sleep Science"
+    difficulty: B2
+    text: |
+      Scientists have become (1)_____ concerned about the amount of sleep people
+      get. They are talking (2)_____ a global sleep deprivation epidemic. Some
+      mammals can (3)_____ with very little sleep, but humans cannot. Experts argue
+      about where (4)_____ draw the line between healthy and unhealthy sleep
+      patterns. People who sleep (5)_____ air conditioning are often in environments
+      that are too cold. Adults (6)_____ sleep at least seven hours a night. A
+      person (7)_____ sleeps less than five hours is at serious health risk. Sleep
+      problems are more common (8)_____ any other health condition.
+    gaps:
+      - number: 1
+        answer: [increasingly, deeply, very, so]
+        tags:
+          - part2_open_cloze
+          - collocations                   # topic macro
+          - coll_adv_deeply                # deeply/increasingly concerned = intensificatori fissi con "concerned"
+          - coll_adv_highly                # cross: highly concerned è meno naturale — deeply/increasingly preferiti
+      - number: 2
+        answer: [about]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - aprep_worried_about            # talk about = verbo + preposizione fissa (non "of/on")
+      - number: 3
+        answer: [do, manage]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - aux_do_does_did_substitution   # do = pro-forma (sostituto di "cope with") / manage = farcela
+      - number: 4
+        answer: [to]
+        tags:
+          - part2_open_cloze
+          - gerund_infinitive              # topic macro
+          - indirect_question_to_inf       # where TO draw = question word + to infinitive (domanda indiretta con infinito)
+      - number: 5
+        answer: [with]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - vprep_deal_with                # sleep with air conditioning = with per strumenti/condizioni presenti
+      - number: 6
+        answer: [should]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - aux_modal_must_should_ought    # should = consiglio/raccomandazione (più morbido di must)
+      - number: 7
+        answer: [who, that]
+        tags:
+          - part2_open_cloze
+          - relative_clauses               # topic macro
+          - rel_who_subject                # who/that (defining, persona, funzione di soggetto)
+          - rel_defining_vs_non_defining   # cross: no virgola = defining → who o that (non "which" per persone)
+      - number: 8
+        answer: [than]
+        tags:
+          - part2_open_cloze
+          - comparatives                   # topic macro
+          - comp_than                      # more common THAN = comparativo + than (non "that" — trappola!)
+          - false_friend_italian           # italiano: "più comune di" — studenti scrivono "that" per analogia con "so...that"
+
+  - id: p2_005
+    source: esl-lounge
+    title: "Wildlife Photography"
+    difficulty: B2
+    text: |
+      Standing in (1)_____ of a wild animal for a perfect shot requires patience.
+      Wildlife photographers often wait (2)_____ long for the right moment. They
+      must make (3)_____ as small and as silent as possible. You need to make
+      the (4)_____ of every opportunity. Photographs can be taken by (5)_____
+      number of people, but true wildlife shots require specialist skills. In the
+      past, photographers (6)_____ to wait days for a single good image. Nowadays,
+      digital cameras make (7)_____ possible to take hundreds of shots. The
+      photographer should try to (8)_____ eye contact with the animal.
+    gaps:
+      - number: 1
+        answer: [front]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - fixed_expression_in_front_of   # in front of = espressione fissa di posizione (non "at front of")
+          - prep_place_in                  # cross: "in" fa parte della struttura — "in front" non è separabile
+      - number: 2
+        answer: [too]
+        tags:
+          - part2_open_cloze
+          - linkers                        # topic macro
+          - struct_too_adj_to              # wait too long = too + avverbio (uso assoluto, senza "to" finale qui)
+      - number: 3
+        answer: [themselves]
+        tags:
+          - part2_open_cloze
+          - pronouns                       # topic macro
+          - pron_reflexive_myself_yourself_etc  # make themselves small = riflessivo (soggetto = themselves)
+      - number: 4
+        answer: [most]
+        tags:
+          - part2_open_cloze
+          - collocations                   # topic macro
+          - quant_most_majority            # make the MOST of = espressione fissa (sfruttare al massimo)
+          - fixed_expression_idiomatic     # cross: make the most of = idioma fisso non sostituibile
+      - number: 5
+        answer: [any, a]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_some_any_no              # any number of = qualsiasi numero di (contesto generico)
+          - article_a_an_indefinite        # cross: a number of = un certo numero di (senso diverso)
+      - number: 6
+        answer: [had, used, needed]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - modal_have_to_obligation       # had to wait = obbligo nel passato
+          - struct_used_to_infinitive      # cross: used to wait = abitudine passata (significato diverso)
+      - number: 7
+        answer: [it]
+        tags:
+          - part2_open_cloze
+          - pronouns                       # topic macro
+          - struct_it_dummy_subject        # make IT possible = dummy "it" soggetto fittizio (non omissibile!)
+      - number: 8
+        answer: [avoid]
+        tags:
+          - part2_open_cloze
+          - gerund_infinitive              # topic macro
+          - verb_gerund_avoid              # try to avoid = avoid + gerundio obbligatorio (non + to inf)
+
+  - id: p2_006
+    source: esl-lounge
+    title: "Ocean Exploration"
+    difficulty: B2
+    text: |
+      Scientists are determined to discover what (1)_____ beneath the ocean's
+      surface. Many creatures live out (2)_____ reach of sunlight. The ocean is
+      so deep that submersibles must withstand incredible (3)_____. Research vessels
+      spend months (4)_____ sea gathering data. Explorers must account for
+      (5)_____ the things that can go wrong. Few scientists have (6)_____ the
+      experience of diving to the deepest points. It is difficult to make real
+      (7)_____ when equipment is so expensive. Funding agencies are reluctant
+      to invest, (8)_____ means research takes much longer than it should.
+    gaps:
+      - number: 1
+        answer: [lies]
+        tags:
+          - part2_open_cloze
+          - verb_tenses                    # topic macro
+          - conf_lie_lay                   # lies (present simple intransitivo) vs lays (transitivo) — trappola classica
+          - false_friend_italian           # italiano: "si trova" → studenti tendono a usare "lays" o "is laying"
+      - number: 2
+        answer: [of]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - fixed_expression_out_of        # out OF reach = espressione fissa (out of sight / out of date / out of order)
+      - number: 3
+        answer: [pressure]
+        tags:
+          - part2_open_cloze
+          - collocations                   # topic macro
+          - coll_verb_adverb               # withstand pressure = collocazione lessicale (il vocabolo mancante è il nome)
+      - number: 4
+        answer: [at]
+        tags:
+          - part2_open_cloze
+          - prepositions                   # topic macro
+          - prep_place_at                  # at sea = espressione fissa con articolo zero (≠ "in the sea")
+          - article_the_vs_zero_trap       # cross: at sea (zero article, espressione) vs at the sea (luogo fisico)
+      - number: 5
+        answer: [all]
+        tags:
+          - part2_open_cloze
+          - quantifiers                    # topic macro
+          - quant_all_whole                # account for ALL the things = totalità
+      - number: 6
+        answer: [had]
+        tags:
+          - part2_open_cloze
+          - auxiliary_verbs                # topic macro
+          - aux_have_has_had_perfect       # have HAD the experience = present perfect (esperienza di vita)
+      - number: 7
+        answer: [progress]
+        tags:
+          - part2_open_cloze
+          - collocations                   # topic macro
+          - coll_make                      # make PROGRESS = collocazione fissa (non do/take/have progress)
+      - number: 8
+        answer: [which]
+        tags:
+          - part2_open_cloze
+          - relative_clauses               # topic macro
+          - rel_which_non_defining         # which (non-defining: riferisce all'intera frase precedente come antecedente)
+          - rel_defining_vs_non_defining   # cross: virgola prima → non-defining → solo which, never that
