@@ -1,0 +1,3820 @@
+# ══════════════════════════════════════════════════════════════
+# Grammar Explanations — TrainEnglish FCE B2
+# Source of truth → import in Supabase via scripts/import_explanations.py
+# Universo narrativo: Prof. Verne (Grammar Lab steampunk), Marco (studente IT),
+#                     Il Gigante (10m), Le Gemelle Irregolari (eccezioni)
+# ══════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────
+# BLOCCO 1 — VERB TENSES (giorni 1–6)
+# ─────────────────────────────────────────
+
+- slug: present_simple_habits
+  tags: [verb_tenses, verb_tenses_block, present_simple]
+  title_en: "Present Simple — Habits, Facts & States"
+  title_it: "Present Simple — Abitudini, Fatti e Stati"
+  display_order: 10
+  rule_en: |
+    Use the **Present Simple** for:
+    1. **Habits & routines** — actions that repeat regularly (always, usually, every day)
+    2. **General truths & permanent facts** — things that are always true
+    3. **States** — non-action verbs: know, believe, own, love, seem, contain
+
+    Form: subject + base verb. Add **-s / -es** for he / she / it.
+    ⚠️ Do NOT use Present Simple for what is happening right now → use Present Continuous.
+  rule_it: |
+    Usa il **Present Simple** per:
+    1. **Abitudini e routine** — azioni che si ripetono regolarmente (always, usually, every day)
+    2. **Verità generali e fatti permanenti** — cose sempre vere
+    3. **Stati** — verbi non-d'azione: know, believe, own, love, seem, contain
+
+    Forma: soggetto + verbo base. Aggiungi **-s / -es** per he / she / it.
+    ⚠️ NON usarlo per ciò che sta accadendo adesso → usa il Present Continuous.
+  example_basic:
+    en: "She reads the newspaper every morning."
+    it: "Lei legge il giornale ogni mattina."
+  example_complex:
+    en: "Scientists generally acknowledge that biodiversity significantly contributes to ecosystem resilience."
+    it: "Gli scienziati generalmente riconoscono che la biodiversità contribuisce significativamente alla resilienza degli ecosistemi."
+  vocabulary:
+    - word: acknowledge
+      pos: verb
+      ipa: /əkˈnɒlɪdʒ/
+      meaning_it: riconoscere, ammettere
+    - word: biodiversity
+      pos: noun
+      ipa: /ˌbaɪəʊdaɪˈvɜːsɪti/
+      meaning_it: biodiversità
+    - word: significantly
+      pos: adverb
+      ipa: /sɪɡˈnɪfɪkəntli/
+      meaning_it: significativamente, notevolmente
+    - word: ecosystem
+      pos: noun
+      ipa: /ˈiːkəʊˌsɪstəm/
+      meaning_it: ecosistema
+    - word: resilience
+      pos: noun
+      ipa: /rɪˈzɪliəns/
+      meaning_it: resilienza, capacità di recupero
+  story_it: |
+    Nel Grammar Lab del Professor Verne c'è un enorme pendolo di ottone che non si ferma MAI.
+    Ogni volta che oscilla, brucia un segno nel legno della scrivania (odore di legno tostato,
+    calore sul dorso della mano se ci passi vicino). Sulla scrivania ci sono già diecimila segni,
+    tutti identici. Marco li conta — e sviene per la noia, perché sono SEMPRE UGUALI.
+    Inciso su ogni segno c'è scritto "ALWAYS." in lettere minuscole.
+    Il professor Verne sorride: «Prima oscilla il pendolo — l'abitudine esiste.
+    Solo DOPO appare il segno — la prova che è un fatto permanente.
+    Non puoi avere il segno senza la ripetizione. Questo è il Present Simple.»
+    Marco tocca un segno fresco (ancora caldo, ruvido), annusa il legno bruciato, e non dimentica più.
+
+- slug: present_continuous_now
+  tags: [verb_tenses, verb_tenses_block, present_continuous]
+  title_en: "Present Continuous — Actions in Progress & Temporary States"
+  title_it: "Present Continuous — Azioni in Corso e Stati Temporanei"
+  display_order: 11
+  rule_en: |
+    Use the **Present Continuous** for:
+    1. **Actions happening right now** (at this moment)
+    2. **Temporary situations** — true now, but not forever
+    3. **Fixed future arrangements** (I'm meeting her tonight)
+    4. **Annoying habits** with *always* (He's always losing his keys!)
+
+    Form: subject + **am / is / are** + verb**-ing**
+    ⚠️ State verbs (know, like, own, seem) do NOT take -ing form.
+  rule_it: |
+    Usa il **Present Continuous** per:
+    1. **Azioni in corso adesso** (in questo momento)
+    2. **Situazioni temporanee** — vere ora, ma non per sempre
+    3. **Appuntamenti futuri già fissati** (I'm meeting her tonight)
+    4. **Abitudini fastidiose** con *always* (He's always losing his keys!)
+
+    Forma: soggetto + **am / is / are** + verbo**-ing**
+    ⚠️ I verbi di stato (know, like, own, seem) NON prendono la forma -ing.
+  example_basic:
+    en: "She is reading the newspaper right now — don't disturb her."
+    it: "Sta leggendo il giornale proprio adesso — non disturbarla."
+  example_complex:
+    en: "The company is currently restructuring its supply chain to address mounting logistical challenges."
+    it: "L'azienda sta attualmente ristrutturando la sua catena di approvvigionamento per affrontare crescenti sfide logistiche."
+  vocabulary:
+    - word: restructure
+      pos: verb
+      ipa: /ˌriːˈstrʌktʃə/
+      meaning_it: ristrutturare, riorganizzare
+    - word: supply chain
+      pos: noun
+      ipa: /səˈplaɪ tʃeɪn/
+      meaning_it: catena di approvvigionamento / fornitura
+    - word: address
+      pos: verb
+      ipa: /əˈdrɛs/
+      meaning_it: affrontare, occuparsi di (non solo "indirizzo"!)
+    - word: mounting
+      pos: adjective
+      ipa: /ˈmaʊntɪŋ/
+      meaning_it: crescente, che aumenta
+    - word: logistical
+      pos: adjective
+      ipa: /ləˈdʒɪstɪkəl/
+      meaning_it: logistico
+  story_it: |
+    Il calderone al centro del Grammar Lab bolle ADESSO — vapore denso, odore di zolfo e
+    menta insieme (paradossale). Il professor Verne corre dentro con il cappotto ancora bagnato
+    (è nel mezzo di qualcosa, non ha finito). Immerge la mano nel vapore e tira fuori
+    una parola GOCCIOLANTE di suffisso **-ING** — le gocce cadono sul pavimento con un
+    suono secco CLOC CLOC. «Vedi?» dice a Marco, «Il -ING cola perché l'azione
+    è ancora IN CORSO. Prima il calderone bolle — l'azione inizia.
+    Solo dopo il -ING gocciola fuori.» Marco tocca una goccia: è tiepida, viscosa.
+    Tra cinque minuti il calderone si spegne — l'azione temporanea finisce —
+    e il -ING evapora. Non puoi avere il -ING prima che il calderone bolla.
+
+- slug: past_simple_completed
+  tags: [verb_tenses, verb_tenses_block, past_simple]
+  title_en: "Past Simple — Completed Actions & Narrative Past"
+  title_it: "Past Simple — Azioni Completate e Racconto al Passato"
+  display_order: 12
+  rule_en: |
+    Use the **Past Simple** for:
+    1. **Completed actions** at a specific time in the past (yesterday, in 2020, last week)
+    2. **Sequence of past events** (narrative: first… then… finally…)
+    3. **Past habits** no longer true (She walked to school every day when she was young)
+
+    Form: verb + **-ed** (regular) OR irregular form (go→went, see→saw, buy→bought).
+    ⚠️ Always with a time marker OR clear past context. No connection to the present.
+  rule_it: |
+    Usa il **Past Simple** per:
+    1. **Azioni completate** in un momento preciso del passato (yesterday, in 2020, last week)
+    2. **Sequenza di eventi passati** (racconto: first… then… finally…)
+    3. **Abitudini passate** non più vere (She walked to school every day when she was young)
+
+    Forma: verbo + **-ed** (regolare) OPPURE forma irregolare (go→went, see→saw).
+    ⚠️ Sempre con un marcatore temporale O un contesto passato chiaro. Nessun legame col presente.
+  example_basic:
+    en: "He locked the door and left without saying goodbye."
+    it: "Chiuse la porta a chiave e se ne andò senza dire arrivederci."
+  example_complex:
+    en: "The archaeologists unearthed a remarkably well-preserved mosaic that immediately contradicted previous assumptions about the settlement."
+    it: "Gli archeologi portarono alla luce un mosaico straordinariamente ben conservato che contraddiceva immediatamente le precedenti ipotesi sull'insediamento."
+  vocabulary:
+    - word: unearthed
+      pos: verb (past simple of unearth)
+      ipa: /ʌnˈɜːθt/
+      meaning_it: portare alla luce, dissotterrare
+    - word: remarkably
+      pos: adverb
+      ipa: /rɪˈmɑːkəbli/
+      meaning_it: straordinariamente, notevolmente
+    - word: well-preserved
+      pos: adjective
+      ipa: /ˌwɛl prɪˈzɜːvd/
+      meaning_it: ben conservato
+    - word: contradict
+      pos: verb
+      ipa: /ˌkɒntrəˈdɪkt/
+      meaning_it: contraddire
+    - word: assumption
+      pos: noun
+      ipa: /əˈsʌmpʃən/
+      meaning_it: ipotesi, supposizione
+    - word: settlement
+      pos: noun
+      ipa: /ˈsɛtlmənt/
+      meaning_it: insediamento, colonia
+  story_it: |
+    Lungo una parete del Grammar Lab ci sono centinaia di fotografie incorniciate —
+    momenti congelati per sempre. Il professor Verne ne prende una, la annusa
+    (odore di carta antica, un po' di muffa), e la appende al muro con un chiodo
+    che fa un BANG secco. «Finito. Immutabile. Quel momento è chiuso.»
+    Marco guarda la foto: mostra Il Gigante che inciampa su una pietra ieri mattina.
+    Il Gigante non sta inciampando ADESSO — lo ha fatto IERI, è finita.
+    Prima l'inciampo (l'azione accade nel passato), poi il BANG del chiodo (viene chiusa),
+    poi la foto sul muro (resta lì per sempre, staccata dal presente).
+    Marco tocca la cornice fredda e rugosa — quella foto non si muoverà mai più.
+
+- slug: past_continuous_background
+  tags: [verb_tenses, verb_tenses_block, past_continuous]
+  title_en: "Past Continuous — Background Actions & Interrupted Past"
+  title_it: "Past Continuous — Azioni di Sfondo e Passato Interrotto"
+  display_order: 13
+  rule_en: |
+    Use the **Past Continuous** for:
+    1. **Background action** interrupted by a Past Simple event
+       → *I was reading when the phone rang.*
+    2. **Two parallel ongoing actions** in the past
+       → *While she was cooking, he was setting the table.*
+    3. **Temporary situation** in the past (at a specific past moment)
+       → *At 8 pm yesterday I was watching a film.*
+
+    Form: subject + **was / were** + verb**-ing**
+    Key signal words: while, when, as, at that moment.
+  rule_it: |
+    Usa il **Past Continuous** per:
+    1. **Azione di sfondo** interrotta da un Past Simple
+       → *I was reading when the phone rang.*
+    2. **Due azioni parallele in corso** nel passato
+       → *While she was cooking, he was setting the table.*
+    3. **Situazione temporanea** nel passato (in un momento preciso)
+       → *At 8 pm yesterday I was watching a film.*
+
+    Forma: soggetto + **was / were** + verbo**-ing**
+    Segnali chiave: while, when, as, at that moment.
+  example_basic:
+    en: "I was writing my essay when the power suddenly went out."
+    it: "Stavo scrivendo il mio tema quando la corrente è andata via all'improvviso."
+  example_complex:
+    en: "While the delegates were negotiating the final terms of the agreement, a journalist was leaking confidential details to the press."
+    it: "Mentre i delegati stavano negoziando i termini finali dell'accordo, un giornalista stava rivelando dettagli riservati alla stampa."
+  vocabulary:
+    - word: delegate
+      pos: noun
+      ipa: /ˈdɛlɪɡət/
+      meaning_it: delegato, rappresentante
+    - word: negotiate
+      pos: verb
+      ipa: /nɪˈɡəʊʃieɪt/
+      meaning_it: negoziare, trattare
+    - word: terms
+      pos: noun (plural)
+      ipa: /tɜːmz/
+      meaning_it: termini, condizioni
+    - word: leak
+      pos: verb
+      ipa: /liːk/
+      meaning_it: far trapelare, divulgare (informazioni riservate)
+    - word: confidential
+      pos: adjective
+      ipa: /ˌkɒnfɪˈdɛnʃəl/
+      meaning_it: riservato, confidenziale
+  story_it: |
+    Il professor Verne dipinge una grande tela — pennellate lente, odore di olio di lino
+    (olfatto), pennello morbido in mano (tatto). È il PAST CONTINUOUS: l'azione di sfondo,
+    ampia e in corso. Poi, all'improvviso, Marco entra di corsa e fa cadere il barattolo
+    di vernice rossa — SPLASH! — una macchia netta sulla tela.
+    Quella macchia è il Past Simple: breve, preciso, interruzione.
+    Prima la tela in costruzione (was + -ing = azione in corso),
+    poi la macchia rossa (Past Simple = interruzione).
+    Non si può invertire: non puoi avere la macchia su una tela che non esiste ancora.
+    Marco tocca la vernice fresca (fredda, appiccicosa), annusa l'olio —
+    e ricorda: **while** = due pennelli che dipingono insieme; **when** = la macchia che cade.
+
+- slug: past_perfect_had_done
+  tags: [verb_tenses, verb_tenses_block, past_perfect]
+  title_en: "Past Perfect — The Past Before the Past"
+  title_it: "Past Perfect — Il Passato Prima del Passato"
+  display_order: 14
+  rule_en: |
+    Use the **Past Perfect** when you are already talking about the past and need to refer
+    to something that happened **even earlier**.
+
+    → *When I arrived, she had already left.* (she left → then I arrived)
+
+    Form: subject + **had** + past participle
+    Key signal words: already, just, yet, never, by the time, when, after, before.
+
+    ⚠️ Not needed if the chronological order is already clear from before/after/then.
+  rule_it: |
+    Usa il **Past Perfect** quando stai già parlando al passato e devi riferire qualcosa
+    accaduto **ancora prima**.
+
+    → *When I arrived, she had already left.* (lei è partita → poi io sono arrivato)
+
+    Forma: soggetto + **had** + participio passato
+    Segnali chiave: already, just, yet, never, by the time, when, after, before.
+
+    ⚠️ Non è necessario se l'ordine cronologico è già chiaro da before/after/then.
+  example_basic:
+    en: "By the time we reached the theatre, the performance had already begun."
+    it: "Quando arrivammo al teatro, lo spettacolo era già iniziato."
+  example_complex:
+    en: "The inspector realised that the witness had deliberately withheld crucial evidence that could have altered the entire verdict."
+    it: "L'ispettore si rese conto che il testimone aveva deliberatamente nascosto prove cruciali che avrebbero potuto cambiare l'intero verdetto."
+  vocabulary:
+    - word: deliberately
+      pos: adverb
+      ipa: /dɪˈlɪbərətli/
+      meaning_it: deliberatamente, intenzionalmente
+    - word: withhold
+      pos: verb
+      ipa: /wɪðˈhəʊld/
+      meaning_it: trattenere, nascondere, non divulgare
+    - word: crucial
+      pos: adjective
+      ipa: /ˈkruːʃəl/
+      meaning_it: cruciale, fondamentale
+    - word: evidence
+      pos: noun
+      ipa: /ˈɛvɪdəns/
+      meaning_it: prova, elemento di prova
+    - word: verdict
+      pos: noun
+      ipa: /ˈvɜːdɪkt/
+      meaning_it: verdetto, sentenza
+    - word: alter
+      pos: verb
+      ipa: /ˈɔːltə/
+      meaning_it: alterare, modificare
+  story_it: |
+    Nel Grammar Lab le fotografie sul muro (Past Simple) hanno ciascuna un piccolo
+    cassetto sotto. Il professor Verne apre il cassetto sotto la foto di ieri —
+    dentro c'è una fotografia ancora più vecchia, ingiallita, che odora di naftalina
+    (olfatto). «Questo è successo PRIMA di quella foto», dice toccando la carta fragile
+    (tatto, quasi si spezza). Marco guarda: prima la foto nel cassetto (Past Perfect —
+    il passato più antico), poi la foto sul muro (Past Simple — il passato recente).
+    Non puoi aprire il cassetto di una foto che non è ancora appesa.
+    Il Gigante cerca di aprire il cassetto prima di appendere la foto
+    e il cassetto gli esplode in mano con un BONG sordo. Ordine impossibile da invertire.
+
+- slug: future_forms_will_going_to
+  tags: [verb_tenses, verb_tenses_block, future_forms]
+  title_en: "Future Forms — will vs going to vs Present Continuous"
+  title_it: "Forme del Futuro — will vs going to vs Present Continuous"
+  display_order: 15
+  rule_en: |
+    Three main future forms — each with a different use:
+
+    **will** → spontaneous decisions, predictions without evidence, promises, offers
+    → *I'll help you with that.* / *I think it will rain.*
+
+    **going to** → plans already decided, predictions with present evidence
+    → *I'm going to study abroad next year.* / *Look at those clouds — it's going to rain.*
+
+    **Present Continuous** → fixed future arrangements (date/time/place already set)
+    → *I'm meeting the director at 3 pm tomorrow.*
+
+    ⚠️ «Vado a fare» in Italian = I'm going to do (NOT «I go to do»)
+  rule_it: |
+    Tre forme principali del futuro — ognuna con uso diverso:
+
+    **will** → decisioni spontanee, previsioni senza prove, promesse, offerte
+    → *I'll help you with that.* / *I think it will rain.*
+
+    **going to** → piani già decisi, previsioni con prove presenti
+    → *I'm going to study abroad next year.* / *Look at those clouds — it's going to rain.*
+
+    **Present Continuous** → appuntamenti futuri già fissati (data/ora/luogo stabiliti)
+    → *I'm meeting the director at 3 pm tomorrow.*
+
+    ⚠️ «Vado a fare» in italiano = I'm going to do (NON «I go to do»)
+  example_basic:
+    en: "— The printer is broken! — Don't worry, I'll fix it."
+    it: "— La stampante è rotta! — Non preoccuparti, la sistemo io. (decisione spontanea)"
+  example_complex:
+    en: "Given the alarming unemployment figures, economists predict the government is going to implement further stimulus measures before the next election."
+    it: "Dati gli allarmanti dati sulla disoccupazione, gli economisti prevedono che il governo implementerà ulteriori misure di stimolo prima delle prossime elezioni."
+  vocabulary:
+    - word: alarming
+      pos: adjective
+      ipa: /əˈlɑːmɪŋ/
+      meaning_it: allarmante, preoccupante
+    - word: unemployment
+      pos: noun
+      ipa: /ˌʌnɪmˈplɔɪmənt/
+      meaning_it: disoccupazione
+    - word: implement
+      pos: verb
+      ipa: /ˈɪmplɪmɛnt/
+      meaning_it: attuare, implementare, mettere in atto
+    - word: stimulus
+      pos: noun
+      ipa: /ˈstɪmjʊləs/
+      meaning_it: stimolo (economico), incentivo
+    - word: measure
+      pos: noun
+      ipa: /ˈmɛʒə/
+      meaning_it: misura, provvedimento
+  story_it: |
+    Nella stanza del futuro del Grammar Lab ci sono tre porte.
+    La porta **WILL** è bianca e si apre solo quando Marco decide al momento —
+    lui vede il calderone che trabocca e SUBITO dice «I'll stop it!»
+    (odore di vapore improvviso, decisione istantanea).
+    La porta **GOING TO** è blu con un cartello già scritto a mano —
+    un piano vecchio di giorni. Marco la apre: dentro c'è il Gigante
+    con la valigia già pronta, biglietto in mano (il piano era già deciso,
+    si sente il profumo di aeroporto).
+    La porta **PRESENT CONTINUOUS** ha un calendario inchiodato —
+    data, ora, luogo già stampati. Non si può aprire senza il calendario.
+    Prima la decisione/piano/appuntamento — poi la porta giusta.
+    Marco prova ad aprire la porta blu senza aver pianificato niente:
+    riceve una scarica elettrica leggera sul polso (paradossale, tattile).
+
+# ─────────────────────────────────────────
+# BLOCCO 2 — COLLOCATIONS I (giorni 7–10)
+# make / do / have / take
+# ─────────────────────────────────────────
+
+- slug: coll_make
+  tags: [collocations, collocations_i_block, coll_make]
+  title_en: "Collocations with MAKE"
+  title_it: "Collocazioni con MAKE"
+  display_order: 20
+  rule_en: |
+    **MAKE** = to produce, create, or cause something.
+    Use it when the result is something NEW or when you CAUSE a situation.
+
+    Most common collocations:
+    make a **mistake** / make a **decision** / make a **suggestion** / make a **complaint**
+    make a **phone call** / make a **noise** / make **progress** / make **friends**
+    make an **effort** / make an **appointment** / make **money** / make a **difference**
+
+    ⚠️ Italian trap: «fare un errore» → make a mistake (NOT *do a mistake*)
+  rule_it: |
+    **MAKE** = produrre, creare o causare qualcosa.
+    Si usa quando il risultato è qualcosa di NUOVO o quando si CAUSA una situazione.
+
+    Collocazioni più comuni:
+    make a **mistake** / make a **decision** / make a **suggestion** / make a **complaint**
+    make a **phone call** / make a **noise** / make **progress** / make **friends**
+    make an **effort** / make an **appointment** / make **money** / make a **difference**
+
+    ⚠️ Trappola italiana: «fare un errore» → make a mistake (NON *do a mistake*)
+  example_basic:
+    en: "She made a terrible mistake by ignoring the warning signs."
+    it: "Ha fatto un errore terribile ignorando i segnali di avvertimento."
+  example_complex:
+    en: "Despite the considerable setbacks, the research team continued to make remarkable progress towards developing a viable vaccine."
+    it: "Nonostante i notevoli contrattempi, il team di ricerca ha continuato a fare notevoli progressi verso lo sviluppo di un vaccino efficace."
+  vocabulary:
+    - word: considerable
+      pos: adjective
+      ipa: /kənˈsɪdərəbəl/
+      meaning_it: notevole, considerevole
+    - word: setback
+      pos: noun
+      ipa: /ˈsɛtbæk/
+      meaning_it: contrattempo, battuta d'arresto
+    - word: remarkable
+      pos: adjective
+      ipa: /rɪˈmɑːkəbəl/
+      meaning_it: notevole, straordinario
+    - word: viable
+      pos: adjective
+      ipa: /ˈvaɪəbəl/
+      meaning_it: fattibile, praticabile, vitale
+    - word: vaccine
+      pos: noun
+      ipa: /ˈvæksiːn/
+      meaning_it: vaccino
+  story_it: |
+    Nel Grammar Lab c'è una fabbrica in miniatura che COSTRUISCE cose dal nulla —
+    odore di metallo caldo e plastica nuova. Il professor Verne prende un foglio bianco
+    (NIENTE sopra) e ci stampa sopra «a mistake» con un timbro rosso —
+    CLONK — una cosa nuova è apparsa. «MAKE crea», dice. «Guarda: prima il foglio vuoto,
+    poi il timbro, poi l'errore esiste.» Il Gigante prova a timbrarci «a homework»
+    e la fabbrica gli spara fuori il foglio in faccia (paradossale, si sente il vento).
+    DO non costruisce — esegue. Prima il foglio bianco (il nulla),
+    poi il MAKE che produce qualcosa di concreto. Non si può invertire:
+    non puoi timbrar su un foglio che non hai ancora.
+
+- slug: coll_do
+  tags: [collocations, collocations_i_block, coll_do]
+  title_en: "Collocations with DO"
+  title_it: "Collocazioni con DO"
+  display_order: 21
+  rule_en: |
+    **DO** = to perform an activity or task (especially work, duties, activities).
+    Use it for actions, tasks, and activities — often without creating a tangible new object.
+
+    Most common collocations:
+    do **homework** / do the **dishes** / do **research** / do **business**
+    do **damage** / do **exercise** / do your **best** / do a **course**
+    do **harm** / do **well** / do **someone a favour**
+
+    ⚠️ Italian trap: «fare i compiti» → do homework (NOT *make homework*)
+  rule_it: |
+    **DO** = svolgere un'attività o un compito (specialmente lavoro, doveri, attività).
+    Si usa per azioni, compiti e attività — spesso senza creare un nuovo oggetto tangibile.
+
+    Collocazioni più comuni:
+    do **homework** / do the **dishes** / do **research** / do **business**
+    do **damage** / do **exercise** / do your **best** / do a **course**
+    do **harm** / do **well** / do **someone a favour**
+
+    ⚠️ Trappola italiana: «fare i compiti» → do homework (NON *make homework*)
+  example_basic:
+    en: "Could you do me a favour and pass on the message?"
+    it: "Potresti farmi un favore e trasmettere il messaggio?"
+  example_complex:
+    en: "The charity has done considerable damage to its reputation by failing to disclose its funding sources transparently."
+    it: "L'ente di beneficenza ha fatto danni considerevoli alla sua reputazione non rivelando in modo trasparente le sue fonti di finanziamento."
+  vocabulary:
+    - word: charity
+      pos: noun
+      ipa: /ˈtʃærɪti/
+      meaning_it: ente di beneficenza, associazione no-profit
+    - word: reputation
+      pos: noun
+      ipa: /ˌrɛpjʊˈteɪʃən/
+      meaning_it: reputazione, fama
+    - word: disclose
+      pos: verb
+      ipa: /dɪsˈkləʊz/
+      meaning_it: rivelare, rendere noto, divulgare
+    - word: funding
+      pos: noun
+      ipa: /ˈfʌndɪŋ/
+      meaning_it: finanziamento, fondi
+    - word: transparently
+      pos: adverb
+      ipa: /trænsˈpærəntli/
+      meaning_it: in modo trasparente
+  story_it: |
+    Accanto alla fabbrica MAKE c'è un corridoio di tapis roulant —
+    ogni tapis roulant è un compito da svolgere. Marco cammina su quello
+    etichettato «homework»: non produce niente di nuovo, ma il tapis roulant avanza
+    (si sente la vibrazione sotto i piedi, odore di gomma calda). «DO è movimento»,
+    dice il professor Verne, «non costruzione.» Il Gigante prova a sedersi su un tapis roulant
+    per «make homework» e la cinghia lo catapulta fuori dalla finestra (WHOOSH — vento in faccia).
+    Prima scegli il tapis roulant giusto (l'attività esiste già),
+    poi ci cammini sopra (la esegui). Non puoi camminare su un tapis roulant che non hai scelto.
+
+- slug: coll_have
+  tags: [collocations, collocations_i_block, coll_have]
+  title_en: "Collocations with HAVE"
+  title_it: "Collocazioni con HAVE"
+  display_order: 22
+  rule_en: |
+    **HAVE** = to experience something or to possess/undergo an action.
+    In collocations, HAVE often describes experiences, activities you participate in,
+    or states of possession.
+
+    Most common collocations:
+    have a **break** / have **fun** / have a **conversation** / have a **look**
+    have a **meal** / have a **shower** / have **difficulty** / have **doubts**
+    have an **argument** / have a **good time** / have a **go** / have **lunch**
+
+    ⚠️ «Avere una pausa» → have a break (NOT *make a break* or *do a break*)
+  rule_it: |
+    **HAVE** = vivere/sperimentare qualcosa oppure possedere/subire un'azione.
+    Nelle collocazioni, HAVE descrive spesso esperienze, attività a cui si partecipa,
+    o stati di possesso.
+
+    Collocazioni più comuni:
+    have a **break** / have **fun** / have a **conversation** / have a **look**
+    have a **meal** / have a **shower** / have **difficulty** / have **doubts**
+    have an **argument** / have a **good time** / have a **go** / have **lunch**
+
+    ⚠️ «Avere una pausa» → have a break (NON *make a break* o *do a break*)
+  example_basic:
+    en: "We had a heated argument about the proposed changes to the schedule."
+    it: "Abbiamo avuto un acceso dibattito sulle modifiche proposte al programma."
+  example_complex:
+    en: "The visiting delegates had considerable difficulty reaching a consensus on the most contentious clauses of the treaty."
+    it: "I delegati in visita hanno avuto notevoli difficoltà a raggiungere un consenso sulle clausole più controverse del trattato."
+  vocabulary:
+    - word: considerable
+      pos: adjective
+      ipa: /kənˈsɪdərəbəl/
+      meaning_it: notevole, considerevole
+    - word: consensus
+      pos: noun
+      ipa: /kənˈsɛnsəs/
+      meaning_it: consenso, accordo generale
+    - word: contentious
+      pos: adjective
+      ipa: /kənˈtɛnʃəs/
+      meaning_it: controverso, dibattuto
+    - word: clause
+      pos: noun
+      ipa: /klɔːz/
+      meaning_it: clausola (di un contratto/trattato)
+    - word: treaty
+      pos: noun
+      ipa: /ˈtriːti/
+      meaning_it: trattato (internazionale)
+  story_it: |
+    Nel Grammar Lab c'è una vasca da bagno piena di esperienze liquide —
+    ogni liquido ha un colore e un profumo diverso. Per «have a break»
+    il liquido è verde menta (odore fresco). Marco si immerge:
+    sente il calore avvolgerlo (tatto), la menta nel naso.
+    HAVE significa immergersi nell'esperienza — non crearla (MAKE),
+    non eseguire un compito (DO), ma VIVERLA.
+    Il professor Verne non può fare «have» dall'esterno della vasca —
+    deve entrarci. Prima la vasca esiste con il liquido,
+    poi Marco ci entra e vive l'esperienza.
+    Il Gigante prova a fare «make a break»: la fabbrica produce un interruttore
+    elettrico invece di una pausa — CLONK — luce che si spegne, buio totale.
+    Ordine chiaro: prima la vasca (l'esperienza è disponibile), poi l'immersione.
+
+- slug: coll_take
+  tags: [collocations, collocations_i_block, coll_take]
+  title_en: "Collocations with TAKE"
+  title_it: "Collocazioni con TAKE"
+  display_order: 23
+  rule_en: |
+    **TAKE** = to accept, grab, or hold something — often implies obtaining or assuming control.
+    In collocations, TAKE suggests taking something FOR yourself or assuming a role/action.
+
+    Most common collocations:
+    take a **risk** / take a **break** / take **responsibility** / take **action**
+    take **place** / take **part** / take **turns** / take **notes**
+    take **advantage** / take **care** / take **time** / take an **exam**
+
+    ⚠️ «Prendere un esame» → take an exam (NOT *make an exam* or *do an exam*)
+    ⚠️ take a break AND have a break are BOTH correct — but take suggests more deliberate choice.
+  rule_it: |
+    **TAKE** = accettare, prendere o assumere qualcosa — implica spesso ottenere o assumere controllo.
+    Nelle collocazioni, TAKE suggerisce prendere qualcosa PER sé o assumere un ruolo/azione.
+
+    Collocazioni più comuni:
+    take a **risk** / take a **break** / take **responsibility** / take **action**
+    take **place** / take **part** / take **turns** / take **notes**
+    take **advantage** / take **care** / take **time** / take an **exam**
+
+    ⚠️ «Prendere un esame» → take an exam (NON *make an exam* o *do an exam*)
+    ⚠️ take a break E have a break sono entrambi corretti — ma take implica una scelta più deliberata.
+  example_basic:
+    en: "You should take responsibility for the errors in the report."
+    it: "Dovresti assumerti la responsabilità degli errori nel rapporto."
+  example_complex:
+    en: "Facing mounting criticism, the board finally decided to take decisive action to address the widespread allegations of misconduct."
+    it: "Di fronte a critiche crescenti, il consiglio ha finalmente deciso di intraprendere un'azione decisiva per affrontare le diffuse accuse di cattiva condotta."
+  vocabulary:
+    - word: mounting
+      pos: adjective
+      ipa: /ˈmaʊntɪŋ/
+      meaning_it: crescente, in aumento
+    - word: decisive
+      pos: adjective
+      ipa: /dɪˈsaɪsɪv/
+      meaning_it: decisivo, risoluto
+    - word: widespread
+      pos: adjective
+      ipa: /ˈwaɪdsprɛd/
+      meaning_it: diffuso, esteso
+    - word: allegation
+      pos: noun
+      ipa: /ˌælɪˈɡeɪʃən/
+      meaning_it: accusa, allegazione
+    - word: misconduct
+      pos: noun
+      ipa: /ˌmɪsˈkɒndʌkt/
+      meaning_it: cattiva condotta, comportamento scorretto
+  story_it: |
+    Nel Grammar Lab c'è un gancio sul soffitto con diversi oggetti appesi —
+    rischi, responsabilità, esami, appunti. Marco deve ALLUNGARE LA MANO e PRENDERE
+    quello che vuole (tatto: sente il peso dell'oggetto, l'aria fresca in alto).
+    «TAKE è prendere attivamente per sé», dice il prof. Il Gigante
+    prova a «do a risk» e il tapis roulant inizia ad andare senza che lui abbia scelto
+    nulla (caotico, rumore di cinghia che scivola). Poi prova «make a risk»
+    e la fabbrica produce un dado di metallo che gli cade sul piede — CLANG —
+    grido basso come un tuono. TAKE invece: Marco allunga la mano,
+    afferra «responsibility» dal gancio (pesante, superficie ruvida),
+    se la mette in spalla deliberatamente. Prima il gancio con l'oggetto,
+    poi la mano che si allunga, poi il peso sulle spalle. Impossibile da invertire.
+
+# ─────────────────────────────────────────
+# BLOCCO 3 — COLLOCATIONS II (giorni 11–14)
+# Intensifiers + adj+noun collocations
+# ─────────────────────────────────────────
+
+- slug: coll_adv_intensifiers
+  tags: [collocations, collocations_ii_block, coll_adv_intensifiers, false_friend_italian]
+  title_en: "Intensifier Adverbs — deeply, highly, widely, strongly"
+  title_it: "Avverbi intensificatori — deeply, highly, widely, strongly"
+  display_order: 30
+  rule_en: |
+    Certain adverbs collocate with specific adjectives/verbs. You cannot swap them freely.
+
+    **deeply** + concerned / affected / committed / regret / moved / disturbing
+    **highly** + recommended / skilled / unlikely / competitive / regarded / effective
+    **widely** + regarded / used / accepted / available / known / criticised
+    **strongly** + recommend / suggest / oppose / believe / disagree / influence
+
+    ⚠️ NOT «*greatly recommended*» or «*deeply skilled*» — these sound unnatural.
+    ⚠️ Italian trap: «molto» covers all of these in Italian — in English each has its own partner.
+  rule_it: |
+    Certi avverbi si collocano con aggettivi/verbi specifici. Non sono intercambiabili.
+
+    **deeply** + concerned / affected / committed / regret / moved / disturbing
+    **highly** + recommended / skilled / unlikely / competitive / regarded / effective
+    **widely** + regarded / used / accepted / available / known / criticised
+    **strongly** + recommend / suggest / oppose / believe / disagree / influence
+
+    ⚠️ NON «*greatly recommended*» o «*deeply skilled*» — suonano innaturali.
+    ⚠️ Trappola italiana: «molto» copre tutto in italiano — in inglese ogni avverbio ha il suo partner.
+  example_basic:
+    en: "I strongly recommend reading this book before the exam."
+    it: "Raccomando vivamente di leggere questo libro prima dell'esame."
+  example_complex:
+    en: "The documentary was widely regarded as a deeply disturbing portrayal of corruption within the financial sector."
+    it: "Il documentario era ampiamente considerato come un ritratto profondamente inquietante della corruzione nel settore finanziario."
+  vocabulary:
+    - word: portrayal
+      pos: noun
+      ipa: /pɔːˈtreɪəl/
+      meaning_it: ritratto, rappresentazione
+    - word: corruption
+      pos: noun
+      ipa: /kəˈrʌpʃən/
+      meaning_it: corruzione
+    - word: financial sector
+      pos: noun phrase
+      ipa: /faɪˈnænʃəl ˈsɛktə/
+      meaning_it: settore finanziario
+    - word: disturbing
+      pos: adjective
+      ipa: /dɪˈstɜːbɪŋ/
+      meaning_it: inquietante, disturbante
+    - word: regard (as)
+      pos: verb
+      ipa: /rɪˈɡɑːd/
+      meaning_it: considerare, ritenere
+  story_it: |
+    Nel Grammar Lab ci sono quattro tazze di colore diverso sul bancone del prof. Verne.
+    La tazza BLU SCURA (deeply) emana vapore freddo e sa di oceano profondo (olfatto salino).
+    La tazza DORATA (highly) ha bordi brillanti e brilla verso l'alto.
+    La tazza VERDE LARGA (widely) è piatta e si espande ai lati come un lago.
+    La tazza ROSSA (strongly) è tiepida e vibrante sotto le dita (tatto: tremore leggero).
+    Marco prova a mescolare le tazze — mette deeply nella tazza dorata:
+    esplosione di schiuma amarissima (sapore, paradossale).
+    Prima impari il colore della tazza (l'avverbio), poi il suo partner naturale.
+    Il Gigante prova «very recommended» e tutte e quattro le tazze gli si rovesciano addosso.
+
+- slug: coll_adj_noun_strong_powerful
+  tags: [collocations, collocations_ii_block, coll_adj_noun_strong_powerful]
+  title_en: "Adj+Noun Collocations — strong vs powerful vs heavy vs great"
+  title_it: "Collocazioni Agg+Sost — strong vs powerful vs heavy vs great"
+  display_order: 31
+  rule_en: |
+    Some adjectives look interchangeable but collocate with fixed nouns:
+
+    **strong** + opinion / evidence / accent / coffee / candidate / argument
+    **powerful** + engine / speech / drug / tool / message / impact
+    **heavy** + rain / traffic / smoker / drinker / burden / workload / influence
+    **great** + deal / pleasure / success / importance / difficulty / variety
+
+    ⚠️ «*a powerful opinion*» or «*a strong engine*» sound wrong to native speakers.
+    ⚠️ Italian trap: «forte», «potente», «pesante», «grande» all feel equivalent — they are not.
+  rule_it: |
+    Alcuni aggettivi sembrano intercambiabili ma si collocano con sostantivi fissi:
+
+    **strong** + opinion / evidence / accent / coffee / candidate / argument
+    **powerful** + engine / speech / drug / tool / message / impact
+    **heavy** + rain / traffic / smoker / drinker / burden / workload / influence
+    **great** + deal / pleasure / success / importance / difficulty / variety
+
+    ⚠️ «*a powerful opinion*» o «*a strong engine*» suonano sbagliati ai madrelingua.
+    ⚠️ Trappola italiana: «forte», «potente», «pesante», «grande» sembrano equivalenti — non lo sono.
+  example_basic:
+    en: "Despite the heavy workload, she delivered the project ahead of schedule."
+    it: "Nonostante il carico di lavoro intenso, ha consegnato il progetto prima del previsto."
+  example_complex:
+    en: "The prosecution presented strong evidence and delivered a powerful closing speech that had a great deal of impact on the jury."
+    it: "L'accusa ha presentato prove solide e ha tenuto un potente discorso finale che ha avuto un grande impatto sulla giuria."
+  vocabulary:
+    - word: prosecution
+      pos: noun
+      ipa: /ˌprɒsɪˈkjuːʃən/
+      meaning_it: accusa (parte accusante in un processo)
+    - word: closing speech
+      pos: noun phrase
+      ipa: /ˈkləʊzɪŋ spiːtʃ/
+      meaning_it: arringa finale, discorso conclusivo
+    - word: jury
+      pos: noun
+      ipa: /ˈdʒʊəri/
+      meaning_it: giuria
+    - word: impact
+      pos: noun
+      ipa: /ˈɪmpækt/
+      meaning_it: impatto, effetto
+    - word: ahead of schedule
+      pos: phrase
+      ipa: /əˈhɛd əv ˈʃɛdjuːl/
+      meaning_it: in anticipo rispetto al programma
+  story_it: |
+    Nel Grammar Lab c'è un armadietto con quattro cassetti etichettati:
+    STRONG (cassetto di acciaio, freddo al tatto), POWERFUL (vibrante, ronza),
+    HEAVY (difficile da aprire, cigola), GREAT (dorato, odore di legno pregiato).
+    Marco apre il cassetto STRONG e trova: opinioni, caffè, prove.
+    Apre POWERFUL: motori, discorsi, farmaci.
+    Prova a mettere «engine» nel cassetto STRONG — il cassetto si blocca,
+    gli pizzica le dita (tatto acuto, paradossale). Prima conosci il cassetto giusto,
+    poi ci metti il sostantivo. Il Gigante apre tutti i cassetti insieme
+    e le combinazioni sbagliate cadono sul pavimento come pietre —
+    CLANG CLANG CLANG — il rumore risveglia tutti nel lab.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 4 — PREPOSITIONS (giorni 15–18)
+# ─────────────────────────────────────────
+
+- slug: prep_time_in_at_on
+  tags: [prepositions, prepositions_block, prep_time]
+  title_en: "Prepositions of Time — in / at / on"
+  title_it: "Preposizioni di Tempo — in / at / on"
+  display_order: 40
+  rule_en: |
+    **at** → precise times & specific moments
+    at 3 pm / at midnight / at noon / at the weekend (BrE) / at Christmas / at the moment
+
+    **on** → days and dates
+    on Monday / on 5th March / on Christmas Day / on my birthday / on time
+
+    **in** → longer periods (months, years, seasons, centuries, parts of day)
+    in March / in 2024 / in summer / in the morning / in the 19th century / in five minutes
+
+    ⚠️ Italian trap: in Italian «a» covers at/on for times — in English you must choose carefully.
+    ⚠️ NO preposition with: last/next/this/every + time word (last Monday, every year)
+  rule_it: |
+    **at** → orari precisi e momenti specifici
+    at 3 pm / at midnight / at noon / at the weekend (BrE) / at Christmas / at the moment
+
+    **on** → giorni e date
+    on Monday / on 5th March / on Christmas Day / on my birthday / on time
+
+    **in** → periodi più lunghi (mesi, anni, stagioni, secoli, parti della giornata)
+    in March / in 2024 / in summer / in the morning / in the 19th century / in five minutes
+
+    ⚠️ Trappola italiana: in italiano «a» copre at/on per gli orari — in inglese devi scegliere.
+    ⚠️ NESSUNA preposizione con: last/next/this/every + parola temporale (last Monday, every year)
+  example_basic:
+    en: "The meeting is on Thursday at 9 am, not in the afternoon."
+    it: "La riunione è giovedì alle 9, non nel pomeriggio."
+  example_complex:
+    en: "In the early 20th century, at a time of profound social upheaval, the movement gained significant momentum on the very day its manifesto was published."
+    it: "All'inizio del XX secolo, in un momento di profondo sconvolgimento sociale, il movimento acquistò slancio significativo proprio il giorno in cui il suo manifesto venne pubblicato."
+  vocabulary:
+    - word: upheaval
+      pos: noun
+      ipa: /ʌpˈhiːvəl/
+      meaning_it: sconvolgimento, tumulto
+    - word: momentum
+      pos: noun
+      ipa: /məˈmɛntəm/
+      meaning_it: slancio, spinta, momento (fisico)
+    - word: manifesto
+      pos: noun
+      ipa: /ˌmænɪˈfɛstəʊ/
+      meaning_it: manifesto, dichiarazione programmatica
+    - word: profound
+      pos: adjective
+      ipa: /prəˈfaʊnd/
+      meaning_it: profondo, intenso
+  story_it: |
+    Il professor Verne ha tre cassetti sul suo orologio da tasca (paradossale: un orologio con cassetti).
+    Cassetto AT: ha un cerchio piccolo e preciso come la punta di uno spillo — si apre solo per momenti esatti.
+    Cassetto ON: è piatto come un foglio di calendario, si apre soltanto posando il dito su UN giorno.
+    Cassetto IN: è profondo come un pozzo, ci cadono dentro mesi interi, anni, stagioni.
+    Marco apre AT e dice «in Monday» — il cassetto gli pizzica le dita (tatto pungente).
+    Poi prova ON per «on March» — il cassetto si gonfia e lo respinge (mese troppo grande per ON).
+    Prima capisci la grandezza del periodo, poi scegli il cassetto giusto.
+    Il Gigante mette «last Monday» in un cassetto qualsiasi: tutti e tre si bloccano.
+    Nessuna preposizione per last/next/this — i cassetti spariscono del tutto.
+
+- slug: prep_place_in_at_on
+  tags: [prepositions, prepositions_block, prep_place]
+  title_en: "Prepositions of Place — in / at / on"
+  title_it: "Preposizioni di Luogo — in / at / on"
+  display_order: 41
+  rule_en: |
+    **in** → enclosed space, inside something, cities, countries
+    in the box / in London / in Italy / in the room / in the street (BrE)
+
+    **at** → a specific point or location (address, institution, event)
+    at the bus stop / at school / at work / at the station / at 14 Baker Street
+
+    **on** → surface, floor, line (transport, street AmE, floor of building)
+    on the table / on the wall / on the first floor / on the bus / on the street (AmE)
+
+    ⚠️ Tricky pairs: *in* the car vs *on* the bus/train/plane (size matters)
+    ⚠️ at school/work/home = no article; in the school/office = specific building
+  rule_it: |
+    **in** → spazio chiuso, dentro qualcosa, città, paesi
+    in the box / in London / in Italy / in the room / in the street (BrE)
+
+    **at** → punto specifico o luogo (indirizzo, istituzione, evento)
+    at the bus stop / at school / at work / at the station / at 14 Baker Street
+
+    **on** → superficie, piano, linea (trasporti, piano dell'edificio)
+    on the table / on the wall / on the first floor / on the bus / on the street (AmE)
+
+    ⚠️ Coppie difficili: *in* the car vs *on* the bus/train/plane (conta la grandezza)
+    ⚠️ at school/work/home = senza articolo; in the school/office = edificio specifico
+  example_basic:
+    en: "She left her keys on the table, not in her bag."
+    it: "Ha lasciato le chiavi sul tavolo, non nella borsa."
+  example_complex:
+    en: "The negotiations took place at the embassy on the outskirts of the city, in a room overlooking a surprisingly tranquil courtyard."
+    it: "I negoziati si sono svolti all'ambasciata alla periferia della città, in una stanza che si affacciava su un cortile sorprendentemente tranquillo."
+  vocabulary:
+    - word: embassy
+      pos: noun
+      ipa: /ˈɛmbəsi/
+      meaning_it: ambasciata
+    - word: outskirts
+      pos: noun (plural)
+      ipa: /ˈaʊtskɜːts/
+      meaning_it: periferia, zone periferiche
+    - word: overlook
+      pos: verb
+      ipa: /ˌəʊvəˈlʊk/
+      meaning_it: affacciarsi su, dare su (vista dall'alto)
+    - word: tranquil
+      pos: adjective
+      ipa: /ˈtræŋkwɪl/
+      meaning_it: tranquillo, sereno
+    - word: courtyard
+      pos: noun
+      ipa: /ˈkɔːtjɑːd/
+      meaning_it: cortile
+  story_it: |
+    Il Grammar Lab ha tre zone demarcate da linee colorate sul pavimento.
+    La zona IN è una scatola di vetro chiusa — Marco entra e sente l'aria ferma intorno,
+    le pareti lo avvolgono (tatto: muri lisci e freddi). IN = spazio chiuso.
+    La zona AT è una croce rossa sul pavimento — un punto preciso. Il prof. Verne
+    ci punta il dito sopra: «Sei QUI, in questo punto esatto. At.»
+    La zona ON è una superficie piatta rialzata — Marco ci sale su e sente il pavimento
+    solido sotto i piedi (tatto). ON = sopra una superficie.
+    Il Gigante si siede «in the bus» — si capisce che è dentro il motore.
+    Poi sale «on the car» — è letteralmente sul tetto (rumore di lamiera che si piega).
+    Prima la forma dello spazio (chiuso/punto/superficie), poi la preposizione.
+
+- slug: prep_verb_preposition
+  tags: [prepositions, prepositions_block, vprep_fixed]
+  title_en: "Verb + Preposition — Fixed Combinations"
+  title_it: "Verbo + Preposizione — Combinazioni Fisse"
+  display_order: 42
+  rule_en: |
+    Many verbs require a specific preposition. These must be memorised as units.
+
+    **about**: think / worry / complain / dream / hear / care / be excited
+    **for**: apply / ask / search / wait / look / hope / be responsible / pay
+    **of**: consist / be aware / be proud / be capable / be afraid / remind / accuse
+    **on**: depend / rely / insist / concentrate / congratulate / comment
+    **with**: agree / deal / be satisfied / be familiar / provide / cope
+    **to**: belong / refer / respond / apologise / listen / object / be used to
+
+    ⚠️ «Dipende da» = depends ON (not *depends of*)
+    ⚠️ «Essere d'accordo con» = agree WITH (not *agree to* a person)
+  rule_it: |
+    Molti verbi richiedono una preposizione specifica. Vanno memorizzati come unità.
+
+    **about**: think / worry / complain / dream / hear / care / be excited
+    **for**: apply / ask / search / wait / look / hope / be responsible / pay
+    **of**: consist / be aware / be proud / be capable / be afraid / remind / accuse
+    **on**: depend / rely / insist / concentrate / congratulate / comment
+    **with**: agree / deal / be satisfied / be familiar / provide / cope
+    **to**: belong / refer / respond / apologise / listen / object / be used to
+
+    ⚠️ «Dipende da» = depends ON (non *depends of*)
+    ⚠️ «Essere d'accordo con» = agree WITH (non *agree to* una persona)
+  example_basic:
+    en: "The success of the project depends on the cooperation of all team members."
+    it: "Il successo del progetto dipende dalla cooperazione di tutti i membri del team."
+  example_complex:
+    en: "The committee insisted on reviewing all the evidence before commenting on the allegations made against the former director."
+    it: "Il comitato ha insistito per esaminare tutte le prove prima di commentare le accuse formulate contro l'ex direttore."
+  vocabulary:
+    - word: committee
+      pos: noun
+      ipa: /kəˈmɪti/
+      meaning_it: comitato, commissione
+    - word: insist on
+      pos: verb + prep
+      ipa: /ɪnˈsɪst ɒn/
+      meaning_it: insistere per/su
+    - word: comment on
+      pos: verb + prep
+      ipa: /ˈkɒmɛnt ɒn/
+      meaning_it: commentare, esprimersi su
+    - word: allegation
+      pos: noun
+      ipa: /ˌælɪˈɡeɪʃən/
+      meaning_it: accusa, allegazione
+    - word: former
+      pos: adjective
+      ipa: /ˈfɔːmə/
+      meaning_it: ex, precedente, primo (di due)
+  story_it: |
+    Nel Grammar Lab ogni verbo è un magnete a forma di verbo (la parola incisa sul metallo,
+    freddo e pesante in mano). Ogni magnete può attaccarsi SOLO alla preposizione giusta —
+    le altre la respingono con uno scatto secco (tatto: vibrazione sul palmo).
+    Marco prende «depends» e lo avvicina a «of»: SCATTO, rimbalza indietro.
+    Lo avvicina a «on»: CLICK, si aggancia (sensazione calda, soddisfacente).
+    Il professor Verne tira fuori una scatola con cento magneti:
+    «Prima impara la forma del magnete (il verbo), poi cerca la preposizione che si aggancia.»
+    Il Gigante prova ad attaccare tutti i magneti a «of»: si forma una palla magnetica
+    enorme che rotola fuori dal laboratorio — odore di metallo caldo,
+    rumore di clic e scatti. Ordine: prima il verbo, poi la preposizione giusta.
+
+- slug: prep_fixed_phrases
+  tags: [prepositions, prepositions_block, fixed_prep_phrases]
+  title_en: "Fixed Prepositional Phrases"
+  title_it: "Frasi Preposizionali Fisse"
+  display_order: 43
+  rule_en: |
+    Some prepositional phrases are fixed expressions. Memorise them as chunks.
+
+    **by**: by mistake / by chance / by heart / by hand / by far / by now / by the way
+    **in**: in advance / in common / in favour of / in charge of / in debt / in touch / in time
+    **on**: on purpose / on behalf of / on the contrary / on the whole / on strike / on sale
+    **at**: at last / at least / at first / at once / at random / at risk / at fault
+    **out of**: out of date / out of order / out of breath / out of the question / out of work
+
+    ⚠️ «A proposito» = by the way (NOT *on purpose* which means «di proposito»)
+  rule_it: |
+    Alcune frasi preposizionali sono espressioni fisse. Memorizzale come blocchi interi.
+
+    **by**: by mistake / by chance / by heart / by hand / by far / by now / by the way
+    **in**: in advance / in common / in favour of / in charge of / in debt / in touch / in time
+    **on**: on purpose / on behalf of / on the contrary / on the whole / on strike / on sale
+    **at**: at last / at least / at first / at once / at random / at risk / at fault
+    **out of**: out of date / out of order / out of breath / out of the question / out of work
+
+    ⚠️ «A proposito» = by the way (NON *on purpose* che significa «di proposito»)
+  example_basic:
+    en: "I deleted the file by mistake — I didn't do it on purpose."
+    it: "Ho cancellato il file per errore — non l'ho fatto apposta."
+  example_complex:
+    en: "On behalf of the entire delegation, I would like to express, in advance, our gratitude for the warm welcome and the arrangements made on our behalf."
+    it: "A nome dell'intera delegazione, vorrei esprimere, in anticipo, la nostra gratitudine per la calorosa accoglienza e per le disposizioni prese a nostro nome."
+  vocabulary:
+    - word: on behalf of
+      pos: phrase
+      ipa: /ɒn bɪˈhɑːf əv/
+      meaning_it: a nome di, per conto di
+    - word: delegation
+      pos: noun
+      ipa: /ˌdɛlɪˈɡeɪʃən/
+      meaning_it: delegazione
+    - word: gratitude
+      pos: noun
+      ipa: /ˈɡrætɪtjuːd/
+      meaning_it: gratitudine, riconoscenza
+    - word: arrangement
+      pos: noun
+      ipa: /əˈreɪndʒmənt/
+      meaning_it: sistemazione, accordo, disposizione
+  story_it: |
+    Nel Grammar Lab c'è una libreria con scaffali etichettati BY, IN, ON, AT, OUT OF.
+    Ogni frase è una statuetta di pietra incisa — fredda, pesante, non modificabile.
+    Marco trova «on purpose» e «by the way» e le confonde (entrambe sembrano «a proposito»).
+    Il professor Verne le mette vicine: «Annusa.» ON PURPOSE odora di inchiostro deliberato —
+    qualcuno l'ha incisa con cura, con intenzione. BY THE WAY odora di polvere di strada —
+    è un pensiero che arriva per caso mentre cammini.
+    Prima il significato, poi lo scaffale giusto.
+    Il Gigante prende tutte le statuette e le rimescola sugli scaffali sbagliati:
+    le statuette iniziano a tremare e cadono una ad una — CRASH — finché ogni statuetta
+    è sul suo scaffale e il rumore si ferma. Ordine impossibile da invertire:
+    le statuette non riposano finché non sono nel posto giusto.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 5 — WORD FORMATION I (giorni 19–22)
+# Suffissi noun/adj/adv
+# ─────────────────────────────────────────
+
+- slug: rule_verb_to_noun_tion
+  tags: [word_formation, word_formation_i_block, rule_verb_to_noun_tion, part3_word_formation]
+  title_en: "Word Formation — Verb → Noun: -tion / -sion / -ation"
+  title_it: "Word Formation — Verbo → Sostantivo: -tion / -sion / -ation"
+  display_order: 50
+  rule_en: |
+    Add **-tion / -sion / -ation** to a verb to form a noun.
+
+    **-tion**: educate→education / produce→production / introduce→introduction
+    **-sion**: decide→decision / extend→extension / expand→expansion / divide→division
+    **-ation**: imagine→imagination / organise→organisation / examine→examination
+
+    Spelling rules:
+    - Drop the final **-e**: produce → produc**tion** (not producEtion)
+    - Verb ends in **-de**: decide → deci**sion** (de→sion)
+    - Verb ends in **-d** or **-nd**: expand → expan**sion**
+
+    ⚠️ The stress often shifts: exˈamine → examinˈation
+  rule_it: |
+    Aggiungi **-tion / -sion / -ation** a un verbo per formare un sostantivo.
+
+    **-tion**: educate→education / produce→production / introduce→introduction
+    **-sion**: decide→decision / extend→extension / expand→expansion / divide→division
+    **-ation**: imagine→imagination / organise→organisation / examine→examination
+
+    Regole di spelling:
+    - Elimina la **-e** finale: produce → produc**tion** (non producEtion)
+    - Il verbo finisce in **-de**: decide → deci**sion** (de→sion)
+    - Il verbo finisce in **-d** o **-nd**: expand → expan**sion**
+
+    ⚠️ Lo stress spesso si sposta: exˈamine → examinˈation
+  example_basic:
+    en: "The introduction of new technology has transformed modern production methods."
+    it: "L'introduzione di nuove tecnologie ha trasformato i moderni metodi di produzione."
+  example_complex:
+    en: "The government's decision to increase taxation on luxury goods sparked considerable opposition from the business community."
+    it: "La decisione del governo di aumentare la tassazione sui beni di lusso ha suscitato una considerevole opposizione dalla comunità imprenditoriale."
+  vocabulary:
+    - word: taxation
+      pos: noun
+      ipa: /tækˈseɪʃən/
+      meaning_it: tassazione, sistema fiscale
+    - word: luxury goods
+      pos: noun phrase
+      ipa: /ˈlʌkʃəri ɡʊdz/
+      meaning_it: beni di lusso
+    - word: spark
+      pos: verb
+      ipa: /spɑːk/
+      meaning_it: scatenare, suscitare, provocare
+    - word: opposition
+      pos: noun
+      ipa: /ˌɒpəˈzɪʃən/
+      meaning_it: opposizione, resistenza
+    - word: community
+      pos: noun
+      ipa: /kəˈmjuːnɪti/
+      meaning_it: comunità, ambiente
+  story_it: |
+    Nel Grammar Lab c'è una macchina con uno stampino a forma di -TION.
+    Il professor Verne prende il verbo «produce» (una barretta di metallo verde, liscia),
+    lo inserisce nella macchina — rumore di ingranaggi, odore di olio caldo —
+    e la macchina pressa il suffisso sulla coda del verbo.
+    Ma prima schiaccia via la -E finale (si sente il clic secco, la piccola E vola via come
+    un insetto). Poi CLONK: esce «production» — più pesante, più rotondo (è diventato un oggetto,
+    una cosa che puoi tenere in mano). Marco tocca la -TION: è rugosa, incisa in rilievo.
+    Ordine fisso: prima inserisci il verbo, poi la macchina toglie la -e,
+    poi applica il suffisso. Non puoi avere il sostantivo prima del verbo.
+
+- slug: rule_noun_to_adj_ful_less
+  tags: [word_formation, word_formation_i_block, rule_noun_to_adj_ful, rule_noun_to_adj_less, part3_word_formation]
+  title_en: "Word Formation — Noun → Adjective: -ful / -less"
+  title_it: "Word Formation — Sostantivo → Aggettivo: -ful / -less"
+  display_order: 51
+  rule_en: |
+    Add **-ful** or **-less** to a noun to create opposite adjectives.
+
+    **-ful** = having the quality of (positive/neutral):
+    care→careful / hope→hopeful / use→useful / help→helpful / power→powerful / harm→harmful
+
+    **-less** = without the quality of (negative/lacking):
+    care→careless / hope→hopeless / use→useless / help→helpless / harm→harmless / end→endless
+
+    ⚠️ Many nouns have BOTH forms with opposite meanings: careful ↔ careless
+    ⚠️ Spelling: if noun ends in -y → change y to i: beauty→beautiful (NOT *beautyful*)
+  rule_it: |
+    Aggiungi **-ful** o **-less** a un sostantivo per creare aggettivi opposti.
+
+    **-ful** = che ha la qualità di (positivo/neutro):
+    care→careful / hope→hopeful / use→useful / help→helpful / power→powerful / harm→harmful
+
+    **-less** = senza la qualità di (negativo/mancante):
+    care→careless / hope→hopeless / use→useless / help→helpless / harm→harmless / end→endless
+
+    ⚠️ Molti sostantivi hanno ENTRAMBE le forme con significati opposti: careful ↔ careless
+    ⚠️ Spelling: se il sostantivo finisce in -y → cambia y in i: beauty→beautiful (NON *beautyful*)
+  example_basic:
+    en: "Her careless attitude made her increasingly hopeless at managing deadlines."
+    it: "Il suo atteggiamento negligente la rendeva sempre più incapace di rispettare le scadenze."
+  example_complex:
+    en: "The seemingly harmless remark proved remarkably harmful to the delicate negotiations, leaving both sides feeling helpless and hopeless."
+    it: "Il commento apparentemente innocuo si rivelò notevolmente dannoso per i delicati negoziati, lasciando entrambe le parti in una sensazione di impotenza e sconforto."
+  vocabulary:
+    - word: seemingly
+      pos: adverb
+      ipa: /ˈsiːmɪŋli/
+      meaning_it: apparentemente, in apparenza
+    - word: remark
+      pos: noun
+      ipa: /rɪˈmɑːk/
+      meaning_it: commento, osservazione
+    - word: prove
+      pos: verb
+      ipa: /pruːv/
+      meaning_it: rivelarsi, dimostrarsi (+ aggettivo)
+    - word: delicate
+      pos: adjective
+      ipa: /ˈdɛlɪkɪt/
+      meaning_it: delicato, fragile, difficile
+  story_it: |
+    Le gemelle Irregolari del Grammar Lab sono FULL (piena, ottimista, -FUL)
+    e EMPTY (vuota, assente, -LESS). Sono identiche tranne per questo.
+    Marco prende un sacchetto di «care» (si sente il calore attraverso il tessuto —
+    care è soffice) e deve scegliere: lo dà a FULL o lo svuota con LESS.
+    Se lo dà a FULL: diventa «careful» — la gemella lo tiene stretto al petto (caldo, sicuro).
+    Se lo passa a LESS: diventa «careless» — la gemella lo buca e il contenuto si sparge per terra
+    (odore di terra, sensazione di vuoto). Prima il sostantivo (il sacchetto),
+    poi la scelta: -ful (riempie) o -less (svuota). Il Gigante aggiunge -y alla fine di «beauty»:
+    «beautyfull» — Le gemelle si tappano le orecchie dal suono sbagliato.
+    La y si trasforma in i prima del -ful: «beau-ti-ful», tre sillabe dolci.
+
+- slug: rule_verb_to_adj_ive
+  tags: [word_formation, word_formation_i_block, rule_verb_to_adj_ive, part3_word_formation]
+  title_en: "Word Formation — Verb → Adjective: -ive / -ative / -itive"
+  title_it: "Word Formation — Verbo → Aggettivo: -ive / -ative / -itive"
+  display_order: 52
+  rule_en: |
+    Add **-ive / -ative / -itive** to a verb (or noun) to form an adjective
+    meaning "having the tendency to" or "relating to".
+
+    **-ive**: create→creative / effect→effective / attract→attractive / act→active
+    **-ative**: inform→informative / imagine→imaginative / cooperate→cooperative / talk→talkative
+    **-itive**: compete→competitive / add→additive / sense→sensitive
+
+    Spelling rules:
+    - Drop the final **-e**: create→creat**ive** / imagine→imagin**ative**
+    - Verb ends in **-ate**: inform**ate**→inform**ative** (drop -ate, add -ative)
+
+    ⚠️ «sensitive» = sensibile (emotionally) — NOT «sensible» which means «ragionevole»!
+  rule_it: |
+    Aggiungi **-ive / -ative / -itive** a un verbo (o sostantivo) per formare un aggettivo
+    con significato «che tende a» o «relativo a».
+
+    **-ive**: create→creative / effect→effective / attract→attractive / act→active
+    **-ative**: inform→informative / imagine→imaginative / cooperate→cooperative / talk→talkative
+    **-itive**: compete→competitive / add→additive / sense→sensitive
+
+    Regole di spelling:
+    - Elimina la **-e** finale: create→creat**ive** / imagine→imagin**ative**
+    - Il verbo finisce in **-ate**: inform**ate**→inform**ative** (togli -ate, aggiungi -ative)
+
+    ⚠️ «sensitive» = sensibile (emotivamente) — NON «sensible» che significa «ragionevole»!
+  example_basic:
+    en: "She is incredibly creative and always comes up with imaginative solutions."
+    it: "È incredibilmente creativa e trova sempre soluzioni fantasiose."
+  example_complex:
+    en: "The highly competitive nature of the industry demands that companies remain consistently innovative and responsive to shifting consumer demands."
+    it: "La natura altamente competitiva del settore richiede che le aziende rimangano costantemente innovative e reattive ai cambiamenti delle richieste dei consumatori."
+  vocabulary:
+    - word: consistently
+      pos: adverb
+      ipa: /kənˈsɪstəntli/
+      meaning_it: costantemente, in modo coerente
+    - word: innovative
+      pos: adjective
+      ipa: /ˈɪnəvətɪv/
+      meaning_it: innovativo
+    - word: responsive
+      pos: adjective
+      ipa: /rɪˈspɒnsɪv/
+      meaning_it: reattivo, ricettivo, pronto a rispondere
+    - word: shifting
+      pos: adjective
+      ipa: /ˈʃɪftɪŋ/
+      meaning_it: mutevole, in cambiamento
+    - word: consumer
+      pos: noun
+      ipa: /kənˈsjuːmə/
+      meaning_it: consumatore
+  story_it: |
+    La macchina -TION del Grammar Lab ha anche un canale laterale per -IVE.
+    Invece di schiacciare il verbo in un oggetto pesante (sostantivo),
+    il canale -IVE lo trasforma in uno strato sottile e colorato che si attacca sui nomi —
+    come vernice ancora fresca (odore di solvente, superficie appiccicosa al tatto).
+    Marco prende «create», rimuove la -e (la piccola lettera vola via come prima),
+    poi applica -IVE: esce «creative» — leggero, si appiccica su «person»: «a creative person».
+    La Gemella FULL lo guarda soddisfatta: -IVE descrive, non sostituisce.
+    Il prof. lancia in aria «sensitive» e «sensible»:
+    hanno colori diversi sotto la luce del laboratorio.
+    Marco le tocca — sensitive è più morbida (emotiva), sensible è più dura e solida (razionale).
+    Prima il verbo, poi togli la -e, poi applica -IVE. Irreversibile.
+
+- slug: rule_adj_to_adv_ly
+  tags: [word_formation, word_formation_i_block, rule_adj_to_adv_ly, part3_word_formation]
+  title_en: "Word Formation — Adjective → Adverb: -ly"
+  title_it: "Word Formation — Aggettivo → Avverbio: -ly"
+  display_order: 53
+  rule_en: |
+    Add **-ly** to an adjective to form an adverb (describes HOW an action is done).
+
+    Most adjectives: add -ly directly
+    careful→carefully / slow→slowly / clear→clearly / complete→completely
+
+    **Spelling rules:**
+    - Ends in **-y**: change y→i + ly: happy→happily / easy→easily / heavy→heavily
+    - Ends in **-le**: change -le → -ly: simple→simply / gentle→gently / possible→possibly
+    - Ends in **-ic**: add **-ally**: basic→basically / dramatic→dramatically / automatic→automatically
+    - Ends in **-l**: just add -ly: careful→carefully (keep the l)
+
+    ⚠️ Irregular: good→**well** / fast→**fast** / hard→**hard** (NOT *hardly* = quasi mai!)
+    ⚠️ «hardly» means «quasi mai» — NOT the adverb of «hard»
+  rule_it: |
+    Aggiungi **-ly** a un aggettivo per formare un avverbio (descrive COME si fa un'azione).
+
+    La maggior parte degli aggettivi: aggiungi -ly direttamente
+    careful→carefully / slow→slowly / clear→clearly / complete→completely
+
+    **Regole di spelling:**
+    - Finisce in **-y**: cambia y→i + ly: happy→happily / easy→easily / heavy→heavily
+    - Finisce in **-le**: cambia -le → -ly: simple→simply / gentle→gently / possible→possibly
+    - Finisce in **-ic**: aggiungi **-ally**: basic→basically / dramatic→dramatically
+    - Finisce in **-l**: aggiungi solo -ly: careful→carefully (mantieni la l)
+
+    ⚠️ Irregolari: good→**well** / fast→**fast** / hard→**hard** (NON *hardly* = quasi mai!)
+    ⚠️ «hardly» significa «quasi mai» — NON l'avverbio di «hard»
+  example_basic:
+    en: "He spoke so quickly that I could hardly understand a word."
+    it: "Parlava così velocemente che riuscivo a malapena a capire una parola."
+  example_complex:
+    en: "She dramatically underestimated how profoundly the restructuring would affect staff morale, particularly among the most recently recruited employees."
+    it: "Ha drammaticamente sottovalutato quanto profondamente la ristrutturazione avrebbe influenzato il morale del personale, in particolare tra i dipendenti assunti più di recente."
+  vocabulary:
+    - word: dramatically
+      pos: adverb
+      ipa: /drəˈmætɪkli/
+      meaning_it: drammaticamente, in modo drastico
+    - word: underestimate
+      pos: verb
+      ipa: /ˌʌndərˈɛstɪmeɪt/
+      meaning_it: sottovalutare
+    - word: profoundly
+      pos: adverb
+      ipa: /prəˈfaʊndli/
+      meaning_it: profondamente
+    - word: restructuring
+      pos: noun
+      ipa: /ˌriːˈstrʌktʃərɪŋ/
+      meaning_it: ristrutturazione
+    - word: morale
+      pos: noun
+      ipa: /məˈrɑːl/
+      meaning_it: morale (psicologico di un gruppo)
+    - word: recruit
+      pos: verb
+      ipa: /rɪˈkruːt/
+      meaning_it: assumere, reclutare
+  story_it: |
+    Il professor Verne ha un timbro speciale a forma di -LY (gomma rossa, odore di caucciù).
+    Prende una farfalla colorata (è un aggettivo — «beautiful»),
+    la poggia delicatamente sul tavolo (si sentono le ali morbide tra le dita)
+    e STAMPA -LY sulla coda. La farfalla ora vola diversamente — non è più un aggettivo
+    che descrive com'è una cosa, ora descrive COME vola: «beautifully».
+    Ma prima delle farfalle difficili: quella che finisce in -Y
+    (la gemella EASY). Il prof. gira la Y al contrario — diventa I —
+    e poi applica -LY. Quella con la -LE finale (SIMPLE)?
+    Le ultime due lettere si staccano con un strappo netto (si sente il suono carta),
+    rimane «simp-», poi arriva -LY. Il Gigante prova «hardly» per «with effort»:
+    il timbro esplode in una nuvola di fumo blu — «hardly» significa quasi MAI,
+    non hard + ly. Prima la farfalla (aggettivo), poi il timbro, poi il volo (avverbio).
+
+
+# ─────────────────────────────────────────
+# BLOCCO 6 — WORD FORMATION II (giorni 23–26)
+# Prefissi + spelling avanzato
+# ─────────────────────────────────────────
+
+- slug: rule_prefix_un_dis
+  tags: [word_formation, word_formation_ii_block, rule_prefix_un, rule_prefix_dis, part3_word_formation]
+  title_en: "Word Formation — Negative Prefixes: un- / dis-"
+  title_it: "Word Formation — Prefissi negativi: un- / dis-"
+  display_order: 60
+  rule_en: |
+    **un-** = not / reverse of (added to adjectives, past participles, some verbs)
+    unhappy / uncertain / unexpected / unaware / unlock / undo / unpack / unfair
+
+    **dis-** = not / opposite / reverse of (often with verbs, nouns, and some adjectives)
+    disagree / disappear / dishonest / discomfort / disorder / dislike / disconnect / disturb
+
+    How to choose:
+    - **un-** is more common with adjectives and past participles
+    - **dis-** is more common with verbs meaning "reverse the action"
+    - Some words only take one: *undecided* (not *disdecided*), *disappear* (not *unappear*)
+
+    ⚠️ There is no rule for every case — learn common pairs, not the formula.
+  rule_it: |
+    **un-** = non / contrario di (si aggiunge ad aggettivi, participi passati, alcuni verbi)
+    unhappy / uncertain / unexpected / unaware / unlock / undo / unpack / unfair
+
+    **dis-** = non / opposto / inversione di (spesso con verbi, sostantivi, alcuni aggettivi)
+    disagree / disappear / dishonest / discomfort / disorder / dislike / disconnect / disturb
+
+    Come scegliere:
+    - **un-** è più comune con aggettivi e participi passati
+    - **dis-** è più comune con verbi che significano "invertire l'azione"
+    - Alcune parole accettano solo uno: *undecided* (non *disdecided*), *disappear* (non *unappear*)
+
+    ⚠️ Non esiste una regola per ogni caso — impara le coppie comuni, non la formula.
+  example_basic:
+    en: "I completely disagree — the results were totally unexpected."
+    it: "Non sono per niente d'accordo — i risultati erano del tutto inaspettati."
+  example_complex:
+    en: "The disorganised response to the crisis left many residents feeling deeply uncertain and increasingly disheartened about their prospects."
+    it: "La risposta disorganizzata alla crisi ha lasciato molti residenti profondamente incerti e sempre più scoraggiati riguardo alle loro prospettive."
+  vocabulary:
+    - word: disorganised
+      pos: adjective
+      ipa: /dɪsˈɔːɡənaɪzd/
+      meaning_it: disorganizzato
+    - word: disheartened
+      pos: adjective
+      ipa: /dɪsˈhɑːtənd/
+      meaning_it: scoraggiato, demoralizzato
+    - word: prospects
+      pos: noun (plural)
+      ipa: /ˈprɒspɛkts/
+      meaning_it: prospettive, possibilità future
+    - word: resident
+      pos: noun
+      ipa: /ˈrɛzɪdənt/
+      meaning_it: residente, abitante
+  story_it: |
+    Nel Grammar Lab ci sono due gemelle negativizzatrici: UN (capelli bianchi, fredda)
+    e DIS (capelli neri, energica). Lavorano in modo diverso.
+    UN prende aggettivi — li afferra per la testa, li capovolge (si sente il tonfo),
+    e li ridipinge al contrario: «happy» diventa «unhappy» (stesso oggetto, colori invertiti).
+    DIS invece prende VERBI e li spinge all'indietro — «appear» entra nella porta,
+    DIS lo afferra per le spalle e lo spinge fuori al contrario: DISAPPEAR.
+    Marco prova a chiedere a UN di fare «unappear» — UN scuote la testa con un sorriso gelido.
+    DIS prova «disdecided» — DIS si arrabbia e lancia il verbo dal laboratorio.
+    Prima impara a chi appartiene la parola, poi chiedi al prefisso giusto.
+    Il Gigante chiede a entrambe insieme: le gemelle si scontrano, esplosione di confetti
+    neri e bianchi (odore di carta bruciata) — e lui resta senza risposta.
+
+- slug: rule_prefix_im_in_ir
+  tags: [word_formation, word_formation_ii_block, rule_prefix_im, rule_prefix_in, part3_word_formation]
+  title_en: "Word Formation — Negative Prefixes: im- / in- / ir- / il-"
+  title_it: "Word Formation — Prefissi negativi: im- / in- / ir- / il-"
+  display_order: 61
+  rule_en: |
+    These prefixes all mean **not** — but the form depends on the first letter of the base word.
+
+    **in-** → the default negative prefix for adjectives
+    incorrect / invisible / informal / incomplete / inefficient
+
+    **im-** → before roots starting with **m** or **p**
+    impossible / impatient / immature / impolite / imperfect / immoral
+
+    **ir-** → before roots starting with **r**
+    irresponsible / irregular / irrelevant / irreversible / irrational
+
+    **il-** → before roots starting with **l**
+    illegal / illogical / illegible / illiterate
+
+    Memory trick: the prefix **assimilates** — it changes to match the first letter.
+  rule_it: |
+    Questi prefissi significano tutti **non** — ma la forma dipende dalla prima lettera della parola base.
+
+    **in-** → prefisso negativo di default per gli aggettivi
+    incorrect / invisible / informal / incomplete / inefficient
+
+    **im-** → prima di radici che iniziano con **m** o **p**
+    impossible / impatient / immature / impolite / imperfect / immoral
+
+    **ir-** → prima di radici che iniziano con **r**
+    irresponsible / irregular / irrelevant / irreversible / irrational
+
+    **il-** → prima di radici che iniziano con **l**
+    illegal / illogical / illegible / illiterate
+
+    Trucco mnemonico: il prefisso si **assimila** — cambia forma per adattarsi alla prima lettera.
+  example_basic:
+    en: "It's completely irresponsible and highly irregular to submit an incomplete report."
+    it: "È del tutto irresponsabile e molto irregolare presentare un rapporto incompleto."
+  example_complex:
+    en: "The committee deemed the proposal irrelevant and the proposed timeline entirely unrealistic, given the immature infrastructure currently in place."
+    it: "Il comitato ha giudicato la proposta irrilevante e la tempistica proposta del tutto irrealistica, data l'infrastruttura ancora immatura attualmente in uso."
+  vocabulary:
+    - word: deem
+      pos: verb
+      ipa: /diːm/
+      meaning_it: ritenere, considerare, giudicare
+    - word: timeline
+      pos: noun
+      ipa: /ˈtaɪmlaɪn/
+      meaning_it: tempistica, cronoprogramma
+    - word: infrastructure
+      pos: noun
+      ipa: /ˈɪnfrəˌstrʌktʃə/
+      meaning_it: infrastruttura
+    - word: unrealistic
+      pos: adjective
+      ipa: /ˌʌnrɪəˈlɪstɪk/
+      meaning_it: irrealistico, poco realistico
+  story_it: |
+    Il prefisso IN- è un camaleonte del Grammar Lab — entra nella parola
+    e cambia colore in base alla prima lettera che incontra.
+    Marco lo vede avvicinarsi a «possible» (inizia con P):
+    il camaleonte tocca la P e diventa IM- istantaneamente — pelle che cambia
+    colore in tempo reale (visivo, si sente il calore del cambiamento).
+    Si avvicina a «responsible» (R): diventa IR- con una piccola vibrazione rossa.
+    Si avvicina a «legal» (L): diventa IL- con un lampo giallo.
+    Per tutte le altre lettere rimane IN- (freddo, blu, neutro).
+    Il Gigante prova a forzare IN- davanti a «possible»: lo stomaco del camaleonte
+    fa un suono borbottante (GLURP) e rigurgita la doppia lettera.
+    Prima guarda la prima lettera della parola base, poi sai quale forma prende il prefisso.
+
+- slug: rule_spelling_drop_e_double
+  tags: [word_formation, word_formation_ii_block, rule_spelling_drop_e, rule_double_transformation, part3_word_formation]
+  title_en: "Word Formation — Spelling Rules: drop -e & double consonant"
+  title_it: "Word Formation — Spelling: eliminare -e & raddoppiare consonante"
+  display_order: 62
+  rule_en: |
+    **Rule 1 — Drop the silent -e before a vowel suffix:**
+    write→writing / make→making / hope→hoping / love→lovable / argue→argument
+    (Keep the -e before consonant suffixes: hope→hopeful, care→careful, excite→excitement)
+
+    **Rule 2 — Double the final consonant** (1-syllable verb, short vowel, ends in consonant):
+    run→running / sit→sitting / stop→stopped / swim→swimming / plan→planned
+    (Do NOT double if: 2+ syllables with stress NOT on last: listen→listening, offer→offered)
+    (Do NOT double if: vowel before final consonant is long: read→reading, rain→raining)
+
+    **Double transformation** (2-step formation — most difficult):
+    happy (adj) → happiness (noun) → happily (adverb) — y→i at each step
+    compete (v) → competition (noun) → competitive (adj) → competitively (adv)
+  rule_it: |
+    **Regola 1 — Elimina la -e muta prima di un suffisso vocalico:**
+    write→writing / make→making / hope→hoping / love→lovable / argue→argument
+    (Mantieni la -e prima di suffissi consonantici: hope→hopeful, care→careful)
+
+    **Regola 2 — Raddoppia la consonante finale** (verbo 1 sillaba, vocale breve, finisce in consonante):
+    run→running / sit→sitting / stop→stopped / swim→swimming / plan→planned
+    (NON raddoppiare se: 2+ sillabe con stress NON sull'ultima: listen→listening, offer→offered)
+    (NON raddoppiare se: la vocale prima della consonante finale è lunga: read→reading)
+
+    **Doppia trasformazione** (formazione in 2 passi — la più difficile):
+    happy (agg) → happiness (sost) → happily (avv) — y→i ad ogni passo
+    compete (v) → competition (sost) → competitive (agg) → competitively (avv)
+  example_basic:
+    en: "She is running a highly competitive business while carefully managing a demanding workload."
+    it: "Gestisce un'attività altamente competitiva mentre gestisce con cura un carico di lavoro impegnativo."
+  example_complex:
+    en: "The surprisingly imaginative and competitively priced proposal was submitted following an exhausting but ultimately rewarding process of refinement."
+    it: "La proposta sorprendentemente fantasiosa e dal prezzo competitivo fu presentata dopo un processo di perfezionamento estenuante ma alla fine gratificante."
+  vocabulary:
+    - word: exhausting
+      pos: adjective
+      ipa: /ɪɡˈzɔːstɪŋ/
+      meaning_it: estenuante, sfiancante
+    - word: ultimately
+      pos: adverb
+      ipa: /ˈʌltɪmɪtli/
+      meaning_it: alla fine, in definitiva
+    - word: rewarding
+      pos: adjective
+      ipa: /rɪˈwɔːdɪŋ/
+      meaning_it: gratificante, soddisfacente
+    - word: refinement
+      pos: noun
+      ipa: /rɪˈfaɪnmənt/
+      meaning_it: perfezionamento, raffinamento
+    - word: submission
+      pos: noun
+      ipa: /səbˈmɪʃən/
+      meaning_it: presentazione, consegna (di un documento)
+  story_it: |
+    Il professor Verne ha due strumenti chirurgici sul bancone.
+    Il BISTURI DEL DROP-E: quando un suffisso vocalico si avvicina (come -ING),
+    il bisturi ritaglia via la -e finale del verbo — un taglio netto, quasi indolore
+    (si sente solo un piccolo clic). Write → writ + ing. Pulito.
+    Il MARTELLO DEL DOUBLE: quando un verbo corto (run, sit, stop) deve prendere -ING o -ED,
+    il martello batte sulla consonante finale — BANG — e appare una copia identica accanto
+    (si sente il colpo sul bancone, odore di legno). Run → runn + ing.
+    La doppia trasformazione è la più complessa: il professor Verne usa ENTRAMBI gli strumenti
+    in sequenza su «compete». Prima il bisturi (compete→compet-), poi il -ition,
+    poi di nuovo un altro strumento per -ive. Come un'operazione chirurgica in più fasi —
+    ogni passo dipende dal precedente. Non puoi saltare un passo.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 7 — PRESENT PERFECT (giorni 27–29)
+# ─────────────────────────────────────────
+
+- slug: present_perfect_for_since
+  tags: [present_perfect, present_perfect_block, pp_for_since, part4_transformation]
+  title_en: "Present Perfect — for & since (Duration)"
+  title_it: "Present Perfect — for & since (Durata)"
+  display_order: 70
+  rule_en: |
+    Use **Present Perfect + for/since** for actions/states that **started in the past
+    and are still true now**.
+
+    **for** + period of time (how long?): for three years / for ages / for a long time
+    **since** + point in time (since when?): since 2018 / since Monday / since I was a child
+
+    Form: subject + **have/has** + past participle
+
+    ⚠️ Italian trap: In Italian you often use «da + presente» (abito qui da tre anni).
+    In English you MUST use Present Perfect, NOT Present Simple: «I have lived here for three years.»
+    NOT «*I live here for three years.*»
+  rule_it: |
+    Usa il **Present Perfect + for/since** per azioni/stati che **sono iniziati nel passato
+    e sono ancora veri adesso**.
+
+    **for** + periodo di tempo (per quanto?): for three years / for ages / for a long time
+    **since** + punto nel tempo (da quando?): since 2018 / since Monday / since I was a child
+
+    Forma: soggetto + **have/has** + participio passato
+
+    ⚠️ Trappola italiana: In italiano si usa «da + presente» (abito qui da tre anni).
+    In inglese DEVI usare il Present Perfect, NON il Present Simple: «I have lived here for three years.»
+    NON «*I live here for three years.*»
+  example_basic:
+    en: "She has worked at the same company since 2015 — that's over ten years."
+    it: "Lavora nella stessa azienda dal 2015 — sono più di dieci anni."
+  example_complex:
+    en: "The charity has been providing emergency shelter for displaced families for nearly two decades, since its foundation following the regional conflict."
+    it: "L'ente di beneficenza fornisce rifugio d'emergenza alle famiglie sfollate da quasi due decenni, dalla sua fondazione dopo il conflitto regionale."
+  vocabulary:
+    - word: shelter
+      pos: noun
+      ipa: /ˈʃɛltə/
+      meaning_it: rifugio, riparo
+    - word: displaced
+      pos: adjective
+      ipa: /dɪsˈpleɪst/
+      meaning_it: sfollato, spostato
+    - word: decade
+      pos: noun
+      ipa: /ˈdɛkeɪd/
+      meaning_it: decennio
+    - word: foundation
+      pos: noun
+      ipa: /faʊnˈdeɪʃən/
+      meaning_it: fondazione, istituzione; le fondamenta
+    - word: conflict
+      pos: noun
+      ipa: /ˈkɒnflɪkt/
+      meaning_it: conflitto
+  story_it: |
+    Nel Grammar Lab c'è un lungo filo teso dal passato fino al presente.
+    FOR è un righello che misura la LUNGHEZZA del filo — quanto è lungo il periodo.
+    SINCE è un dito che indica il PUNTO dove il filo è stato attaccato al muro.
+    Marco prende il filo, lo allunga da «2015» fino ad ADESSO:
+    il filo è ancora teso (ancora vero), ancora vibra leggermente (tatto: vibrazione),
+    ancora conduce corrente. «She has worked» — il Present Perfect è la corrente nel filo.
+    Se Marco smette di tenere il filo (l'azione è finita), il filo cade —
+    e allora serve il Past Simple, non più il Present Perfect.
+    Il Gigante traduce dall'italiano: «I live here since three years» —
+    il filo si spezza di netto con uno SNAP secco (silenzio improvviso).
+    Il prof. lo riattacca con «have lived» e la corrente riprende a scorrere.
+
+- slug: present_perfect_yet_already_just
+  tags: [present_perfect, present_perfect_block, pp_yet_already, part4_transformation]
+  title_en: "Present Perfect — yet, already, just"
+  title_it: "Present Perfect — yet, already, just"
+  display_order: 71
+  rule_en: |
+    **already** = before the expected time (sooner than expected) — affirmative
+    Position: between have/has and past participle, or at the end.
+    → *She has already finished.* / *I've already seen that film.*
+
+    **yet** = up to now (expectation unfulfilled) — questions & negatives
+    Position: always at the end of the sentence.
+    → *Have you eaten yet?* / *I haven't called her yet.*
+
+    **just** = a very short time ago — affirmative
+    Position: between have/has and past participle.
+    → *He has just arrived.* / *I've just heard the news.*
+
+    ⚠️ «Ho appena» = I have just (NOT «I just have»)
+  rule_it: |
+    **already** = prima del momento atteso (prima del previsto) — affermativo
+    Posizione: tra have/has e participio passato, oppure in fondo.
+    → *She has already finished.* / *I've already seen that film.*
+
+    **yet** = fino ad ora (aspettativa non soddisfatta) — domande e negativi
+    Posizione: sempre alla fine della frase.
+    → *Have you eaten yet?* / *I haven't called her yet.*
+
+    **just** = pochissimo tempo fa — affermativo
+    Posizione: tra have/has e participio passato.
+    → *He has just arrived.* / *I've just heard the news.*
+
+    ⚠️ «Ho appena» = I have just (NON «I just have»)
+  example_basic:
+    en: "— Has the director arrived yet? — Yes, she has just arrived and has already started the meeting."
+    it: "— Il direttore è già arrivato? — Sì, è appena arrivato e ha già iniziato la riunione."
+  example_complex:
+    en: "Although the funding has already been allocated, the committee hasn't yet approved the revised budget, so the project hasn't officially commenced."
+    it: "Sebbene i finanziamenti siano già stati stanziati, il comitato non ha ancora approvato il bilancio rivisto, quindi il progetto non è iniziato ufficialmente."
+  vocabulary:
+    - word: allocate
+      pos: verb
+      ipa: /ˈæləkeɪt/
+      meaning_it: stanziare, assegnare, allocare
+    - word: revised
+      pos: adjective
+      ipa: /rɪˈvaɪzd/
+      meaning_it: rivisto, aggiornato
+    - word: commence
+      pos: verb
+      ipa: /kəˈmɛns/
+      meaning_it: iniziare, cominciare (formale)
+    - word: officially
+      pos: adverb
+      ipa: /əˈfɪʃəli/
+      meaning_it: ufficialmente
+  story_it: |
+    Tre elfi lavorano nel magazzino del Grammar Lab.
+    ALREADY è un elfo in anticipo — porta i pacchi PRIMA che tu li aspetti,
+    li mette già sul bancone (odore di pacchetto appena aperto, profumo di cartone).
+    JUST è il più veloce — arriva di corsa, il pacco è ancora caldo in mano
+    (tatto: superficie tiepida), il fiato affannato (si sente l'ansimo).
+    YET è l'elfo delle domande e dei ritardi — guarda l'orologio con l'aria
+    di chi aspetta ancora qualcosa, le mani vuote (paradossale: l'unico dei tre
+    che non porta niente di fisico). «È arrivato YET?» = no, non ancora.
+    ALREADY e JUST vanno sempre tra have e il participio (tra due cose),
+    YET va sempre alla fine — è come se aspettasse in coda.
+    Il Gigante mette YET tra have e arrived: l'elfo YET inciampa,
+    il pacco si rompe — CRASH — e rotola fino alla fine della frase da solo.
+
+- slug: present_perfect_never_ever
+  tags: [present_perfect, present_perfect_block, pp_never_ever, part4_transformation]
+  title_en: "Present Perfect — never, ever & PP vs Past Simple"
+  title_it: "Present Perfect — never, ever & PP vs Past Simple"
+  display_order: 72
+  rule_en: |
+    **ever** = at any time in your life — questions only
+    → *Have you ever been to Japan?*
+
+    **never** = at no time in your life — negative meaning without «not»
+    → *I have never tried sushi.* (no «not» needed — never is already negative)
+
+    **Present Perfect vs Past Simple — the key rule:**
+    - **Present Perfect**: unspecified time, life experience, result matters NOW
+      → *I've lost my keys.* (I can't find them now — the present matters)
+    - **Past Simple**: specific time mentioned or implied
+      → *I lost my keys yesterday.* (yesterday = finished past)
+
+    ⚠️ The moment you say WHEN → use Past Simple.
+  rule_it: |
+    **ever** = in qualsiasi momento della propria vita — solo domande
+    → *Have you ever been to Japan?*
+
+    **never** = in nessun momento della propria vita — significato negativo senza «not»
+    → *I have never tried sushi.* (non serve «not» — never è già negativo)
+
+    **Present Perfect vs Past Simple — la regola chiave:**
+    - **Present Perfect**: tempo non specificato, esperienza di vita, il risultato conta ORA
+      → *I've lost my keys.* (non riesco a trovarle adesso — conta il presente)
+    - **Past Simple**: tempo specifico menzionato o implicito
+      → *I lost my keys yesterday.* (yesterday = passato concluso)
+
+    ⚠️ Nel momento in cui dici QUANDO → usa il Past Simple.
+  example_basic:
+    en: "Have you ever worked abroad? — No, I've never had the opportunity, but I applied for a position in Vienna last year."
+    it: "Hai mai lavorato all'estero? — No, non ne ho mai avuto l'opportunità, ma l'anno scorso ho fatto domanda per una posizione a Vienna."
+  example_complex:
+    en: "I have never encountered such a well-structured argument, though I must admit that when I first read the paper last month, I found several claims deeply unconvincing."
+    it: "Non ho mai incontrato un argomento così ben strutturato, anche se devo ammettere che quando ho letto il saggio per la prima volta il mese scorso, ho trovato diverse affermazioni profondamente poco convincenti."
+  vocabulary:
+    - word: encounter
+      pos: verb
+      ipa: /ɪnˈkaʊntə/
+      meaning_it: incontrare, imbattersi in
+    - word: well-structured
+      pos: adjective
+      ipa: /ˌwɛl ˈstrʌktʃəd/
+      meaning_it: ben strutturato
+    - word: claim
+      pos: noun
+      ipa: /kleɪm/
+      meaning_it: affermazione, tesi, rivendicazione
+    - word: unconvincing
+      pos: adjective
+      ipa: /ˌʌnkənˈvɪnsɪŋ/
+      meaning_it: poco convincente
+  story_it: |
+    EVER è una torcia che illumina tutta la linea della vita di Marco —
+    dall'infanzia ad oggi. «Have you EVER?» = accendi la torcia, guarda TUTTA la linea.
+    NEVER è la stessa torcia, ma Marco la punta verso tutta la linea e dice:
+    «Non c'è niente qui» — nessuna esperienza, buio totale in quel punto.
+    La differenza con il Past Simple è una porta: quando dici «yesterday» o «in 2019»,
+    apri una porta specifica nel passato ed entri in quella stanza (Past Simple —
+    porta con la data incisa, si sente il cigolìo). Con il Present Perfect
+    la porta non ha data — è aperta sul corridoio intero.
+    Il Gigante dice «I have lost my keys yesterday» —
+    la torcia e la porta cercano di funzionare insieme e si scontrano,
+    scintille (visivo), odore di cavi bruciati. Regola: appena dici quando,
+    chiudi la torcia e usa la porta con la data.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 8 — PASSIVE VOICE (giorni 30–33)
+# ─────────────────────────────────────────
+
+- slug: passive_simple_perfect
+  tags: [passive, passive_block, passive_simple, part4_transformation]
+  title_en: "Passive Voice — Present & Past Simple/Perfect"
+  title_it: "Forma Passiva — Present & Past Simple/Perfect"
+  display_order: 80
+  rule_en: |
+    Form: **object + be (correct tense) + past participle** (+ by agent, optional)
+
+    | Tense | Active | Passive |
+    |---|---|---|
+    | Present Simple | They build houses. | Houses **are built**. |
+    | Past Simple | They built the bridge. | The bridge **was built**. |
+    | Present Perfect | They have finished the report. | The report **has been finished**. |
+    | Past Perfect | They had stolen the car. | The car **had been stolen**. |
+    | Future (will) | They will announce the results. | The results **will be announced**. |
+    | Modal | They should review the plan. | The plan **should be reviewed**. |
+
+    Use passive when: the action is more important than who does it; the agent is unknown/obvious/irrelevant.
+    ⚠️ Italian overuses the passive with «si» (si dice = it is said) — English prefers passive or active.
+  rule_it: |
+    Forma: **oggetto + be (tempo corretto) + participio passato** (+ by agente, opzionale)
+
+    | Tempo | Attiva | Passiva |
+    |---|---|---|
+    | Present Simple | They build houses. | Houses **are built**. |
+    | Past Simple | They built the bridge. | The bridge **was built**. |
+    | Present Perfect | They have finished the report. | The report **has been finished**. |
+    | Past Perfect | They had stolen the car. | The car **had been stolen**. |
+    | Future (will) | They will announce the results. | The results **will be announced**. |
+    | Modale | They should review the plan. | The plan **should be reviewed**. |
+
+    Usa il passivo quando: l'azione è più importante di chi la fa; l'agente è sconosciuto/ovvio/irrilevante.
+    ⚠️ L'italiano abusa del «si» passivante (si dice) — l'inglese preferisce passivo o attivo.
+  example_basic:
+    en: "The new hospital was built in 2019 and has been expanded twice since then."
+    it: "Il nuovo ospedale è stato costruito nel 2019 ed è stato ampliato due volte da allora."
+  example_complex:
+    en: "The confidential report had been leaked to the press before the official statement was issued, causing considerable damage to the organisation's reputation."
+    it: "Il rapporto riservato era stato fatto trapelare alla stampa prima che venisse emessa la dichiarazione ufficiale, causando danni considerevoli alla reputazione dell'organizzazione."
+  vocabulary:
+    - word: leak
+      pos: verb
+      ipa: /liːk/
+      meaning_it: far trapelare (informazioni)
+    - word: issue (a statement)
+      pos: verb
+      ipa: /ˈɪʃuː/
+      meaning_it: emettere, pubblicare, rilasciare
+    - word: expand
+      pos: verb
+      ipa: /ɪkˈspænd/
+      meaning_it: ampliare, espandere
+    - word: official
+      pos: adjective
+      ipa: /əˈfɪʃəl/
+      meaning_it: ufficiale
+  story_it: |
+    Nel Grammar Lab c'è una giostra che ruota gli attori di una frase.
+    In attivo, il SOGGETTO è davanti (Marco costruisce la casa).
+    Il professor Verne gira la giostra: la CASA viene in primo piano,
+    Marco scivolona dietro (si sente la rotazione, il vento del movimento).
+    Sul fondo della giostra c'è una barra metallica chiamata BE —
+    devi regolarla nel tempo giusto (si gira un pomello: presente, passato, perfetto).
+    Poi attacchi il participio passato alla barra. CLONK — la struttura si blocca.
+    Se l'agente (Marco) è ovvio o irrilevante, sparisce dietro la tenda.
+    Il Gigante prova a girare la giostra senza regolare la barra BE:
+    la frase esce storta, le parole cadono a terra — PATATRAC.
+    Prima regola BE nel tempo giusto, poi attacca il participio. Irreversibile.
+
+- slug: causative_have_get
+  tags: [passive, passive_block, causative_have, causative_get, part4_transformation]
+  title_en: "Causative — have/get something done"
+  title_it: "Causativo — have/get something done"
+  display_order: 81
+  rule_en: |
+    Use the **causative** when you arrange for someone else to do something for you
+    (you don't do it yourself — you cause it to happen).
+
+    **have + object + past participle**
+    → *I had my hair cut.* (a hairdresser cut it, not me)
+    → *She had her car repaired.* (a mechanic repaired it)
+
+    **get + object + past participle** (slightly more informal)
+    → *I got my laptop fixed.* / *He got his suit dry-cleaned.*
+
+    The structure can be used in any tense — just change have/get:
+    → *I'm having the house painted next week.*
+    → *She had her phone stolen.* (passive experience — bad thing happened TO her)
+  rule_it: |
+    Usa il **causativo** quando fai fare qualcosa a qualcun altro per te
+    (non lo fai tu — lo FAI fare).
+
+    **have + oggetto + participio passato**
+    → *I had my hair cut.* (il parrucchiere l'ha tagliato, non io)
+    → *She had her car repaired.* (il meccanico l'ha riparata)
+
+    **get + oggetto + participio passato** (leggermente più informale)
+    → *I got my laptop fixed.* / *He got his suit dry-cleaned.*
+
+    La struttura funziona con tutti i tempi — basta cambiare have/get:
+    → *I'm having the house painted next week.*
+    → *She had her phone stolen.* (esperienza passiva — qualcosa di brutto è successo a lei)
+  example_basic:
+    en: "I need to have my passport renewed before the trip."
+    it: "Devo far rinnovare il mio passaporto prima del viaggio."
+  example_complex:
+    en: "Following the flood damage, the residents are having the entire ground floor renovated at the landlord's expense, while simultaneously getting the electrical system upgraded."
+    it: "Dopo i danni dell'alluvione, i residenti stanno facendo ristrutturare l'intero piano terra a spese del proprietario, mentre contestualmente fanno aggiornare l'impianto elettrico."
+  vocabulary:
+    - word: flood damage
+      pos: noun phrase
+      ipa: /flʌd ˈdæmɪdʒ/
+      meaning_it: danni da alluvione
+    - word: ground floor
+      pos: noun
+      ipa: /ˈɡraʊnd flɔː/
+      meaning_it: piano terra
+    - word: renovate
+      pos: verb
+      ipa: /ˈrɛnəveɪt/
+      meaning_it: ristrutturare, rinnovare
+    - word: simultaneously
+      pos: adverb
+      ipa: /ˌsɪməlˈteɪniəsli/
+      meaning_it: simultaneamente, contemporaneamente
+    - word: upgrade
+      pos: verb
+      ipa: /ˈʌpɡreɪd/
+      meaning_it: aggiornare, potenziare
+    - word: at one's expense
+      pos: phrase
+      ipa: /ɪkˈspɛns/
+      meaning_it: a spese di qualcuno
+  story_it: |
+    Il professor Verne non si taglia mai i capelli da solo — li fa tagliare.
+    Il professor Verne HAVE capelli → TAGLINO (il parrucchiere).
+    Nel Grammar Lab c'è un assistente (Il Gigante, naturalmente).
+    Il prof. indica i capelli, poi indica le forbici in mano al Gigante:
+    «Have — oggetto — fatto da lui.»
+    Prima il prof. punta il dito (HAD), poi l'oggetto (capelli) arriva davanti al Gigante,
+    poi il Gigante tira fuori le forbici (past participle). Tre gesti, in ordine.
+    Se il Gigante tira fuori le forbici PRIMA che il prof. indichi cosa tagliare:
+    taglia per sbaglio il cappello di Marco — SNIP — e tutti ridono (paradossale).
+    Ordine obbligatorio: HAVE/GET → oggetto → participio.
+
+- slug: passive_reporting
+  tags: [passive, passive_block, passive_reporting_said, part4_transformation]
+  title_en: "Passive Reporting — it is said/believed/reported that…"
+  title_it: "Passivo di Reporting — it is said/believed/reported that…"
+  display_order: 82
+  rule_en: |
+    Used in formal writing/journalism to report without citing a specific source.
+
+    **Structure 1** — it + passive reporting verb + that + clause:
+    → *It is believed that the cost will rise.*
+    → *It has been reported that several staff members resigned.*
+
+    **Structure 2** — subject + passive reporting verb + to infinitive:
+    → *The cost is believed to rise.*
+    → *Several staff members are reported to have resigned.*
+
+    Common reporting verbs: say / believe / report / claim / consider / expect / know / think / allege
+
+    ⚠️ «It is said that» → «Si dice che» (NOT «È detto che» which is unnatural in English)
+  rule_it: |
+    Usato nella scrittura formale/giornalistica per riportare senza citare una fonte specifica.
+
+    **Struttura 1** — it + verbo di reporting al passivo + that + frase:
+    → *It is believed that the cost will rise.*
+    → *It has been reported that several staff members resigned.*
+
+    **Struttura 2** — soggetto + verbo di reporting al passivo + to infinitive:
+    → *The cost is believed to rise.*
+    → *Several staff members are reported to have resigned.*
+
+    Verbi di reporting comuni: say / believe / report / claim / consider / expect / know / think / allege
+
+    ⚠️ «It is said that» → «Si dice che» (NON «È detto che» che è innaturale in inglese)
+  example_basic:
+    en: "It is widely believed that the new policy will significantly reduce waiting times."
+    it: "Si crede ampiamente che la nuova politica ridurrà significativamente i tempi di attesa."
+  example_complex:
+    en: "The former executive is alleged to have misappropriated substantial funds, and it has been claimed that several board members were fully aware of the irregularities."
+    it: "Al ex dirigente viene attribuita l'appropriazione indebita di fondi sostanziali, e si afferma che diversi membri del consiglio fossero pienamente consapevoli delle irregolarità."
+  vocabulary:
+    - word: allege
+      pos: verb
+      ipa: /əˈlɛdʒ/
+      meaning_it: asserire, sostenere, attribuire (senza prove certe)
+    - word: misappropriate
+      pos: verb
+      ipa: /ˌmɪsəˈprəʊprieɪt/
+      meaning_it: appropriarsi indebitamente di, sottrarre
+    - word: substantial
+      pos: adjective
+      ipa: /səbˈstænʃəl/
+      meaning_it: sostanziale, considerevole
+    - word: irregularity
+      pos: noun
+      ipa: /ɪˌrɛɡjʊˈlærɪti/
+      meaning_it: irregolarità
+    - word: executive
+      pos: noun
+      ipa: /ɪɡˈzɛkjʊtɪv/
+      meaning_it: dirigente, alto funzionario
+  story_it: |
+    Nel Grammar Lab c'è un giornalista senza faccia — nessuno sa chi è (la fonte è anonima).
+    Scrive articoli con la struttura: IT IS SAID THAT…
+    La frase appare sul muro del lab in lettere fumose — nessuno sa chi le ha scritte.
+    Marco può anche girare la struttura: «The cost is believed to rise» —
+    ora il soggetto è davanti, ma l'autore rimane senza faccia.
+    Il professor Verne annusa l'inchiostro fumoso (odore di giornale bagnato):
+    «Formale. Distante. Nessun dito puntato.»
+    Il Gigante prova a mettere un nome sull'articolo: il giornalista senza faccia sparisce
+    (si sente uno SBUFFO di vento, odore di carta bruciata) e la struttura si rompe.
+    La regola è che l'autore rimane invisibile — prima la notizia, poi il verbo passivo,
+    poi il contenuto. Non puoi avere un autore nominato.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 9 — MODAL VERBS (giorni 34–36)
+# ─────────────────────────────────────────
+
+- slug: modals_obligation_deduction
+  tags: [modals, modals_block, modal_must, modal_have_to, part4_transformation]
+  title_en: "Modal Verbs — must / have to / should / ought to"
+  title_it: "Verbi Modali — must / have to / should / ought to"
+  display_order: 90
+  rule_en: |
+    **must** → strong obligation (speaker's own judgement) OR logical deduction
+    → *You must wear a seatbelt.* (I'm telling you — personal obligation)
+    → *She must be tired.* (I deduce this from evidence — NOT «she has to be»)
+
+    **have to** → external obligation (rule, law, someone else's requirement)
+    → *I have to submit the report by Friday.* (the boss said so)
+    → *Do you have to work on Sundays?* (is it a rule?)
+
+    **should / ought to** → advice, recommendation, moral obligation (weaker than must)
+    → *You should see a doctor.* / *You ought to apologise.*
+    ⚠️ «mustn't» = absolute prohibition (do NOT do it) — very different from «don't have to» (not necessary)
+  rule_it: |
+    **must** → obbligo forte (giudizio del parlante) OPPURE deduzione logica
+    → *You must wear a seatbelt.* (te lo dico io — obbligo personale)
+    → *She must be tired.* (lo deduco dalle prove — NON «she has to be»)
+
+    **have to** → obbligo esterno (regola, legge, requisito di qualcun altro)
+    → *I have to submit the report by Friday.* (il capo lo ha detto)
+    → *Do you have to work on Sundays?* (è una regola?)
+
+    **should / ought to** → consiglio, raccomandazione, obbligo morale (meno forte di must)
+    → *You should see a doctor.* / *You ought to apologise.*
+    ⚠️ «mustn't» = divieto assoluto (NON farlo) — diversissimo da «don't have to» (non necessario)
+  example_basic:
+    en: "You mustn't park here — it's a no-parking zone. You don't have to pay, but you must display your permit."
+    it: "Non puoi parcheggiare qui — è una zona vietata. Non è necessario pagare, ma devi esporre il permesso."
+  example_complex:
+    en: "Given the candidate's impeccable track record, she must be the strongest applicant — the committee should have made the decision weeks ago."
+    it: "Dato il curriculum impeccabile della candidata, deve essere la candidata più forte — il comitato avrebbe dovuto prendere la decisione settimane fa."
+  vocabulary:
+    - word: impeccable
+      pos: adjective
+      ipa: /ɪmˈpɛkəbəl/
+      meaning_it: impeccabile, irreprensibile
+    - word: track record
+      pos: noun phrase
+      ipa: /træk ˈrɛkɔːd/
+      meaning_it: curriculum, storico di risultati
+    - word: applicant
+      pos: noun
+      ipa: /ˈæplɪkənt/
+      meaning_it: candidato, richiedente
+    - word: display
+      pos: verb
+      ipa: /dɪˈspleɪ/
+      meaning_it: esporre, mostrare, visualizzare
+    - word: permit
+      pos: noun
+      ipa: /ˈpɜːmɪt/
+      meaning_it: permesso, autorizzazione
+  story_it: |
+    Il professor Verne ha due cappelli nel laboratorio.
+    Il cappello MUST (rosso, pesante, con fiamme dipinte) lo indossa lui stesso:
+    «È la mia decisione personale — lo dico io.» Lo tira fuori per deduzioni
+    («she MUST be tired» — lo vedo dalle sue occhiaie, decido io che è stanco).
+    Il cappello HAVE TO (grigio, burocratico, con timbri) viene dall'esterno —
+    Marco lo trova già sul tavolo con un bigliettino firmato dal capo,
+    dal governo, dalla regola (freddo, cartoncino rigido al tatto).
+    MUSTN'T è una catena rossa sul pavimento — non si passa.
+    DON'T HAVE TO è una porta aperta — puoi passarci, ma non sei obbligato.
+    Il Gigante indossa il cappello MUST grigio: il cappello rosso vola fuori
+    dalla testa di Marco con uno WHOMP (vento improvviso) e li scambia.
+    Prima capisci CHI impone l'obbligo (tu o una regola esterna), poi scegli il cappello.
+
+- slug: modal_perfects
+  tags: [modals, modals_block, modal_should_have, modal_must_have, modal_cant_have, part4_transformation]
+  title_en: "Modal Perfects — should/must/can't have + past participle"
+  title_it: "Modal Perfects — should/must/can't have + participio passato"
+  display_order: 91
+  rule_en: |
+    Modal perfects refer to **past situations** — deduction or criticism about what happened.
+
+    **must have + pp** → almost certain deduction (positive)
+    → *She must have missed the train.* (I'm almost sure she did)
+
+    **can't have + pp** → almost certain deduction (negative/impossible)
+    → *He can't have finished already — it was a 2-hour task.* (impossible)
+
+    **should have + pp** → past criticism or regret (you were expected to but didn't)
+    → *You should have called me.* (you didn't, and that was wrong)
+
+    **could have + pp** → past possibility that didn't happen
+    → *She could have won, but she made too many errors.*
+
+    ⚠️ «could have» ≠ «should have» — possibility vs obligation/regret
+  rule_it: |
+    I modal perfects si riferiscono a **situazioni passate** — deduzione o critica su ciò che è accaduto.
+
+    **must have + pp** → deduzione quasi certa (positiva)
+    → *She must have missed the train.* (sono quasi sicuro che sia successo)
+
+    **can't have + pp** → deduzione quasi certa (negativa/impossibile)
+    → *He can't have finished already — it was a 2-hour task.* (impossibile)
+
+    **should have + pp** → critica o rimpianto passato (avresti dovuto ma non l'hai fatto)
+    → *You should have called me.* (non l'hai fatto, ed era sbagliato)
+
+    **could have + pp** → possibilità passata non realizzata
+    → *She could have won, but she made too many errors.*
+
+    ⚠️ «could have» ≠ «should have» — possibilità vs obbligo/rimpianto
+  example_basic:
+    en: "You should have left earlier — you must have known the traffic would be terrible on a Friday."
+    it: "Avresti dovuto partire prima — dovevi sapere che il traffico sarebbe stato terribile di venerdì."
+  example_complex:
+    en: "The auditors can't have overlooked such a significant discrepancy; they must have deliberately chosen to omit it from the final report, which means they should have declared a conflict of interest."
+    it: "I revisori non possono aver ignorato una discrepanza così significativa; devono aver deliberatamente scelto di ometterla dal rapporto finale, il che significa che avrebbero dovuto dichiarare un conflitto di interessi."
+  vocabulary:
+    - word: auditor
+      pos: noun
+      ipa: /ˈɔːdɪtə/
+      meaning_it: revisore dei conti, revisore
+    - word: overlook
+      pos: verb
+      ipa: /ˌəʊvəˈlʊk/
+      meaning_it: trascurare, ignorare, non notare
+    - word: discrepancy
+      pos: noun
+      ipa: /dɪˈskrɛpənsi/
+      meaning_it: discrepanza, incongruenza
+    - word: omit
+      pos: verb
+      ipa: /əˈmɪt/
+      meaning_it: omettere, tralasciare
+    - word: conflict of interest
+      pos: noun phrase
+      ipa: /ˈkɒnflɪkt əv ˈɪntrɪst/
+      meaning_it: conflitto di interessi
+  story_it: |
+    Il professor Verne usa un telescopio per guardare nel PASSATO
+    (al contrario: il futuro è davanti, il passato è dietro — il telescopio guarda all'indietro).
+    Vede una scena: il Gigante è scomparso.
+    MUST HAVE: «È quasi certo che sia caduto nel calderone —
+    le impronte portano lì.» Il telescopio mostra le impronte (visivo).
+    CAN'T HAVE: «Impossibile che abbia già finito il lavoro —
+    era un lavoro da due ore e sono passati cinque minuti.»
+    Il telescopio mostra il calendario (impossibilità logica, visivo + freddo logico).
+    SHOULD HAVE: il professor Verne sospira, odore di rimpianto (come bruciato),
+    scuote la testa: «Avresti dovuto avvisarmi. Non l'hai fatto. Sbagliato.»
+    Prima guardi nel telescopio (capisci la situazione passata),
+    poi scegli il modale giusto in base al livello di certezza.
+    Non puoi usare il telescopio senza prima guardare le prove.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 10 — REPORTED SPEECH (giorni 37–39)
+# ─────────────────────────────────────────
+
+- slug: reported_speech_tense_backshift
+  tags: [reported_speech, reported_speech_block, reported_tense_backshift, part4_transformation]
+  title_en: "Reported Speech — Tense Backshift"
+  title_it: "Discorso Indiretto — Retrocessione dei Tempi"
+  display_order: 100
+  rule_en: |
+    When reporting what someone said (not their exact words), shift verb tenses back:
+
+    | Direct | Reported |
+    |---|---|
+    | «I **am** tired» | He said he **was** tired. |
+    | «I **work** here» | She said she **worked** there. |
+    | «I **have finished**» | He said he **had finished**. |
+    | «I **was** reading» | She said she **had been** reading. |
+    | «I **will** come» | He said he **would** come. |
+    | «I **can** help» | She said she **could** help. |
+
+    Also change: time expressions (now→then, today→that day, yesterday→the day before)
+    and place/person references (here→there, this→that, I→he/she).
+
+    ⚠️ No backshift needed if the situation is still true now:
+    → *He said the Earth orbits the Sun.* (still true)
+  rule_it: |
+    Quando riporti ciò che qualcuno ha detto (non le parole esatte), fai retrocedere i tempi verbali:
+
+    | Discorso Diretto | Indiretto |
+    |---|---|
+    | «I **am** tired» | He said he **was** tired. |
+    | «I **work** here» | She said she **worked** there. |
+    | «I **have finished**» | He said he **had finished**. |
+    | «I **was** reading» | She said she **had been** reading. |
+    | «I **will** come» | He said he **would** come. |
+    | «I **can** help» | She said she **could** help. |
+
+    Cambia anche: espressioni di tempo (now→then, today→that day, yesterday→the day before)
+    e riferimenti di luogo/persona (here→there, this→that, I→he/she).
+
+    ⚠️ Nessuna retrocessione se la situazione è ancora vera ora:
+    → *He said the Earth orbits the Sun.* (ancora vero)
+  example_basic:
+    en: "«I will finish by tomorrow,» she said. → She said she would finish by the following day."
+    it: "«Finirò entro domani», disse. → Disse che avrebbe finito entro il giorno seguente."
+  example_complex:
+    en: "The spokesperson claimed that the company had been unaware of the irregularities and insisted that immediate measures would be taken to address the concerns raised by the committee."
+    it: "Il portavoce ha affermato che l'azienda non era a conoscenza delle irregolarità e ha insistito sul fatto che sarebbero state adottate misure immediate per affrontare le preoccupazioni sollevate dal comitato."
+  vocabulary:
+    - word: spokesperson
+      pos: noun
+      ipa: /ˈspəʊkspɜːsən/
+      meaning_it: portavoce
+    - word: unaware (of)
+      pos: adjective
+      ipa: /ˌʌnəˈwɛə/
+      meaning_it: inconsapevole di, non a conoscenza di
+    - word: irregularity
+      pos: noun
+      ipa: /ɪˌrɛɡjʊˈlærɪti/
+      meaning_it: irregolarità
+    - word: immediate
+      pos: adjective
+      ipa: /ɪˈmiːdiət/
+      meaning_it: immediato
+    - word: concern
+      pos: noun
+      ipa: /kənˈsɜːn/
+      meaning_it: preoccupazione, problema
+  story_it: |
+    Il laboratorio del professor Verne ha un registratore che cattura i discorsi
+    e poi li manda indietro nel tempo di un gradino.
+    Il Gigante dice: «I am hungry NOW.»
+    Il registratore fa CLICK e sposta il pulsante: una tacca indietro.
+    L'ADESSO diventa ALLORA: «He said he WAS hungry» — la fame era allora, non ora.
+    Marco sente il cambio come un piccolo colpo d'aria fredda sul viso
+    (il tempo si sposta leggermente indietro, temperatura cala di un grado).
+    Se il Gigante dice «The Earth is round» (verità permanente), il registratore
+    si blocca — nessun click, nessun cambio (verità eterna non retrocede).
+    Prima il discorso diretto (il Gigante parla),
+    poi il registratore retrocede di un gradino, poi il discorso indiretto esce.
+    Non si può sentire il risultato prima che il Gigante abbia parlato.
+
+- slug: reported_speech_reporting_verbs
+  tags: [reported_speech, reported_speech_block, reporting_verb_advise, reporting_verb_suggest, part4_transformation]
+  title_en: "Reported Speech — Reporting Verbs (advise, suggest, warn, deny…)"
+  title_it: "Discorso Indiretto — Verbi di Reporting (advise, suggest, warn, deny…)"
+  display_order: 101
+  rule_en: |
+    Instead of just «said», use specific reporting verbs — each has its own grammar structure:
+
+    **+ to-infinitive**: advise / warn / tell / encourage / remind / urge / invite / ask
+    → *She advised him **to see** a doctor.* / *He warned us **not to trust** them.*
+
+    **+ -ing**: admit / deny / suggest / recommend / regret / accuse sb of
+    → *He denied **stealing** the money.* / *She suggested **going** by train.*
+
+    **+ that + clause**: claim / insist / agree / argue / explain / confirm / believe
+    → *He claimed **that he had not been** informed.*
+
+    ⚠️ «suggest» NEVER + to-infinitive: NOT «*She suggested to go.*» → «She suggested going.»
+  rule_it: |
+    Invece di usare solo «said», usa verbi di reporting specifici — ognuno ha la propria struttura grammaticale:
+
+    **+ to-infinitive**: advise / warn / tell / encourage / remind / urge / invite / ask
+    → *She advised him **to see** a doctor.* / *He warned us **not to trust** them.*
+
+    **+ -ing**: admit / deny / suggest / recommend / regret / accuse sb of
+    → *He denied **stealing** the money.* / *She suggested **going** by train.*
+
+    **+ that + clause**: claim / insist / agree / argue / explain / confirm / believe
+    → *He claimed **that he had not been** informed.*
+
+    ⚠️ «suggest» NON vuole mai il to-infinitive: NON «*She suggested to go.*» → «She suggested going.»
+  example_basic:
+    en: "He denied taking the money but admitted making a serious error of judgement."
+    it: "Ha negato di aver preso i soldi ma ha ammesso di aver commesso un grave errore di valutazione."
+  example_complex:
+    en: "The consultant strongly advised the board to reconsider their position, warned them against proceeding hastily, and suggested bringing in an independent expert before reaching any final agreement."
+    it: "Il consulente ha consigliato vivamente al consiglio di riconsiderare la propria posizione, li ha avvertiti di non procedere frettolosamente e ha suggerito di coinvolgere un esperto indipendente prima di raggiungere un accordo definitivo."
+  vocabulary:
+    - word: reconsider
+      pos: verb
+      ipa: /ˌriːkənˈsɪdə/
+      meaning_it: riconsiderare, ripensarci
+    - word: hastily
+      pos: adverb
+      ipa: /ˈheɪstɪli/
+      meaning_it: frettolosamente, in fretta
+    - word: independent
+      pos: adjective
+      ipa: /ˌɪndɪˈpɛndənt/
+      meaning_it: indipendente
+    - word: consultant
+      pos: noun
+      ipa: /kənˈsʌltənt/
+      meaning_it: consulente
+    - word: proceed
+      pos: verb
+      ipa: /prəˈsiːd/
+      meaning_it: procedere, andare avanti
+  story_it: |
+    Il professor Verne ha una scatola di cacciaviti — uno per ogni verbo di reporting.
+    Il cacciavite ADVISE ha una punta a FRECCIA (punta verso il to-infinitive).
+    Il cacciavite DENY ha una punta ROTONDA (si avvita su -ING).
+    Il cacciavite CLAIM ha una punta PIATTA (si inserisce nel that-clause).
+    Marco prende SUGGEST e cerca il cacciavite freccia (to-infinitive):
+    il professor Verne gli blocca la mano — «No! Suggest ha la punta rotonda.
+    Non *suggest to go*. Suggest going.» Il cacciavite sbagliato non entra nella vite —
+    fa un rumore stridulo (suono di metallo sul metallo), odore di metallo.
+    Prima identifichi il verbo di reporting, poi scegli il cacciavite giusto,
+    poi avviti la struttura. Non puoi avvitare prima di scegliere la punta.
+
+- slug: reported_questions
+  tags: [reported_speech, reported_speech_block, reported_questions, part4_transformation]
+  title_en: "Reported Speech — Reported Questions"
+  title_it: "Discorso Indiretto — Domande Indirette"
+  display_order: 102
+  rule_en: |
+    Reported questions use **statement word order** (NOT question word order) and NO question mark.
+
+    **Wh- questions**: wh-word + subject + verb
+    → «Where do you live?» → She asked me **where I lived**. (NOT *where did I live?*)
+
+    **Yes/No questions**: use **whether** or **if** + subject + verb
+    → «Are you coming?» → He asked **whether/if I was coming**.
+
+    Changes: tense backshift applies; do/does/did disappear; question mark disappears.
+
+    ⚠️ «He asked me where **did** I live» is a very common error — remove the auxiliary!
+  rule_it: |
+    Le domande indirette usano l'**ordine affermativo** (NON quello interrogativo) e NESSUN punto interrogativo.
+
+    **Domande con wh-**: wh-word + soggetto + verbo
+    → «Where do you live?» → She asked me **where I lived**. (NON *where did I live?*)
+
+    **Domande sì/no**: usa **whether** o **if** + soggetto + verbo
+    → «Are you coming?» → He asked **whether/if I was coming**.
+
+    Cambiamenti: retrocessione dei tempi; do/does/did scompaiono; il punto interrogativo scompare.
+
+    ⚠️ «He asked me where **did** I live» è un errore molto comune — rimuovi l'ausiliare!
+  example_basic:
+    en: "She asked whether I had ever visited the city and where I was planning to stay."
+    it: "Ha chiesto se avessi mai visitato la città e dove stavo pianificando di soggiornare."
+  example_complex:
+    en: "The interviewer enquired whether the candidate had previous experience in the field and asked what strategies she would implement to address the most pressing operational challenges."
+    it: "L'intervistatore ha chiesto se la candidata avesse esperienza precedente nel settore e ha domandato quali strategie avrebbe attuato per affrontare le sfide operative più urgenti."
+  vocabulary:
+    - word: enquire
+      pos: verb
+      ipa: /ɪnˈkwaɪə/
+      meaning_it: chiedere (formale), informarsi
+    - word: previous
+      pos: adjective
+      ipa: /ˈpriːviəs/
+      meaning_it: precedente
+    - word: implement
+      pos: verb
+      ipa: /ˈɪmplɪmɛnt/
+      meaning_it: attuare, implementare
+    - word: pressing
+      pos: adjective
+      ipa: /ˈprɛsɪŋ/
+      meaning_it: urgente, pressante
+    - word: operational
+      pos: adjective
+      ipa: /ˌɒpəˈreɪʃənəl/
+      meaning_it: operativo, operazionale
+  story_it: |
+    Le domande dirette entrano nel Grammar Lab con le antenne alzate (punto interrogativo in cima).
+    Appena passano la porta del «reported speech», il buttafuori (il professor Verne)
+    le ferma e le fa sdraiare — ordine affermativo, antenne giù.
+    L'antenna DO/DID viene confiscata all'ingresso (sparisce in una scatola sigillata —
+    rumore di cassetto che si chiude). Il punto interrogativo rimane fuori dalla porta.
+    La domanda WH- entra con il wh-word davanti e poi soggetto + verbo: normale, tranquilla.
+    La domanda sì/no si trasforma: riceve un badge WHETHER o IF all'ingresso
+    (si sente il ticchettio della macchinetta del badge).
+    Il Gigante prova a tenere le antenne alzate dentro: il soffitto basso le piega.
+    Paradossale ma fisicamente inevitabile: dentro la reported speech, le antenne non stanno dritte.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 11 — WISH / IF ONLY (giorni 40–42)
+# ─────────────────────────────────────────
+
+- slug: wish_present_situation
+  tags: [wish_if_only, wish_block, wish_present, part4_transformation]
+  title_en: "Wish / If only — Present Situation (Wish + Past Simple)"
+  title_it: "Wish / If only — Situazione Presente (Wish + Past Simple)"
+  display_order: 110
+  rule_en: |
+    To express **dissatisfaction with the present** — you wish something were different NOW.
+
+    Form: **wish / if only + past simple** (even though we mean NOW, not the past!)
+    → *I wish I **had** more time.* (I don't have enough time — present reality)
+    → *If only she **lived** closer.* (she doesn't live close — present reality)
+    → *I wish I **could** speak French.* (I can't — present ability)
+
+    ⚠️ «wish + would» is for PEOPLE'S BEHAVIOUR (see next entry), not for your own wishes
+    ⚠️ «wish + was/were»: both are acceptable, but **were** is more formal in all persons:
+    → *I wish it **were** warmer.* / *I wish I **were** taller.*
+  rule_it: |
+    Per esprimere **insoddisfazione per il presente** — desideri che qualcosa fosse diverso ORA.
+
+    Forma: **wish / if only + past simple** (anche se parliamo di ORA, non del passato!)
+    → *I wish I **had** more time.* (non ho abbastanza tempo — realtà presente)
+    → *If only she **lived** closer.* (non vive vicino — realtà presente)
+    → *I wish I **could** speak French.* (non posso — abilità presente)
+
+    ⚠️ «wish + would» è per il COMPORTAMENTO ALTRUI (vedi voce successiva), non per i propri desideri
+    ⚠️ «wish + was/were»: entrambi accettabili, ma **were** è più formale per tutte le persone:
+    → *I wish it **were** warmer.* / *I wish I **were** taller.*
+  example_basic:
+    en: "I wish I had more experience — if only I had applied for that position last year."
+    it: "Vorrei avere più esperienza — se solo avessi fatto domanda per quella posizione l'anno scorso."
+  example_complex:
+    en: "If only the committee were more transparent in its decision-making process; many stakeholders wish they had greater access to the relevant documentation."
+    it: "Se solo il comitato fosse più trasparente nel suo processo decisionale; molti stakeholder vorrebbero avere maggiore accesso alla documentazione pertinente."
+  vocabulary:
+    - word: transparent
+      pos: adjective
+      ipa: /trænsˈpærənt/
+      meaning_it: trasparente (anche figurato)
+    - word: decision-making
+      pos: noun phrase
+      ipa: /dɪˈsɪʒən ˌmeɪkɪŋ/
+      meaning_it: processo decisionale
+    - word: stakeholder
+      pos: noun
+      ipa: /ˈsteɪkˌhəʊldə/
+      meaning_it: portatore di interesse, stakeholder
+    - word: documentation
+      pos: noun
+      ipa: /ˌdɒkjʊmɛnˈteɪʃən/
+      meaning_it: documentazione
+    - word: relevant
+      pos: adjective
+      ipa: /ˈrɛlɪvənt/
+      meaning_it: pertinente, rilevante
+  story_it: |
+    Nel Grammar Lab c'è uno specchio magico che mostra la realtà al contrario —
+    il mondo che VORRESTI fosse vero. Marco ci si avvicina (vetro fresco al tatto):
+    nello specchio si vede con i capelli perfetti, parla francese fluentemente.
+    Nella realtà: capelli disordinati, francese nullo.
+    «I wish I **had**…» — il verbo nello specchio è al PASSATO
+    ma descrive il PRESENTE desiderato. Paradossale: il passato per il presente.
+    Il professor Verne spiega: «Lo specchio usa il passato come linguaggio del desiderio —
+    non del tempo.» Il Gigante prova «I wish I have»:
+    lo specchio si incrina con un CRACK sottile (suono di vetro fragile),
+    odore di aria fredda che esce dalla crepa — grammatica rotta.
+    Prima la realtà attuale (insoddisfazione), poi lo specchio (wish + past),
+    poi il desiderio riflesso. Non si può vedere il riflesso senza lo specchio.
+
+- slug: wish_past_regret
+  tags: [wish_if_only, wish_block, wish_past_regret, part4_transformation]
+  title_en: "Wish / If only — Past Regret (Wish + Past Perfect)"
+  title_it: "Wish / If only — Rimpianto Passato (Wish + Past Perfect)"
+  display_order: 111
+  rule_en: |
+    To express **regret about a past action or situation** — something happened (or didn't)
+    and you wish it had been different.
+
+    Form: **wish / if only + past perfect (had + pp)**
+    → *I wish I **had studied** harder.* (I didn't study hard — I regret it now)
+    → *If only she **hadn't said** that.* (she said it — bad result)
+    → *I wish I **had taken** that job.* (I didn't take it — I regret it)
+
+    ⚠️ The action is FINISHED — you cannot change it. This is pure regret.
+    ⚠️ Italian trap: In Italian «Vorrei aver studiato» maps exactly to «I wish I had studied».
+  rule_it: |
+    Per esprimere **rimpianto per un'azione passata** — qualcosa è successo (o non è successo)
+    e vorresti che fosse andato diversamente.
+
+    Forma: **wish / if only + past perfect (had + pp)**
+    → *I wish I **had studied** harder.* (non ho studiato abbastanza — me ne pento)
+    → *If only she **hadn't said** that.* (l'ha detto — brutto risultato)
+    → *I wish I **had taken** that job.* (non l'ho preso — me ne pento)
+
+    ⚠️ L'azione è FINITA — non puoi cambiarla. Questo è puro rimpianto.
+    ⚠️ Trappola italiana: «Vorrei aver studiato» corrisponde esattamente a «I wish I had studied».
+  example_basic:
+    en: "I wish I had saved more money — if only I hadn't spent so much last summer."
+    it: "Vorrei aver risparmiato di più — se solo non avessi speso tanto l'estate scorsa."
+  example_complex:
+    en: "If only the project manager had flagged the budget shortfall earlier; the board wish they had been given adequate warning before the situation became irreversible."
+    it: "Se solo il project manager avesse segnalato prima la carenza di budget; il consiglio vorrebbe aver ricevuto un avvertimento adeguato prima che la situazione diventasse irreversibile."
+  vocabulary:
+    - word: flag (an issue)
+      pos: verb
+      ipa: /flæɡ/
+      meaning_it: segnalare, evidenziare (un problema)
+    - word: shortfall
+      pos: noun
+      ipa: /ˈʃɔːtfɔːl/
+      meaning_it: carenza, deficit, ammanco
+    - word: adequate
+      pos: adjective
+      ipa: /ˈædɪkwɪt/
+      meaning_it: adeguato, sufficiente
+    - word: irreversible
+      pos: adjective
+      ipa: /ˌɪrɪˈvɜːsɪbəl/
+      meaning_it: irreversibile
+    - word: warning
+      pos: noun
+      ipa: /ˈwɔːnɪŋ/
+      meaning_it: avvertimento, avviso
+  story_it: |
+    Lo stesso specchio magico di prima ora è ammaccato e annerito —
+    la realtà è già successa e non si può cambiare.
+    Marco ci batte sopra con il pugno (tatto: dolore lieve, superficie fredda),
+    ma l'immagine è congelata: vede se stesso che non studia ieri sera.
+    «I wish I **had studied**» — il past perfect nel rimpianto:
+    HAD è come una mano che tende verso il passato dentro lo specchio ammaccato,
+    il participio è l'azione che avresti voluto fare.
+    Il professor Verne annusa lo specchio: odore di fumo vecchio, rimpianto bruciato.
+    La differenza con lo specchio del presente: quello era freddo e integro (ancora cambiabile),
+    questo è ammaccato e tiepido (già successo, irrimediabile).
+    Prima la fotografia del passato (hai già visto cosa è successo),
+    poi la mano che tende verso il cambiamento impossibile (wish + had + pp).
+    Non puoi rimpiangere qualcosa che non è ancora avvenuto.
+
+- slug: wish_would_annoyance
+  tags: [wish_if_only, wish_block, wish_would_annoyance, part4_transformation]
+  title_en: "Wish + would — Annoyance & Desire for Change"
+  title_it: "Wish + would — Fastidio e Desiderio di Cambiamento"
+  display_order: 112
+  rule_en: |
+    Use **wish + would** to express **annoyance** about someone's behaviour
+    or a strong desire for something to change (often repeated or ongoing situation).
+
+    → *I wish you **would** stop interrupting me.* (you keep interrupting — it's annoying)
+    → *I wish it **would** stop raining.* (the rain is ongoing and annoying — not a person)
+    → *If only they **would** reply to my emails.*
+
+    ⚠️ Do NOT use **wish + would** about yourself (except «I wish I could» — that's different)
+    → NOT «*I wish I would study more.*» → Use: «I wish I **studied** more.» (wish + past simple)
+
+    ⚠️ «I wish you **would**» = you're being annoying / please change.
+    «I wish you **were**» = I wish you were different (your nature, not your behaviour)
+  rule_it: |
+    Usa **wish + would** per esprimere **fastidio** per il comportamento di qualcuno
+    o un forte desiderio che qualcosa cambi (spesso situazione ripetuta o in corso).
+
+    → *I wish you **would** stop interrupting me.* (mi interrompi continuamente — è fastidioso)
+    → *I wish it **would** stop raining.* (piove continuamente — fastidioso)
+    → *If only they **would** reply to my emails.*
+
+    ⚠️ NON usare **wish + would** parlando di sé stessi (eccetto «I wish I could» — è diverso)
+    → NON «*I wish I would study more.*» → Usa: «I wish I **studied** more.» (wish + past simple)
+
+    ⚠️ «I wish you **would**» = sei fastidioso / per favore cambia.
+    «I wish you **were**» = vorrei che fossi diverso (natura, non comportamento)
+  example_basic:
+    en: "I wish my colleague would stop leaving the kitchen in such a mess."
+    it: "Vorrei che il mio collega smettesse di lasciare la cucina in tale disordine."
+  example_complex:
+    en: "If only the authorities would introduce stricter regulations; many residents wish they would take more decisive action to address the persistent noise pollution in the area."
+    it: "Se solo le autorità introducessero normative più severe; molti residenti vorrebbero che prendessero misure più decisive per affrontare il persistente inquinamento acustico nella zona."
+  vocabulary:
+    - word: authorities
+      pos: noun (plural)
+      ipa: /ɔːˈθɒrɪtiz/
+      meaning_it: autorità, istituzioni
+    - word: regulation
+      pos: noun
+      ipa: /ˌrɛɡjʊˈleɪʃən/
+      meaning_it: normativa, regolamento
+    - word: decisive
+      pos: adjective
+      ipa: /dɪˈsaɪsɪv/
+      meaning_it: decisivo, risoluto
+    - word: persistent
+      pos: adjective
+      ipa: /pəˈsɪstənt/
+      meaning_it: persistente, continuo
+    - word: noise pollution
+      pos: noun phrase
+      ipa: /nɔɪz pəˈluːʃən/
+      meaning_it: inquinamento acustico
+  story_it: |
+    Il terzo specchio del Grammar Lab è ROSSO e vibra continuamente —
+    è lo specchio del fastidio. Marco ci guarda dentro e vede il Gigante
+    che batte i piedi per terra, ancora e ancora (si sente il BOOM di ogni passo,
+    il pavimento che trema sotto i piedi di Marco). Irritante, ripetuto, continuo.
+    «I wish he **would** stop» — il WOULD è come un segnale d'allarme rosso
+    che si accende ogni volta che l'azione si ripete (lampeggia, odore di plastica calda).
+    Diverso dagli altri specchi: questo non descrive una singola situazione —
+    descrive un COMPORTAMENTO ALTRUI che vuoi cambiare.
+    Marco prova «I wish I would study more» — lo specchio rosso lo respinge (si sente l'aria compressa).
+    Non funziona su sé stessi: per i propri desideri si torna allo specchio integro (wish + past simple).
+    Prima il comportamento fastidioso ripetuto, poi lo specchio rosso, poi il WOULD.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 12 — GERUND & INFINITIVE (giorni 43–45)
+# ─────────────────────────────────────────
+
+- slug: verb_gerund_patterns
+  tags: [gerund_infinitive, gerund_infinitive_block, verb_gerund, part4_transformation]
+  title_en: "Gerund & Infinitive — Verbs followed by -ing"
+  title_it: "Gerundio & Infinito — Verbi seguiti da -ing"
+  display_order: 120
+  rule_en: |
+    These verbs are ALWAYS followed by the **gerund (-ing form)**:
+
+    **Mind, Deny, Admit, Avoid, Consider, Delay, Enjoy, Finish, Imagine, Keep, Miss,
+    Practise, Recommend, Risk, Suggest, Can't help, Can't stand, Give up, Put off**
+
+    → *He denied **stealing** the money.*
+    → *I enjoy **reading** in the evenings.*
+    → *She suggested **going** by train.*
+    → *I can't help **laughing** when I see that.*
+
+    Also after **prepositions**: be interested in doing / without doing / instead of doing
+
+    ⚠️ «avoid» is NEVER followed by to-infinitive: NOT «*avoid to make*»
+  rule_it: |
+    Questi verbi sono SEMPRE seguiti dal **gerundio (-ing)**:
+
+    **Mind, Deny, Admit, Avoid, Consider, Delay, Enjoy, Finish, Imagine, Keep, Miss,
+    Practise, Recommend, Risk, Suggest, Can't help, Can't stand, Give up, Put off**
+
+    → *He denied **stealing** the money.*
+    → *I enjoy **reading** in the evenings.*
+    → *She suggested **going** by train.*
+    → *I can't help **laughing** when I see that.*
+
+    Anche dopo le **preposizioni**: be interested in doing / without doing / instead of doing
+
+    ⚠️ «avoid» non è MAI seguito dal to-infinitive: NON «*avoid to make*»
+  example_basic:
+    en: "I keep putting off finishing my assignment — I can't help avoiding it."
+    it: "Continuo a rimandare il completamento del compito — non riesco a fare a meno di evitarlo."
+  example_complex:
+    en: "The board considered postponing the launch but ultimately decided against delaying any further, despite recommendations suggesting waiting for more favourable market conditions."
+    it: "Il consiglio ha considerato di posticipare il lancio ma ha infine deciso di non ritardare ulteriormente, nonostante le raccomandazioni di attendere condizioni di mercato più favorevoli."
+  vocabulary:
+    - word: postpone
+      pos: verb
+      ipa: /pəʊstˈpəʊn/
+      meaning_it: posticipare, rimandare
+    - word: launch
+      pos: noun
+      ipa: /lɔːntʃ/
+      meaning_it: lancio (di un prodotto/evento)
+    - word: ultimately
+      pos: adverb
+      ipa: /ˈʌltɪmɪtli/
+      meaning_it: alla fine, in definitiva
+    - word: favourable
+      pos: adjective
+      ipa: /ˈfeɪvərəbəl/
+      meaning_it: favorevole, propizio
+    - word: conditions
+      pos: noun (plural)
+      ipa: /kənˈdɪʃənz/
+      meaning_it: condizioni
+  story_it: |
+    Nel Grammar Lab c'è un tubo rotondo (il gerundio è tondo, rotante — -ING gira su sé stesso).
+    I verbi DENY, AVOID, ENJOY, SUGGEST sono calamite che ATTRAGGONO solo il tubo rotondo.
+    Marco porta «suggest» vicino al tubo: CLACK, si agganciano.
+    Porta «suggest» vicino alla freccia retta (to-infinitive): respinta.
+    La freccia retta odora di metallo freddo, il tubo rotondo odora di legno caldo.
+    «Can't help» è speciale: è una trappola magnetica — ti attira il gerundio
+    ANCHE quando non vuoi. Il prof. Verne dice: «Non puoi resistere — can't help laughing.»
+    Prima identifica il verbo (è una calamita per -ING?),
+    poi il gerundio si aggancia automaticamente. Il Gigante porta «avoid» alla freccia:
+    la freccia gli si inchioda alla mano con un suono acuto — errore fisico, impossibile ignorarlo.
+
+- slug: verb_infinitive_patterns
+  tags: [gerund_infinitive, gerund_infinitive_block, verb_infinitive, part4_transformation]
+  title_en: "Gerund & Infinitive — Verbs followed by to-infinitive"
+  title_it: "Gerundio & Infinito — Verbi seguiti da to-infinitive"
+  display_order: 121
+  rule_en: |
+    These verbs are ALWAYS followed by the **to-infinitive**:
+
+    **Afford, Agree, Aim, Arrange, Choose, Decide, Expect, Fail, Hope, Learn,
+    Manage, Need, Offer, Plan, Pretend, Promise, Refuse, Seem, Tend, Want, Wish**
+
+    → *She managed **to finish** in time.*
+    → *He refused **to answer** any questions.*
+    → *They expect **to receive** a response by Friday.*
+
+    Also: **want / ask / tell / expect / advise / encourage / remind + object + to-inf**
+    → *She told him **to leave**.*  / *I reminded her **to call**.*
+  rule_it: |
+    Questi verbi sono SEMPRE seguiti dal **to-infinitive**:
+
+    **Afford, Agree, Aim, Arrange, Choose, Decide, Expect, Fail, Hope, Learn,
+    Manage, Need, Offer, Plan, Pretend, Promise, Refuse, Seem, Tend, Want, Wish**
+
+    → *She managed **to finish** in time.*
+    → *He refused **to answer** any questions.*
+    → *They expect **to receive** a response by Friday.*
+
+    Anche: **want / ask / tell / expect / advise / encourage / remind + oggetto + to-inf**
+    → *She told him **to leave**.*  / *I reminded her **to call**.*
+  example_basic:
+    en: "He refused to acknowledge the problem and failed to provide any satisfactory explanation."
+    it: "Ha rifiutato di riconoscere il problema e non è riuscito a fornire alcuna spiegazione soddisfacente."
+  example_complex:
+    en: "The organisation managed to secure substantial funding after agreeing to implement more rigorous oversight measures, which it had previously failed to enforce adequately."
+    it: "L'organizzazione è riuscita ad assicurarsi finanziamenti sostanziali dopo aver accettato di implementare misure di supervisione più rigorose, che in precedenza non era riuscita ad applicare adeguatamente."
+  vocabulary:
+    - word: secure (funding)
+      pos: verb
+      ipa: /sɪˈkjʊə/
+      meaning_it: assicurarsi, ottenere
+    - word: rigorous
+      pos: adjective
+      ipa: /ˈrɪɡərəs/
+      meaning_it: rigoroso, severo
+    - word: oversight
+      pos: noun
+      ipa: /ˈəʊvəsaɪt/
+      meaning_it: "supervisione, controllo (anche: svista)"
+    - word: enforce
+      pos: verb
+      ipa: /ɪnˈfɔːs/
+      meaning_it: far rispettare, applicare
+    - word: satisfactory
+      pos: adjective
+      ipa: /ˌsætɪsˈfæktəri/
+      meaning_it: soddisfacente, adeguato
+  story_it: |
+    La freccia retta del Grammar Lab (to-infinitive) è attratta dai verbi MANAGE, REFUSE, HOPE.
+    È una freccia di metallo cromato, fredda, dritta — punta sempre avanti verso il futuro.
+    «Manage» la afferra con la mano destra (si sente il click della freccia in mano),
+    «refuse» la respinge con forza (la freccia vola via ma torna — magnetismo).
+    Il professor Verne tiene la lista: «Questi verbi guardano AVANTI — vogliono la freccia,
+    non il tubo rotondo.» Marco porta REFUSE vicino al tubo -ING:
+    odore di plastica bruciata, rumore di attrito — rifiuto totale.
+    Prima identifica il verbo (freccia o tubo?), poi aggancia il giusto.
+    Il Gigante mischia i due gruppi: alcune frecce si piantano nel soffitto,
+    alcuni tubi rotolano via — il lab è in caos finché Marco li rimette in ordine.
+
+- slug: verb_gerund_infinitive_change
+  tags: [gerund_infinitive, gerund_infinitive_block, be_used_to, stop_try_remember, part4_transformation]
+  title_en: "Gerund vs Infinitive — Verbs that change meaning"
+  title_it: "Gerundio vs Infinito — Verbi che cambiano significato"
+  display_order: 122
+  rule_en: |
+    Some verbs take BOTH -ing and to-infinitive but with DIFFERENT meanings:
+
+    **stop + -ing** = quit doing something
+    → *She stopped **talking**.* (she was talking, then she stopped)
+    **stop + to-inf** = pause in order to do something
+    → *She stopped **to talk** to him.* (she was walking; she paused to have a conversation)
+
+    **remember + -ing** = recall a past action (the action happened first)
+    → *I remember **locking** the door.* (I locked it, and I recall this)
+    **remember + to-inf** = not forget to do something (the action is still ahead)
+    → *Remember **to lock** the door!* (don't forget — it's future)
+
+    **try + -ing** = experiment, attempt a different approach
+    → *Try **adding** more salt.* (see if it helps)
+    **try + to-inf** = make an effort to do something difficult
+    → *I tried **to open** the window but it was stuck.*
+  rule_it: |
+    Alcuni verbi accettano sia -ing che to-infinitive ma con SIGNIFICATI DIVERSI:
+
+    **stop + -ing** = smettere di fare qualcosa
+    → *She stopped **talking**.* (stava parlando, poi ha smesso)
+    **stop + to-inf** = fermarsi per fare qualcosa
+    → *She stopped **to talk** to him.* (stava camminando; si è fermata per parlare)
+
+    **remember + -ing** = ricordare un'azione passata (l'azione è già avvenuta)
+    → *I remember **locking** the door.* (l'ho chiusa e me lo ricordo)
+    **remember + to-inf** = non dimenticare di fare qualcosa (l'azione è futura)
+    → *Remember **to lock** the door!* (non dimenticare — è futuro)
+
+    **try + -ing** = sperimentare, provare un approccio diverso
+    → *Try **adding** more salt.* (vedi se aiuta)
+    **try + to-inf** = fare uno sforzo per fare qualcosa di difficile
+    → *I tried **to open** the window but it was stuck.*
+  example_basic:
+    en: "I remember meeting her — she stopped to talk to us and tried to explain the situation."
+    it: "Ricordo di averla incontrata — si è fermata per parlarci e ha cercato di spiegare la situazione."
+  example_complex:
+    en: "The engineer tried adjusting the settings but then tried to reconfigure the system entirely; she remembered having encountered the same fault before but didn't remember what had resolved it."
+    it: "L'ingegnere ha provato a regolare le impostazioni ma poi ha cercato di riconfigurare l'intero sistema; ricordava di aver incontrato lo stesso guasto in precedenza ma non ricordava cosa l'avesse risolto."
+  vocabulary:
+    - word: adjust
+      pos: verb
+      ipa: /əˈdʒʌst/
+      meaning_it: regolare, aggiustare
+    - word: reconfigure
+      pos: verb
+      ipa: /ˌriːkənˈfɪɡə/
+      meaning_it: riconfigurare
+    - word: fault
+      pos: noun
+      ipa: /fɔːlt/
+      meaning_it: guasto, difetto, errore
+    - word: encounter
+      pos: verb
+      ipa: /ɪnˈkaʊntə/
+      meaning_it: incontrare, imbattersi in
+    - word: resolve
+      pos: verb
+      ipa: /rɪˈzɒlv/
+      meaning_it: risolvere
+  story_it: |
+    STOP, REMEMBER e TRY hanno due porte nel Grammar Lab —
+    una porta ROTONDA (gerundio) e una porta FRECCIA (infinito).
+    Per STOP: se entri dalla porta rotonda (stop + -ing), l'azione finisce qui,
+    come sbattere una porta — BANG — silenzio. Se entri dalla porta freccia
+    (stop + to), ti fermi un momento davanti alla porta freccia e poi la attraversi:
+    interruzione temporanea per fare qualcos'altro.
+    Il Gigante prova a capire quale porta entrare:
+    «Ho smesso di fumare» → porta rotonda (l'azione è finita).
+    «Mi sono fermato per comprare il giornale» → porta freccia (mi sono fermato, poi ho comprato).
+    Annusa le porte: la rotonda odora di chiusura (legno umido, finale),
+    la freccia odora di apertura (aria fresca, futuro).
+    Prima capisci SE l'azione finisce o SE ti fermi per fare altro — poi scegli la porta.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 13 — LINKING WORDS (giorni 46–48)
+# ─────────────────────────────────────────
+
+- slug: linking_contrast
+  tags: [linking_words, linking_words_block, link_contrast, part1_mc_cloze, part2_open_cloze]
+  title_en: "Linkers — Contrast: although, however, despite, in spite of, whereas"
+  title_it: "Connettori — Contrasto: although, however, despite, in spite of, whereas"
+  display_order: 130
+  rule_en: |
+    **although / even though / though** + subject + verb (clause)
+    → *Although it was cold, she wore a light jacket.*
+
+    **however / nevertheless / nonetheless** + comma (connector between sentences)
+    → *The plan seemed solid. However, several key factors had been overlooked.*
+
+    **despite / in spite of** + noun / -ing (NOT + clause directly)
+    → *Despite the rain, the event was a success.*
+    → *In spite of feeling unwell, she attended the meeting.*
+    ⚠️ NOT «*despite that it rained*» — use «despite the fact that + clause»
+
+    **whereas / while** = contrast between two parallel facts
+    → *She prefers tea, whereas he drinks only coffee.*
+  rule_it: |
+    **although / even though / though** + soggetto + verbo (frase completa)
+    → *Although it was cold, she wore a light jacket.*
+
+    **however / nevertheless / nonetheless** + virgola (connettore tra frasi)
+    → *The plan seemed solid. However, several key factors had been overlooked.*
+
+    **despite / in spite of** + sostantivo / -ing (NON + frase completa direttamente)
+    → *Despite the rain, the event was a success.*
+    → *In spite of feeling unwell, she attended the meeting.*
+    ⚠️ NON «*despite that it rained*» — usa «despite the fact that + frase»
+
+    **whereas / while** = contrasto tra due fatti paralleli
+    → *She prefers tea, whereas he drinks only coffee.*
+  example_basic:
+    en: "Although the budget was limited, the team produced impressive results. However, the timeline proved extremely challenging."
+    it: "Sebbene il budget fosse limitato, il team ha prodotto risultati impressionanti. Tuttavia, la tempistica si è rivelata estremamente impegnativa."
+  example_complex:
+    en: "Despite facing considerable opposition from established stakeholders, the initiative gained widespread support, whereas previous attempts had consistently failed to attract sufficient public interest."
+    it: "Nonostante l'opposizione considerevole da parte degli stakeholder affermati, l'iniziativa ha ottenuto un ampio sostegno, mentre i precedenti tentativi erano costantemente falliti nell'attrarre sufficiente interesse pubblico."
+  vocabulary:
+    - word: opposition
+      pos: noun
+      ipa: /ˌɒpəˈzɪʃən/
+      meaning_it: opposizione, resistenza
+    - word: established
+      pos: adjective
+      ipa: /ɪˈstæblɪʃt/
+      meaning_it: affermato, consolidato
+    - word: initiative
+      pos: noun
+      ipa: /ɪˈnɪʃɪətɪv/
+      meaning_it: iniziativa
+    - word: consistently
+      pos: adverb
+      ipa: /kənˈsɪstəntli/
+      meaning_it: costantemente, sistematicamente
+    - word: sufficient
+      pos: adjective
+      ipa: /səˈfɪʃənt/
+      meaning_it: sufficiente
+  story_it: |
+    Nel Grammar Lab c'è un ring da boxe dove due fatti si fronteggiano.
+    ALTHOUGH è un arbitro che tiene i due pugili nella stessa frase —
+    entrano insieme dalla stessa porta, uno dopo l'altro (suono di guantoni che atterrano).
+    HOWEVER invece è un muro di vetro tra due stanze separate:
+    il primo fatto è nella stanza A, HOWEVER apre il pannello di vetro (SCRIC),
+    il secondo fatto arriva dalla stanza B. Si sentono due temperature diverse (una stanza calda, una fredda).
+    DESPITE è speciale: non vuole due frasi — vuole un sostantivo o un -ING.
+    Marco prova «despite that it rained»: l'arbitro fischia (suono acuto),
+    la parola «that» rimbalza fuori come un pugile mandato al tappeto — BONG.
+    DESPITE vuole solo: «despite the rain» o «despite raining».
+    Prima capisci se hai UNA frase (although) o DUE frasi (however) o UN SOSTANTIVO (despite).
+
+- slug: linking_addition_result
+  tags: [linking_words, linking_words_block, link_addition, link_result, part1_mc_cloze, part2_open_cloze]
+  title_en: "Linkers — Addition & Result: furthermore, therefore, consequently…"
+  title_it: "Connettori — Aggiunta e Risultato: furthermore, therefore, consequently…"
+  display_order: 131
+  rule_en: |
+    **ADDITION** (adding more information — same direction):
+    **furthermore / moreover / in addition / additionally** + comma
+    → *The report was thorough. Furthermore, it was delivered ahead of schedule.*
+    **as well as + noun/-ing** (not between sentences)
+    → *She speaks French as well as Spanish.*
+
+    **RESULT/CONSEQUENCE** (the second idea follows from the first):
+    **therefore / consequently / as a result / thus** + comma
+    → *The data was incomplete; therefore, the conclusions remain uncertain.*
+    **so** (informal, in the middle of a sentence)
+    → *It was late, so we left.*
+
+    ⚠️ «therefore» is formal — avoid in spoken English. «so» is informal — avoid in essays.
+  rule_it: |
+    **AGGIUNTA** (aggiungere informazioni nella stessa direzione):
+    **furthermore / moreover / in addition / additionally** + virgola
+    → *The report was thorough. Furthermore, it was delivered ahead of schedule.*
+    **as well as + sostantivo/-ing** (non tra frasi separate)
+    → *She speaks French as well as Spanish.*
+
+    **RISULTATO/CONSEGUENZA** (la seconda idea deriva dalla prima):
+    **therefore / consequently / as a result / thus** + virgola
+    → *The data was incomplete; therefore, the conclusions remain uncertain.*
+    **so** (informale, a metà frase)
+    → *It was late, so we left.*
+
+    ⚠️ «therefore» è formale — evitalo nel parlato. «so» è informale — evitalo nei saggi.
+  example_basic:
+    en: "The project was underfunded; consequently, several key milestones were missed. Furthermore, the team was not given adequate support."
+    it: "Il progetto era sottofinanziato; di conseguenza, sono stati mancati diversi traguardi chiave. Inoltre, il team non ha ricevuto un supporto adeguato."
+  example_complex:
+    en: "The findings strongly corroborate the initial hypothesis; therefore, the research team has decided to proceed to the next phase. Furthermore, two additional partners have agreed to contribute both expertise and resources."
+    it: "I risultati corroborano fortemente l'ipotesi iniziale; pertanto, il team di ricerca ha deciso di procedere alla fase successiva. Inoltre, due partner aggiuntivi hanno accettato di contribuire sia con competenze che con risorse."
+  vocabulary:
+    - word: corroborate
+      pos: verb
+      ipa: /kəˈrɒbəreɪt/
+      meaning_it: corroborare, confermare, avvalorare
+    - word: hypothesis
+      pos: noun
+      ipa: /haɪˈpɒθɪsɪs/
+      meaning_it: ipotesi
+    - word: proceed
+      pos: verb
+      ipa: /prəˈsiːd/
+      meaning_it: procedere, andare avanti
+    - word: expertise
+      pos: noun
+      ipa: /ˌɛkspɜːˈtiːz/
+      meaning_it: competenza, perizia
+    - word: milestone
+      pos: noun
+      ipa: /ˈmaɪlstəʊn/
+      meaning_it: traguardo, pietra miliare
+  story_it: |
+    Nel Grammar Lab le frasi sono vagoni di un treno.
+    FURTHERMORE e MOREOVER sono ganci di aggancio che uniscono un vagone nella STESSA direzione —
+    si sente il CLONK dell'aggancio, poi il treno riparte più lungo (aggiunta).
+    THEREFORE e CONSEQUENTLY sono locomotori di spinta: il primo vagone causa il movimento
+    del secondo — si sente l'accelerazione, si sente il vapore (il risultato è inevitabile).
+    Marco cerca di usare «so» in un saggio formale:
+    il professor Verne scuote la testa e il vagone «so» si colora di rosso (informale —
+    non entra nel convoglio formale). Marco prova «therefore» in una conversazione:
+    il Gigante ride così forte che il vagone «therefore» deraglia (troppo pesante per il parlato).
+    Prima capisci il registro (formale/informale), poi scegli il gancio giusto.
+
+- slug: linking_purpose_time
+  tags: [linking_words, linking_words_block, link_purpose, link_time, part1_mc_cloze]
+  title_en: "Linkers — Purpose & Time: so that, in order to, as soon as, once…"
+  title_it: "Connettori — Scopo e Tempo: so that, in order to, as soon as, once…"
+  display_order: 132
+  rule_en: |
+    **PURPOSE** (why something is done):
+    **in order to / so as to** + infinitive (formal)
+    → *She left early in order to avoid the traffic.*
+    **so that** + subject + verb (with modal: can, could, would, might)
+    → *I'll write it down so that I don't forget.*
+
+    **TIME CONNECTORS**:
+    **as soon as / the moment** = immediately when
+    → *Call me as soon as you arrive.*
+    **once** = when and only after (implies completion)
+    → *Once you've finished, you can leave.*
+    **by the time** = before/when a deadline/moment is reached
+    → *By the time she arrived, everyone had left.*
+    **until / till** = up to the moment when
+    → *Wait until I get back.*
+  rule_it: |
+    **SCOPO** (perché si fa qualcosa):
+    **in order to / so as to** + infinito (formale)
+    → *She left early in order to avoid the traffic.*
+    **so that** + soggetto + verbo (con modale: can, could, would, might)
+    → *I'll write it down so that I don't forget.*
+
+    **CONNETTORI DI TEMPO**:
+    **as soon as / the moment** = immediatamente quando
+    → *Call me as soon as you arrive.*
+    **once** = quando e solo dopo (implica completamento)
+    → *Once you've finished, you can leave.*
+    **by the time** = prima/quando si raggiunge una scadenza/momento
+    → *By the time she arrived, everyone had left.*
+    **until / till** = fino al momento in cui
+    → *Wait until I get back.*
+  example_basic:
+    en: "I called her as soon as I arrived so that she wouldn't worry."
+    it: "L'ho chiamata appena sono arrivato in modo che non si preoccupasse."
+  example_complex:
+    en: "The team worked through the night in order to finalise the proposal, so that by the time the board convened the following morning, all outstanding issues had been resolved."
+    it: "Il team ha lavorato tutta la notte per finalizzare la proposta, cosicché quando il consiglio si è riunito la mattina seguente, tutti i problemi in sospeso erano stati risolti."
+  vocabulary:
+    - word: finalise
+      pos: verb
+      ipa: /ˈfaɪnəlaɪz/
+      meaning_it: finalizzare, completare
+    - word: convene
+      pos: verb
+      ipa: /kənˈviːn/
+      meaning_it: riunirsi, convocarsi
+    - word: outstanding
+      pos: adjective
+      ipa: /ˌaʊtˈstændɪŋ/
+      meaning_it: "in sospeso, non risolto (anche: eccezionale)"
+    - word: resolve
+      pos: verb
+      ipa: /rɪˈzɒlv/
+      meaning_it: risolvere
+  story_it: |
+    I connettori di scopo sono frecce su un arco — puntano verso un obiettivo.
+    IN ORDER TO è una freccia elegante di metallo (formale, si sente il freddo del metallo),
+    SO THAT è una freccia di legno semplice con una corda (si sente la tensione della corda).
+    I connettori di tempo invece sono un orologio con diversi pulsanti:
+    AS SOON AS fa suonare la sveglia istantaneamente — DRIIIN — nel momento esatto.
+    ONCE è un interruttore che si attiva solo dopo che il primo processo è completato —
+    si sente il click quando il circuito si chiude (prima finisci, poi il click, poi l'azione).
+    BY THE TIME è un timer che conta alla rovescia — quando arriva a zero,
+    tutto deve essere già successo (si sente il BEEP finale, odore di urgenza).
+    Il Gigante usa «in order to» in una conversazione informale —
+    tutti si girano a guardarlo come se portasse la giacca della cerimonia al supermercato.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 14 — COMPARATIVES & SUPERLATIVES (giorni 49–50)
+# ─────────────────────────────────────────
+
+- slug: comparatives_as_as
+  tags: [comparatives, comparatives_block, comparative_as_as, part4_transformation]
+  title_en: "Comparatives — as…as, comparative, double comparative"
+  title_it: "Comparativi — as…as, comparativo, doppio comparativo"
+  display_order: 140
+  rule_en: |
+    **as + adj/adv + as** = equal comparison
+    → *She is as talented as her sister.*
+    → *It didn't take as long as I expected.*
+
+    **Comparative + than** (short adj: +er; long adj: more + adj)
+    → *This model is cheaper than the previous one.*
+    → *The results were more significant than anticipated.*
+
+    **Double comparative** = gradual change (the more…the more)
+    → *The more you practise, the better you become.*
+    → *The harder she worked, the more confident she felt.*
+
+    **no sooner…than / hardly…when** = one event immediately followed by another
+    → *No sooner had she arrived than the meeting started.*
+    → *Hardly had he spoken when the alarm went off.*
+    ⚠️ «no sooner/hardly» require INVERSION: had + subject (not «No sooner she had arrived»)
+  rule_it: |
+    **as + agg/avv + as** = confronto di uguaglianza
+    → *She is as talented as her sister.*
+    → *It didn't take as long as I expected.*
+
+    **Comparativo + than** (agg. corti: +er; agg. lunghi: more + agg)
+    → *This model is cheaper than the previous one.*
+    → *The results were more significant than anticipated.*
+
+    **Doppio comparativo** = cambiamento graduale (più…più)
+    → *The more you practise, the better you become.*
+    → *The harder she worked, the more confident she felt.*
+
+    **no sooner…than / hardly…when** = un evento immediatamente seguito da un altro
+    → *No sooner had she arrived than the meeting started.*
+    ⚠️ «no sooner/hardly» richiedono INVERSIONE: had + soggetto
+  example_basic:
+    en: "The new system is far more efficient than the old one and isn't as expensive as we feared."
+    it: "Il nuovo sistema è molto più efficiente di quello vecchio e non è così costoso come temevamo."
+  example_complex:
+    en: "The more stakeholders were consulted, the more complex the requirements became; no sooner had a consensus been reached than new objections arose from previously silent parties."
+    it: "Più venivano consultati gli stakeholder, più i requisiti diventavano complessi; non appena si era raggiunto un consenso, sorgevano nuove obiezioni da parti precedentemente silenziose."
+  vocabulary:
+    - word: consulted
+      pos: verb (past passive)
+      ipa: /kənˈsʌltɪd/
+      meaning_it: consultato
+    - word: requirement
+      pos: noun
+      ipa: /rɪˈkwaɪəmənt/
+      meaning_it: requisito, esigenza
+    - word: consensus
+      pos: noun
+      ipa: /kənˈsɛnsəs/
+      meaning_it: consenso
+    - word: objection
+      pos: noun
+      ipa: /əbˈdʒɛkʃən/
+      meaning_it: obiezione, riserva
+    - word: previously
+      pos: adverb
+      ipa: /ˈpriːviəsli/
+      meaning_it: precedentemente, prima
+  story_it: |
+    Nel Grammar Lab c'è una bilancia con due piatti.
+    AS...AS mette pesi IDENTICI su entrambi i piatti — la bilancia è perfettamente in equilibrio
+    (si sente il silenzio della bilancia ferma, nessun cigolìo).
+    Il comparativo mette più peso su UN piatto — la bilancia si inclina (si sente il tonfo),
+    e c'è sempre un THAN accanto al piatto più pesante.
+    Il doppio comparativo è una bilancia automatica che scala:
+    aggiungi peso a sinistra (MORE) e il piatto destro sale automaticamente (BETTER).
+    NO SOONER è drammatico: il Gigante arriva correndo (BOOM dei piedi sul pavimento),
+    la bilancia si rovescia — HAD + soggetto prima, poi la conseguenza.
+    Il prof. Verne fa notare l'inversione: «No sooner HAD she arrived — non *she had*.»
+    Prima capisci il tipo di confronto (uguale/diverso/graduale), poi scegli lo strumento.
+
+- slug: superlatives_structures
+  tags: [comparatives, comparatives_block, superlative, part4_transformation]
+  title_en: "Superlatives — the most / -est, by far, comparative of fraction"
+  title_it: "Superlativi — the most / -est, by far, fraction comparatives"
+  display_order: 141
+  rule_en: |
+    **Superlatives**: the + adjective + -est (short) OR the most + adjective (long)
+    → *This is the longest bridge in the country.*
+    → *She is the most experienced candidate.*
+
+    After superlatives: use **in** (places/groups) or **of** (amounts/time)
+    → *the best restaurant **in** the city* / *the hottest day **of** the year*
+
+    **by far** = emphasise the superlative
+    → *She is by far the most qualified applicant.*
+
+    **Fraction comparatives** (formal, FCE Part 4):
+    → *This model costs three times **as much as** the other.*
+    → *The new route is twice **as long as** the old one.*
+    → *There are half **as many** applicants as last year.*
+  rule_it: |
+    **Superlativi**: the + aggettivo + -est (corti) OPPURE the most + aggettivo (lunghi)
+    → *This is the longest bridge in the country.*
+    → *She is the most experienced candidate.*
+
+    Dopo i superlativi: usa **in** (luoghi/gruppi) o **of** (quantità/tempo)
+    → *the best restaurant **in** the city* / *the hottest day **of** the year*
+
+    **by far** = enfatizza il superlativo
+    → *She is by far the most qualified applicant.*
+
+    **Comparativi frazionali** (formale, FCE Part 4):
+    → *This model costs three times **as much as** the other.*
+    → *The new route is twice **as long as** the old one.*
+  example_basic:
+    en: "This is by far the most challenging project I have ever managed — and the most rewarding."
+    it: "Questo è di gran lunga il progetto più impegnativo che abbia mai gestito — e il più gratificante."
+  example_complex:
+    en: "The proposed infrastructure investment is nearly twice as costly as the previous scheme and by far the most ambitious undertaking the city has approved in over a decade."
+    it: "L'investimento infrastrutturale proposto costa quasi il doppio del piano precedente ed è di gran lunga l'impresa più ambiziosa approvata dalla città in oltre un decennio."
+  vocabulary:
+    - word: infrastructure
+      pos: noun
+      ipa: /ˈɪnfrəˌstrʌktʃə/
+      meaning_it: infrastruttura
+    - word: ambitious
+      pos: adjective
+      ipa: /æmˈbɪʃəs/
+      meaning_it: ambizioso
+    - word: undertaking
+      pos: noun
+      ipa: /ˌʌndəˈteɪkɪŋ/
+      meaning_it: impresa, progetto
+    - word: scheme
+      pos: noun
+      ipa: /skiːm/
+      meaning_it: piano, programma, schema
+    - word: costly
+      pos: adjective
+      ipa: /ˈkɒstli/
+      meaning_it: costoso
+  story_it: |
+    I superlativi nel Grammar Lab sono trofei sul più alto scaffale della libreria —
+    si deve usare la scala per arrivare a THE (il palco più alto, legno lucido, profumo di cera).
+    BY FAR è un faro che illumina il trofeo da lontano — lo vedi brillare anche dall'altra parte del lab.
+    I comparativi frazionali (twice as…as, three times as…as) sono righelli sovrapposti:
+    il Gigante tiene due righelli fianco a fianco — uno è il DOPPIO dell'altro
+    (si vede la differenza visivamente, si sente il peso diverso in mano).
+    Marco prova «the best restaurant of the city» — lo scaffale trema (OF non va con i luoghi).
+    Il trofeo cade, si sente il CRASH, il prof. Verne lo raccoglie e dice: «IN the city.»
+    Prima impara il trofeo (superlativo), poi scegli la preposizione giusta (in/of).
+
+
+# ─────────────────────────────────────────
+# BLOCCO 15 — RELATIVE CLAUSES (giorni 51–52)
+# ─────────────────────────────────────────
+
+- slug: relative_defining
+  tags: [relative_clauses, relative_clauses_block, rel_defining, part2_open_cloze]
+  title_en: "Relative Clauses — Defining (no comma)"
+  title_it: "Relative Clauses — Definenti (senza virgola)"
+  display_order: 150
+  rule_en: |
+    A **defining relative clause** identifies WHICH person/thing we mean.
+    It is essential — remove it and the sentence loses its meaning.
+    **No commas.**
+
+    **who** → people (subject or object)
+    → *The scientist **who discovered** penicillin was Alexander Fleming.*
+    **which** → things/animals
+    → *The report **which was submitted** yesterday needs revising.*
+    **that** → people OR things (common in defining clauses, especially spoken)
+    → *The policy **that was introduced** last year has been effective.*
+    **whose** → possession (people and things)
+    → *The researcher **whose findings** challenged the theory retired last year.*
+
+    ⚠️ In defining clauses: «that» can replace «who/which» — but NOT in non-defining.
+    ⚠️ Object pronouns can be omitted: *The book (that) I read was excellent.*
+  rule_it: |
+    Una **relative clause definente** identifica DI QUALE persona/cosa stiamo parlando.
+    È essenziale — toglila e la frase perde il significato. **Senza virgola.**
+
+    **who** → persone (soggetto o oggetto)
+    → *The scientist **who discovered** penicillin was Alexander Fleming.*
+    **which** → cose/animali
+    → *The report **which was submitted** yesterday needs revising.*
+    **that** → persone O cose (comune nelle definenti, specialmente nel parlato)
+    → *The policy **that was introduced** last year has been effective.*
+    **whose** → possesso (persone e cose)
+    → *The researcher **whose findings** challenged the theory retired last year.*
+
+    ⚠️ Nelle definenti: «that» può sostituire «who/which» — ma NON nelle non-definenti.
+    ⚠️ I pronomi oggetto possono essere omessi: *The book (that) I read was excellent.*
+  example_basic:
+    en: "The colleague that submitted the report and the manager whose signature was missing are both being investigated."
+    it: "Il collega che ha presentato il rapporto e il manager la cui firma mancava sono entrambi sotto indagine."
+  example_complex:
+    en: "The investigative journalist who exposed the scandal, whose article prompted widespread calls for reform, has been shortlisted for the most prestigious award in the field."
+    it: "La giornalista investigativa che ha scoperto lo scandalo, il cui articolo ha suscitato un ampio appello alla riforma, è stata inserita nella rosa dei candidati per il premio più prestigioso del settore."
+  vocabulary:
+    - word: investigative
+      pos: adjective
+      ipa: /ɪnˈvɛstɪɡətɪv/
+      meaning_it: investigativo, d'inchiesta
+    - word: expose
+      pos: verb
+      ipa: /ɪkˈspəʊz/
+      meaning_it: smascherare, rivelare, esporre
+    - word: prompt
+      pos: verb
+      ipa: /prɒmpt/
+      meaning_it: suscitare, provocare, spingere a
+    - word: shortlist
+      pos: verb
+      ipa: /ˈʃɔːtlɪst/
+      meaning_it: inserire nella rosa finale dei candidati
+    - word: prestigious
+      pos: adjective
+      ipa: /prɛˈstɪdʒəs/
+      meaning_it: prestigioso
+  story_it: |
+    Nel Grammar Lab ogni sostantivo porta un cartellino identificativo.
+    La relative clause definente è come un cartellino ROSSO OBBLIGATORIO —
+    senza di esso non si sa di quale persona/cosa stai parlando
+    (il Gigante entra in una stanza piena di scienziati senza sapere quale).
+    WHO, WHICH, THAT sono tre pass d'ingresso — ognuno apre la porta al gruppo giusto:
+    WHO apre la porta dei corridori umani (si sente il calpestio di piedi),
+    WHICH apre la porta degli oggetti (rumore di cose che tintinnano),
+    THAT apre entrambe le porte (universale, ma solo in assenza di virgola).
+    Nessuna virgola = il cartellino è attaccato direttamente al sostantivo.
+    Marco prova a mettere una virgola: il cartellino si stacca e cade a terra —
+    diventa NON-defining (vedi prossima scheda).
+
+- slug: relative_non_defining
+  tags: [relative_clauses, relative_clauses_block, rel_defining_vs_non_defining, part2_open_cloze]
+  title_en: "Relative Clauses — Non-defining (comma required)"
+  title_it: "Relative Clauses — Non-definenti (virgola obbligatoria)"
+  display_order: 151
+  rule_en: |
+    A **non-defining relative clause** adds EXTRA information about someone/something
+    already identified. It is not essential — it could be removed in brackets.
+    **Commas are obligatory.**
+
+    → *Alexander Fleming, **who discovered penicillin**, was Scottish.* (extra info — we know who)
+    → *The new policy, **which was introduced last year**, has been widely praised.* (extra info)
+
+    Rules for non-defining clauses:
+    ✓ Use **who** (people), **which** (things) — NEVER «that»
+    ✓ Always use commas (before AND after if in the middle)
+    ✓ The pronoun CANNOT be omitted
+
+    ⚠️ NEVER use «that» in non-defining clauses — this is a very common error.
+    ⚠️ «which» at the start of a new clause = referring back to whole previous idea:
+    → *She passed the exam, **which** surprised everyone.* (the whole fact surprised people)
+  rule_it: |
+    Una **relative clause non-definente** aggiunge informazioni EXTRA su qualcuno/qualcosa
+    già identificato. Non è essenziale — potrebbe essere rimossa tra parentesi.
+    **Le virgole sono obbligatorie.**
+
+    → *Alexander Fleming, **who discovered penicillin**, was Scottish.*
+    → *The new policy, **which was introduced last year**, has been widely praised.*
+
+    Regole per le non-definenti:
+    ✓ Usa **who** (persone), **which** (cose) — MAI «that»
+    ✓ Sempre virgole (prima E dopo se è al centro)
+    ✓ Il pronome NON può essere omesso
+
+    ⚠️ Non usare MAI «that» nelle non-definenti — errore molto comune.
+    ⚠️ «which» all'inizio di una nuova frase = riferimento all'intera frase precedente:
+    → *She passed the exam, **which** surprised everyone.* (il fatto intero ha sorpreso tutti)
+  example_basic:
+    en: "My manager, who has worked here for fifteen years, which is quite remarkable, will retire next month."
+    it: "Il mio manager, che lavora qui da quindici anni, il che è abbastanza notevole, andrà in pensione il mese prossimo."
+  example_complex:
+    en: "The committee's final report, which was published after months of deliberation, concluded that the regulatory framework, whose weaknesses had long been acknowledged, required fundamental reform."
+    it: "Il rapporto finale del comitato, pubblicato dopo mesi di deliberazione, ha concluso che il quadro normativo, le cui debolezze erano state a lungo riconosciute, necessitava di una riforma fondamentale."
+  vocabulary:
+    - word: deliberation
+      pos: noun
+      ipa: /dɪˌlɪbəˈreɪʃən/
+      meaning_it: deliberazione, riflessione approfondita
+    - word: regulatory
+      pos: adjective
+      ipa: /ˈrɛɡjʊlətəri/
+      meaning_it: normativo, regolatorio
+    - word: framework
+      pos: noun
+      ipa: /ˈfreɪmwɜːk/
+      meaning_it: quadro normativo, struttura, framework
+    - word: fundamental
+      pos: adjective
+      ipa: /ˌfʌndəˈmɛntəl/
+      meaning_it: fondamentale
+    - word: acknowledge
+      pos: verb
+      ipa: /əkˈnɒlɪdʒ/
+      meaning_it: riconoscere, ammettere
+  story_it: |
+    Le virgole nel Grammar Lab sono parentesi fisiche — due pannelli di vetro
+    che isolano acusticamente la clausola non-definente.
+    Marco parla di Alexander Fleming — tutti sanno già chi è (identificato).
+    La clausola «who discovered penicillin» entra tra i due pannelli di vetro:
+    si sente la differenza di eco (risuona diversamente, meno urgente).
+    Se Marco rimuove i pannelli (toglie le virgole), la clausola diventa definente —
+    come se non sapessimo chi fosse Fleming (assurdo, paradossale: tutti lo conoscono).
+    THAT non può passare tra i pannelli — ha un sensore che lo blocca
+    (beep acuto, odore di plastica surriscaldata). Solo WHO e WHICH passano.
+    Prima l'identificazione (il soggetto è già noto),
+    poi i pannelli di vetro (virgole), poi l'informazione extra.
+    Non puoi mettere i pannelli intorno a informazioni obbligatorie — cadono.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 16 — CONDITIONALS & INVERSION (giorni 53–54)
+# ─────────────────────────────────────────
+
+- slug: conditional_2nd_3rd
+  tags: [conditionals, conditionals_block, conditional_2, conditional_3, part4_transformation]
+  title_en: "Conditionals — 2nd & 3rd Conditional"
+  title_it: "Condizionali — 2° e 3° Condizionale"
+  display_order: 160
+  rule_en: |
+    **2nd Conditional** — imaginary/unlikely present or future situation
+    If + **past simple**, subject + **would + infinitive**
+    → *If I had more time, I would learn a third language.*
+    → *If she were the director, things would be different.* (were — formal for all persons)
+
+    **3rd Conditional** — imaginary past (couldn't happen — it's over)
+    If + **past perfect**, subject + **would have + past participle**
+    → *If I had studied harder, I would have passed the exam.*
+    → *If they had invested earlier, the company wouldn't have collapsed.*
+
+    **Mixed Conditional** — past cause, present result
+    If + **past perfect**, subject + **would + infinitive**
+    → *If she had taken that job, she would be living in Paris now.*
+
+    ⚠️ NEVER «would» in the if-clause: NOT «*If I would have…*»
+  rule_it: |
+    **2° Condizionale** — situazione immaginaria/improbabile nel presente o futuro
+    If + **past simple**, soggetto + **would + infinito**
+    → *If I had more time, I would learn a third language.*
+    → *If she were the director, things would be different.* (were — formale per tutte le persone)
+
+    **3° Condizionale** — passato immaginario (impossibile — è già finito)
+    If + **past perfect**, soggetto + **would have + participio passato**
+    → *If I had studied harder, I would have passed the exam.*
+
+    **Condizionale Misto** — causa passata, risultato presente
+    If + **past perfect**, soggetto + **would + infinito**
+    → *If she had taken that job, she would be living in Paris now.*
+
+    ⚠️ MAI «would» nella if-clause: NON «*If I would have…*»
+  example_basic:
+    en: "If they had planned more carefully, the project wouldn't have gone over budget."
+    it: "Se avessero pianificato più attentamente, il progetto non avrebbe sforato il budget."
+  example_complex:
+    en: "If the committee had adopted a more transparent approach from the outset, public trust would not have eroded so significantly, and the organisation would still be operating at full capacity."
+    it: "Se il comitato avesse adottato un approccio più trasparente fin dall'inizio, la fiducia pubblica non si sarebbe erosa così significativamente, e l'organizzazione starebbe ancora operando a piena capacità."
+  vocabulary:
+    - word: transparent
+      pos: adjective
+      ipa: /trænsˈpærənt/
+      meaning_it: trasparente (anche figurato)
+    - word: from the outset
+      pos: phrase
+      ipa: /frɒm ðə ˈaʊtsɛt/
+      meaning_it: fin dall'inizio, sin dall'inizio
+    - word: erode
+      pos: verb
+      ipa: /ɪˈrəʊd/
+      meaning_it: erodere, consumare gradualmente
+    - word: capacity
+      pos: noun
+      ipa: /kəˈpæsɪti/
+      meaning_it: capacità, potenziale massimo
+    - word: go over budget
+      pos: phrase
+      ipa: /ɡəʊ ˈəʊvə ˈbʌdʒɪt/
+      meaning_it: sforare il budget
+  story_it: |
+    Il Grammar Lab ha una macchina del tempo con due impostazioni.
+    IMPOSTAZIONE 2: Marco entra nel futuro immaginario — non è reale,
+    si sente la consistenza morbida e impalpabile dell'aria (texture di sogno),
+    colori leggermente sbiaditi. «If I had time» — il past simple nella if-clause
+    è il biglietto d'ingresso per questo universo parallelo.
+    IMPOSTAZIONE 3: Marco entra nel passato già avvenuto — le porte sono sigillate
+    e opache (si sente il freddo definitivo del metallo), c'è un cartello: «NON MODIFICABILE».
+    Il would have + pp è il lamento di chi guarda dalla finestra chiusa.
+    Il Gigante prova a mettere «would» nella if-clause:
+    la macchina del tempo si blocca con un CRASH, odore di cavi bruciati.
+    Prima scegli l'impostazione (presente/futuro immaginario o passato irrecuperabile),
+    poi compila il biglietto correttamente. Il WOULD non va mai nel biglietto d'ingresso.
+
+- slug: inversion_conditional
+  tags: [conditionals, conditionals_block, inversion_had_were_should, part4_transformation]
+  title_en: "Inversion — Had, Were, Should (Conditional Inversion)"
+  title_it: "Inversione — Had, Were, Should (Inversione Condizionale)"
+  display_order: 161
+  rule_en: |
+    In formal English, you can replace «if» with **inverted word order** (auxiliary before subject).
+    This is common in written English and FCE Part 4.
+
+    **Had** + subject + pp (replaces: if + had + pp)
+    → *If I had known* → ***Had** I known*, I would have acted differently.*
+    → *If she had arrived earlier* → ***Had** she arrived earlier, we wouldn't have missed it.*
+
+    **Were** + subject + infinitive (replaces: if + were to + infinitive)
+    → ***Were** he to resign, the entire team would be affected.*
+
+    **Should** + subject + infinitive (replaces: if + should + inf — unlikely future)
+    → ***Should** you have any further questions, please do not hesitate to contact us.*
+
+    ⚠️ Inversion = no «if», but the meaning is identical. Used to sound more formal.
+  rule_it: |
+    In inglese formale, puoi sostituire «if» con l'**ordine invertito** (ausiliare prima del soggetto).
+    Comune nell'inglese scritto e nel FCE Part 4.
+
+    **Had** + soggetto + pp (sostituisce: if + had + pp)
+    → *If I had known* → ***Had** I known*, I would have acted differently.*
+
+    **Were** + soggetto + infinito (sostituisce: if + were to + infinito)
+    → ***Were** he to resign, the entire team would be affected.*
+
+    **Should** + soggetto + infinito (sostituisce: if + should + inf — futuro improbabile)
+    → ***Should** you have any further questions, please do not hesitate to contact us.*
+
+    ⚠️ Inversione = no «if», ma il significato è identico. Si usa per suonare più formale.
+  example_basic:
+    en: "Had I known about the meeting, I would have prepared better. Should you need any further information, do not hesitate to ask."
+    it: "Se avessi saputo della riunione, mi sarei preparato meglio. Se dovesse avere bisogno di ulteriori informazioni, non esiti a chiedere."
+  example_complex:
+    en: "Had the regulatory changes been implemented sooner, the crisis might have been averted; were the committee to reconsider its position now, it would need to acknowledge past oversights."
+    it: "Se i cambiamenti normativi fossero stati implementati prima, la crisi avrebbe potuto essere evitata; se il comitato dovesse riconsiderare la propria posizione ora, dovrebbe riconoscere le sviste passate."
+  vocabulary:
+    - word: avert
+      pos: verb
+      ipa: /əˈvɜːt/
+      meaning_it: evitare, scongiurare
+    - word: oversight
+      pos: noun
+      ipa: /ˈəʊvəsaɪt/
+      meaning_it: "svista, omissione (anche: supervisione)"
+    - word: hesitate
+      pos: verb
+      ipa: /ˈhɛzɪteɪt/
+      meaning_it: esitare
+    - word: resign
+      pos: verb
+      ipa: /rɪˈzaɪn/
+      meaning_it: dimettersi, rassegnare le dimissioni
+  story_it: |
+    Il professor Verne ha una giacca formale che indossa solo nelle occasioni importanti
+    (odore di naftalina, tessuto rigido e freddo al tatto — formale).
+    Quando la indossa, le frasi si invertono automaticamente:
+    IF sparisce (come un coniglio che scompare nel cappello — WHOMP)
+    e l'ausiliare (HAD, WERE, SHOULD) balza in prima posizione.
+    «If I had known» → «Had I known» — stesso significato, giacca formale.
+    Marco la prova: la giacca è scomoda (è insolita) ma funziona perfettamente
+    nelle situazioni formali (lettere, saggi, FCE Writing).
+    Il Gigante la indossa per ordinare una pizza al telefono:
+    «Should you have any toppings to suggest, please do not hesitate...»
+    — il pizzaiolo riattacca (paradossale, si sente il tono del telefono che cade).
+    Prima valuti il contesto (formale = giacca), poi togli IF e metti l'ausiliare davanti.
+
+
+# ─────────────────────────────────────────
+# BLOCCO 17 — QUANTIFIERS & ARTICLES (giorni 55–56)
+# ─────────────────────────────────────────
+
+- slug: quantifiers_few_little
+  tags: [quantifiers, quantifiers_block, quant_few_little, false_friend_italian, part2_open_cloze]
+  title_en: "Quantifiers — few/a few, little/a little, much/many, too/enough"
+  title_it: "Quantificatori — few/a few, little/a little, much/many, too/enough"
+  display_order: 170
+  rule_en: |
+    **Countable nouns** (can be counted: books, people, mistakes):
+    **many** / **a great number of** / **a few** (some, positive) / **few** (almost none, negative)
+    → *A few students passed.* (some — good) vs *Few students passed.* (almost none — bad)
+
+    **Uncountable nouns** (can't be counted: water, money, advice):
+    **much** / **a great deal of** / **a little** (some, positive) / **little** (almost none, negative)
+    → *A little time remains.* (some — ok) vs *Little time remains.* (almost none — urgent)
+
+    **both countable and uncountable**: some / any / a lot of / plenty of / enough
+
+    **too** + adj/adv = more than necessary/desired (negative)
+    → *It's too cold to swim.* / *He works too slowly.*
+    **enough** + noun / adj/adv + enough = sufficient
+    → *We have enough time.* / *She isn't tall enough.*
+
+    ⚠️ Italian trap: «pochi» = few (negative) OR a few (positive) — in English they're VERY different.
+  rule_it: |
+    **Sostantivi numerabili** (si possono contare: books, people, mistakes):
+    **many** / **a great number of** / **a few** (alcuni, positivo) / **few** (quasi nessuno, negativo)
+    → *A few students passed.* (alcuni — bene) vs *Few students passed.* (quasi nessuno — male)
+
+    **Sostantivi non numerabili** (non si contano: water, money, advice):
+    **much** / **a great deal of** / **a little** (un po', positivo) / **little** (quasi niente, negativo)
+    → *A little time remains.* (un po' — ok) vs *Little time remains.* (quasi niente — urgente)
+
+    **entrambi**: some / any / a lot of / plenty of / enough
+
+    **too** + agg/avv = più del necessario (negativo)
+    → *It's too cold to swim.* / *He works too slowly.*
+    **enough** + sost / agg/avv + enough = sufficiente
+    → *We have enough time.* / *She isn't tall enough.*
+
+    ⚠️ Trappola italiana: «pochi» = few (negativo) O a few (positivo) — in inglese sono MOLTO diversi.
+  example_basic:
+    en: "Few people applied, but a few of the candidates were highly qualified. Unfortunately, there wasn't enough time to interview them all properly."
+    it: "Poche persone si sono candidate, ma alcuni dei candidati erano altamente qualificati. Purtroppo non c'era abbastanza tempo per intervistarli tutti adeguatamente."
+  example_complex:
+    en: "There is little evidence to support the claim, yet a little encouragement from senior management could make a considerable difference, provided there is enough political will to act decisively."
+    it: "Ci sono poche prove a supporto della tesi, eppure un po' di incoraggiamento da parte del management senior potrebbe fare una differenza considerevole, a condizione che ci sia sufficiente volontà politica per agire in modo decisivo."
+  vocabulary:
+    - word: evidence
+      pos: noun
+      ipa: /ˈɛvɪdəns/
+      meaning_it: prova, evidenza
+    - word: encouragement
+      pos: noun
+      ipa: /ɪnˈkʌrɪdʒmənt/
+      meaning_it: incoraggiamento
+    - word: political will
+      pos: noun phrase
+      ipa: /pəˈlɪtɪkəl wɪl/
+      meaning_it: volontà politica
+    - word: decisively
+      pos: adverb
+      ipa: /dɪˈsaɪsɪvli/
+      meaning_it: in modo decisivo, risolutamente
+    - word: provided
+      pos: conjunction
+      ipa: /prəˈvaɪdɪd/
+      meaning_it: a condizione che, purché
+  story_it: |
+    Nel Grammar Lab c'è una dispensa con due scomparti.
+    Scomparto CONTABILE (scaffale a destra): libri, persone, errori — si possono contare.
+    Scomparto INCONTABILE (scaffale a sinistra): acqua, consiglio, tempo — scorrono, non si contano.
+    La Gemella FEW vive nello scaffale contabile con una faccia triste (quasi vuoto —
+    quasi nessuno, odore di polvere). La Gemella A FEW ha la stessa faccia ma con un sorriso
+    (alcuni, il barattolo ha qualcosa dentro — odore di cibo fresco).
+    La confusione italiana: «pochi» ha UNA parola, l'inglese ne ha due con significati opposti.
+    Marco assaggia FEW: sapore amaro (negativo).
+    Assaggia A FEW: sapore neutro (positivo). Stessa parola, articolo diverso — tutto cambia.
+    Il Gigante mischia i due barattoli: «Few people came — it was a great party!»
+    Il professor Verne scuote la testa: se FEW, il party era desolante.
+
+- slug: articles_the_zero
+  tags: [quantifiers, quantifiers_block, article_the_zero, part2_open_cloze]
+  title_en: "Articles — the, a/an, and zero article"
+  title_it: "Articoli — the, a/an e assenza di articolo"
+  display_order: 171
+  rule_en: |
+    **a / an** = first mention, one of many, classifying
+    → *I saw a film.* / *She is a doctor.*
+
+    **the** = specific, already mentioned, unique, shared knowledge
+    → *The film I saw was excellent.* / *The sun / the moon / the government*
+
+    **Zero article (no article)**:
+    - Plural/uncountable in general statements: *Dogs are loyal.* / *Water is essential.*
+    - Names of most countries, cities, languages: *Italy, London, English*
+    - Meals, transport, institutions (general): *at school / by train / at breakfast*
+    - Abstract nouns in general: *Love is complicated.* / *Life is short.*
+
+    ⚠️ «the» is used with: oceans (the Pacific), mountain ranges (the Alps),
+    rivers (the Thames), plural country names (the Netherlands, the United States)
+  rule_it: |
+    **a / an** = prima menzione, uno tra tanti, classificazione
+    → *I saw a film.* / *She is a doctor.*
+
+    **the** = specifico, già menzionato, unico, conoscenza condivisa
+    → *The film I saw was excellent.* / *The sun / the moon / the government*
+
+    **Assenza di articolo (zero article)**:
+    - Plurali/incontabili in affermazioni generali: *Dogs are loyal.* / *Water is essential.*
+    - Nomi di la maggior parte di paesi, città, lingue: *Italy, London, English*
+    - Pasti, trasporti, istituzioni (uso generale): *at school / by train / at breakfast*
+    - Sostantivi astratti in generale: *Love is complicated.* / *Life is short.*
+
+    ⚠️ «the» si usa con: oceani (the Pacific), catene montuose (the Alps),
+    fiumi (the Thames), nomi di paesi al plurale (the Netherlands, the United States)
+  example_basic:
+    en: "I had a meeting at the office this morning. The manager who attended is an expert in the field."
+    it: "Stamattina ho avuto una riunione in ufficio. Il manager che ha partecipato è un esperto nel settore."
+  example_complex:
+    en: "The report published by the United Nations highlights the urgent need for governments to address water scarcity — a challenge that demands both political will and international cooperation."
+    it: "Il rapporto pubblicato dalle Nazioni Unite evidenzia l'urgente necessità che i governi affrontino la scarsità d'acqua — una sfida che richiede sia volontà politica che cooperazione internazionale."
+  vocabulary:
+    - word: scarcity
+      pos: noun
+      ipa: /ˈskɛəsɪti/
+      meaning_it: scarsità, carenza
+    - word: cooperation
+      pos: noun
+      ipa: /kəʊˌɒpəˈreɪʃən/
+      meaning_it: cooperazione
+    - word: highlight
+      pos: verb
+      ipa: /ˈhaɪlaɪt/
+      meaning_it: evidenziare, mettere in risalto
+    - word: urgent
+      pos: adjective
+      ipa: /ˈɜːdʒənt/
+      meaning_it: urgente
+  story_it: |
+    Il professor Verne ha tre cappelli che indossa in sequenza.
+    Il cappello A/AN (di paglia, leggero) lo indossa quando incontra qualcosa per la prima volta
+    (si sente la texture fresca della paglia): «There is A dog in the garden» — primo avvistamento.
+    Il cappello THE (di velluto scuro, pesante, familiare) lo indossa la volta successiva:
+    «THE dog is barking» — lo conosciamo già, è specifico.
+    Il cappello ZERO (la testa scoperta, aria fresca) lo indossa per le generalizzazioni:
+    «Dogs are loyal» — tutti i cani, universo intero, nessun cappello necessario.
+    Il Gigante prova a usare THE per generalizzare: «The dogs are loyal animals» —
+    come se stesse parlando di dei cani specifici già menzionati.
+    Il prof. Verne si toglie il cappello di velluto con un gesto preciso:
+    «Generalizzazione = testa scoperta. The = già noto, specifico.»
+
+
+# ─────────────────────────────────────────
+# BLOCCO 18 — PHRASAL VERBS & FALSE FRIENDS (giorni 57–58)
+# ─────────────────────────────────────────
+
+- slug: phrasal_verbs_core
+  tags: [phrasal_verbs, phrasal_verbs_block, pv_set_up, pv_call_off, part1_mc_cloze, part4_transformation]
+  title_en: "Phrasal Verbs — Core FCE Patterns"
+  title_it: "Phrasal Verbs — Pattern FCE Fondamentali"
+  display_order: 180
+  rule_en: |
+    Phrasal verbs = verb + particle (preposition or adverb). The meaning often differs from the parts.
+
+    **Separable** (object can go between verb and particle — with pronoun it MUST):
+    *set up* (establish): *She set up a company.* / *She set it up.*
+    *call off* (cancel): *They called off the meeting.* / *They called it off.*
+    *put off* (postpone): *He put off making a decision.* / *He put it off.*
+    *bring up* (raise — topic or child): *She brought up the issue.* / *She brought it up.*
+    *turn down* (refuse/lower): *He turned down the offer.* / *He turned it down.*
+
+    **Inseparable** (object always after the particle):
+    *look into* (investigate): *We'll look into the matter.*
+    *come across* (find unexpectedly): *I came across an interesting article.*
+    *take after* (resemble): *She takes after her father.*
+    *look forward to* (+ -ing): *I look forward to hearing from you.*
+
+    ⚠️ «look forward to» + gerund, NOT infinitive: *NOT «look forward to hear»*
+  rule_it: |
+    I phrasal verbs = verbo + particella (preposizione o avverbio). Il significato spesso differisce dalle parti.
+
+    **Separabili** (l'oggetto può andare tra verbo e particella — con i pronomi DEVE):
+    *set up* (fondare): *She set up a company.* / *She set it up.*
+    *call off* (cancellare): *They called off the meeting.* / *They called it off.*
+    *put off* (rimandare): *He put off making a decision.* / *He put it off.*
+    *bring up* (sollevare — argomento; crescere — figlio): *She brought up the issue.*
+    *turn down* (rifiutare/abbassare): *He turned down the offer.*
+
+    **Inseparabili** (l'oggetto va sempre dopo la particella):
+    *look into* (indagare): *We'll look into the matter.*
+    *come across* (trovare per caso): *I came across an interesting article.*
+    *look forward to* (+ -ing): *I look forward to hearing from you.*
+
+    ⚠️ «look forward to» + gerundio, NON infinito
+  example_basic:
+    en: "She set up the project but eventually called it off after the main investor turned down their revised proposal."
+    it: "Ha avviato il progetto ma alla fine lo ha cancellato dopo che il principale investitore ha rifiutato la loro proposta rivista."
+  example_complex:
+    en: "The auditors are looking into the matter and have already come across several irregularities that the management had consistently put off addressing, which has brought up serious questions about corporate governance."
+    it: "I revisori stanno esaminando la questione e hanno già trovato diverse irregolarità che il management aveva continuamente rimandato, il che ha sollevato seri interrogativi sulla governance aziendale."
+  vocabulary:
+    - word: auditor
+      pos: noun
+      ipa: /ˈɔːdɪtə/
+      meaning_it: revisore dei conti
+    - word: irregularity
+      pos: noun
+      ipa: /ɪˌrɛɡjʊˈlærɪti/
+      meaning_it: irregolarità
+    - word: governance
+      pos: noun
+      ipa: /ˈɡʌvənəns/
+      meaning_it: governance, gestione
+    - word: investor
+      pos: noun
+      ipa: /ɪnˈvɛstə/
+      meaning_it: investitore
+    - word: corporate
+      pos: adjective
+      ipa: /ˈkɔːpərɪt/
+      meaning_it: aziendale, societario
+  story_it: |
+    Il professor Verne ha una valigetta piena di pezzi di puzzle —
+    verbi separabili e inseparabili hanno colori diversi.
+    Per i SEPARABILI (set up, call off): il puzzle si può smontare
+    e rimontare con l'oggetto in mezzo (Marco smonta «set up» e mette «it» nel mezzo —
+    si sente il CLICK del pezzo che entra). Ma se l'oggetto è un pronome,
+    DEVE stare in mezzo — la scatola del pezzo dice «PRONOME: OBBLIGATORIO AL CENTRO».
+    Per gli INSEPARABILI (look into, come across): i pezzi sono incollati con colla forte
+    (odore di colla, superfici appiccicose) — non si possono separare.
+    Marco prova a mettere «it» dopo «look into»: la colla gli rimane sulle dita.
+    «Look forward to» ha un pezzo speciale: dopo TO arriva sempre -ING, non l'infinito.
+    Il pezzo -ING si incastra perfettamente (suono di click soddisfacente),
+    il pezzo TO-INF rimbalza fuori (rumore di pezzo che cade sul tavolo).
+
+- slug: false_friends_italian
+  tags: [phrasal_verbs, phrasal_verbs_block, false_friend_italian, confusables]
+  title_en: "False Friends — Italian False Friends & Confusables"
+  title_it: "Falsi Amici — False Friends italiani e parole simili"
+  display_order: 181
+  rule_en: |
+    These English words look similar to Italian words but have DIFFERENT meanings:
+
+    | English | Looks like | Actual meaning | Italian equivalent |
+    |---|---|---|---|
+    | **actually** | attualmente | in fact, in reality | currently / at the moment |
+    | **eventually** | eventualmente | in the end, finally | possibly / if necessary |
+    | **sensible** | sensibile | reasonable, practical | sensitive |
+    | **sensitive** | sensibile | emotionally responsive | sensibile |
+    | **sympathetic** | simpatico | understanding, compassionate | nice, likeable |
+    | **comprehensive** | comprensivo | thorough, complete | understanding (forgiving) |
+    | **argument** | argomento | disagreement, quarrel | topic, subject |
+    | **historic** | storico | of great historical importance | qualunque cosa del passato |
+    | **few** | pochi (gen.) | almost none (negative) | «a few» = some |
+    | **pretend** | pretendere | to act as if, to fake | to demand, to expect |
+
+    ⚠️ «Actually, I agree» = in realtà, sono d'accordo (NOT «attualmente sono d'accordo»)
+  rule_it: |
+    Queste parole inglesi sembrano simili a parole italiane ma hanno significati DIVERSI:
+
+    | Inglese | Sembra | Significato reale | Equivalente italiano |
+    |---|---|---|---|
+    | **actually** | attualmente | in realtà, di fatto | currently / at the moment |
+    | **eventually** | eventualmente | alla fine, infine | possibly / if necessary |
+    | **sensible** | sensibile | ragionevole, pratico | sensitive |
+    | **sensitive** | sensibile | emotivamente reattivo | sensibile |
+    | **sympathetic** | simpatico | comprensivo, empatico | nice, likeable |
+    | **comprehensive** | comprensivo | esaustivo, completo | understanding (indulgente) |
+    | **argument** | argomento | litigio, discussione | topic, subject |
+    | **historic** | storico | di grande importanza storica | qualunque cosa del passato |
+    | **few** | pochi (gen.) | quasi nessuno (negativo) | «a few» = alcuni |
+    | **pretend** | pretendere | fingere, fare finta | to demand, to expect |
+  example_basic:
+    en: "He is actually quite sensible, not sensitive — he eventually became sympathetic to our argument after a comprehensive explanation."
+    it: "In realtà è abbastanza ragionevole, non emotivo — alla fine si è dimostrato comprensivo riguardo alla nostra discussione dopo una spiegazione esaustiva."
+  example_complex:
+    en: "The spokesperson, who actually turned out to be remarkably sympathetic to our concerns, eventually proposed a comprehensive solution that even the most sensitive critics found sensible."
+    it: "Il portavoce, che in realtà si è rivelato straordinariamente comprensivo riguardo alle nostre preoccupazioni, ha infine proposto una soluzione esaustiva che anche i critici più emotivi hanno trovato ragionevole."
+  vocabulary:
+    - word: spokesperson
+      pos: noun
+      ipa: /ˈspəʊkspɜːsən/
+      meaning_it: portavoce
+    - word: remarkably
+      pos: adverb
+      ipa: /rɪˈmɑːkəbli/
+      meaning_it: notevolmente, straordinariamente
+    - word: comprehensive
+      pos: adjective
+      ipa: /ˌkɒmprɪˈhɛnsɪv/
+      meaning_it: esaustivo, completo (NON comprensivo)
+    - word: eventually
+      pos: adverb
+      ipa: /ɪˈvɛntʃuəli/
+      meaning_it: alla fine (NON eventualmente!)
+  story_it: |
+    Nel Grammar Lab c'è una galleria di maschere — ogni falso amico indossa la maschera
+    di una parola italiana ma ha un volto completamente diverso sotto.
+    Marco alza la maschera di «actually»: sotto trova il viso di «in realtà», non di «attualmente».
+    Odore di inganno (legno verniciato, artificiale).
+    «Eventually» ha la maschera di «eventualmente» — ma dentro dice «alla fine»,
+    voce profonda e definitiva. Marco tocca la maschera: fredda, come un travestimento.
+    Il prof. Verne gli mostra «sympathetic» con la maschera di «simpatico» —
+    ma sotto c'è un volto serioso, empatico, non allegro.
+    Il Gigante si fida di tutte le maschere: usa «actually» come «attualmente»,
+    «pretend» come «pretendere» — le maschere cadono tutte in cascata (CRASH CRASH CRASH,
+    rumore di maschere di legno che battono sul pavimento).
+    Prima togli la maschera, guarda il vero volto — poi usa la parola.
+
