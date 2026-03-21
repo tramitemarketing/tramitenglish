@@ -252,7 +252,7 @@ function renderPage() {
   var ph = _session.phase;
   ['strategy','questions','review','results','errors'].forEach(function(p) {
     var el = document.getElementById('phase-' + p);
-    if (el) el.style.display = (p === ph) ? '' : 'none';
+    if (el) el.style.display = (p === ph) ? 'block' : 'none';
   });
   var footer = document.getElementById('diagFooter');
   if (footer) footer.style.display = (ph === 'results' || ph === 'errors') ? 'none' : '';
