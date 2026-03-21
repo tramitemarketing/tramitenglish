@@ -169,9 +169,13 @@
 
     <!-- Danger zone -->
     <div class="section-title" style="color:var(--error)">Zona dati</div>
-    <button class="btn btn-secondary" id="resetStatsBtn" style="color:var(--error);border-color:var(--error)">
-      Azzera statistiche
-    </button>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-secondary" id="downloadCsvBtn">&#x2B07; Scarica errori CSV</button>
+      <button class="btn btn-secondary" id="downloadTxtBtn">&#x2B07; Scarica errori TXT</button>
+      <button class="btn btn-secondary" id="resetStatsBtn" style="color:var(--error);border-color:var(--error)">
+        Azzera statistiche
+      </button>
+    </div>
 
   </main>
 
@@ -349,6 +353,57 @@
         document.getElementById('logArrow').classList.remove('open');
         renderLog();
       });
+
+      // ── Download errors ──────────────────────────────────
+      function downloadErrors(format) {
+        var errors = state.sessionErrors || [];
+        if (errors.length === 0) { UI.toast('Nessun errore da scaricare.', 'info'); return; }
+
+        var date = new Date().toISOString().slice(0, 10);
+        var content, mime, ext;
+
+        if (format === 'csv') {
+          var rows = [['Data', 'Sorgente', 'Parte', 'Domanda', 'Tua risposta', 'Risposta corretta', 'Spiegazione']];
+          errors.forEach(function(e) {
+            rows.push([
+              (e.date || '').slice(0, 10),
+              e.source || 'session',
+              e.part || '',
+              (e.question || '').replace(/"/g, '""'),
+              (e.userAnswer || '').replace(/"/g, '""'),
+              (e.correct || '').replace(/"/g, '""'),
+              (e.explanation || '').replace(/<[^>]+>/g, '').replace(/"/g, '""')
+            ]);
+          });
+          content = rows.map(function(r){ return r.map(function(c){ return '"' + c + '"'; }).join(','); }).join('\n');
+          mime = 'text/csv;charset=utf-8;';
+          ext  = 'csv';
+        } else {
+          var lines = ['TrainEnglish — Log Errori — ' + date, '='.repeat(50), ''];
+          errors.forEach(function(e, i) {
+            lines.push((i + 1) + '. [' + (e.part || '?') + '] ' + (e.source === 'diagnostic' ? '(Test diagnostico) ' : '') + (e.date || '').slice(0, 10));
+            lines.push('   Domanda : ' + (e.question || '').replace(/<[^>]+>/g, ''));
+            lines.push('   Tua rsp : ' + (e.userAnswer || '—'));
+            lines.push('   Corretta: ' + (e.correct || '—'));
+            if (e.explanation) lines.push('   Note    : ' + e.explanation.replace(/<[^>]+>/g, ''));
+            lines.push('');
+          });
+          content = lines.join('\n');
+          mime = 'text/plain;charset=utf-8;';
+          ext  = 'txt';
+        }
+
+        var blob = new Blob(['\uFEFF' + content], { type: mime });
+        var url  = URL.createObjectURL(blob);
+        var a    = document.createElement('a');
+        a.href     = url;
+        a.download = 'traininenglish_errori_' + date + '.' + ext;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      document.getElementById('downloadCsvBtn').addEventListener('click', function(){ downloadErrors('csv'); });
+      document.getElementById('downloadTxtBtn').addEventListener('click', function(){ downloadErrors('txt'); });
 
       // Reset stats
       document.getElementById('resetStatsBtn').addEventListener('click', function () {
