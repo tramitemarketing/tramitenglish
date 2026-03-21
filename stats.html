@@ -57,6 +57,37 @@
       color: var(--subtext);
       margin-top: 4px;
     }
+
+    /* ── Error log section ── */
+    .log-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; padding: 12px 0; border: none; background: none;
+      width: 100%; text-align: left;
+    }
+    .log-toggle-label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .log-toggle-meta  { font-size: 12px; color: var(--subtext); }
+    .log-toggle-arrow { font-size: 14px; color: var(--subtext); transition: transform .2s; }
+    .log-toggle-arrow.open { transform: rotate(180deg); }
+    .log-preview { display: flex; flex-direction: column; gap: 8px; }
+    .log-full    { display: none; flex-direction: column; gap: 8px; padding-top: 8px; }
+    .log-full.visible { display: flex; }
+    .log-err-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px;
+    }
+    .log-err-meta    { font-size: 11px; color: var(--subtext); margin-bottom: 4px; }
+    .log-err-q       { font-size: 13px; color: var(--text); margin-bottom: 6px; font-weight: 500; }
+    .log-err-answers { font-size: 12px; }
+    .log-err-wrong   { color: var(--error); }
+    .log-err-correct { color: var(--success); font-weight: 600; }
+    .log-err-expl    { font-size: 11px; color: var(--text2); margin-top: 6px; line-height: 1.5; background: var(--surface2); border-radius: 6px; padding: 6px 8px; }
+    .log-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 10px; scrollbar-width: none; }
+    .log-chips::-webkit-scrollbar { display: none; }
+    .show-more-btn {
+      background: none; border: 1px solid var(--border); border-radius: 10px;
+      padding: 8px 14px; font-size: 12px; color: var(--text2); cursor: pointer; width: 100%;
+    }
+    .show-more-btn:hover { border-color: var(--accent); color: var(--accent); }
   </style>
 </head>
 <body>
@@ -97,6 +128,33 @@
 
     <div class="divider"></div>
 
+    <!-- Error log (collapsible) -->
+    <div class="section-title">Errori recenti</div>
+
+    <!-- Filter chips -->
+    <div class="log-chips" id="logChips">
+      <span class="chip active" data-filter="all">Tutti</span>
+      <span class="chip" data-filter="diagnostic">Test diagnostici</span>
+      <span class="chip" data-filter="session">Sessioni</span>
+      <span class="chip" data-filter="Part 1">Part 1</span>
+      <span class="chip" data-filter="Part 2">Part 2</span>
+      <span class="chip" data-filter="Part 3">Part 3</span>
+      <span class="chip" data-filter="Part 4">Part 4</span>
+    </div>
+
+    <!-- Last 3 always visible -->
+    <div id="logPreview" class="log-preview"></div>
+
+    <!-- Toggle for all errors -->
+    <button class="log-toggle" id="logToggle">
+      <span class="log-toggle-label">Vedi tutti gli errori</span>
+      <span class="log-toggle-meta" id="logToggleMeta"></span>
+      <span class="log-toggle-arrow" id="logArrow">&#9660;</span>
+    </button>
+    <div id="logFull" class="log-full"></div>
+
+    <div class="divider"></div>
+
     <!-- Personal notes -->
     <div class="section-title">Note personali</div>
     <div class="input-group">
@@ -131,9 +189,9 @@
       <span class="nav-icon">&#x1F4D6;</span>
       <span>Libreria</span>
     </a>
-    <a href="log.html" class="nav-item">
-      <span class="nav-icon">&#x1F4CB;</span>
-      <span>Log</span>
+    <a href="test.html" class="nav-item">
+      <span class="nav-icon">&#x1F4DD;</span>
+      <span>Test</span>
     </a>
     <a href="stats.html" class="nav-item active">
       <span class="nav-icon">&#x1F4CA;</span>
@@ -210,6 +268,86 @@
       document.getElementById('saveNotesBtn').addEventListener('click', function () {
         State.update({ notes: [notesArea.value] });
         UI.toast('Note salvate', 'success');
+      });
+
+      // ── Error log ──────────────────────────────────
+      var allErrors    = state.sessionErrors || [];
+      var logFilter    = 'all';
+      var logExpanded  = false;
+
+      function filterErrors(filter) {
+        if (filter === 'all') return allErrors;
+        if (filter === 'diagnostic') return allErrors.filter(function(e){ return e.source === 'diagnostic'; });
+        if (filter === 'session')    return allErrors.filter(function(e){ return !e.source || e.source === 'session'; });
+        return allErrors.filter(function(e){ return e.part === filter; });
+      }
+
+      function buildErrCard(e) {
+        var meta = '';
+        if (e.source === 'diagnostic') meta += '<span class="badge" style="background:var(--accent-light);color:var(--accent);font-size:10px">Test diagnostico</span> ';
+        meta += e.part || '';
+        if (e.date) { var d = new Date(e.date); meta += ' &middot; ' + d.toLocaleDateString('it-IT', {day:'2-digit',month:'short'}); }
+
+        return '<div class="log-err-card">'
+          + '<div class="log-err-meta">' + meta + '</div>'
+          + '<div class="log-err-q">' + (e.question || '') + '</div>'
+          + '<div class="log-err-answers">'
+          + '<span class="log-err-wrong">&#10007; ' + (e.userAnswer || '—') + '</span>'
+          + ' &nbsp;&#8594;&nbsp; '
+          + '<span class="log-err-correct">&#10003; ' + (e.correct || '—') + '</span>'
+          + '</div>'
+          + (e.explanation ? '<div class="log-err-expl">' + e.explanation + '</div>' : '')
+          + '</div>';
+      }
+
+      function renderLog() {
+        var filtered = filterErrors(logFilter);
+        var preview  = document.getElementById('logPreview');
+        var full     = document.getElementById('logFull');
+        var meta     = document.getElementById('logToggleMeta');
+
+        if (filtered.length === 0) {
+          preview.innerHTML = '<div style="font-size:13px;color:var(--subtext);padding:12px 0">Nessun errore per questo filtro.</div>';
+          full.innerHTML = '';
+          meta.textContent = '';
+          return;
+        }
+
+        // First 3
+        preview.innerHTML = filtered.slice(0, 3).map(buildErrCard).join('');
+
+        // Rest
+        var rest = filtered.slice(3);
+        meta.textContent = filtered.length + ' errori totali';
+        if (rest.length > 0) {
+          full.innerHTML = rest.map(buildErrCard).join('');
+        } else {
+          full.innerHTML = '';
+        }
+      }
+
+      renderLog();
+
+      // Toggle expand
+      document.getElementById('logToggle').addEventListener('click', function() {
+        logExpanded = !logExpanded;
+        var full  = document.getElementById('logFull');
+        var arrow = document.getElementById('logArrow');
+        full.classList.toggle('visible', logExpanded);
+        arrow.classList.toggle('open', logExpanded);
+      });
+
+      // Filter chips
+      document.getElementById('logChips').addEventListener('click', function(ev) {
+        var chip = ev.target.closest('.chip');
+        if (!chip) return;
+        document.querySelectorAll('#logChips .chip').forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        logFilter   = chip.dataset.filter;
+        logExpanded = false;
+        document.getElementById('logFull').classList.remove('visible');
+        document.getElementById('logArrow').classList.remove('open');
+        renderLog();
       });
 
       // Reset stats

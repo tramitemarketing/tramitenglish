@@ -7,15 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
+    /* ── Search ── */
     .search-wrap {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-
     .search-wrap input {
       padding-left: 40px;
     }
-
     .search-icon {
       position: absolute;
       left: 14px;
@@ -26,37 +25,286 @@
       pointer-events: none;
     }
 
-    .accordion-body ul {
-      padding-left: 18px;
-      margin: 8px 0;
+    /* ── Topic chips ── */
+    .topic-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
     }
-
-    .accordion-body li {
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.6;
-    }
-
-    .accordion-body h4 {
-      font-size: 13px;
+    .topic-chips::-webkit-scrollbar { display: none; }
+    .chip {
+      flex-shrink: 0;
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text);
-      margin-top: 12px;
-      margin-bottom: 6px;
-    }
-
-    .accordion-body h4:first-child {
-      margin-top: 0;
-    }
-
-    .accordion-body p {
-      font-size: 13px;
+      letter-spacing: 0.04em;
+      background: var(--surface2);
       color: var(--text2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .chip.active, .chip:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── Accordion groups ── */
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+      user-select: none;
+      transition: background .15s;
+    }
+    .group-header:hover { background: var(--surface3, #f5f5f4); }
+    .group-header.closed { border-radius: 10px; }
+    .group-arrow { margin-left: auto; color: var(--subtext); transition: transform .2s; }
+    .group-header.closed .group-arrow { transform: rotate(-90deg); }
+    .group-count {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 10px;
+      padding: 1px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .group-body { display: block; }
+    .group-body.hidden { display: none; }
+    .group-wrap {
+      margin-bottom: 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    .group-container {
+      margin-bottom: 16px;
+    }
+
+    /* ── Grammar items ── */
+    .gram-item {
+      border-bottom: 1px solid var(--border2);
+    }
+    .gram-item:last-child { border-bottom: none; }
+    .gram-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      background: var(--surface);
+      transition: background .15s;
+      user-select: none;
+    }
+    .gram-header:hover { background: var(--surface2); }
+    .gram-title-it {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+    .gram-title-en {
+      font-size: 11px;
+      color: var(--subtext);
+      font-style: italic;
+    }
+    .gram-arrow {
+      color: var(--subtext);
+      font-size: 12px;
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .gram-header.open .gram-arrow { transform: rotate(180deg); }
+
+    .gram-body {
+      display: none;
+      padding: 0 16px 16px;
+      background: var(--surface);
+    }
+    .gram-body.open { display: block; }
+
+    /* ── Rule content ── */
+    .rule-block {
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      font-size: 13px;
       line-height: 1.7;
+      color: var(--text2);
+    }
+    .rule-block strong { color: var(--text); }
+    .rule-block ol { padding-left: 18px; margin: 6px 0; }
+    .rule-block ol li { margin-bottom: 4px; }
+
+    .lang-tabs {
+      display: flex;
+      gap: 0;
       margin-bottom: 8px;
     }
+    .lang-tab {
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--subtext);
+      transition: .15s;
+    }
+    .lang-tab:first-child { border-radius: 4px 0 0 4px; }
+    .lang-tab:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+    .lang-tab.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
+    /* ── Examples ── */
+    .examples-section { margin-bottom: 12px; }
+    .examples-section h5 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--subtext);
+      margin-bottom: 8px;
+    }
+    .example-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .example-lang {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--surface2);
+      color: var(--subtext);
+      border-radius: 3px;
+      padding: 2px 6px;
+      align-self: flex-start;
+      margin-top: 1px;
+    }
+    .example-text { color: var(--text2); line-height: 1.5; }
+    .example-complex .example-text { font-style: italic; }
+
+    /* ── Vocabulary ── */
+    .vocab-section { margin-bottom: 12px; }
+    .vocab-section h5 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--subtext);
+      margin-bottom: 8px;
+    }
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .vocab-table th {
+      background: var(--surface2);
+      color: var(--subtext);
+      font-weight: 700;
+      padding: 5px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .vocab-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border2);
+      color: var(--text2);
+      vertical-align: top;
+    }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-word { font-weight: 600; color: var(--text); }
+    .vocab-pos {
+      display: inline-block;
+      padding: 0 5px;
+      background: var(--surface2);
+      border-radius: 3px;
+      font-size: 10px;
+      color: var(--subtext);
+      font-style: italic;
+    }
+    .vocab-ipa { color: var(--subtext); font-size: 11px; font-family: 'Courier New', monospace; }
+
+    /* ── Story ── */
+    .story-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--subtext);
+      cursor: pointer;
+      padding: 4px 0;
+      border: none;
+      background: none;
+      margin-bottom: 8px;
+    }
+    .story-toggle:hover { color: var(--accent); }
+    .story-body {
+      display: none;
+      background: var(--surface2);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text2);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+    .story-body.open { display: block; }
+
+    /* ── FCE Strategy accordion ── */
+    .accordion-item { border-bottom: 1px solid var(--border2); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
+      transition: background .15s;
+      user-select: none;
+    }
+    .accordion-header:hover { background: var(--surface2); }
+    .accordion-body {
+      display: none;
+      padding: 0 16px 16px;
+      background: var(--surface);
+    }
+    .accordion-body.open { display: block; }
+    .accordion-body p { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 8px; }
+    .accordion-body ul { padding-left: 18px; margin: 6px 0; }
+    .accordion-body li { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 4px; }
+    .accordion-body h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 12px 0 6px; }
+    .accordion-body h4:first-child { margin-top: 0; }
     .accordion-body code {
       background: var(--surface2);
       border-radius: 4px;
@@ -65,14 +313,12 @@
       font-size: 12px;
       color: var(--accent);
     }
-
     .accordion-body table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
       margin-bottom: 8px;
     }
-
     .accordion-body th {
       background: var(--surface2);
       color: var(--text2);
@@ -81,13 +327,11 @@
       text-align: left;
       border-bottom: 1px solid var(--border);
     }
-
     .accordion-body td {
       padding: 6px 10px;
       border-bottom: 1px solid var(--border2);
       color: var(--text2);
     }
-
     .part-badge {
       display: inline-block;
       padding: 2px 8px;
@@ -96,16 +340,37 @@
       border-radius: 4px;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: .06em;
       margin-right: 8px;
     }
 
+    /* ── Misc ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--subtext);
+      margin: 20px 0 10px;
+      padding-left: 2px;
+    }
     .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--subtext);
+      font-size: 14px;
+    }
+    .loading-msg {
       text-align: center;
       padding: 30px;
       color: var(--subtext);
       font-size: 14px;
     }
+    .loading-msg span {
+      display: inline-block;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
   </style>
 </head>
 <body>
@@ -121,10 +386,18 @@
 
     <div class="search-wrap">
       <span class="search-icon">&#128269;</span>
-      <input type="text" id="searchInput" placeholder="Cerca nella libreria...">
+      <input type="text" id="searchInput" placeholder="Cerca regola, esempio, parola...">
     </div>
 
-    <div id="accordionList"></div>
+    <div class="topic-chips" id="topicChips"></div>
+
+    <div id="grammarSection">
+      <div class="loading-msg"><span>Caricamento spiegazioni...</span></div>
+    </div>
+
+    <div class="section-label">Strategia FCE</div>
+    <div class="card" style="padding:0; overflow:hidden;" id="fceAccordion"></div>
+
     <div class="no-results" id="noResults" style="display:none">Nessun risultato trovato.</div>
 
   </main>
@@ -143,9 +416,9 @@
       <span class="nav-icon">&#x1F4D6;</span>
       <span>Libreria</span>
     </a>
-    <a href="log.html" class="nav-item">
-      <span class="nav-icon">&#x1F4CB;</span>
-      <span>Log</span>
+    <a href="test.html" class="nav-item">
+      <span class="nav-icon">&#x1F4DD;</span>
+      <span>Test</span>
     </a>
     <a href="stats.html" class="nav-item">
       <span class="nav-icon">&#x1F4CA;</span>
@@ -157,235 +430,537 @@
   <script src="js/app.js"></script>
   <script src="js/content.js"></script>
   <script>
-    (function () {
-      if (!Auth.requireAuth()) return;
+  (function () {
+    if (!Auth.requireAuth()) return;
 
-      var sections = [
-        {
-          title: 'Part 1 — Multiple Choice Cloze',
-          badge: 'PART 1',
-          content: `
-            <p>Un testo di circa 150 parole con 8 spazi. Per ogni spazio scegli tra 4 opzioni (A, B, C, D).</p>
-            <h4>Focalizzati su:</h4>
-            <ul>
-              <li>Phrasal verbs: <code>carry out</code>, <code>come across</code>, <code>give up</code></li>
-              <li>Collocazioni fisse: <code>make a decision</code>, <code>do research</code></li>
-              <li>Preposizioni dopo verbi/aggettivi: <code>depend on</code>, <code>interested in</code></li>
-              <li>Linking words: <code>although</code>, <code>despite</code>, <code>however</code></li>
-              <li>Verbi di stato vs. azione</li>
-            </ul>
-            <h4>Strategia:</h4>
-            <ul>
-              <li>Leggi il testo completo prima di iniziare</li>
-              <li>Controlla il contesto prima e dopo ogni spazio</li>
-              <li>Elimina le opzioni palesemente errate</li>
-            </ul>`
-        },
-        {
-          title: 'Part 2 — Open Cloze',
-          badge: 'PART 2',
-          content: `
-            <p>Un testo con 8 spazi da completare con una sola parola. Non hai opzioni: devi trovare la parola corretta.</p>
-            <h4>Categorie frequenti:</h4>
-            <ul>
-              <li>Preposizioni: <code>in spite of</code>, <code>due to</code>, <code>as a result of</code></li>
-              <li>Articoli: <code>a / an / the</code></li>
-              <li>Pronomi relativi: <code>which, who, whose, where</code></li>
-              <li>Verbi ausiliari e modali: <code>have, been, would</code></li>
-              <li>Congiunzioni: <code>although, unless, provided</code></li>
-              <li>Quantificatori: <code>few, little, much, many</code></li>
-            </ul>
-            <h4>Strategia:</h4>
-            <ul>
-              <li>Individua la categoria grammaticale mancante</li>
-              <li>Non inserire mai due parole (tranne phrasal verb composto)</li>
-              <li>Controlla sempre accordo e tempo verbale</li>
-            </ul>`
-        },
-        {
-          title: 'Part 3 — Word Formation',
-          badge: 'PART 3',
-          content: `
-            <p>Un testo con 8 spazi. Ogni spazio ha una parola base in maiuscolo; devi formare la parola derivata corretta.</p>
-            <h4>Suffissi comuni:</h4>
-            <table>
-              <tr><th>Categoria</th><th>Suffisso</th><th>Esempio</th></tr>
-              <tr><td>Sostantivo</td><td>-tion, -ness, -ment, -ity</td><td>solution, happiness</td></tr>
-              <tr><td>Aggettivo</td><td>-ful, -less, -ous, -ive, -al</td><td>careful, famous</td></tr>
-              <tr><td>Avverbio</td><td>-ly</td><td>carefully, quickly</td></tr>
-              <tr><td>Negativo</td><td>un-, in-, dis-, im-</td><td>unusual, impossible</td></tr>
-            </table>
-            <h4>Strategia:</h4>
-            <ul>
-              <li>Decidi prima la categoria grammaticale necessaria</li>
-              <li>Controlla se serve un prefisso negativo</li>
-              <li>Attenzione alle forme irregolari: <code>STRONG &rarr; strength</code></li>
-            </ul>`
-        },
-        {
-          title: 'Part 4 — Key-Word Transformations',
-          badge: 'PART 4',
-          content: `
-            <p>6 coppie di frasi: riscrivi la seconda frase usando la parola chiave data, mantenendo il significato della prima. Usa 2–5 parole inclusa la parola chiave.</p>
-            <h4>Strutture più testate:</h4>
-            <ul>
-              <li>Condizionali: <code>Unless / If not</code></li>
-              <li>Passivo: <code>was built / has been seen</code></li>
-              <li>Reported speech: <code>said that / told me to</code></li>
-              <li>Causativi: <code>have something done</code></li>
-              <li>Comparativi: <code>not as... as / less than</code></li>
-              <li>Modal perfects: <code>should have / must have</code></li>
-              <li>Wish / If only: <code>wish I had studied</code></li>
-            </ul>
-            <h4>Regole:</h4>
-            <ul>
-              <li>2 punti per risposta: 1 se parzialmente corretta</li>
-              <li>Non cambiare mai la parola chiave (non plurale, non coniugata)</li>
-              <li>Conta sempre le parole: massimo 5</li>
-            </ul>`
-        },
-        {
-          title: 'Part 5 — Reading (Multiple Choice)',
-          badge: 'PART 5',
-          content: `
-            <p>Un testo di circa 550 parole con 6 domande a scelta multipla (A, B, C, D).</p>
-            <h4>Strategia di lettura:</h4>
-            <ul>
-              <li>Leggi prima le domande, poi il testo</li>
-              <li>Le risposte seguono l'ordine del testo</li>
-              <li>Cerca il paragrafo di riferimento prima di scegliere</li>
-              <li>Elimina le opzioni chiaramente sbagliate</li>
-              <li>Attenzione ai distrattori: spesso veri ma non rispondono alla domanda</li>
-            </ul>
-            <h4>Tipi di domande:</h4>
-            <ul>
-              <li>Dettaglio specifico</li>
-              <li>Scopo dell'autore</li>
-              <li>Opinione / atteggiamento dell'autore</li>
-              <li>Significato di parola/frase nel contesto</li>
-              <li>Idea principale del paragrafo</li>
-            </ul>`
-        },
-        {
-          title: 'Grammar Quick Reference',
-          badge: 'GRAM',
-          content: `
-            <h4>Tempi verbali — usi chiave</h4>
-            <table>
-              <tr><th>Tempo</th><th>Uso principale</th></tr>
-              <tr><td>Present Simple</td><td>Abitudini, fatti generali, stati</td></tr>
-              <tr><td>Present Continuous</td><td>Azioni in corso, tendenze temporanee</td></tr>
-              <tr><td>Past Simple</td><td>Azioni completate nel passato</td></tr>
-              <tr><td>Past Continuous</td><td>Azione di sfondo / in corso nel passato</td></tr>
-              <tr><td>Present Perfect</td><td>Risultati presenti di azioni passate</td></tr>
-              <tr><td>Past Perfect</td><td>Anteriorità rispetto a un momento passato</td></tr>
-            </table>
+    // ── Constants ──────────────────────────────────────────────────
+    var TOPIC_ORDER = [
+      'verb_tenses', 'collocations', 'prepositions',
+      'word_formation', 'present_perfect', 'passive',
+      'modals', 'reported_speech', 'wish_if_only',
+      'gerund_infinitive', 'linking_words', 'comparatives',
+      'relative_clauses', 'conditionals', 'quantifiers',
+      'phrasal_verbs', 'review'
+    ];
 
-            <h4>Condizionali</h4>
-            <ul>
-              <li><strong>Tipo 0</strong>: If + Present, Present (verità universale)</li>
-              <li><strong>Tipo 1</strong>: If + Present, will (reale/futuro)</li>
-              <li><strong>Tipo 2</strong>: If + Past, would (ipotetico presente)</li>
-              <li><strong>Tipo 3</strong>: If + Past Perfect, would have (ipotetico passato)</li>
-            </ul>
+    var TOPIC_LABELS_IT = {
+      verb_tenses:       'Tempi Verbali',
+      collocations:      'Collocazioni',
+      prepositions:      'Preposizioni',
+      word_formation:    'Word Formation',
+      present_perfect:   'Present Perfect',
+      passive:           'Passivo & Causativo',
+      modals:            'Verbi Modali & Modal Perfects',
+      reported_speech:   'Discorso Indiretto',
+      wish_if_only:      'Wish / If only / Desideri',
+      gerund_infinitive: 'Gerundio & Infinito',
+      linking_words:     'Connettori',
+      comparatives:      'Comparativi & Superlativi',
+      relative_clauses:  'Relative Clauses',
+      conditionals:      'Condizionali & Inversione',
+      quantifiers:       'Quantificatori & Articoli',
+      phrasal_verbs:     'Phrasal Verbs & Confusables',
+      review:            'Ripasso & Simulazione'
+    };
 
-            <h4>Passivo — formazione</h4>
-            <p>Ausiliare <strong>be</strong> (nel tempo corretto) + <strong>participio passato</strong></p>
-            <ul>
-              <li>Present: <code>is made</code></li>
-              <li>Past: <code>was made</code></li>
-              <li>Present Perfect: <code>has been made</code></li>
-              <li>Modal: <code>could be made</code></li>
-            </ul>
+    var TOPIC_ICONS = {
+      verb_tenses:       '⏱',
+      collocations:      '🤝',
+      prepositions:      '📍',
+      word_formation:    '🔨',
+      present_perfect:   '✅',
+      passive:           '🔄',
+      modals:            '💬',
+      reported_speech:   '💭',
+      wish_if_only:      '✨',
+      gerund_infinitive: '🔀',
+      linking_words:     '🔗',
+      comparatives:      '⚖️',
+      relative_clauses:  '🔍',
+      conditionals:      '🌿',
+      quantifiers:       '🔢',
+      phrasal_verbs:     '🌀',
+      review:            '🎯'
+    };
 
-            <h4>Reported Speech — trasformazioni</h4>
-            <table>
-              <tr><th>Diretto</th><th>Indiretto</th></tr>
-              <tr><td>Present Simple</td><td>&rarr; Past Simple</td></tr>
-              <tr><td>Past Simple</td><td>&rarr; Past Perfect</td></tr>
-              <tr><td>will</td><td>&rarr; would</td></tr>
-              <tr><td>can</td><td>&rarr; could</td></tr>
-              <tr><td>must</td><td>&rarr; had to</td></tr>
-            </table>`
+    // ── State ──────────────────────────────────────────────────────
+    var allExplanations = [];
+    var activeFilter = 'all';
+    var searchQuery = '';
+
+    // ── Markdown mini-renderer ─────────────────────────────────────
+    function mdToHtml(text) {
+      if (!text) return '';
+      // Numbered list items: lines starting with "  1. " or "1. "
+      var lines = text.split('\n');
+      var html = '';
+      var inList = false;
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var listMatch = line.match(/^\s*\d+\.\s+(.*)/);
+        if (listMatch) {
+          if (!inList) { html += '<ol>'; inList = true; }
+          html += '<li>' + inlineMd(listMatch[1]) + '</li>';
+        } else {
+          if (inList) { html += '</ol>'; inList = false; }
+          var trimmed = line.trim();
+          if (trimmed === '') continue;
+          html += '<p>' + inlineMd(trimmed) + '</p>';
         }
-      ];
+      }
+      if (inList) html += '</ol>';
+      return html;
+    }
 
-      var listEl = document.getElementById('accordionList');
+    function inlineMd(text) {
+      // **bold**
+      text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      // *italic*
+      text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      // `code`
+      text = text.replace(/`(.+?)`/g, '<code>$1</code>');
+      return text;
+    }
 
-      function buildAccordions(filter) {
-        filter = (filter || '').toLowerCase();
-        listEl.innerHTML = '';
-        var found = 0;
+    // ── Render a single grammar item ───────────────────────────────
+    function renderGramItem(exp) {
+      var item = document.createElement('div');
+      item.className = 'gram-item';
+      item.dataset.slug = exp.slug;
+      item.dataset.search = [
+        exp.title_it, exp.title_en,
+        exp.rule_it || '', exp.rule_en || '',
+        (exp.example_basic ? exp.example_basic.it + ' ' + exp.example_basic.en : ''),
+        (exp.example_complex ? exp.example_complex.it + ' ' + exp.example_complex.en : ''),
+        (exp.vocabulary || []).map(function(v){ return v.word + ' ' + (v.meaning_it||''); }).join(' ')
+      ].join(' ').toLowerCase();
 
-        sections.forEach(function (sec, i) {
-          if (filter && sec.title.toLowerCase().indexOf(filter) === -1
-              && sec.content.toLowerCase().indexOf(filter) === -1) {
-            return;
-          }
-          found++;
+      var header = document.createElement('div');
+      header.className = 'gram-header';
+      header.innerHTML = '<div style="flex:1"><div class="gram-title-it">' + exp.title_it + '</div>'
+        + '<div class="gram-title-en">' + exp.title_en + '</div></div>'
+        + '<span class="gram-arrow">&#9660;</span>';
 
-          var item = document.createElement('div');
-          item.className = 'accordion-item';
+      var body = document.createElement('div');
+      body.className = 'gram-body';
 
-          var header = document.createElement('div');
-          header.className = 'accordion-header';
-          header.innerHTML = '<span><span class="part-badge">' + sec.badge + '</span>' + sec.title + '</span>'
-            + '<span class="accordion-arrow">&#9660;</span>';
+      // Lang tabs
+      var langHtml = '<div class="lang-tabs">'
+        + '<button class="lang-tab active" data-lang="it">IT</button>'
+        + '<button class="lang-tab" data-lang="en">EN</button>'
+        + '</div>';
 
-          var body = document.createElement('div');
-          body.className = 'accordion-body';
-          body.innerHTML = sec.content;
+      // Rule blocks
+      var ruleHtml = '<div class="rule-block rule-it">' + mdToHtml(exp.rule_it) + '</div>'
+        + '<div class="rule-block rule-en" style="display:none">' + mdToHtml(exp.rule_en) + '</div>';
 
-          // Open first item by default
-          if (i === 0 && !filter) {
+      // Examples
+      var exHtml = '';
+      if (exp.example_basic || exp.example_complex) {
+        exHtml += '<div class="examples-section"><h5>Esempi</h5>';
+        if (exp.example_basic) {
+          exHtml += '<div class="example-row">'
+            + '<span class="example-lang">IT</span>'
+            + '<span class="example-text">' + escHtml(exp.example_basic.it) + '</span></div>';
+          exHtml += '<div class="example-row" style="margin-bottom:12px">'
+            + '<span class="example-lang">EN</span>'
+            + '<span class="example-text">' + escHtml(exp.example_basic.en) + '</span></div>';
+        }
+        if (exp.example_complex) {
+          exHtml += '<div class="example-row example-complex">'
+            + '<span class="example-lang">IT</span>'
+            + '<span class="example-text">' + escHtml(exp.example_complex.it) + '</span></div>';
+          exHtml += '<div class="example-row example-complex" style="margin-bottom:4px">'
+            + '<span class="example-lang">EN</span>'
+            + '<span class="example-text">' + escHtml(exp.example_complex.en) + '</span></div>';
+        }
+        exHtml += '</div>';
+      }
+
+      // Vocabulary
+      var vocHtml = '';
+      if (exp.vocabulary && exp.vocabulary.length > 0) {
+        vocHtml += '<div class="vocab-section"><h5>Vocabolario</h5>'
+          + '<table class="vocab-table">'
+          + '<tr><th>Parola</th><th>IPA</th><th>Significato</th></tr>';
+        exp.vocabulary.forEach(function(v) {
+          vocHtml += '<tr>'
+            + '<td><span class="vocab-word">' + escHtml(v.word) + '</span>'
+            + (v.pos ? ' <span class="vocab-pos">' + escHtml(v.pos) + '</span>' : '') + '</td>'
+            + '<td><span class="vocab-ipa">' + escHtml(v.ipa || '') + '</span></td>'
+            + '<td>' + escHtml(v.meaning_it || '') + '</td>'
+            + '</tr>';
+        });
+        vocHtml += '</table></div>';
+      }
+
+      // Story
+      var storyHtml = '';
+      if (exp.story_it) {
+        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
+          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
+      }
+
+      body.innerHTML = langHtml + ruleHtml + exHtml + vocHtml + storyHtml;
+
+      // Events — header toggle
+      header.addEventListener('click', function() {
+        var isOpen = body.classList.contains('open');
+        body.classList.toggle('open', !isOpen);
+        header.classList.toggle('open', !isOpen);
+      });
+
+      // Events — lang tabs
+      body.querySelectorAll('.lang-tab').forEach(function(tab) {
+        tab.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var lang = tab.dataset.lang;
+          body.querySelectorAll('.lang-tab').forEach(function(t){ t.classList.remove('active'); });
+          tab.classList.add('active');
+          body.querySelector('.rule-it').style.display = lang === 'it' ? '' : 'none';
+          body.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
+        });
+      });
+
+      // Events — story toggle
+      var storyBtn = body.querySelector('.story-toggle');
+      if (storyBtn) {
+        storyBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var sb = body.querySelector('.story-body');
+          sb.classList.toggle('open');
+          storyBtn.innerHTML = sb.classList.contains('open')
+            ? '&#128218; Storia mnemonica &#9650;'
+            : '&#128218; Storia mnemonica &#9660;';
+        });
+      }
+
+      item.appendChild(header);
+      item.appendChild(body);
+      return item;
+    }
+
+    // ── Render grouped grammar sections ───────────────────────────
+    function renderGrammar(explanations) {
+      var container = document.getElementById('grammarSection');
+      container.innerHTML = '';
+
+      // Group by tags[0]
+      var groups = {};
+      explanations.forEach(function(exp) {
+        var key = (exp.tags && exp.tags[0]) || 'other';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(exp);
+      });
+
+      // Sort groups by TOPIC_ORDER
+      var orderedKeys = TOPIC_ORDER.filter(function(k){ return groups[k]; });
+      // Add any keys not in TOPIC_ORDER at the end
+      Object.keys(groups).forEach(function(k){
+        if (orderedKeys.indexOf(k) === -1) orderedKeys.push(k);
+      });
+
+      if (orderedKeys.length === 0) {
+        container.innerHTML = '<div class="no-results">Nessuna spiegazione trovata.</div>';
+        return;
+      }
+
+      orderedKeys.forEach(function(key) {
+        var items = groups[key];
+        var label = TOPIC_LABELS_IT[key] || key;
+        var icon = TOPIC_ICONS[key] || '📌';
+
+        var groupContainer = document.createElement('div');
+        groupContainer.className = 'group-container';
+        groupContainer.dataset.topic = key;
+
+        var groupHeader = document.createElement('div');
+        groupHeader.className = 'group-header';
+        groupHeader.innerHTML = icon + ' <span style="flex:1">' + label + '</span>'
+          + '<span class="group-count">' + items.length + '</span>'
+          + '<span class="group-arrow">&#9660;</span>';
+
+        var groupWrap = document.createElement('div');
+        groupWrap.className = 'group-wrap';
+
+        var groupBody = document.createElement('div');
+        groupBody.className = 'group-body';
+
+        items.forEach(function(exp) {
+          groupBody.appendChild(renderGramItem(exp));
+        });
+
+        groupWrap.appendChild(groupBody);
+
+        // Toggle group
+        groupHeader.addEventListener('click', function() {
+          var isClosed = groupBody.classList.contains('hidden');
+          groupBody.classList.toggle('hidden', !isClosed);
+          groupHeader.classList.toggle('closed', !isClosed);
+        });
+
+        groupContainer.appendChild(groupHeader);
+        groupContainer.appendChild(groupWrap);
+        container.appendChild(groupContainer);
+      });
+    }
+
+    // ── Build topic chips ──────────────────────────────────────────
+    function buildChips(explanations) {
+      var chipsEl = document.getElementById('topicChips');
+      chipsEl.innerHTML = '';
+
+      var allChip = document.createElement('span');
+      allChip.className = 'chip active';
+      allChip.textContent = 'Tutti';
+      allChip.dataset.topic = 'all';
+      chipsEl.appendChild(allChip);
+
+      // Collect topics in TOPIC_ORDER that exist
+      var seen = {};
+      explanations.forEach(function(e){ if(e.tags&&e.tags[0]) seen[e.tags[0]]=true; });
+
+      TOPIC_ORDER.forEach(function(key) {
+        if (!seen[key]) return;
+        var chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = (TOPIC_ICONS[key]||'') + ' ' + (TOPIC_LABELS_IT[key]||key);
+        chip.dataset.topic = key;
+        chipsEl.appendChild(chip);
+      });
+
+      chipsEl.addEventListener('click', function(e) {
+        var chip = e.target.closest('.chip');
+        if (!chip) return;
+        chipsEl.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        activeFilter = chip.dataset.topic;
+        applyFilters();
+      });
+    }
+
+    // ── Filter & search ────────────────────────────────────────────
+    function applyFilters() {
+      var q = searchQuery.toLowerCase();
+      var filtered = allExplanations.filter(function(exp) {
+        var topicOk = activeFilter === 'all' || (exp.tags && exp.tags[0] === activeFilter);
+        if (!topicOk) return false;
+        if (!q) return true;
+        var text = [
+          exp.title_it, exp.title_en,
+          exp.rule_it||'', exp.rule_en||'',
+          exp.example_basic ? exp.example_basic.it+' '+exp.example_basic.en : '',
+          exp.example_complex ? exp.example_complex.it+' '+exp.example_complex.en : '',
+          (exp.vocabulary||[]).map(function(v){ return v.word+' '+(v.meaning_it||''); }).join(' ')
+        ].join(' ').toLowerCase();
+        return text.indexOf(q) !== -1;
+      });
+
+      renderGrammar(filtered);
+
+      // When searching, open all items
+      if (q) {
+        document.querySelectorAll('.gram-body').forEach(function(b){ b.classList.add('open'); });
+        document.querySelectorAll('.gram-header').forEach(function(h){ h.classList.add('open'); });
+      }
+
+      document.getElementById('noResults').style.display = filtered.length === 0 ? '' : 'none';
+    }
+
+    // ── FCE Strategy sections ──────────────────────────────────────
+    var fceSections = [
+      {
+        title: 'Part 1 — Multiple Choice Cloze', badge: 'P1',
+        content: '<p>Un testo di ~150 parole con 8 spazi. Scegli tra 4 opzioni (A–D) per spazio.</p>'
+          + '<h4>Focalizzati su:</h4><ul>'
+          + '<li>Phrasal verbs: <code>carry out</code>, <code>come across</code>, <code>give up</code></li>'
+          + '<li>Collocazioni fisse: <code>make a decision</code>, <code>do research</code></li>'
+          + '<li>Preposizioni dopo verbi/aggettivi: <code>depend on</code>, <code>interested in</code></li>'
+          + '<li>Linking words: <code>although</code>, <code>despite</code>, <code>however</code></li>'
+          + '</ul><h4>Strategia:</h4><ul>'
+          + '<li>Leggi il testo completo prima</li>'
+          + '<li>Controlla contesto prima e dopo ogni spazio</li>'
+          + '<li>Elimina opzioni palesemente errate</li>'
+          + '</ul>'
+      },
+      {
+        title: 'Part 2 — Open Cloze', badge: 'P2',
+        content: '<p>Un testo con 8 spazi da completare con UNA sola parola.</p>'
+          + '<h4>Categorie frequenti:</h4><ul>'
+          + '<li>Preposizioni: <code>in spite of</code>, <code>due to</code></li>'
+          + '<li>Pronomi relativi: <code>which, who, whose, where</code></li>'
+          + '<li>Verbi ausiliari: <code>have, been, would</code></li>'
+          + '<li>Quantificatori: <code>few, little, much, many</code></li>'
+          + '</ul><h4>Strategia:</h4><ul>'
+          + '<li>Non inserire mai due parole (tranne phrasal verb)</li>'
+          + '<li>Controlla accordo e tempo verbale</li>'
+          + '</ul>'
+      },
+      {
+        title: 'Part 3 — Word Formation', badge: 'P3',
+        content: '<p>8 spazi. Parola base in MAIUSCOLO — forma la parola derivata corretta.</p>'
+          + '<h4>Suffissi chiave:</h4>'
+          + '<table><tr><th>Categoria</th><th>Suffisso</th><th>Esempio</th></tr>'
+          + '<tr><td>Sostantivo</td><td>-tion, -ness, -ment, -ity</td><td>solution, happiness</td></tr>'
+          + '<tr><td>Aggettivo</td><td>-ful, -less, -ous, -ive, -al</td><td>careful, famous</td></tr>'
+          + '<tr><td>Avverbio</td><td>-ly</td><td>carefully</td></tr>'
+          + '<tr><td>Negativo</td><td>un-, in-, dis-, im-</td><td>unusual, impossible</td></tr>'
+          + '</table><h4>Strategia:</h4><ul>'
+          + '<li>Decide prima la categoria grammaticale necessaria</li>'
+          + '<li>Controlla se serve un prefisso negativo</li>'
+          + '<li>Attenzione forme irregolari: <code>STRONG → strength</code></li>'
+          + '</ul>'
+      },
+      {
+        title: 'Part 4 — Key-Word Transformations', badge: 'P4',
+        content: '<p>6 coppie di frasi: riscrivi la seconda usando la parola chiave. Usa 2–5 parole.</p>'
+          + '<h4>Strutture più testate:</h4><ul>'
+          + '<li>Passivo: <code>was built / has been seen</code></li>'
+          + '<li>Reported speech: <code>said that / told me to</code></li>'
+          + '<li>Causativi: <code>have something done</code></li>'
+          + '<li>Comparativi: <code>not as... as / less than</code></li>'
+          + '<li>Modal perfects: <code>should have / must have</code></li>'
+          + '<li>Wish / If only: <code>wish I had studied</code></li>'
+          + '</ul><h4>Regole:</h4><ul>'
+          + '<li>2 punti per risposta; 1 se parzialmente corretta</li>'
+          + '<li>Non cambiare mai la parola chiave</li>'
+          + '<li>Conta sempre: massimo 5 parole</li>'
+          + '</ul>'
+      },
+      {
+        title: 'Part 5 — Reading (Multiple Choice)', badge: 'P5',
+        content: '<p>~550 parole con 6 domande a scelta multipla (A–D).</p>'
+          + '<h4>Strategia:</h4><ul>'
+          + '<li>Leggi prima le domande, poi il testo</li>'
+          + '<li>Le risposte seguono l\'ordine del testo</li>'
+          + '<li>Cerca il paragrafo di riferimento prima di scegliere</li>'
+          + '<li>Attenzione ai distrattori: spesso veri ma non rispondono alla domanda</li>'
+          + '</ul>'
+      }
+    ];
+
+    function buildFCE() {
+      var el = document.getElementById('fceAccordion');
+      el.innerHTML = '';
+      fceSections.forEach(function(sec, i) {
+        var item = document.createElement('div');
+        item.className = 'accordion-item';
+
+        var header = document.createElement('div');
+        header.className = 'accordion-header';
+        header.innerHTML = '<span><span class="part-badge">' + sec.badge + '</span>' + sec.title + '</span>'
+          + '<span class="accordion-arrow" style="color:var(--subtext);font-size:12px;transition:transform .2s">&#9660;</span>';
+
+        var body = document.createElement('div');
+        body.className = 'accordion-body';
+        body.innerHTML = sec.content;
+
+        header.addEventListener('click', function() {
+          var isOpen = body.classList.contains('open');
+          el.querySelectorAll('.accordion-body').forEach(function(b){ b.classList.remove('open'); });
+          el.querySelectorAll('.accordion-arrow').forEach(function(a){ a.style.transform=''; });
+          if (!isOpen) {
             body.classList.add('open');
             header.querySelector('.accordion-arrow').style.transform = 'rotate(180deg)';
           }
-
-          header.addEventListener('click', function () {
-            var isOpen = body.classList.contains('open');
-            // Close all
-            listEl.querySelectorAll('.accordion-body').forEach(function (b) {
-              b.classList.remove('open');
-            });
-            listEl.querySelectorAll('.accordion-arrow').forEach(function (a) {
-              a.style.transform = '';
-            });
-            if (!isOpen) {
-              body.classList.add('open');
-              header.querySelector('.accordion-arrow').style.transform = 'rotate(180deg)';
-            }
-          });
-
-          item.appendChild(header);
-          item.appendChild(body);
-          listEl.appendChild(item);
         });
 
-        document.getElementById('noResults').style.display = found === 0 ? '' : 'none';
-      }
-
-      buildAccordions('');
-
-      // Search
-      var searchTimeout;
-      document.getElementById('searchInput').addEventListener('input', function () {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(function () {
-          buildAccordions(document.getElementById('searchInput').value);
-          // Open all when searching
-          if (document.getElementById('searchInput').value) {
-            listEl.querySelectorAll('.accordion-body').forEach(function (b) {
-              b.classList.add('open');
-            });
-            listEl.querySelectorAll('.accordion-arrow').forEach(function (a) {
-              a.style.transform = 'rotate(180deg)';
-            });
-          }
-        }, 250);
+        item.appendChild(header);
+        item.appendChild(body);
+        el.appendChild(item);
       });
+    }
 
-    })();
+    // ── Utility ────────────────────────────────────────────────────
+    function escHtml(s) {
+      if (!s) return '';
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── Load from Supabase ─────────────────────────────────────────
+    var SELECT_FIELDS = 'slug,tags,title_it,title_en,rule_it,rule_en,example_basic,example_complex,vocabulary,story_it,display_order';
+
+    async function loadExplanations() {
+      try {
+        var { data, error } = await _supabase
+          .from('grammar_explanations')
+          .select(SELECT_FIELDS)
+          .order('display_order', { ascending: true });
+
+        if (error) throw error;
+        if (!data || data.length === 0) {
+          document.getElementById('grammarSection').innerHTML =
+            '<div class="no-results">Nessuna spiegazione grammaticale trovata nel database.</div>';
+          return;
+        }
+
+        allExplanations = data;
+        buildChips(data);
+        renderGrammar(data);
+      } catch (err) {
+        console.error('Supabase error:', err);
+        document.getElementById('grammarSection').innerHTML =
+          '<div class="no-results">Errore caricamento: ' + escHtml(err.message || String(err)) + '</div>';
+      }
+    }
+
+    // ── Search Supabase (FTS + trigram fallback) ───────────────────
+    async function searchSupabase(q) {
+      var container = document.getElementById('grammarSection');
+      container.innerHTML = '<div class="loading-msg"><span>Ricerca in corso...</span></div>';
+
+      try {
+        // 1. Prova FTS (plainto_tsquery su search_vector)
+        var { data: ftsData, error: ftsErr } = await _supabase
+          .rpc('search_grammar', { query_text: q });
+
+        if (!ftsErr && ftsData && ftsData.length > 0) {
+          // Applica filtro topic se attivo
+          var results = activeFilter === 'all'
+            ? ftsData
+            : ftsData.filter(function(e){ return e.tags && e.tags[0] === activeFilter; });
+          renderGrammar(results);
+          // Apri tutti i risultati
+          document.querySelectorAll('.gram-body').forEach(function(b){ b.classList.add('open'); });
+          document.querySelectorAll('.gram-header').forEach(function(h){ h.classList.add('open'); });
+          document.getElementById('noResults').style.display = results.length === 0 ? '' : 'none';
+          return;
+        }
+
+        // 2. Fallback: client-side indexOf su allExplanations già in memoria
+        searchQuery = q;
+        applyFilters();
+
+      } catch (err) {
+        console.error('Search error:', err);
+        // Fallback silenzioso a client-side
+        searchQuery = q;
+        applyFilters();
+      }
+    }
+
+    // ── Search ─────────────────────────────────────────────────────
+    var searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      var q = document.getElementById('searchInput').value.trim();
+      searchTimeout = setTimeout(function() {
+        if (!q) {
+          searchQuery = '';
+          applyFilters();
+          return;
+        }
+        // Usa FTS Supabase se search_vector è disponibile (migration 003 eseguita),
+        // altrimenti cade in applyFilters() client-side
+        searchSupabase(q);
+      }, 300);
+    });
+
+    // ── Init ───────────────────────────────────────────────────────
+    buildFCE();
+    loadExplanations();
+
+  })();
   </script>
 </body>
 </html>
