@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Practice Tests</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .test-intro {
+      font-size: 13px; color: var(--subtext); line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .tests-grid {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .test-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 16px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: inherit;
+      transition: border-color .15s, box-shadow .15s;
+      position: relative;
+    }
+    .test-card:hover:not(.locked) { border-color: var(--accent); box-shadow: 0 2px 12px rgba(180,83,9,.1); }
+    .test-card.locked { opacity: 0.5; pointer-events: none; }
+    .test-card.completed { border-color: var(--success); }
+    .test-card.in-progress { border-color: var(--warning); }
+
+    .test-num-badge {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 18px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .test-card.locked .test-num-badge { background: var(--surface2); color: var(--subtext); }
+    .test-card.completed .test-num-badge { background: #d1fae5; color: #059669; }
+
+    .test-card-body { flex: 1; }
+    .test-card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+    .test-card-meta  { font-size: 12px; color: var(--subtext); margin-top: 2px; }
+    .test-card-score { font-size: 13px; font-weight: 700; }
+    .score-good { color: var(--success); }
+    .score-mid  { color: var(--warning); }
+    .score-bad  { color: var(--error); }
+
+    .test-card-arrow { font-size: 18px; color: var(--subtext); flex-shrink: 0; }
+    .test-card.locked .test-card-arrow { content: '🔒'; }
+
+    .lock-icon  { font-size: 20px; }
+    .status-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 20px;
+      display: inline-block; margin-top: 4px;
+    }
+    .badge-available  { background: var(--accent-light); color: var(--accent); }
+    .badge-completed  { background: #d1fae5; color: #059669; }
+    .badge-progress   { background: #fef3c7; color: #92400e; }
+    .badge-locked     { background: var(--surface2); color: var(--subtext); }
+
+    .info-box {
+      background: var(--accent-light); border-radius: 14px; padding: 14px;
+      margin-bottom: 20px; font-size: 13px; color: var(--text2); line-height: 1.6;
+    }
+    .info-box strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="topbar-title">Practice Tests</span>
+    <span id="completedCount" class="badge">0/10</span>
+  </header>
+
+  <!-- Main content -->
+  <main class="page-content">
+
+    <div class="info-box">
+      <strong>B2 First — Reading &amp; Use of English</strong><br>
+      52 questions · 7 parts · 1h 15min estimated.<br>
+      Complete each test to unlock the next. You can pause and resume at any time.
+    </div>
+
+    <div class="tests-grid" id="testsGrid">
+      <!-- rendered by JS -->
+    </div>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <span class="nav-icon">&#x1F3E0;</span>
+      <span>Home</span>
+    </a>
+    <a href="session.html" class="nav-item">
+      <span class="nav-icon">&#9654;</span>
+      <span>Sessione</span>
+    </a>
+    <a href="test.html" class="nav-item active">
+      <span class="nav-icon">&#x1F4DD;</span>
+      <span>Test</span>
+    </a>
+    <a href="library.html" class="nav-item">
+      <span class="nav-icon">&#x1F4D6;</span>
+      <span>Libreria</span>
+    </a>
+    <a href="stats.html" class="nav-item">
+      <span class="nav-icon">&#x1F4CA;</span>
+      <span>Stats</span>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/tests-data.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      var completed = JSON.parse(localStorage.getItem('te_completed_tests') || '[]');
+      document.getElementById('completedCount').textContent = completed.length + '/10';
+
+      var grid = document.getElementById('testsGrid');
+
+      DIAGNOSTIC_TESTS.forEach(function (test) {
+        var tid      = test.id;
+        var isLocked = tid > 1 && !completed.includes(tid - 1);
+        var isDone   = completed.includes(tid);
+        var session  = JSON.parse(localStorage.getItem('te_test_session_' + tid) || 'null');
+        var inProg   = session && !session.submittedAt && session.partIdx > 0;
+        var results  = JSON.parse(localStorage.getItem('te_test_results_' + tid) || 'null');
+
+        var statusBadge, statusClass, arrowOrLock;
+        if (isLocked) {
+          statusBadge = '<span class="status-badge badge-locked">&#x1F512; Locked</span>';
+          statusClass = 'locked';
+          arrowOrLock = '&#x1F512;';
+        } else if (isDone) {
+          statusBadge = '<span class="status-badge badge-completed">&#x2705; Completed</span>';
+          statusClass = 'completed';
+          arrowOrLock = '&#8250;';
+        } else if (inProg) {
+          statusBadge = '<span class="status-badge badge-progress">&#x23F3; In progress</span>';
+          statusClass = 'in-progress';
+          arrowOrLock = '&#8250;';
+        } else {
+          statusBadge = '<span class="status-badge badge-available">Available</span>';
+          statusClass = '';
+          arrowOrLock = '&#8250;';
+        }
+
+        var scoreHtml = '';
+        if (results) {
+          var pct  = Math.round(results.totalCorrect / results.totalQ * 100);
+          var cls  = pct >= 75 ? 'score-good' : pct >= 50 ? 'score-mid' : 'score-bad';
+          var time = formatTime(results.totalElapsed || 0);
+          scoreHtml = '<div class="test-card-score ' + cls + '">' + results.totalCorrect + '/' + results.totalQ + ' (' + pct + '%) &middot; ' + time + '</div>';
+        }
+
+        var href = isLocked ? '#' : 'diagnostic.html?test=' + tid;
+        var card = document.createElement('a');
+        card.href      = href;
+        card.className = 'test-card ' + statusClass;
+        card.innerHTML = '<div class="test-num-badge">' + tid + '</div>'
+          + '<div class="test-card-body">'
+          + '<div class="test-card-title">Practice Test ' + tid + '</div>'
+          + statusBadge
+          + scoreHtml
+          + '</div>'
+          + '<div class="test-card-arrow">' + arrowOrLock + '</div>';
+        grid.appendChild(card);
+      });
+
+      function formatTime(s) {
+        var m = Math.floor(s / 60), sec = s % 60;
+        return (Math.floor(s / 3600) > 0 ? Math.floor(s/3600) + 'h ' : '') + m + 'm ' + pad(sec) + 's';
+      }
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    })();
+  </script>
+</body>
+</html>

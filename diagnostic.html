@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainEnglish — Practice Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: var(--bg); min-height: 100vh; }
+
+    /* ── Fixed header ── */
+    #diagHeader {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 54px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 14px;
+      gap: 8px;
+    }
+    #backBtn {
+      background: none; border: none; cursor: pointer;
+      font-size: 20px; color: var(--text2); padding: 6px;
+      flex-shrink: 0;
+    }
+    #headerTitle {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      flex: 1; text-align: center;
+    }
+    #headerTimer {
+      font-size: 13px; font-weight: 700; color: var(--accent);
+      font-variant-numeric: tabular-nums; flex-shrink: 0;
+    }
+    #answeredCount {
+      font-size: 11px; color: var(--subtext); font-weight: 600;
+    }
+
+    /* ── Progress bar ── */
+    #progressBar {
+      position: fixed; top: 54px; left: 0; right: 0; z-index: 99;
+      height: 3px; background: var(--surface2);
+    }
+    #progressFill {
+      height: 100%; background: var(--accent);
+      transition: width 0.4s ease;
+    }
+
+    /* ── Main content ── */
+    #diagMain {
+      padding: 70px 16px 90px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ── Phases ── */
+    .phase { display: none; }
+
+    /* ── Strategy guide ── */
+    .strat-header { margin-bottom: 20px; }
+    .strat-part-label { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .strat-title { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .strat-subtitle { font-size: 13px; color: var(--subtext); }
+    .strat-tips { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .strat-tip {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 14px; font-size: 13px; color: var(--text2); line-height: 1.6;
+    }
+    .strat-num {
+      font-size: 11px; font-weight: 800; color: var(--accent);
+      background: var(--accent-light); border-radius: 50%;
+      width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .strat-overview {
+      background: var(--accent-light); border-radius: 12px;
+      padding: 12px 14px; font-size: 12px; color: var(--text2); line-height: 1.6;
+    }
+
+    /* ── Part header ── */
+    .part-header { margin-bottom: 16px; }
+    .part-title { font-size: 18px; font-weight: 800; color: var(--text); }
+    .part-passage-title { font-size: 13px; color: var(--subtext); margin-top: 2px; }
+
+    /* ── Passage ── */
+    .passage-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px; margin-bottom: 20px;
+      font-size: 14px; line-height: 1.8; color: var(--text2);
+    }
+    .passage-long { max-height: 55vh; overflow-y: auto; }
+    .gap-marker {
+      display: inline-block;
+      background: var(--accent-light); color: var(--accent);
+      font-weight: 800; border-radius: 4px; padding: 0 4px;
+      font-size: 12px;
+    }
+
+    /* ── Questions ── */
+    .questions-list { display: flex; flex-direction: column; gap: 12px; }
+    .q-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px;
+    }
+    .q-label { font-size: 13px; color: var(--text2); margin-bottom: 10px; line-height: 1.5; }
+    .q-num   { font-size: 11px; color: var(--subtext); margin-bottom: 6px; }
+    .stem-word { font-weight: 800; color: var(--accent); letter-spacing: 0.04em; }
+
+    /* ── Options ── */
+    .options-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .options-list { display: flex; flex-direction: column; gap: 8px; }
+    .opt-btn {
+      background: var(--surface2); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 10px 12px;
+      font-size: 13px; color: var(--text); text-align: left;
+      cursor: pointer; transition: background .15s, border-color .15s;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .opt-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+    .opt-btn.opt-selected { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+    .opt-full { grid-column: span 2; }
+    .opt-letter {
+      font-weight: 800; color: var(--accent);
+      background: var(--surface); border-radius: 6px;
+      width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; flex-shrink: 0;
+    }
+
+    /* ── Section buttons (Part 7) ── */
+    .section-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sect-btn {
+      padding: 8px 16px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--surface2); font-weight: 700; color: var(--text2);
+      cursor: pointer; font-size: 14px;
+      transition: background .15s, border-color .15s;
+    }
+    .sect-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+    .sect-btn.opt-selected { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+    /* ── Open inputs ── */
+    .open-input {
+      width: 100%; box-sizing: border-box;
+      font-size: 15px; font-weight: 600;
+    }
+
+    /* ── Transform ── */
+    .q-transform { }
+    .transform-s1 { font-size: 14px; color: var(--text); margin-bottom: 8px; font-style: italic; }
+    .transform-s2 { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+    .keyword-row { margin-bottom: 8px; }
+    .keyword-badge {
+      display: inline-block; background: var(--accent); color: #fff;
+      font-weight: 800; font-size: 12px; letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .blank-marker { font-weight: 700; color: var(--subtext); }
+    .transform-input { margin-top: 4px; }
+
+    /* ── Part 6 ── */
+    .p6-instructions { font-size: 13px; color: var(--subtext); margin-bottom: 12px; }
+    .p6-sentences { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .p6-sentence {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px; font-size: 13px; color: var(--text2);
+    }
+    .sent-label {
+      font-weight: 800; color: var(--accent); flex-shrink: 0;
+      background: var(--accent-light); border-radius: 6px;
+      width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    }
+    .gap-select {
+      border: 1.5px solid var(--accent); border-radius: 6px;
+      background: var(--accent-light); color: var(--accent);
+      font-weight: 700; padding: 2px 6px; font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* ── Part 7 sections ── */
+    .p7-sections { margin-bottom: 20px; }
+    .p7-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 8px; overflow: hidden;
+    }
+    .p7-section-title {
+      padding: 12px 14px; font-size: 13px; font-weight: 700;
+      color: var(--text); cursor: pointer; list-style: none;
+    }
+    .p7-section-title::marker { display: none; }
+    .p7-section[open] .p7-section-title { color: var(--accent); }
+    .p7-section-text {
+      padding: 0 14px 14px; font-size: 13px; color: var(--text2); line-height: 1.7;
+    }
+    .q-matching { }
+
+    /* ── Review ── */
+    .review-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .review-sub   { font-size: 13px; color: var(--subtext); margin-bottom: 20px; }
+    .review-parts { display: flex; flex-direction: column; gap: 10px; }
+    .review-part  { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; }
+    .review-part-complete { border-color: var(--success); }
+    .review-part-partial  { border-color: var(--warning); }
+    .review-part-empty    { border-color: var(--error); opacity: 0.8; }
+    .review-part-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .review-part-label { font-weight: 800; color: var(--text); }
+    .review-part-title { font-size: 12px; color: var(--subtext); flex: 1; }
+    .review-part-count { font-size: 12px; font-weight: 700; color: var(--text2); }
+    .review-answers { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .review-ans { font-size: 11px; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
+    .ans-set   { background: var(--accent-light); color: var(--accent); }
+    .ans-empty { background: var(--surface2); color: var(--subtext); }
+    .review-edit-btn {
+      background: none; border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font-size: 12px; color: var(--text2); cursor: pointer;
+    }
+    .review-edit-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Results ── */
+    .results-hero { text-align: center; margin-bottom: 24px; }
+    .results-circle {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: var(--accent-light); border: 3px solid var(--accent);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .results-score { font-size: 22px; font-weight: 800; color: var(--accent); }
+    .results-pct   { font-size: 14px; font-weight: 700; color: var(--text2); }
+    .results-grade { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .results-time  { font-size: 13px; color: var(--subtext); }
+    .results-breakdown { margin-bottom: 24px; }
+    .result-part-row {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .rp-label  { font-weight: 700; color: var(--text); min-width: 48px; }
+    .rp-score  { flex: 1; font-weight: 600; }
+    .rp-time   { font-size: 11px; color: var(--subtext); text-align: right; }
+    .res-good  .rp-score { color: var(--success); }
+    .res-mid   .rp-score { color: var(--warning); }
+    .res-bad   .rp-score { color: var(--error); }
+    .results-actions { display: flex; flex-direction: column; gap: 10px; }
+    .perfect-score { text-align: center; font-size: 16px; font-weight: 700; color: var(--success); padding: 12px; }
+
+    /* ── Errors ── */
+    .errors-title    { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+    .error-group     { margin-bottom: 20px; }
+    .error-group-title { font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
+    .diag-error      { margin-bottom: 10px; }
+    .err-question    { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .err-answers     { margin-bottom: 8px; }
+    .err-row         { display: flex; gap: 8px; font-size: 12px; margin-bottom: 4px; }
+    .err-label       { font-weight: 700; color: var(--subtext); min-width: 100px; }
+    .err-wrong       { color: var(--error); font-weight: 600; }
+    .err-correct     { color: var(--success); font-weight: 700; }
+    .err-explanation { font-size: 12px; color: var(--text2); line-height: 1.6; background: var(--surface2); border-radius: 8px; padding: 8px 10px; }
+
+    /* ── Footer ── */
+    #diagFooter {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 10px 16px; display: flex; gap: 10px; align-items: center;
+      justify-content: space-between;
+    }
+    #prevBtn, #nextBtn {
+      padding: 10px 18px; border-radius: 12px; font-weight: 700;
+      font-size: 14px; cursor: pointer; border: none;
+    }
+    #prevBtn   { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+    #nextBtn   { background: var(--accent); color: #fff; }
+    #prevBtn:hover { border-color: var(--accent); color: var(--accent); }
+    #nextBtn:hover { opacity: 0.9; }
+    #reviewBtn {
+      flex: 1; padding: 10px; border-radius: 12px; font-weight: 700;
+      font-size: 13px; cursor: pointer;
+      background: none; border: 1.5px solid var(--border); color: var(--text2);
+    }
+    #reviewBtn:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed header -->
+  <header id="diagHeader">
+    <button id="backBtn" title="Back to tests">&#8592;</button>
+    <div id="headerTitle">Test — Part 1 of 7</div>
+    <div id="headerTimer">00:00</div>
+  </header>
+
+  <!-- Progress bar -->
+  <div id="progressBar"><div id="progressFill" style="width:0%"></div></div>
+
+  <!-- Main content -->
+  <main id="diagMain">
+
+    <!-- Strategy guide -->
+    <div id="phase-strategy" class="phase"></div>
+
+    <!-- Questions -->
+    <div id="phase-questions" class="phase"></div>
+
+    <!-- Review all answers -->
+    <div id="phase-review" class="phase"></div>
+
+    <!-- Results after submission -->
+    <div id="phase-results" class="phase"></div>
+
+    <!-- Error review -->
+    <div id="phase-errors" class="phase"></div>
+
+  </main>
+
+  <!-- Bottom footer (hidden on results/errors) -->
+  <div id="diagFooter">
+    <button id="prevBtn" style="display:none">&#8592; Back</button>
+    <button id="reviewBtn">Review All</button>
+    <button id="nextBtn">Next &#8594;</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+  <script src="js/tests-data.js"></script>
+  <script src="js/diagnostic.js"></script>
+  <script>
+    (function () {
+      if (!Auth.requireAuth()) return;
+
+      // Back button
+      document.getElementById('backBtn').addEventListener('click', function () {
+        // Save position before leaving
+        window.location.href = 'test.html';
+      });
+
+      // Review button (go to review phase from questions)
+      document.getElementById('reviewBtn').addEventListener('click', function () {
+        goToReview();
+      });
+
+      // Init the test engine
+      diagInit();
+    })();
+  </script>
+</body>
+</html>
