@@ -3,69 +3,380 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Statistiche</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>TrainEnglish — Progress</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
-    }
+    .page-content { max-width: 720px; }
 
-    .stat-card-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      text-align: center;
-      padding: 16px 8px;
-      box-shadow: 0 2px 8px rgba(180, 83, 9, 0.06);
-    }
-
-    .accuracy-fill-good  { background: var(--success); }
-    .accuracy-fill-mid   { background: var(--warning); }
-    .accuracy-fill-bad   { background: var(--error); }
-
-    .notes-save-row {
+    /* ── Page header ── */
+    .stats-header {
       display: flex;
-      justify-content: flex-end;
-      margin-top: 8px;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
-
-    .notes-save-btn {
-      padding: 8px 18px;
+    .stats-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -0.4px;
+    }
+    .stats-daterange {
       font-size: 12px;
-    }
-
-    .last-studied {
-      font-size: 12px;
-      color: var(--subtext);
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .empty-accuracy {
-      text-align: center;
-      padding: 24px;
-      font-size: 13px;
-      color: var(--subtext);
-    }
-
-    .notes-hint {
-      font-size: 11px;
       color: var(--subtext);
       margin-top: 4px;
     }
+    .stats-header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .range-pills {
+      display: flex;
+      gap: 3px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+    }
+    .range-pill {
+      padding: 5px 11px;
+      border: none;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--subtext);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .range-pill.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .export-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--subtext);
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .export-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ── Error log section ── */
+    /* ── Metrics grid ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 600px) {
+      .metrics-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .metric-card {
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: none;
+    }
+    .metric-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .metric-label {
+      font-size: 10px;
+      color: var(--subtext);
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 600;
+    }
+    .metric-delta {
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      min-height: 16px;
+    }
+    .metric-sub {
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .delta-up   { color: var(--success); }
+    .delta-down { color: var(--error); }
+    .delta-flat { color: var(--subtext); }
+
+    /* ── Section wrapper ── */
+    .stats-section { margin-bottom: 28px; }
+    .stats-section-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    /* ── Chart ── */
+    .chart-wrap { padding: 4px 0 0; position: relative; }
+    .chart-svg  { width: 100%; display: block; overflow: visible; }
+    .chart-grid-line { stroke: var(--border2); stroke-width: 1; stroke-dasharray: 4 4; }
+    .chart-b2-line   { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 6 4; opacity: 0.45; }
+    .chart-area-fill { fill: var(--accent); opacity: 0.07; }
+    .chart-line-path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-dot {
+      fill: var(--surface);
+      stroke: var(--accent);
+      stroke-width: 2;
+      cursor: pointer;
+      transition: r 0.1s;
+    }
+    .chart-axis-lbl { font-size: 9px; fill: var(--subtext); font-family: 'JetBrains Mono', monospace; }
+    .chart-b2-lbl   { font-size: 9px; fill: var(--accent); opacity: 0.65; }
+    .chart-empty {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .chart-empty-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text2);
+      margin-bottom: 6px;
+    }
+    .chart-empty-sub {
+      font-size: 13px;
+      color: var(--subtext);
+      margin-bottom: 16px;
+    }
+    .chart-tooltip {
+      position: fixed;
+      background: var(--text);
+      color: #fff;
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      white-space: nowrap;
+      z-index: 300;
+      line-height: 1.6;
+    }
+    .chart-tooltip.show { opacity: 1; }
+
+    /* ── Grammar breakdown ── */
+    .weak-callout {
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+    .weak-callout-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 10px;
+    }
+    .weak-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .grammar-row {
+      display: grid;
+      grid-template-columns: minmax(110px,auto) 1fr 44px 50px 18px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.25s ease forwards;
+    }
+    .grammar-row:last-child { border-bottom: none; }
+    .grammar-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .grammar-count { font-size: 11px; color: var(--subtext); text-align: right; }
+    .trend-arrow { font-size: 12px; text-align: center; }
+    .trend-up   { color: var(--success); }
+    .trend-down { color: var(--error); }
+    .trend-flat { color: var(--subtext); }
+    .badge-success { background: #ecfdf5; color: var(--success); }
+    .badge-error   { background: #fef2f2; color: var(--error); }
+    .badge-warning { background: #fffbeb; color: var(--warning); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Journey grid ── */
+    .journey-scroll { overflow-x: auto; padding-bottom: 4px; }
+    .journey-cal    { min-width: 280px; }
+    .cal-day-wrap   { position: relative; }
+    .cal-day-tip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      z-index: 20;
+      line-height: 1.5;
+    }
+    .cal-day-wrap:hover .cal-day-tip { opacity: 1; }
+    .journey-stats-row {
+      display: flex;
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+      padding-top: 14px;
+    }
+    .journey-stat { flex: 1; text-align: center; }
+    .journey-stat + .journey-stat { border-left: 1px solid var(--border); }
+    .journey-stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+    .journey-stat-lbl {
+      font-size: 10px;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 3px;
+    }
+
+    /* ── Test history ── */
+    .test-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .test-row:last-child { border-bottom: none; }
+    .test-date  { font-size: 12px; color: var(--subtext); min-width: 72px; }
+    .test-score {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+    .test-review {
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      background: none;
+      text-decoration: none;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .test-empty { text-align: center; padding: 32px 20px; }
+
+    /* ── Insights ── */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 540px) { .insights-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 720px) { .insights-grid { grid-template-columns: repeat(3, 1fr); } }
+    .insight-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+    .insight-icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      background: var(--surface2);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .insight-text {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .insight-cta {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-top: 4px;
+      text-decoration: none;
+    }
+
+    /* ── Show-all ── */
+    .show-all-btn {
+      width: 100%;
+      margin-top: 8px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .show-all-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Error log (preserved) ── */
     .log-toggle {
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer; padding: 12px 0; border: none; background: none;
       width: 100%; text-align: left;
     }
     .log-toggle-label { font-size: 14px; font-weight: 700; color: var(--text); }
-    .log-toggle-meta  { font-size: 12px; color: var(--subtext); }
+    .log-toggle-meta  { font-size: 12px; color: var(--subtext); margin-left: auto; margin-right: 8px; }
     .log-toggle-arrow { font-size: 14px; color: var(--subtext); transition: transform .2s; }
     .log-toggle-arrow.open { transform: rotate(180deg); }
     .log-preview { display: flex; flex-direction: column; gap: 8px; }
@@ -73,7 +384,7 @@
     .log-full.visible { display: flex; }
     .log-err-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 12px;
+      border-radius: 10px; padding: 12px;
     }
     .log-err-meta    { font-size: 11px; color: var(--subtext); margin-bottom: 4px; }
     .log-err-q       { font-size: 13px; color: var(--text); margin-bottom: 6px; font-weight: 500; }
@@ -83,71 +394,145 @@
     .log-err-expl    { font-size: 11px; color: var(--text2); margin-top: 6px; line-height: 1.5; background: var(--surface2); border-radius: 6px; padding: 6px 8px; }
     .log-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 10px; scrollbar-width: none; }
     .log-chips::-webkit-scrollbar { display: none; }
-    .show-more-btn {
-      background: none; border: 1px solid var(--border); border-radius: 10px;
-      padding: 8px 14px; font-size: 12px; color: var(--text2); cursor: pointer; width: 100%;
+    .notes-save-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .notes-hint { font-size: 11px; color: var(--subtext); margin-top: 4px; }
+
+    @media print {
+      .bottom-nav, .topbar, .range-pills, .export-btn,
+      .notes-save-row, #dataZone { display: none !important; }
+      .page-content { padding: 0 !important; max-width: 100% !important; }
     }
-    .show-more-btn:hover { border-color: var(--accent); color: var(--accent); }
   </style>
 </head>
 <body>
 
-  <!-- Topbar -->
   <header class="topbar">
-    <span class="topbar-title">Statistiche</span>
+    <span class="topbar-title">Progress</span>
     <span></span>
   </header>
 
-  <!-- Main content -->
   <main class="page-content">
 
-    <!-- Last studied -->
-    <div class="last-studied" id="lastStudied"></div>
-
-    <!-- Stat cards row -->
-    <div class="stat-row">
-      <div class="stat-card-item">
-        <div class="stat-num" id="statDays">0</div>
-        <div class="stat-label">Giorni<br>completati</div>
+    <!-- ── Page header ───────────────────────── -->
+    <div class="stats-header">
+      <div>
+        <h1 class="stats-title">Your Progress</h1>
+        <div class="stats-daterange" id="dateRange"></div>
       </div>
-      <div class="stat-card-item">
-        <div class="stat-num" id="statMinutes">0</div>
-        <div class="stat-label">Minuti<br>totali</div>
-      </div>
-      <div class="stat-card-item">
-        <div class="stat-num" id="statStreak">0</div>
-        <div class="stat-label">Streak<br>attuale</div>
+      <div class="stats-header-actions">
+        <div class="range-pills" id="rangePills">
+          <button class="range-pill" data-range="7">7 days</button>
+          <button class="range-pill active" data-range="30">30 days</button>
+          <button class="range-pill" data-range="0">All time</button>
+        </div>
+        <button class="export-btn" id="exportPdfBtn">Export PDF</button>
       </div>
     </div>
 
-    <!-- Accuracy per topic -->
-    <div class="section-title">Accuratezza per argomento</div>
-    <div id="accuracyList">
-      <div class="empty-accuracy">Completa alcune sessioni per vedere le statistiche di accuratezza.</div>
+    <!-- ── Section 1: Metrics ─────────────────── -->
+    <div class="metrics-grid">
+      <div class="metric-card card">
+        <div class="metric-num" id="mAccuracy">—</div>
+        <div class="metric-label">Overall Accuracy</div>
+        <div class="metric-delta" id="dAccuracy"></div>
+      </div>
+      <div class="metric-card card">
+        <div class="metric-num" id="mExercises">—</div>
+        <div class="metric-label">Exercises Done</div>
+        <div class="metric-delta" id="dExercises"></div>
+      </div>
+      <div class="metric-card card">
+        <div class="metric-num" id="mStreak">—</div>
+        <div class="metric-label">Current Streak</div>
+        <div class="metric-delta" id="dStreak"></div>
+      </div>
+      <div class="metric-card card">
+        <div class="metric-num" id="mLevel">—</div>
+        <div class="metric-label">Estimated Level</div>
+        <div class="metric-sub" id="dLevel"></div>
+      </div>
+    </div>
+
+    <!-- ── Section 2: Chart ───────────────────── -->
+    <div class="stats-section">
+      <div class="stats-section-hdr">
+        <div class="section-title" style="margin-bottom:0">Accuracy Over Time</div>
+        <span style="font-size:11px;color:var(--subtext)">Exam simulations</span>
+      </div>
+      <div class="card" style="padding:16px 16px 12px">
+        <div class="chart-wrap" id="chartWrap"></div>
+      </div>
+    </div>
+
+    <!-- ── Section 3: Grammar Breakdown ──────── -->
+    <div class="stats-section">
+      <div class="stats-section-hdr">
+        <div class="section-title" style="margin-bottom:0">Performance by Grammar Area</div>
+        <span style="font-size:11px;color:var(--subtext)">All time</span>
+      </div>
+      <div id="weakCallout" style="display:none" class="weak-callout">
+        <div class="weak-callout-title">3 weakest areas this period</div>
+        <div class="weak-badges" id="weakBadges"></div>
+        <a href="session.html" class="btn btn-ghost" style="display:inline-block;width:auto;padding:7px 14px;font-size:12px">Practice these now</a>
+      </div>
+      <div class="card" style="padding:16px">
+        <div id="grammarList"></div>
+        <button class="show-all-btn" id="showAllGrammar" style="display:none">Show all areas</button>
+      </div>
+    </div>
+
+    <!-- ── Section 4: 60-Day Journey ─────────── -->
+    <div class="stats-section">
+      <div class="section-title">60-Day Journey</div>
+      <div class="card" style="padding:16px">
+        <div class="journey-scroll">
+          <div class="cal-grid journey-cal" id="journeyGrid"></div>
+        </div>
+        <div class="journey-stats-row">
+          <div class="journey-stat">
+            <div class="journey-stat-num" id="jLongest">0</div>
+            <div class="journey-stat-lbl">Longest streak</div>
+          </div>
+          <div class="journey-stat">
+            <div class="journey-stat-num" id="jActive">0</div>
+            <div class="journey-stat-lbl">Active / 60</div>
+          </div>
+          <div class="journey-stat">
+            <div class="journey-stat-num" id="jTests">0</div>
+            <div class="journey-stat-lbl">Tests taken</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Section 5: Test History ───────────── -->
+    <div class="stats-section" id="testHistorySection">
+      <div class="section-title">Exam Simulations</div>
+      <div class="card" style="padding:4px 16px" id="testHistoryWrap"></div>
+    </div>
+
+    <!-- ── Section 6: Insights ───────────────── -->
+    <div class="stats-section" id="insightsSection" style="display:none">
+      <div class="section-title">Insights</div>
+      <div class="insights-grid" id="insightsList"></div>
     </div>
 
     <div class="divider"></div>
 
-    <!-- Error log (collapsible) -->
-    <div class="section-title">Errori recenti</div>
-
-    <!-- Filter chips -->
+    <!-- ── Error log ─────────────────────────── -->
+    <div class="section-title">Recent Errors</div>
     <div class="log-chips" id="logChips">
-      <span class="chip active" data-filter="all">Tutti</span>
-      <span class="chip" data-filter="diagnostic">Test diagnostici</span>
-      <span class="chip" data-filter="session">Sessioni</span>
+      <span class="chip active" data-filter="all">All</span>
+      <span class="chip" data-filter="diagnostic">Exam tests</span>
+      <span class="chip" data-filter="session">Sessions</span>
       <span class="chip" data-filter="Part 1">Part 1</span>
       <span class="chip" data-filter="Part 2">Part 2</span>
       <span class="chip" data-filter="Part 3">Part 3</span>
       <span class="chip" data-filter="Part 4">Part 4</span>
     </div>
-
-    <!-- Last 3 always visible -->
     <div id="logPreview" class="log-preview"></div>
-
-    <!-- Toggle for all errors -->
     <button class="log-toggle" id="logToggle">
-      <span class="log-toggle-label">Vedi tutti gli errori</span>
+      <span class="log-toggle-label">Show all errors</span>
       <span class="log-toggle-meta" id="logToggleMeta"></span>
       <span class="log-toggle-arrow" id="logArrow">&#9660;</span>
     </button>
@@ -155,210 +540,762 @@
 
     <div class="divider"></div>
 
-    <!-- Personal notes -->
-    <div class="section-title">Note personali</div>
+    <!-- ── Notes ─────────────────────────────── -->
+    <div class="section-title">Personal Notes</div>
     <div class="input-group">
-      <textarea id="notesArea" rows="6" placeholder="Scrivi qui le tue note, promemoria, trucchi che vuoi ricordare..."></textarea>
-      <div class="notes-hint">Le note vengono salvate automaticamente.</div>
+      <textarea id="notesArea" rows="5" placeholder="Notes, reminders, tricks you want to remember..."></textarea>
+      <div class="notes-hint">Saved automatically.</div>
     </div>
     <div class="notes-save-row">
-      <button class="btn btn-secondary notes-save-btn" id="saveNotesBtn">Salva note</button>
+      <button class="btn btn-secondary" style="width:auto;padding:8px 18px;font-size:12px" id="saveNotesBtn">Save notes</button>
     </div>
 
     <div class="divider"></div>
 
-    <!-- Danger zone -->
-    <div class="section-title" style="color:var(--error)">Zona dati</div>
-    <button class="btn btn-secondary" id="resetStatsBtn" style="color:var(--error);border-color:var(--error)">
-      Azzera statistiche
-    </button>
+    <!-- ── Data zone ──────────────────────────── -->
+    <div id="dataZone">
+      <div class="section-title" style="color:var(--subtext)">Data</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-secondary" style="width:auto;padding:10px 16px;font-size:12px" id="downloadCsvBtn">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:5px"><path d="M8 2v8m0 0-3-3m3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download CSV
+        </button>
+        <button class="btn btn-secondary" style="width:auto;padding:10px 16px;font-size:12px" id="downloadTxtBtn">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:5px"><path d="M8 2v8m0 0-3-3m3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download TXT
+        </button>
+        <button class="btn btn-secondary" style="width:auto;padding:10px 16px;font-size:12px;color:var(--error);border-color:var(--error)" id="resetStatsBtn">
+          Reset all data
+        </button>
+      </div>
+    </div>
 
   </main>
 
-  <!-- Bottom nav -->
+  <!-- ── Bottom nav ── -->
   <nav class="bottom-nav">
     <a href="dashboard.html" class="nav-item">
-      <span class="nav-icon">&#x1F3E0;</span>
+      <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       <span>Home</span>
     </a>
     <a href="session.html" class="nav-item">
-      <span class="nav-icon">&#9654;</span>
+      <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5 3.5-5 3.5V8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       <span>Sessione</span>
     </a>
-    <a href="library.html" class="nav-item">
-      <span class="nav-icon">&#x1F4D6;</span>
-      <span>Libreria</span>
-    </a>
     <a href="test.html" class="nav-item">
-      <span class="nav-icon">&#x1F4DD;</span>
+      <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h5M8 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       <span>Test</span>
     </a>
+    <a href="library.html" class="nav-item">
+      <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span>Libreria</span>
+    </a>
     <a href="stats.html" class="nav-item active">
-      <span class="nav-icon">&#x1F4CA;</span>
+      <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       <span>Stats</span>
     </a>
   </nav>
+
+  <!-- Chart tooltip (singleton, outside SVG) -->
+  <div class="chart-tooltip" id="chartTip"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/app.js"></script>
   <script src="js/content.js"></script>
   <script>
-    (function () {
-      if (!Auth.requireAuth()) return;
+  (function () {
+    if (!Auth.requireAuth()) return;
 
-      var state = State.load();
+    // ── Data ──────────────────────────────────────────────
+    var state          = State.load();
+    var scores         = state.topicScores   || {};
+    var allErrors      = state.sessionErrors || [];
+    var completedDays  = state.completedDays || [];
 
-      // Stat numbers
-      document.getElementById('statDays').textContent    = (state.completedDays || []).length;
-      document.getElementById('statMinutes').textContent = state.totalMinutes || 0;
-      document.getElementById('statStreak').textContent  = state.streak || 0;
-
-      // Last studied
-      if (state.lastStudied) {
-        var d = new Date(state.lastStudied);
-        document.getElementById('lastStudied').textContent = 'Ultima sessione: ' + d.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
-      }
-
-      // Accuracy bars
-      var scores    = state.topicScores || {};
-      var accList   = document.getElementById('accuracyList');
-      var scoreKeys = Object.keys(scores);
-
-      if (scoreKeys.length > 0) {
-        accList.innerHTML = '';
-        scoreKeys
-          .filter(function (k) { return scores[k].total > 0; })
-          .sort(function (a, b) {
-            var pctA = Math.round(scores[a].correct / scores[a].total * 100);
-            var pctB = Math.round(scores[b].correct / scores[b].total * 100);
-            return pctA - pctB;
-          })
-          .forEach(function (key) {
-            var s   = scores[key];
-            var pct = Math.round((s.correct / s.total) * 100);
-            var cls = pct >= 75 ? 'accuracy-fill-good' : (pct >= 50 ? 'accuracy-fill-mid' : 'accuracy-fill-bad');
-            var colorCls = pct >= 75 ? 'pct-good' : (pct >= 50 ? 'pct-mid' : 'pct-bad');
-
-            var row = document.createElement('div');
-            row.className = 'accuracy-row';
-            row.innerHTML = '<div class="accuracy-label">'
-              + '<span>' + (TOPIC_LABELS[key] || key) + '</span>'
-              + '<span class="accuracy-pct ' + colorCls + '">' + pct + '%</span>'
-              + '</div>'
-              + '<div class="progress-bar"><div class="progress-fill ' + cls + '" style="width:' + pct + '%"></div></div>'
-              + '<div style="font-size:11px;color:var(--subtext);margin-top:3px">' + s.correct + ' corrette su ' + s.total + '</div>';
-            accList.appendChild(row);
-          });
-      }
-
-      // Notes
-      var notesArea = document.getElementById('notesArea');
-      var notes     = state.notes || [];
-      notesArea.value = notes.length ? notes[0] : '';
-
-      var saveTimeout;
-      notesArea.addEventListener('input', function () {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(function () {
-          State.update({ notes: [notesArea.value] });
-          UI.toast('Note salvate', 'success');
-        }, 1500);
+    var completedTestIds = JSON.parse(localStorage.getItem('te_completed_tests') || '[]');
+    var testResults = completedTestIds
+      .map(function (id) {
+        var r = localStorage.getItem('te_test_results_' + id);
+        return r ? JSON.parse(r) : null;
+      })
+      .filter(Boolean)
+      .sort(function (a, b) {
+        return (a.completedAt || '') < (b.completedAt || '') ? -1 : 1;
       });
 
-      document.getElementById('saveNotesBtn').addEventListener('click', function () {
-        State.update({ notes: [notesArea.value] });
-        UI.toast('Note salvate', 'success');
+    // ── Range state ───────────────────────────────────────
+    var currentRangeDays = 30;
+
+    // ── Helpers ───────────────────────────────────────────
+    function rangeMs() {
+      return currentRangeDays > 0 ? currentRangeDays * 86400000 : 0;
+    }
+
+    function inRange(dateStr) {
+      if (!currentRangeDays) return true;
+      if (!dateStr) return false;
+      return (Date.now() - new Date(dateStr).getTime()) <= rangeMs();
+    }
+
+    function easeOut(t) { return 1 - Math.pow(1 - t, 2); }
+
+    function countUp(el, to, suffix, duration) {
+      var start = performance.now();
+      var from  = 0;
+      function step(now) {
+        var t   = Math.min((now - start) / duration, 1);
+        var val = Math.round(from + (to - from) * easeOut(t));
+        el.textContent = val + (suffix || '');
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function pctClass(p) {
+      return p >= 75 ? 'pct-good' : (p >= 50 ? 'pct-mid' : 'pct-bad');
+    }
+
+    function pctFillClass(p) {
+      return p >= 75 ? 'accuracy-fill-good' : (p >= 50 ? 'accuracy-fill-mid' : 'accuracy-fill-bad');
+    }
+
+    function badgeClass(p) {
+      return p >= 75 ? 'badge-success' : (p >= 50 ? 'badge-warning' : 'badge-error');
+    }
+
+    function smoothLinePath(pts) {
+      if (pts.length < 2) return '';
+      var d = 'M ' + pts[0][0] + ' ' + pts[0][1];
+      for (var i = 1; i < pts.length; i++) {
+        var p0  = pts[Math.max(0, i - 2)];
+        var p1  = pts[i - 1];
+        var p2  = pts[i];
+        var p3  = pts[Math.min(pts.length - 1, i + 1)];
+        var c1x = p1[0] + (p2[0] - p0[0]) / 6;
+        var c1y = p1[1] + (p2[1] - p0[1]) / 6;
+        var c2x = p2[0] - (p3[0] - p1[0]) / 6;
+        var c2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += ' C ' + c1x + ' ' + c1y + ' ' + c2x + ' ' + c2y + ' ' + p2[0] + ' ' + p2[1];
+      }
+      return d;
+    }
+
+    function longestConsecutive(arr) {
+      if (!arr.length) return 0;
+      var sorted = arr.slice().sort(function (a, b) { return a - b; });
+      var max = 1, cur = 1;
+      for (var i = 1; i < sorted.length; i++) {
+        cur = sorted[i] === sorted[i - 1] + 1 ? cur + 1 : 1;
+        if (cur > max) max = cur;
+      }
+      return max;
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function fmtDateShort(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    }
+
+    function fmtRange(days) {
+      if (!days) {
+        var first = state.lastStudied || new Date().toISOString();
+        return 'All time';
+      }
+      var end   = new Date();
+      var start = new Date(Date.now() - days * 86400000);
+      return start.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })
+        + ' – '
+        + end.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function estimateLevel(pct) {
+      if (pct === null) return { level: 'N/A', sub: 'Complete some exercises' };
+      if (pct >= 85) return { level: 'B2+', sub: 'C1 ready' };
+      if (pct >= 75) return { level: 'B2',  sub: 'FCE target reached' };
+      if (pct >= 62) return { level: 'B1+', sub: 'B2 in ~' + (Math.ceil((75 - pct) * 2.5)) + ' days' };
+      return           { level: 'B1',  sub: 'Keep practicing' };
+    }
+
+    // ── Section: Metrics ─────────────────────────────────
+    function renderMetrics() {
+      document.getElementById('dateRange').textContent = fmtRange(currentRangeDays);
+
+      // Overall accuracy from topicScores (aggregate — no per-day granularity)
+      var totC = 0, totT = 0;
+      Object.values(scores).forEach(function (s) { totC += s.correct; totT += s.total; });
+      var overallPct = totT > 0 ? Math.round(totC / totT * 100) : null;
+
+      var mAcc  = document.getElementById('mAccuracy');
+      var mEx   = document.getElementById('mExercises');
+      var mStr  = document.getElementById('mStreak');
+      var mLvl  = document.getElementById('mLevel');
+      var dStr  = document.getElementById('dStreak');
+      var dLvl  = document.getElementById('dLevel');
+
+      if (overallPct !== null) {
+        countUp(mAcc, overallPct, '%', 350);
+      } else {
+        mAcc.textContent = '—';
+      }
+      document.getElementById('dAccuracy').innerHTML = '<span class="delta-flat">All time</span>';
+
+      countUp(mEx, totT, '', 350);
+      document.getElementById('dExercises').innerHTML = '<span class="delta-flat">All time</span>';
+
+      var streak = state.streak || 0;
+      countUp(mStr, streak, '', 250);
+      dStr.innerHTML = streak > 0
+        ? '<span class="delta-up">↑</span><span class="delta-up">' + streak + ' day' + (streak !== 1 ? 's' : '') + '</span>'
+        : '<span class="delta-flat">—</span>';
+
+      var lvl = estimateLevel(overallPct);
+      mLvl.textContent = lvl.level;
+      dLvl.textContent = lvl.sub;
+    }
+
+    // ── Section: Chart ────────────────────────────────────
+    function buildAccuracyChart() {
+      var wrap = document.getElementById('chartWrap');
+      wrap.innerHTML = '';
+
+      var filtered = testResults.filter(function (r) {
+        return r.completedAt && (!currentRangeDays || inRange(r.completedAt));
       });
 
-      // ── Error log ──────────────────────────────────
-      var allErrors    = state.sessionErrors || [];
-      var logFilter    = 'all';
-      var logExpanded  = false;
-
-      function filterErrors(filter) {
-        if (filter === 'all') return allErrors;
-        if (filter === 'diagnostic') return allErrors.filter(function(e){ return e.source === 'diagnostic'; });
-        if (filter === 'session')    return allErrors.filter(function(e){ return !e.source || e.source === 'session'; });
-        return allErrors.filter(function(e){ return e.part === filter; });
-      }
-
-      function buildErrCard(e) {
-        var meta = '';
-        if (e.source === 'diagnostic') meta += '<span class="badge" style="background:var(--accent-light);color:var(--accent);font-size:10px">Test diagnostico</span> ';
-        meta += e.part || '';
-        if (e.date) { var d = new Date(e.date); meta += ' &middot; ' + d.toLocaleDateString('it-IT', {day:'2-digit',month:'short'}); }
-
-        return '<div class="log-err-card">'
-          + '<div class="log-err-meta">' + meta + '</div>'
-          + '<div class="log-err-q">' + (e.question || '') + '</div>'
-          + '<div class="log-err-answers">'
-          + '<span class="log-err-wrong">&#10007; ' + (e.userAnswer || '—') + '</span>'
-          + ' &nbsp;&#8594;&nbsp; '
-          + '<span class="log-err-correct">&#10003; ' + (e.correct || '—') + '</span>'
-          + '</div>'
-          + (e.explanation ? '<div class="log-err-expl">' + e.explanation + '</div>' : '')
+      if (filtered.length < 2) {
+        var isEmpty = testResults.length === 0;
+        wrap.innerHTML = '<div class="chart-empty">'
+          + '<div class="chart-empty-title">' + (isEmpty ? 'No exam data yet' : 'Not enough data for this range') + '</div>'
+          + '<div class="chart-empty-sub">' + (isEmpty ? 'Take an exam simulation to track your accuracy over time.' : 'Switch to "All time" to see all results.') + '</div>'
+          + (isEmpty ? '<a href="test.html" class="btn btn-ghost" style="display:inline-block;width:auto;padding:9px 18px;font-size:13px">Take first test</a>' : '')
           + '</div>';
+        return;
       }
 
-      function renderLog() {
-        var filtered = filterErrors(logFilter);
-        var preview  = document.getElementById('logPreview');
-        var full     = document.getElementById('logFull');
-        var meta     = document.getElementById('logToggleMeta');
+      var pts = filtered.map(function (r) {
+        return {
+          ts:    new Date(r.completedAt).getTime(),
+          pct:   Math.round(r.totalCorrect / r.totalQ * 100),
+          score: r.totalCorrect + '/' + r.totalQ,
+          date:  fmtDateShort(r.completedAt)
+        };
+      });
 
-        if (filtered.length === 0) {
-          preview.innerHTML = '<div style="font-size:13px;color:var(--subtext);padding:12px 0">Nessun errore per questo filtro.</div>';
-          full.innerHTML = '';
-          meta.textContent = '';
-          return;
+      var W = 560, H = 190;
+      var PL = 34, PR = 28, PT = 14, PB = 32;
+      var cW = W - PL - PR, cH = H - PT - PB;
+      var minTs = pts[0].ts, maxTs = pts[pts.length - 1].ts;
+      var tsRange = maxTs - minTs || (cW); // prevent div/0 when single timestamp
+
+      function sx(ts)  { return PL + (ts - minTs) / tsRange * cW; }
+      function sy(pct) { return PT + (1 - pct / 100) * cH; }
+
+      var ns = 'http://www.w3.org/2000/svg';
+      var svgEl = document.createElementNS(ns, 'svg');
+      svgEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svgEl.classList.add('chart-svg');
+      svgEl.setAttribute('aria-label', 'Accuracy over time. ' + pts.length + ' exam results shown.');
+
+      function el(tag, attrs) {
+        var e = document.createElementNS(ns, tag);
+        Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+        return e;
+      }
+
+      // Gridlines + Y labels
+      [0, 20, 40, 60, 80, 100].forEach(function (yv) {
+        var yp = sy(yv);
+        svgEl.appendChild(el('line', {
+          class: yv === 80 ? 'chart-b2-line' : 'chart-grid-line',
+          x1: PL, y1: yp, x2: W - PR, y2: yp
+        }));
+        svgEl.appendChild(Object.assign(el('text', {
+          class: 'chart-axis-lbl', x: PL - 4, y: yp + 3.5, 'text-anchor': 'end'
+        }), { textContent: yv }));
+        if (yv === 80) {
+          svgEl.appendChild(Object.assign(el('text', {
+            class: 'chart-b2-lbl', x: W - PR + 3, y: yp + 3.5
+          }), { textContent: 'B2' }));
         }
+      });
 
-        // First 3
-        preview.innerHTML = filtered.slice(0, 3).map(buildErrCard).join('');
+      var coordPairs = pts.map(function (p) { return [sx(p.ts), sy(p.pct)]; });
 
-        // Rest
-        var rest = filtered.slice(3);
-        meta.textContent = filtered.length + ' errori totali';
-        if (rest.length > 0) {
-          full.innerHTML = rest.map(buildErrCard).join('');
+      // Area fill
+      var areaCoords = [[coordPairs[0][0], sy(0)]]
+        .concat(coordPairs)
+        .concat([[coordPairs[coordPairs.length - 1][0], sy(0)]]);
+      svgEl.appendChild(el('polygon', {
+        class:  'chart-area-fill',
+        points: areaCoords.map(function (c) { return c[0] + ',' + c[1]; }).join(' ')
+      }));
+
+      // Smooth line
+      var pathEl = el('path', {
+        class: 'chart-line-path',
+        id:    'chartLinePath',
+        d:     smoothLinePath(coordPairs)
+      });
+      svgEl.appendChild(pathEl);
+
+      // Dots
+      pts.forEach(function (p, i) {
+        var dot = el('circle', { class: 'chart-dot', cx: sx(p.ts), cy: sy(p.pct), r: 4, 'data-i': i });
+        svgEl.appendChild(dot);
+      });
+
+      // X-axis labels: first, middle, last
+      var lblIdxs = [0, Math.floor((pts.length - 1) / 2), pts.length - 1]
+        .filter(function (v, i, a) { return a.indexOf(v) === i; });
+      lblIdxs.forEach(function (i) {
+        svgEl.appendChild(Object.assign(el('text', {
+          class: 'chart-axis-lbl', x: sx(pts[i].ts), y: H - 6, 'text-anchor': 'middle'
+        }), { textContent: pts[i].date }));
+      });
+
+      wrap.appendChild(svgEl);
+
+      // Animate line draw-in
+      requestAnimationFrame(function () {
+        var len = pathEl.getTotalLength ? pathEl.getTotalLength() : 1000;
+        pathEl.style.strokeDasharray  = len;
+        pathEl.style.strokeDashoffset = len;
+        pathEl.getBoundingClientRect();
+        pathEl.style.transition = 'stroke-dashoffset 0.4s ease';
+        pathEl.style.strokeDashoffset = '0';
+      });
+
+      // Tooltip
+      var tip = document.getElementById('chartTip');
+      svgEl.addEventListener('mouseover', function (ev) {
+        var dot = ev.target.closest ? ev.target.closest('.chart-dot') : null;
+        if (!dot) return;
+        var p = pts[parseInt(dot.getAttribute('data-i'))];
+        tip.innerHTML = '<strong>' + p.date + '</strong><br>' + p.score + ' &mdash; ' + p.pct + '%';
+        tip.classList.add('show');
+      });
+      svgEl.addEventListener('mousemove', function (ev) {
+        tip.style.left = (ev.clientX + 14) + 'px';
+        tip.style.top  = (ev.clientY - 44) + 'px';
+      });
+      svgEl.addEventListener('mouseout', function (ev) {
+        if (ev.target.classList && ev.target.classList.contains('chart-dot')) {
+          tip.classList.remove('show');
+        }
+      });
+    }
+
+    // ── Section: Grammar Breakdown ────────────────────────
+    function renderGrammarBreakdown() {
+      var list    = document.getElementById('grammarList');
+      var showBtn = document.getElementById('showAllGrammar');
+      var callout = document.getElementById('weakCallout');
+      var wBadges = document.getElementById('weakBadges');
+      list.innerHTML = '';
+      showBtn.style.display = 'none';
+
+      var rows = Object.keys(scores)
+        .filter(function (k) { return scores[k].total > 0; })
+        .map(function (k) {
+          var s   = scores[k];
+          var pct = Math.round(s.correct / s.total * 100);
+          return { key: k, pct: pct, total: s.total, label: TOPIC_LABELS[k] || k };
+        })
+        .sort(function (a, b) { return a.pct - b.pct; });
+
+      if (rows.length === 0) {
+        list.innerHTML = '<div style="padding:24px 0;text-align:center;font-size:13px;color:var(--subtext)">Complete some sessions to see accuracy by topic.</div>';
+        callout.style.display = 'none';
+        return;
+      }
+
+      // Weak callout (bottom 3 with < 75%)
+      var weak3 = rows.slice(0, 3).filter(function (r) { return r.pct < 75; });
+      if (weak3.length >= 2) {
+        callout.style.display = 'block';
+        wBadges.innerHTML = weak3.map(function (r) {
+          return '<span class="badge ' + badgeClass(r.pct) + '">' + r.label + '</span>';
+        }).join('');
+      } else {
+        callout.style.display = 'none';
+      }
+
+      var MAX_VISIBLE = 8;
+      var showAll = false;
+
+      function renderRows() {
+        list.innerHTML = '';
+        var visible = showAll ? rows : rows.slice(0, MAX_VISIBLE);
+        visible.forEach(function (r, i) {
+          var delay = Math.min(i * 50, 400);
+          var row = document.createElement('div');
+          row.className = 'grammar-row';
+          row.style.animationDelay = delay + 'ms';
+          row.innerHTML =
+            '<span class="badge ' + badgeClass(r.pct) + '" style="font-size:10px;padding:3px 8px">' + r.label + '</span>'
+            + '<div class="progress-bar" style="height:5px">'
+            +   '<div class="progress-fill ' + pctFillClass(r.pct) + '" style="width:0%" data-pct="' + r.pct + '"></div>'
+            + '</div>'
+            + '<span class="grammar-pct ' + pctClass(r.pct) + '">' + r.pct + '%</span>'
+            + '<span class="grammar-count">' + r.total + ' ex</span>'
+            + '<span class="trend-arrow trend-flat">—</span>';
+          list.appendChild(row);
+        });
+
+        // Animate progress bars
+        requestAnimationFrame(function () {
+          list.querySelectorAll('.progress-fill[data-pct]').forEach(function (fill) {
+            fill.style.transition = 'width 0.4s ease';
+            fill.style.width = fill.getAttribute('data-pct') + '%';
+          });
+        });
+
+        if (!showAll && rows.length > MAX_VISIBLE) {
+          showBtn.textContent = 'Show all ' + rows.length + ' areas';
+          showBtn.style.display = 'block';
         } else {
-          full.innerHTML = '';
+          showBtn.style.display = 'none';
         }
       }
 
+      renderRows();
+
+      showBtn.onclick = function () {
+        showAll = true;
+        renderRows();
+      };
+    }
+
+    // ── Section: 60-Day Journey ───────────────────────────
+    function renderJourneyGrid() {
+      var grid    = document.getElementById('journeyGrid');
+      var today   = state.currentDay || 1;
+      grid.innerHTML = '';
+
+      for (var d = 1; d <= 60; d++) {
+        var wrap = document.createElement('div');
+        wrap.className = 'cal-day-wrap';
+
+        var cell = document.createElement('div');
+        cell.className = 'cal-day';
+        cell.textContent = d;
+
+        var tip = document.createElement('div');
+        tip.className = 'cal-day-tip';
+
+        if (completedDays.includes(d)) {
+          cell.classList.add('done');
+          tip.textContent = 'Day ' + d + ' — completed';
+        } else if (d === today) {
+          cell.classList.add('today');
+          tip.textContent = 'Day ' + d + ' — today';
+        } else if (d > today) {
+          cell.classList.add('future');
+          tip.textContent = 'Day ' + d + ' — upcoming';
+        } else {
+          tip.textContent = 'Day ' + d + ' — rest day';
+        }
+
+        wrap.appendChild(cell);
+        wrap.appendChild(tip);
+        grid.appendChild(wrap);
+      }
+
+      document.getElementById('jLongest').textContent = longestConsecutive(completedDays);
+      document.getElementById('jActive').textContent  = completedDays.length;
+      document.getElementById('jTests').textContent   = completedTestIds.length;
+    }
+
+    // ── Section: Test History ─────────────────────────────
+    function renderTestHistory() {
+      var wrap = document.getElementById('testHistoryWrap');
+      wrap.innerHTML = '';
+
+      if (testResults.length === 0) {
+        wrap.innerHTML = '<div class="test-empty">'
+          + '<div style="font-size:14px;font-weight:600;color:var(--text2);margin-bottom:6px">No exam simulations yet</div>'
+          + '<div style="font-size:13px;color:var(--subtext);margin-bottom:16px">Take a full FCE practice test to see your results here.</div>'
+          + '<a href="test.html" class="btn btn-ghost" style="display:inline-block;width:auto;padding:9px 18px;font-size:13px">Take first test</a>'
+          + '</div>';
+        return;
+      }
+
+      var MAX = 5;
+      var showAll = false;
+
+      function renderRows() {
+        wrap.innerHTML = '';
+        var visible = showAll ? testResults : testResults.slice().reverse().slice(0, MAX);
+        visible.slice().reverse().forEach(function (r) {
+          var pct  = Math.round(r.totalCorrect / r.totalQ * 100);
+          var pass = pct >= 60;
+          var row  = document.createElement('div');
+          row.className = 'test-row';
+          row.innerHTML =
+            '<span class="test-date">' + fmtDateShort(r.completedAt) + '</span>'
+            + '<span class="test-score">' + r.totalCorrect + '/' + r.totalQ
+            +   ' <span style="font-size:11px;color:var(--subtext)">' + pct + '%</span></span>'
+            + '<span class="badge ' + (pass ? 'badge-success' : 'badge-error') + '" style="font-size:10px">'
+            +   (pass ? 'Pass' : 'Fail') + '</span>'
+            + '<a href="diagnostic.html?test=' + r.testId + '&review=1" class="test-review">Review</a>';
+          wrap.appendChild(row);
+        });
+
+        if (!showAll && testResults.length > MAX) {
+          var btn = document.createElement('button');
+          btn.className = 'show-all-btn';
+          btn.textContent = 'Show all ' + testResults.length + ' results';
+          btn.onclick = function () { showAll = true; renderRows(); };
+          wrap.appendChild(btn);
+        }
+      }
+
+      renderRows();
+    }
+
+    // ── Section: Insights ─────────────────────────────────
+    function renderInsights() {
+      var section = document.getElementById('insightsSection');
+      var grid    = document.getElementById('insightsList');
+      var insights = [];
+
+      // Insight: streak
+      if (state.streak >= 3) {
+        insights.push({
+          icon: '<path d="M12 2C8.5 6 6 9 6 13a6 6 0 0 0 12 0c0-4-2.5-7-6-11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+          text: state.streak + ' consecutive days studied — your current streak.',
+          cta:  null
+        });
+      }
+
+      // Insight: best topic
+      var topicRows = Object.keys(scores)
+        .filter(function (k) { return scores[k].total >= 5; })
+        .map(function (k) {
+          return { key: k, pct: Math.round(scores[k].correct / scores[k].total * 100), label: TOPIC_LABELS[k] || k };
+        });
+
+      if (topicRows.length > 0) {
+        topicRows.sort(function (a, b) { return b.pct - a.pct; });
+        var best = topicRows[0];
+        insights.push({
+          icon: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+          text: best.label + ' is your strongest area at ' + best.pct + '%.',
+          cta:  null
+        });
+      }
+
+      // Insight: worst topic
+      if (topicRows.length > 1) {
+        topicRows.sort(function (a, b) { return a.pct - b.pct; });
+        var worst = topicRows[0];
+        if (worst.pct < 70) {
+          insights.push({
+            icon: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4m0 4h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+            text: worst.label + ' needs attention — currently at ' + worst.pct + '%.',
+            cta:  { label: 'Practice now', href: 'session.html' }
+          });
+        }
+      }
+
+      // Insight: test performance trend
+      if (testResults.length >= 2) {
+        var last  = testResults[testResults.length - 1];
+        var prev  = testResults[testResults.length - 2];
+        var diff  = Math.round(last.totalCorrect / last.totalQ * 100) - Math.round(prev.totalCorrect / prev.totalQ * 100);
+        if (Math.abs(diff) >= 3) {
+          insights.push({
+            icon: diff > 0
+              ? '<path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
+              : '<path d="M3 7l6 6 4-4 8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+            text: 'Last exam score ' + (diff > 0 ? 'up ' + diff : 'down ' + Math.abs(diff)) + ' points vs. previous test.',
+            cta:  null
+          });
+        }
+      }
+
+      if (insights.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+      grid.innerHTML = insights.map(function (ins) {
+        return '<div class="insight-card card">'
+          + '<div class="insight-icon">'
+          +   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none">' + ins.icon + '</svg>'
+          + '</div>'
+          + '<div class="insight-text">'
+          + ins.text
+          + (ins.cta ? '<a href="' + ins.cta.href + '" class="insight-cta">' + ins.cta.label + '</a>' : '')
+          + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    // ── Error log ─────────────────────────────────────────
+    var logFilter   = 'all';
+    var logExpanded = false;
+
+    function filterErrors(filter) {
+      var base = allErrors.filter(function (e) { return inRange(e.date); });
+      if (filter === 'all')        return base;
+      if (filter === 'diagnostic') return base.filter(function (e) { return e.source === 'diagnostic'; });
+      if (filter === 'session')    return base.filter(function (e) { return !e.source || e.source === 'session'; });
+      return base.filter(function (e) { return e.part === filter; });
+    }
+
+    function buildErrCard(e) {
+      var meta = '';
+      if (e.source === 'diagnostic') meta += '<span class="badge" style="background:var(--accent-light);color:var(--accent);font-size:10px;margin-right:4px">Exam test</span>';
+      meta += (e.part || '');
+      if (e.date) { var d = new Date(e.date); meta += ' &middot; ' + d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }); }
+      return '<div class="log-err-card">'
+        + '<div class="log-err-meta">' + meta + '</div>'
+        + '<div class="log-err-q">' + (e.question || '') + '</div>'
+        + '<div class="log-err-answers">'
+        + '<span class="log-err-wrong">&#10007; ' + (e.userAnswer || '—') + '</span>'
+        + ' &nbsp;&#8594;&nbsp; '
+        + '<span class="log-err-correct">&#10003; ' + (e.correct || '—') + '</span>'
+        + '</div>'
+        + (e.explanation ? '<div class="log-err-expl">' + e.explanation + '</div>' : '')
+        + '</div>';
+    }
+
+    function renderLog() {
+      var filtered = filterErrors(logFilter);
+      var preview  = document.getElementById('logPreview');
+      var full     = document.getElementById('logFull');
+      var meta     = document.getElementById('logToggleMeta');
+
+      if (filtered.length === 0) {
+        preview.innerHTML = '<div style="font-size:13px;color:var(--subtext);padding:12px 0">No errors for this filter.</div>';
+        full.innerHTML    = '';
+        meta.textContent  = '';
+        return;
+      }
+      preview.innerHTML = filtered.slice(0, 3).map(buildErrCard).join('');
+      var rest = filtered.slice(3);
+      meta.textContent = filtered.length + ' total';
+      full.innerHTML   = rest.length ? rest.map(buildErrCard).join('') : '';
+    }
+
+    renderLog();
+
+    document.getElementById('logToggle').addEventListener('click', function () {
+      logExpanded = !logExpanded;
+      document.getElementById('logFull').classList.toggle('visible', logExpanded);
+      document.getElementById('logArrow').classList.toggle('open', logExpanded);
+    });
+
+    document.getElementById('logChips').addEventListener('click', function (ev) {
+      var chip = ev.target.closest ? ev.target.closest('.chip') : null;
+      if (!chip) return;
+      document.querySelectorAll('#logChips .chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      logFilter   = chip.dataset.filter;
+      logExpanded = false;
+      document.getElementById('logFull').classList.remove('visible');
+      document.getElementById('logArrow').classList.remove('open');
       renderLog();
+    });
 
-      // Toggle expand
-      document.getElementById('logToggle').addEventListener('click', function() {
-        logExpanded = !logExpanded;
-        var full  = document.getElementById('logFull');
-        var arrow = document.getElementById('logArrow');
-        full.classList.toggle('visible', logExpanded);
-        arrow.classList.toggle('open', logExpanded);
-      });
+    // ── Notes ─────────────────────────────────────────────
+    var notesArea = document.getElementById('notesArea');
+    var notes     = state.notes || [];
+    notesArea.value = notes.length ? notes[0] : '';
 
-      // Filter chips
-      document.getElementById('logChips').addEventListener('click', function(ev) {
-        var chip = ev.target.closest('.chip');
-        if (!chip) return;
-        document.querySelectorAll('#logChips .chip').forEach(function(c){ c.classList.remove('active'); });
-        chip.classList.add('active');
-        logFilter   = chip.dataset.filter;
-        logExpanded = false;
-        document.getElementById('logFull').classList.remove('visible');
-        document.getElementById('logArrow').classList.remove('open');
-        renderLog();
-      });
+    var saveTimeout;
+    notesArea.addEventListener('input', function () {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(function () {
+        State.update({ notes: [notesArea.value] });
+        UI.toast('Notes saved', 'success');
+      }, 1500);
+    });
 
-      // Reset stats
-      document.getElementById('resetStatsBtn').addEventListener('click', function () {
-        if (!confirm('Sei sicuro di voler azzerare tutte le statistiche? I dati non possono essere recuperati.')) return;
-        State.save(State._defaults);
-        UI.toast('Statistiche azzerate.', 'info');
-        setTimeout(function () { window.location.replace('dashboard.html'); }, 800);
-      });
+    document.getElementById('saveNotesBtn').addEventListener('click', function () {
+      State.update({ notes: [notesArea.value] });
+      UI.toast('Notes saved', 'success');
+    });
 
-    })();
+    // ── Download ──────────────────────────────────────────
+    function downloadErrors(format) {
+      var errors = state.sessionErrors || [];
+      if (!errors.length) { UI.toast('No errors to download.', 'info'); return; }
+      var date = new Date().toISOString().slice(0, 10);
+      var content, mime, ext;
+      if (format === 'csv') {
+        var rows = [['Date', 'Source', 'Part', 'Question', 'Your answer', 'Correct', 'Explanation']];
+        errors.forEach(function (e) {
+          rows.push([
+            (e.date || '').slice(0, 10), e.source || 'session', e.part || '',
+            (e.question || '').replace(/"/g, '""'), (e.userAnswer || '').replace(/"/g, '""'),
+            (e.correct || '').replace(/"/g, '""'),
+            (e.explanation || '').replace(/<[^>]+>/g, '').replace(/"/g, '""')
+          ]);
+        });
+        content = rows.map(function (r) { return r.map(function (c) { return '"' + c + '"'; }).join(','); }).join('\n');
+        mime = 'text/csv;charset=utf-8;'; ext = 'csv';
+      } else {
+        var lines = ['TrainEnglish — Error Log — ' + date, '='.repeat(48), ''];
+        errors.forEach(function (e, i) {
+          lines.push((i + 1) + '. [' + (e.part || '?') + '] ' + (e.date || '').slice(0, 10));
+          lines.push('   Q  : ' + (e.question || '').replace(/<[^>]+>/g, ''));
+          lines.push('   You: ' + (e.userAnswer || '—'));
+          lines.push('   Ans: ' + (e.correct || '—'));
+          if (e.explanation) lines.push('   Note: ' + e.explanation.replace(/<[^>]+>/g, ''));
+          lines.push('');
+        });
+        content = lines.join('\n'); mime = 'text/plain;charset=utf-8;'; ext = 'txt';
+      }
+      var blob = new Blob(['\uFEFF' + content], { type: mime });
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement('a');
+      a.href = url; a.download = 'traininenglish_errors_' + date + '.' + ext;
+      a.click(); URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('downloadCsvBtn').addEventListener('click', function () { downloadErrors('csv'); });
+    document.getElementById('downloadTxtBtn').addEventListener('click', function () { downloadErrors('txt'); });
+    document.getElementById('exportPdfBtn').addEventListener('click', function () { window.print(); });
+
+    document.getElementById('resetStatsBtn').addEventListener('click', function () {
+      if (!confirm('Reset all stats? This cannot be undone.')) return;
+      State.save(State._defaults);
+      UI.toast('Stats reset.', 'info');
+      setTimeout(function () { window.location.replace('dashboard.html'); }, 800);
+    });
+
+    // ── Range pill toggle ─────────────────────────────────
+    document.getElementById('rangePills').addEventListener('click', function (ev) {
+      var pill = ev.target.closest ? ev.target.closest('.range-pill') : null;
+      if (!pill) return;
+      document.querySelectorAll('.range-pill').forEach(function (p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      currentRangeDays = parseInt(pill.dataset.range, 10);
+      renderAll();
+    });
+
+    // ── Render all ────────────────────────────────────────
+    function renderAll() {
+      renderMetrics();
+      buildAccuracyChart();
+      renderGrammarBreakdown();
+      renderJourneyGrid();
+      renderTestHistory();
+      renderInsights();
+      renderLog();
+    }
+
+    renderAll();
+
+  })();
   </script>
 </body>
 </html>

@@ -158,7 +158,12 @@ body {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: color 0.2s;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-item:hover {
+  color: var(--accent);
+  background: var(--accent-light);
 }
 
 .nav-item.active {
