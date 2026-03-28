@@ -4,101 +4,351 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrainEnglish — Sessione</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body {
-      background: var(--bg);
-      min-height: 100vh;
-    }
+    body { min-height: 100vh; }
 
     #mainContent {
-      padding: 16px;
-      max-width: 480px;
+      max-width: 680px;
       margin: 0 auto;
+      padding: 24px 16px 100px;
+    }
+    @media (min-width: 768px) {
+      #mainContent { padding: 40px 24px 60px; }
     }
 
+    /* ── Session topbar override ── */
+    .session-topbar {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+    }
+    .session-count {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--subtext);
+    }
+    .session-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .exit-btn {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--subtext);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 9px;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .exit-btn:hover { color: var(--error); border-color: var(--error); }
+
+    /* ── Steps ── */
     .step { display: none; }
     .step.active { display: block; }
 
-    /* Theory */
-    .theory-body {
-      font-size: 14px;
-      color: var(--text2);
-      line-height: 1.7;
+    /* ── Question entrance ── */
+    @keyframes qIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
+    .q-animate { animation: qIn 150ms ease-out both; }
 
-    /* Progress dots */
-    .exercise-dots {
+    /* ── Exercise meta row ── */
+    .ex-meta {
       display: flex;
-      gap: 6px;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      transition: background 0.2s;
-    }
-
-    .dot.done     { background: var(--success); border-color: var(--success); }
-    .dot.current  { background: var(--accent);  border-color: var(--accent); }
-    .dot.wrong    { background: var(--error);   border-color: var(--error); }
-
-    /* Fill input */
-    .fill-input {
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-      letter-spacing: 0.02em;
-    }
-
-    /* Recap */
-    .recap-circle {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .diff-dots { display: flex; gap: 3px; }
+    .diff-dots span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    .diff-dots span.on { background: var(--accent); }
+    .adaptive-hint {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--subtext);
+      font-weight: 500;
     }
 
-    .recap-errors-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text2);
-      margin-bottom: 10px;
-    }
-
-    .recap-error-item {
-      background: var(--surface2);
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.5;
-    }
-
-    .recap-error-item strong {
+    /* ── Question text ── */
+    .q-text {
+      font-size: 20px;
+      font-weight: 600;
       color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 28px;
+      letter-spacing: -0.3px;
     }
+    @media (min-width: 768px) { .q-text { font-size: 22px; } }
+
+    /* ── Keyword row ── */
+    .keyword-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--subtext);
+      font-weight: 500;
+    }
+
+    /* ── Fill input ── */
+    .fill-wrap { text-align: center; margin-bottom: 6px; }
+    .fill-large {
+      width: 100%; max-width: 380px;
+      font-size: 18px; font-weight: 600;
+      text-align: center;
+      padding: 14px 20px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-ui);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+    }
+    .fill-large:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+    .fill-large.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    .fill-large.wrong {
+      border-color: var(--error);
+      background: var(--error-bg);
+      color: var(--error);
+    }
+    .enter-hint {
+      font-size: 11px; color: var(--subtext);
+      text-align: center; margin-top: 6px;
+    }
+
+    /* ── Multiple choice ── */
+    .option-btn {
+      min-height: 52px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    @media (max-width: 767px) { .option-btn { min-height: 56px; } }
+    .opt-key {
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 600;
+      color: var(--muted); min-width: 16px;
+      transition: color 0.12s;
+    }
+    .option-btn:hover:not(:disabled) .opt-key { color: var(--accent); }
+    .option-btn.selected .opt-key             { color: var(--accent); }
+    .option-btn.correct .opt-key              { color: var(--success); }
+    .option-btn.wrong .opt-key                { color: var(--error); }
+
+    /* ── Word reorder ── */
+    .zone-label {
+      font-size: 10px; font-weight: 700;
+      color: var(--subtext); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 8px;
+    }
+    .word-bank {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      min-height: 44px; padding: 10px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      background: var(--surface2);
+      margin-bottom: 12px;
+    }
+    .answer-zone {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      min-height: 52px; padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      margin-bottom: 6px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .answer-zone.zone-ok  { border-color: var(--success); background: var(--success-bg); }
+    .answer-zone.zone-bad { border-color: var(--error); }
+    .word-chip {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--text); font-size: 14px; font-weight: 500;
+      cursor: pointer; user-select: none;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .word-chip:hover { background: var(--surface2); border-color: var(--border2); }
+    .word-chip.placed {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .correct-order {
+      font-size: 13px; color: var(--success);
+      font-weight: 600; margin-top: 6px;
+    }
+
+    /* ── Feedback block ── */
+    .feedback-block {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid;
+      display: none;
+      animation: qIn 150ms ease-out both;
+    }
+    .feedback-block.show { display: block; }
+    .feedback-block.fb-ok  { background: var(--success-bg); border-color: var(--success-border); }
+    .feedback-block.fb-err { background: var(--error-bg);   border-color: var(--error-border); }
+    .fb-head {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 6px;
+    }
+    .fb-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .fb-title { font-size: 13px; font-weight: 700; }
+    .fb-ok  .fb-title { color: var(--success); }
+    .fb-err .fb-title { color: var(--error); }
+    .fb-correct-ans {
+      font-size: 13px; color: var(--text2);
+      margin-top: 4px;
+    }
+    .fb-correct-ans strong { color: var(--accent); font-weight: 700; }
+    .fb-explanation {
+      font-size: 13px; color: var(--text2);
+      line-height: 1.6; margin-top: 4px;
+    }
+    .focus-link {
+      display: inline-block; margin-top: 8px;
+      font-size: 12px; color: var(--subtext);
+      text-decoration: underline;
+      background: none; border: none;
+      font-family: var(--font-ui); cursor: pointer; padding: 0;
+    }
+    .focus-link:hover { color: var(--text2); }
+
+    /* ── Sticky submit (mobile) ── */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      z-index: 50;
+    }
+    @media (min-width: 768px) {
+      .sticky-cta {
+        position: static;
+        background: none; border-top: none;
+        padding: 0; margin-top: 20px;
+      }
+    }
+    .btn-cta { transition: transform 0.15s ease, opacity 0.15s !important; }
+    .btn-cta:hover:not(:disabled) { transform: scale(1.02); }
+
+    /* ── Theory ── */
+    .theory-body {
+      font-size: 14px; color: var(--text2);
+      line-height: 1.8;
+    }
+
+    /* ── Session complete ── */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #stepComplete { animation: fadeIn 400ms ease-out both; }
+
+    .cmp-header { text-align: center; margin-bottom: 28px; }
+    .cmp-icon {
+      width: 48px; height: 48px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-light);
+      border: 1px solid rgba(180,83,9,0.15);
+      border-radius: 50%;
+    }
+    [data-theme="dark"] .cmp-icon { border-color: rgba(245,158,11,0.2); }
+    .cmp-title {
+      font-family: var(--font-display);
+      font-size: 28px; color: var(--text);
+      margin-bottom: 6px; line-height: 1.2;
+    }
+    .cmp-sub { font-size: 14px; color: var(--subtext); font-weight: 500; }
+
+    .cmp-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl); overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .cmp-stat {
+      background: var(--surface); text-align: center;
+      padding: 20px 8px;
+      opacity: 0; animation: fadeUp 400ms ease-out forwards;
+    }
+    .cmp-stat:nth-child(2) { animation-delay: 100ms; }
+    .cmp-stat:nth-child(3) { animation-delay: 200ms; }
+    .cmp-val {
+      font-family: var(--font-mono); font-size: 32px;
+      font-weight: 700; color: var(--accent);
+      line-height: 1; letter-spacing: -1px;
+    }
+    .cmp-lbl {
+      font-size: 10px; font-weight: 700;
+      color: var(--subtext); text-transform: uppercase;
+      letter-spacing: 0.07em; margin-top: 6px;
+    }
+    .weak-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+    /* ── Exit dialog ── */
+    .exit-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      display: none; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .exit-overlay.show { display: flex; }
+    .exit-dialog {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px; max-width: 320px; width: 100%;
+    }
+    .exit-dialog h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .exit-dialog p {
+      font-size: 13px; color: var(--subtext);
+      margin-bottom: 20px; line-height: 1.5;
+    }
+    .exit-dialog-btns { display: flex; gap: 8px; }
   </style>
 </head>
 <body>
 
   <!-- Session topbar -->
   <header class="session-topbar">
-    <a href="dashboard.html" class="topbar-back" id="backBtn">&#8592;</a>
-    <span class="session-title" id="sessionTitle">Caricamento...</span>
-    <span class="session-timer" id="timerEl">0:00</span>
+    <span class="session-count" id="exCount" aria-live="polite">—</span>
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="session-right">
+      <span class="session-timer" id="timerEl">0:00</span>
+      <button class="exit-btn" id="exitBtn" aria-label="Esci dalla sessione">Esci</button>
+    </div>
   </header>
 
   <main id="mainContent">
@@ -106,360 +356,528 @@
     <!-- STEP 0: Theory -->
     <div class="step active" id="stepTheory">
       <div class="card">
-        <div class="card-label" id="theoryLabel">Teoria del giorno</div>
+        <div class="card-label" id="theoryLabel">Teoria</div>
         <div class="theory-body" id="theoryBody"></div>
       </div>
-      <div class="mt-16">
-        <button class="btn btn-primary" id="startExercisesBtn">Inizia esercizi</button>
-      </div>
-      <div class="mt-8">
-        <button class="btn btn-secondary" id="skipToRecapBtn">Salta agli esercizi &rarr;</button>
+      <div class="mt-20">
+        <button class="btn btn-primary btn-cta" id="startBtn">Inizia esercizi</button>
+        <button class="btn btn-secondary mt-8" id="skipBtn" style="opacity:.65">Salta teoria</button>
       </div>
     </div>
 
     <!-- STEP 1: Exercise -->
     <div class="step" id="stepExercise">
-      <div class="exercise-dots" id="exerciseDots"></div>
+      <div id="exWrap" class="q-animate">
 
-      <div class="card" id="exerciseCard">
-        <div class="exercise-part" id="exPart"></div>
-        <div class="exercise-question" id="exQuestion"></div>
-
-        <!-- Multiple choice options -->
-        <div id="optionsArea"></div>
-
-        <!-- Fill / Transform input -->
-        <div id="fillArea" style="display:none">
-          <div id="keywordBadge" style="display:none;margin-bottom:12px">
-            <span style="font-size:11px;font-weight:600;color:var(--subtext)">Parola chiave: </span>
-            <span class="badge" id="keywordText"></span>
+        <!-- Meta: tag + difficulty + adaptive hint -->
+        <div class="ex-meta">
+          <span class="badge" id="exTag">Grammar</span>
+          <div class="diff-dots" id="diffDots" aria-label="Difficoltà">
+            <span class="on"></span><span class="on"></span><span></span>
           </div>
-          <input type="text" class="fill-input" id="fillInput" placeholder="Scrivi la tua risposta...">
+          <span class="adaptive-hint">Calibrato sui tuoi errori</span>
+        </div>
+
+        <!-- Question -->
+        <div class="q-text" id="exQ" role="heading" aria-level="2"></div>
+
+        <!-- Keyword badge (transform only) -->
+        <div class="keyword-row" id="kwRow" style="display:none">
+          Parola chiave: <span class="badge" id="kwText"></span>
+        </div>
+
+        <!-- Type A: Fill -->
+        <div id="fillArea" style="display:none">
+          <div class="fill-wrap">
+            <input class="fill-large" id="fillInput" type="text"
+              placeholder="Scrivi la risposta..."
+              autocomplete="off" autocorrect="off" spellcheck="false"
+              aria-label="Risposta">
+          </div>
+          <div class="enter-hint">↵ per confermare</div>
+        </div>
+
+        <!-- Type B: Multiple choice -->
+        <div id="optArea" role="group" aria-label="Opzioni"></div>
+
+        <!-- Type C: Word reorder -->
+        <div id="reorderArea" style="display:none">
+          <div class="zone-label">Parole disponibili</div>
+          <div class="word-bank" id="wordBank" role="group" aria-label="Parole da usare"></div>
+          <div class="zone-label">La tua risposta</div>
+          <div class="answer-zone" id="answerZone" role="group" aria-label="Risposta composta"></div>
+          <div class="correct-order" id="correctOrder" style="display:none"></div>
         </div>
 
         <!-- Feedback -->
-        <div class="feedback" id="feedbackArea">
-          <strong id="feedbackTitle"></strong>
-          <span id="feedbackExplanation"></span>
+        <div class="feedback-block" id="fbBlock" role="alert" aria-live="polite">
+          <div class="fb-head">
+            <svg class="fb-icon" id="fbIcon" viewBox="0 0 20 20" fill="none"
+              aria-hidden="true"></svg>
+            <span class="fb-title" id="fbTitle"></span>
+          </div>
+          <div class="fb-correct-ans" id="fbCorrectAns" style="display:none"></div>
+          <div class="fb-explanation" id="fbExplanation"></div>
+          <button class="focus-link" id="focusLink" style="display:none">
+            + Aggiungi ai focus della prossima sessione
+          </button>
         </div>
+
       </div>
 
-      <div class="mt-12">
-        <button class="btn btn-primary" id="confirmBtn" disabled>Conferma</button>
-      </div>
-      <div class="mt-8" id="nextBtnWrap" style="display:none">
-        <button class="btn btn-secondary" id="nextBtn">Prossimo esercizio &rarr;</button>
+      <!-- Sticky CTA -->
+      <div class="sticky-cta">
+        <button class="btn btn-primary btn-cta" id="confirmBtn" disabled
+          aria-label="Conferma risposta">Conferma</button>
       </div>
     </div>
 
-    <!-- STEP 2: Recap -->
-    <div class="step" id="stepRecap">
-      <div class="card" style="text-align:center">
-        <div class="card-label">Sessione completata</div>
-        <div class="recap-circle" id="recapCircle">
-          <div class="recap-score" id="recapScore">-</div>
-          <div class="recap-label" id="recapLabel">punteggio</div>
+    <!-- STEP 2: Complete -->
+    <div class="step" id="stepComplete">
+      <div class="cmp-header">
+        <div class="cmp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="var(--accent)" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-        <p id="recapMessage" style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px"></p>
-        <div class="divider"></div>
-        <div style="display:flex;gap:12px;justify-content:center">
-          <div>
-            <div class="stat-num" id="recapCorrect" style="font-size:28px">0</div>
-            <div class="stat-label">Corrette</div>
-          </div>
-          <div>
-            <div class="stat-num" id="recapWrong" style="font-size:28px;color:var(--error)">0</div>
-            <div class="stat-label">Errate</div>
-          </div>
-          <div>
-            <div class="stat-num" id="recapTime" style="font-size:28px">0</div>
-            <div class="stat-label">Minuti</div>
-          </div>
+        <h1 class="cmp-title">Sessione completata</h1>
+        <p class="cmp-sub" id="cmpSub">Ottima sessione.</p>
+      </div>
+
+      <div class="cmp-stats" aria-label="Risultati">
+        <div class="cmp-stat">
+          <div class="cmp-val" id="cmpAcc">—</div>
+          <div class="cmp-lbl">Accuratezza</div>
+        </div>
+        <div class="cmp-stat">
+          <div class="cmp-val" id="cmpDone">0</div>
+          <div class="cmp-lbl">Esercizi</div>
+        </div>
+        <div class="cmp-stat">
+          <div class="cmp-val" id="cmpTime">0</div>
+          <div class="cmp-lbl">Minuti</div>
         </div>
       </div>
 
-      <div id="recapErrorsList" style="margin-top:16px;display:none">
-        <div class="recap-errors-title">Errori da ripassare</div>
-        <div id="recapErrorsItems"></div>
+      <div id="weakSection" style="display:none">
+        <div class="section-title">Aree da ripassare</div>
+        <div class="weak-tags" id="weakTags"></div>
       </div>
 
-      <div class="mt-16">
-        <button class="btn btn-primary" id="completeDayBtn">Completa giornata &#10003;</button>
+      <div id="errSection" class="mt-16" style="display:none">
+        <div class="section-title">Errori di oggi</div>
+        <div id="errItems"></div>
       </div>
-      <div class="mt-8">
-        <a href="stats.html" class="btn btn-secondary">Vedi errori e statistiche</a>
+
+      <div class="mt-20">
+        <button class="btn btn-primary btn-cta" id="reviewBtn" style="display:none">
+          Rivedi gli errori
+        </button>
+        <button class="btn btn-primary btn-cta" id="completeBtn" style="display:none">
+          Completa la giornata
+        </button>
+        <a href="dashboard.html" class="btn btn-secondary mt-8">Torna alla home</a>
       </div>
     </div>
 
   </main>
 
+  <!-- Exit dialog -->
+  <div class="exit-overlay" id="exitOverlay"
+    role="dialog" aria-modal="true" aria-labelledby="exitDlgTitle">
+    <div class="exit-dialog">
+      <h3 id="exitDlgTitle">Uscire dalla sessione?</h3>
+      <p>I progressi di questa sessione non verranno salvati.</p>
+      <div class="exit-dialog-btns">
+        <button class="btn btn-secondary" style="flex:1" id="cancelExitBtn">Continua</button>
+        <a href="dashboard.html" class="btn btn-danger" style="flex:1">Esci</a>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/app.js"></script>
   <script src="js/content.js"></script>
   <script>
-    (function () {
-      if (!Auth.requireAuth()) return;
+  (function () {
+    if (!Auth.requireAuth()) return;
 
-      const state    = State.load();
-      const plan     = Plan.today();
-      const day      = state.currentDay || 1;
-      const topicKey = topicKeyForDay(day);
+    var state    = State.load();
+    var plan     = Plan.today();
+    var day      = state.currentDay || 1;
+    var topicKey = topicKeyForDay(day);
 
-      // Update topbar
-      document.getElementById('sessionTitle').textContent = plan ? plan.topic : 'Sessione';
+    Timer.start(document.getElementById('timerEl'));
 
-      // Start timer
-      Timer.start(document.getElementById('timerEl'));
+    // Theory
+    document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Teoria';
+    document.getElementById('theoryBody').innerHTML    = getTheoryFor(day);
 
-      // Load theory
-      document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Teoria del giorno';
-      document.getElementById('theoryBody').innerHTML     = getTheoryFor(day);
+    // Step switcher
+    function showStep(id) {
+      document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+      document.getElementById(id).classList.add('active');
+    }
 
-      // Step switching
-      function showStep(id) {
-        document.querySelectorAll('.step').forEach(function (el) {
-          el.classList.remove('active');
-        });
-        document.getElementById(id).classList.add('active');
-      }
+    // Exit dialog
+    document.getElementById('exitBtn').addEventListener('click', function() {
+      document.getElementById('exitOverlay').classList.add('show');
+      document.getElementById('cancelExitBtn').focus();
+    });
+    document.getElementById('cancelExitBtn').addEventListener('click', function() {
+      document.getElementById('exitOverlay').classList.remove('show');
+    });
+    document.getElementById('exitOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('show');
+    });
 
-      // ── Theory step ──
-      document.getElementById('startExercisesBtn').addEventListener('click', function () {
-        const exercises = getExercisesFor(day);
-        if (exercises && exercises.length) {
-          initExercises(exercises);
-          showStep('stepExercise');
-        } else {
-          showStep('stepRecap');
-          initRecap(0, 0, []);
-        }
+    // Theory buttons
+    function goToExercises() {
+      var list = getExercisesFor(day);
+      if (list && list.length) { initExercises(list); showStep('stepExercise'); }
+      else { showComplete(0, 0, []); }
+    }
+    document.getElementById('startBtn').addEventListener('click', goToExercises);
+    document.getElementById('skipBtn').addEventListener('click', goToExercises);
+
+    // ---- Exercise state ----
+    var exercises    = [];
+    var exIndex      = 0;
+    var correctCount = 0;
+    var wrongCount   = 0;
+    var sessionErrs  = [];
+    var answered     = false;
+    var confirmBtn   = document.getElementById('confirmBtn');
+
+    function initExercises(list) {
+      exercises = list; exIndex = 0;
+      renderExercise();
+    }
+
+    function updateProgress() {
+      var pct = exercises.length ? Math.round((exIndex / exercises.length) * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressBar').setAttribute('aria-valuenow', pct);
+      document.getElementById('exCount').textContent = (exIndex + 1) + ' / ' + exercises.length;
+    }
+
+    function renderExercise() {
+      if (exIndex >= exercises.length) { showComplete(correctCount, wrongCount, sessionErrs); return; }
+
+      answered = false;
+      var ex   = exercises[exIndex];
+      updateProgress();
+
+      // Entrance animation
+      var wrap = document.getElementById('exWrap');
+      wrap.classList.remove('q-animate');
+      void wrap.offsetWidth;
+      wrap.classList.add('q-animate');
+
+      // Tag + difficulty
+      document.getElementById('exTag').textContent = ex.part || 'Grammar';
+      var lvl  = ex.difficulty || 2;
+      document.getElementById('diffDots').querySelectorAll('span').forEach(function(d, i) {
+        d.classList.toggle('on', i < lvl);
       });
 
-      document.getElementById('skipToRecapBtn').addEventListener('click', function () {
-        showStep('stepRecap');
-        initRecap(0, 0, []);
+      // Question
+      document.getElementById('exQ').textContent = ex.question;
+
+      // Keyword
+      var kwRow = document.getElementById('kwRow');
+      if (ex.type === 'transform' && ex.keyword) {
+        kwRow.style.display = '';
+        document.getElementById('kwText').textContent = ex.keyword;
+      } else {
+        kwRow.style.display = 'none';
+      }
+
+      // Reset feedback
+      var fb = document.getElementById('fbBlock');
+      fb.className = 'feedback-block';
+      document.getElementById('fbCorrectAns').style.display = 'none';
+      document.getElementById('focusLink').style.display    = 'none';
+      document.getElementById('focusLink').disabled         = false;
+      document.getElementById('focusLink').textContent      = '+ Aggiungi ai focus della prossima sessione';
+
+      // Reset confirm
+      confirmBtn.disabled    = true;
+      confirmBtn.textContent = 'Conferma';
+
+      // Hide all input areas
+      ['fillArea','optArea','reorderArea'].forEach(function(id) {
+        document.getElementById(id).style.display = 'none';
       });
 
-      // ── Exercise step ──
-      var exercises   = getExercisesFor(day) || [];
-      var exIndex     = 0;
-      var correctCount = 0;
-      var wrongCount   = 0;
-      var sessionErrs  = [];
-      var answered     = false;
-
-      function initExercises(exList) {
-        exercises = exList;
-        exIndex   = 0;
-        buildDots();
-        renderExercise();
+      if (ex.type === 'multiple') {
+        document.getElementById('optArea').style.display = '';
+        renderMultiple(ex);
+      } else if (ex.type === 'reorder') {
+        document.getElementById('reorderArea').style.display = '';
+        document.getElementById('correctOrder').style.display = 'none';
+        renderReorder(ex);
+      } else {
+        document.getElementById('fillArea').style.display = '';
+        renderFill();
       }
+    }
 
-      function buildDots() {
-        var dots = document.getElementById('exerciseDots');
-        dots.innerHTML = '';
-        exercises.forEach(function (_, i) {
-          var d = document.createElement('div');
-          d.className = 'dot' + (i === 0 ? ' current' : '');
-          d.id = 'dot-' + i;
-          dots.appendChild(d);
+    // ---- Type B: Multiple choice ----
+    function renderMultiple(ex) {
+      var area = document.getElementById('optArea');
+      area.innerHTML = '';
+      var keys = ['1','2','3','4'];
+      ex.options.forEach(function(opt, i) {
+        var btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.dataset.index = i;
+        btn.setAttribute('aria-label', 'Opzione ' + (i+1) + ': ' + opt);
+        btn.innerHTML = '<span class="opt-key">' + keys[i] + '</span><span>' + opt + '</span>';
+        btn.addEventListener('click', function() {
+          if (answered) return;
+          area.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          confirmBtn.disabled = false;
+          confirmBtn.dataset.selected = i;
         });
+        area.appendChild(btn);
+      });
+    }
+
+    // ---- Type A: Fill in blank ----
+    function renderFill() {
+      var inp = document.getElementById('fillInput');
+      inp.value = ''; inp.disabled = false;
+      inp.className = 'fill-large';
+      setTimeout(function() { inp.focus(); }, 160);
+      inp.oninput = function() {
+        confirmBtn.disabled = inp.value.trim().length === 0;
+      };
+    }
+
+    // ---- Type C: Word reorder ----
+    function renderReorder(ex) {
+      var bank = document.getElementById('wordBank');
+      var zone = document.getElementById('answerZone');
+      bank.innerHTML = ''; zone.innerHTML = '';
+      zone.className = 'answer-zone';
+
+      var rawAnswer = Array.isArray(ex.answer) ? ex.answer[0] : ex.answer;
+      var words = ex.words ? ex.words.slice() : rawAnswer.split(' ');
+      // Shuffle
+      for (var i = words.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = words[i]; words[i] = words[j]; words[j] = tmp;
       }
 
-      function updateDot(index, cls) {
-        var d = document.getElementById('dot-' + index);
-        if (d) { d.className = 'dot ' + cls; }
-      }
-
-      function renderExercise() {
-        if (exIndex >= exercises.length) {
-          showStep('stepRecap');
-          initRecap(correctCount, wrongCount, sessionErrs);
-          return;
-        }
-
-        answered = false;
-        var ex   = exercises[exIndex];
-
-        document.getElementById('exPart').textContent     = ex.part || '';
-        document.getElementById('exQuestion').textContent = ex.question;
-
-        var feedback = document.getElementById('feedbackArea');
-        feedback.className = 'feedback';
-        feedback.style.display = 'none';
-
-        document.getElementById('nextBtnWrap').style.display = 'none';
-
-        var confirmBtn = document.getElementById('confirmBtn');
-        confirmBtn.disabled   = true;
-        confirmBtn.textContent = 'Conferma';
-
-        if (ex.type === 'multiple') {
-          document.getElementById('fillArea').style.display    = 'none';
-          document.getElementById('optionsArea').style.display = '';
-          renderOptions(ex);
-        } else {
-          document.getElementById('optionsArea').style.display = 'none';
-          document.getElementById('fillArea').style.display    = '';
-          renderFill(ex);
-        }
-      }
-
-      function renderOptions(ex) {
-        var area = document.getElementById('optionsArea');
-        area.innerHTML = '';
-        ex.options.forEach(function (opt, i) {
-          var btn = document.createElement('button');
-          btn.className = 'option-btn';
-          btn.textContent = opt;
-          btn.addEventListener('click', function () {
-            if (answered) return;
-            area.querySelectorAll('.option-btn').forEach(function (b) {
-              b.classList.remove('selected');
-            });
-            btn.classList.add('selected');
-            document.getElementById('confirmBtn').disabled = false;
-            document.getElementById('confirmBtn').dataset.selected = i;
-          });
-          area.appendChild(btn);
-        });
-      }
-
-      function renderFill(ex) {
-        var fillInput   = document.getElementById('fillInput');
-        var keywordBadge = document.getElementById('keywordBadge');
-        var keywordText  = document.getElementById('keywordText');
-
-        fillInput.value = '';
-        fillInput.disabled = false;
-
-        if (ex.type === 'transform' && ex.keyword) {
-          keywordBadge.style.display = '';
-          keywordText.textContent    = ex.keyword;
-        } else {
-          keywordBadge.style.display = 'none';
-        }
-
-        fillInput.addEventListener('input', function () {
-          document.getElementById('confirmBtn').disabled = fillInput.value.trim().length === 0;
-        });
-      }
-
-      document.getElementById('confirmBtn').addEventListener('click', function () {
+      function moveChip(chip) {
         if (answered) return;
-        answered = true;
-
-        var ex      = exercises[exIndex];
-        var correct = false;
-
-        if (ex.type === 'multiple') {
-          var selected = parseInt(this.dataset.selected);
-          correct = selected === ex.correct;
-          // Mark options
-          var btns = document.getElementById('optionsArea').querySelectorAll('.option-btn');
-          btns.forEach(function (b, i) {
-            b.disabled = true;
-            if (i === ex.correct) b.classList.add('correct');
-            else if (i === selected && !correct) b.classList.add('wrong');
-            b.classList.remove('selected');
-          });
+        if (bank.contains(chip)) {
+          bank.removeChild(chip); chip.classList.add('placed'); zone.appendChild(chip);
         } else {
-          var userAnswer = document.getElementById('fillInput').value.trim().toLowerCase();
-          var accepted   = Array.isArray(ex.answer) ? ex.answer : [ex.answer];
-          correct = accepted.some(function (a) {
-            return a.toLowerCase() === userAnswer;
-          });
-          document.getElementById('fillInput').disabled = true;
-          document.getElementById('fillInput').style.borderColor = correct ? '#6ee7b7' : '#fca5a5';
-          document.getElementById('fillInput').style.background  = correct ? '#ecfdf5' : '#fef2f2';
+          zone.removeChild(chip); chip.classList.remove('placed'); bank.appendChild(chip);
         }
-
-        // Show feedback
-        var feedback   = document.getElementById('feedbackArea');
-        var fbTitle    = document.getElementById('feedbackTitle');
-        var fbExplain  = document.getElementById('feedbackExplanation');
-
-        if (correct) {
-          correctCount++;
-          feedback.className = 'feedback feedback-correct show';
-          fbTitle.textContent = 'Corretto! ';
-          updateDot(exIndex, 'done');
-          State.updateTopicScore(topicKey, true);
-        } else {
-          wrongCount++;
-          feedback.className = 'feedback feedback-wrong show';
-          fbTitle.textContent = 'Errato. ';
-          updateDot(exIndex, 'wrong');
-          State.updateTopicScore(topicKey, false);
-
-          var errObj = {
-            day:       day,
-            topicKey:  topicKey,
-            part:      ex.part,
-            question:  ex.question,
-            userAnswer: ex.type === 'multiple'
-              ? ex.options[parseInt(document.getElementById('confirmBtn').dataset.selected)]
-              : document.getElementById('fillInput').value,
-            correct:   Array.isArray(ex.answer) ? ex.answer[0] : (ex.options ? ex.options[ex.correct] : ex.answer),
-            explanation: ex.explanation,
-            date:      new Date().toISOString()
-          };
-          sessionErrs.push(errObj);
-          State.recordError(errObj);
-        }
-
-        fbExplain.textContent = ex.explanation || '';
-        feedback.style.display = 'block';
-
-        document.getElementById('confirmBtn').disabled = true;
-        document.getElementById('nextBtnWrap').style.display = '';
-      });
-
-      document.getElementById('nextBtn').addEventListener('click', function () {
-        exIndex++;
-        renderExercise();
-      });
-
-      // ── Recap step ──
-      function initRecap(correct, wrong, errors) {
-        var minutes  = Timer.stop();
-        var total    = correct + wrong;
-        var pct      = total > 0 ? Math.round((correct / total) * 100) : 0;
-
-        document.getElementById('recapScore').textContent   = pct + '%';
-        document.getElementById('recapCorrect').textContent = correct;
-        document.getElementById('recapWrong').textContent   = wrong;
-        document.getElementById('recapTime').textContent    = minutes;
-
-        var msg = '';
-        if (pct >= 80) msg = 'Ottimo lavoro! Continua cos\u00ec.';
-        else if (pct >= 60) msg = 'Buon risultato. Ripassare gli errori aiuta molto.';
-        else if (total === 0) msg = 'Hai letto la teoria. Torna per fare gli esercizi.';
-        else msg = 'Qualche difficolt\u00e0 oggi. Ripassare fa parte del metodo.';
-        document.getElementById('recapMessage').textContent = msg;
-
-        if (errors.length) {
-          document.getElementById('recapErrorsList').style.display = '';
-          var items = document.getElementById('recapErrorsItems');
-          items.innerHTML = errors.map(function (e) {
-            return '<div class="recap-error-item">'
-              + '<strong>' + e.question + '</strong><br>'
-              + '<span style="color:var(--subtext)">Risposta corretta: </span><em>' + e.correct + '</em>'
-              + '</div>';
-          }).join('');
-        }
+        confirmBtn.disabled = zone.children.length === 0;
       }
 
-      document.getElementById('completeDayBtn').addEventListener('click', function () {
-        var minutes = 0;
-        State.markDayComplete(day, minutes);
-        UI.toast('Giornata completata!', 'success');
-        setTimeout(function () {
-          window.location.replace('dashboard.html');
-        }, 800);
+      words.forEach(function(word) {
+        var chip = document.createElement('span');
+        chip.className = 'word-chip'; chip.textContent = word;
+        chip.setAttribute('role', 'button'); chip.setAttribute('tabindex', '0');
+        chip.addEventListener('click', function() { moveChip(chip); });
+        chip.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); moveChip(chip); }
+        });
+        bank.appendChild(chip);
       });
+    }
 
-    })();
+    // ---- Confirm / Next button ----
+    confirmBtn.addEventListener('click', function() {
+      if (answered) { exIndex++; renderExercise(); return; }
+      submitAnswer();
+    });
+
+    function submitAnswer() {
+      answered = true;
+      var ex  = exercises[exIndex];
+      var ok  = false;
+      var userAns = '';
+      var correctAns = '';
+
+      if (ex.type === 'multiple') {
+        var sel    = parseInt(confirmBtn.dataset.selected);
+        ok         = sel === ex.correct;
+        correctAns = ex.options[ex.correct];
+        userAns    = ex.options[sel] || '';
+        document.getElementById('optArea').querySelectorAll('.option-btn').forEach(function(b, i) {
+          b.disabled = true; b.classList.remove('selected');
+          if (i === ex.correct)          b.classList.add('correct');
+          else if (i === sel && !ok)     b.classList.add('wrong');
+        });
+
+      } else if (ex.type === 'reorder') {
+        var placed = Array.from(document.getElementById('answerZone').querySelectorAll('.word-chip'))
+                         .map(function(c) { return c.textContent; });
+        userAns    = placed.join(' ');
+        correctAns = (Array.isArray(ex.answer) ? ex.answer[0] : ex.answer);
+        ok         = userAns.trim().toLowerCase() === correctAns.trim().toLowerCase();
+        var zone   = document.getElementById('answerZone');
+        zone.className = 'answer-zone ' + (ok ? 'zone-ok' : 'zone-bad');
+        if (!ok) {
+          var co = document.getElementById('correctOrder');
+          co.style.display = ''; co.textContent = 'Ordine corretto: ' + correctAns;
+        }
+
+      } else {
+        userAns    = document.getElementById('fillInput').value.trim();
+        var accept = Array.isArray(ex.answer) ? ex.answer : [ex.answer];
+        ok         = accept.some(function(a) { return a.toLowerCase() === userAns.toLowerCase(); });
+        correctAns = accept[0];
+        var inp    = document.getElementById('fillInput');
+        inp.disabled = true;
+        inp.classList.add(ok ? 'correct' : 'wrong');
+      }
+
+      // Track scores
+      if (ok) {
+        correctCount++; State.updateTopicScore(topicKey, true);
+      } else {
+        wrongCount++; State.updateTopicScore(topicKey, false);
+        var err = {
+          day: day, topicKey: topicKey, part: ex.part,
+          question: ex.question, userAnswer: userAns,
+          correct: correctAns, explanation: ex.explanation,
+          date: new Date().toISOString()
+        };
+        sessionErrs.push(err); State.recordError(err);
+      }
+
+      showFeedback(ok, correctAns, ex.explanation);
+      confirmBtn.disabled    = false;
+      confirmBtn.textContent = ok ? 'Avanti →' : 'Capito →';
+    }
+
+    function showFeedback(ok, correctAns, explanation) {
+      var fb = document.getElementById('fbBlock');
+      fb.className = 'feedback-block show ' + (ok ? 'fb-ok' : 'fb-err');
+
+      var icon = document.getElementById('fbIcon');
+      if (ok) {
+        icon.innerHTML = '<path d="M16 5L7 14l-4-4" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      } else {
+        icon.innerHTML = '<path d="M15 5L5 15M5 5l10 10" stroke="var(--error)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      }
+      document.getElementById('fbTitle').textContent = ok ? 'Corretto' : 'Non corretto';
+
+      if (!ok && correctAns) {
+        var ca = document.getElementById('fbCorrectAns');
+        ca.style.display = '';
+        ca.innerHTML = 'Risposta corretta: <strong>' + correctAns + '</strong>';
+        document.getElementById('focusLink').style.display = '';
+      }
+      document.getElementById('fbExplanation').textContent = explanation || '';
+    }
+
+    document.getElementById('focusLink').addEventListener('click', function() {
+      State.updateTopicScore(topicKey, false);
+      this.textContent = '✓ Aggiunto ai focus';
+      this.style.opacity = '0.5'; this.disabled = true;
+    });
+
+    // ---- Session complete ----
+    function showComplete(correct, wrong, errors) {
+      var minutes = Timer.stop();
+      var total   = correct + wrong;
+      var pct     = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+      showStep('stepComplete');
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('exCount').textContent = total + ' / ' + total;
+
+      document.getElementById('cmpAcc').textContent  = total > 0 ? pct + '%' : '—';
+      document.getElementById('cmpDone').textContent = total;
+      document.getElementById('cmpTime').textContent = minutes;
+
+      var sub = total === 0   ? 'Hai letto la teoria. Torna per gli esercizi.' :
+                pct >= 80    ? 'Ottima sessione. Continua così.' :
+                pct >= 60    ? 'Buona sessione. Ripassa gli errori.' :
+                               'Qualche difficoltà. Fa parte del processo.';
+      document.getElementById('cmpSub').textContent = sub;
+
+      // Weak areas
+      var weak = Adaptive.weakTopics(3);
+      if (weak.length) {
+        document.getElementById('weakSection').style.display = '';
+        document.getElementById('weakTags').innerHTML = weak.map(function(t) {
+          return '<span class="badge badge-error">' + t.label + '</span>';
+        }).join('');
+      }
+
+      // Errors
+      if (errors.length) {
+        document.getElementById('errSection').style.display = '';
+        document.getElementById('errItems').innerHTML = errors.map(function(e) {
+          return '<div class="card error-card mb-8">'
+            + '<div class="error-question">' + e.question + '</div>'
+            + '<div class="error-answer-row"><span>Tua: </span>' + e.userAnswer + '</div>'
+            + '<div class="error-answer-row"><span>Corretta: </span>' + e.correct + '</div>'
+            + (e.explanation ? '<div class="error-explanation">' + e.explanation + '</div>' : '')
+            + '</div>';
+        }).join('');
+        document.getElementById('reviewBtn').style.display = '';
+      } else {
+        document.getElementById('completeBtn').style.display = '';
+      }
+
+      document.getElementById('reviewBtn').addEventListener('click', function() {
+        State.markDayComplete(day, minutes);
+        window.location.replace('stats.html');
+      });
+      document.getElementById('completeBtn').addEventListener('click', function() {
+        State.markDayComplete(day, minutes);
+        UI.toast('Giornata completata!');
+        setTimeout(function() { window.location.replace('dashboard.html'); }, 800);
+      });
+    }
+
+    // ---- Keyboard navigation ----
+    document.addEventListener('keydown', function(e) {
+      var overlay = document.getElementById('exitOverlay');
+
+      if (e.key === 'Escape') {
+        if (overlay.classList.contains('show')) overlay.classList.remove('show');
+        else if (document.getElementById('stepExercise').classList.contains('active'))
+          overlay.classList.add('show');
+        return;
+      }
+
+      if (!document.getElementById('stepExercise').classList.contains('active')) return;
+
+      // Number keys → select MC option
+      if (['1','2','3','4'].includes(e.key) && !e.ctrlKey && !e.metaKey) {
+        var btns = document.getElementById('optArea').querySelectorAll('.option-btn');
+        var btn  = btns[parseInt(e.key) - 1];
+        if (btn && !answered) btn.click();
+        return;
+      }
+
+      // Enter → confirm/next
+      if (e.key === 'Enter') {
+        var active = document.activeElement;
+        if (active && active.tagName === 'INPUT') return; // handled by input
+        if (!confirmBtn.disabled) confirmBtn.click();
+      }
+    });
+
+    // Enter key from fill input
+    document.getElementById('fillInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !confirmBtn.disabled) confirmBtn.click();
+    });
+
+  })();
   </script>
 </body>
 </html>
