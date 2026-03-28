@@ -4,64 +4,196 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrainEnglish — Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .day-fraction {
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--muted);
-    }
-
-    .week-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--subtext);
-      margin-top: 2px;
-    }
-
-    .topic-card-inner {
+    /* ── Dashboard layout ── */
+    .dash-grid {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 16px;
     }
 
-    .topic-card-inner h3 {
-      font-size: 18px;
+    @media (min-width: 1024px) {
+      .page-content { max-width: 1100px; }
+      .dash-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+    }
+
+    /* ── Greeting ── */
+    .greeting-label {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
     }
 
-    .topic-card-inner p {
-      font-size: 12px;
+    .greeting-name {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .motivation-line {
+      font-size: 13px;
       color: var(--subtext);
+      padding: 10px 12px;
+      background: var(--surface2);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent);
+      margin-bottom: 20px;
       line-height: 1.5;
     }
 
-    .progress-meta {
+    /* ── Streak grid ── */
+    .streak-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+    }
+
+    .streak-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      min-width: 200px;
+    }
+
+    @media (max-width: 767px) {
+      .streak-grid {
+        grid-template-columns: repeat(30, 26px);
+        width: max-content;
+      }
+    }
+
+    /* Staggered fill animation */
+    @keyframes fillIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .cal-day.done {
+      animation: fillIn 250ms ease-out both;
+    }
+    .cal-day.today {
+      animation: fillIn 300ms ease-out both;
+    }
+
+    /* ── Session pills ── */
+    .session-pills {
       display: flex;
-      justify-content: space-between;
-      font-size: 11px;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .session-pill {
+      flex: 1;
+      padding: 9px 0;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
       color: var(--subtext);
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .session-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    [data-theme="dark"] .session-pill.active { color: #0c0c0c; }
+
+    .session-pill:hover:not(.active) {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    /* CTA scale */
+    .btn-cta {
+      transition: transform 0.15s ease, opacity 0.15s !important;
+    }
+    .btn-cta:hover { transform: scale(1.02); }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-cell {
+      text-align: center;
+      padding: 16px 8px;
+      opacity: 0;
+      animation: fadeUp 400ms ease-out forwards;
+    }
+    .stat-cell:nth-child(2) {
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      animation-delay: 100ms;
+    }
+    .stat-cell:nth-child(3) { animation-delay: 200ms; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .stat-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
       margin-top: 6px;
     }
 
-    .week-chips {
+    /* ── Focus badges ── */
+    .focus-badges {
       display: flex;
       flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ── Today topic inline ── */
+    .today-meta {
+      display: flex;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 20px;
+    .today-topic {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cta-hint {
+      font-size: 12px;
       color: var(--subtext);
-      font-size: 13px;
-    }
-
-    .section-block {
-      margin-top: 24px;
+      text-align: center;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -70,85 +202,100 @@
   <!-- Topbar -->
   <header class="topbar">
     <a href="dashboard.html" class="topbar-logo">Tram<span>it</span>English</a>
-    <a href="settings.html" class="topbar-icon" title="Impostazioni">&#9881;</a>
+    <a href="settings.html" class="topbar-icon" aria-label="Impostazioni">&#9881;</a>
   </header>
 
-  <!-- Main content -->
-  <main class="page-content" id="mainContent">
+  <!-- Main -->
+  <main class="page-content">
+    <div class="dash-grid">
 
-    <!-- Streak & Day card -->
-    <div class="card" id="progressCard">
-      <div class="card-label">Progresso</div>
+      <!-- LEFT: Greeting + Streak -->
       <div>
-        <span class="day-big" id="dayNum">1</span>
-        <span class="day-fraction">/60</span>
-      </div>
-      <div class="week-label" id="weekLabel">Settimana 1</div>
+        <div class="greeting-label" id="dayLabel">Giorno 1 di 60</div>
+        <h1 class="greeting-name" id="greetingName">Bentornato</h1>
+        <p class="motivation-line" id="motivLine">Prima sessione della settimana. Inizia.</p>
 
-      <div class="streak-row">
-        <div class="streak-num" id="streakNum">&#x1F525; 0</div>
-        <div class="streak-label" id="streakLabel">giorni di fila</div>
+        <!-- 60-day streak grid -->
+        <div class="card">
+          <div class="card-label">Piano 60 giorni</div>
+          <div class="streak-scroll" role="img" aria-label="Griglia progressi 60 giorni">
+            <div class="streak-grid" id="streakGrid"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="mt-16">
-        <a href="session.html" class="btn btn-primary" id="sessionBtn">&#9654; Inizia sessione di oggi</a>
+      <!-- RIGHT: CTA + Stats + Weak areas -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+
+        <!-- CTA card -->
+        <div class="card">
+          <div class="card-label">Sessione di oggi</div>
+          <div class="today-meta">
+            <span class="badge" id="ctaPart">Part 1</span>
+            <span class="today-topic" id="ctaTopic">Verb Tenses</span>
+          </div>
+
+          <div class="session-pills" id="sessionPills" role="group" aria-label="Durata sessione">
+            <button class="session-pill" data-min="20" aria-pressed="false">20 min</button>
+            <button class="session-pill" data-min="30" aria-pressed="false">30 min</button>
+            <button class="session-pill" data-min="40" aria-pressed="false">40 min</button>
+          </div>
+
+          <a href="session.html" class="btn btn-primary btn-cta" id="sessionBtn" role="button">
+            Inizia la sessione
+          </a>
+          <p class="cta-hint" id="ctaHint">Calibrata sui tuoi errori recenti</p>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="card" aria-label="Statistiche">
+          <div class="card-label">Statistiche</div>
+          <div class="stats-row">
+            <div class="stat-cell">
+              <div class="stat-val" id="statStreak">0</div>
+              <div class="stat-lbl">Streak</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-val" id="statAcc">—</div>
+              <div class="stat-lbl">Accuratezza</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-val" id="statLeft">60</div>
+              <div class="stat-lbl">Giorni rimasti</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weak areas (hidden until data exists) -->
+        <div id="weakSection" style="display:none;">
+          <div class="section-title">Focus areas</div>
+          <div class="focus-badges" id="weakBadges" aria-label="Argomenti da ripassare"></div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Today topic card -->
-    <div class="card mt-12" id="todayCard">
-      <div class="card-label">Sessione di oggi</div>
-      <span class="badge" id="todayPart">Part 1</span>
-      <div class="topic-card-inner mt-8">
-        <h3 id="todayTopic">Tempi Verbali</h3>
-        <p id="todaySection">Present Simple & Continuous</p>
-      </div>
-      <div class="progress-bar mt-12">
-        <div class="progress-fill" id="todayProgress" style="width: 0%"></div>
-      </div>
-      <div class="progress-meta">
-        <span id="progressText">0 esercizi completati</span>
-        <span id="progressMinutes">0 min oggi</span>
-      </div>
-    </div>
-
-    <!-- Weak topics -->
-    <div class="section-block">
-      <div class="section-title">Argomenti da ripassare</div>
-      <div id="weakTopicsList">
-        <div class="empty-state">Completa alcune sessioni per vedere le aree deboli.</div>
-      </div>
-    </div>
-
-    <!-- Calendar -->
-    <div class="section-block">
-      <div class="section-title">Calendario 2026</div>
-      <div class="week-chips" id="weekChips"></div>
-      <div class="cal-grid" id="calGrid"></div>
-    </div>
-
   </main>
 
   <!-- Bottom nav -->
-  <nav class="bottom-nav">
-    <a href="dashboard.html" class="nav-item active">
-      <span class="nav-icon">&#x1F3E0;</span>
+  <nav class="bottom-nav" aria-label="Navigazione principale">
+    <a href="dashboard.html" class="nav-item active" aria-current="page">
+      <span class="nav-icon" aria-hidden="true">&#x2302;</span>
       <span>Home</span>
     </a>
     <a href="session.html" class="nav-item">
-      <span class="nav-icon">&#9654;</span>
+      <span class="nav-icon" aria-hidden="true">&#9654;</span>
       <span>Sessione</span>
     </a>
     <a href="library.html" class="nav-item">
-      <span class="nav-icon">&#x1F4D6;</span>
+      <span class="nav-icon" aria-hidden="true">&#x1F4D6;</span>
       <span>Libreria</span>
     </a>
     <a href="test.html" class="nav-item">
-      <span class="nav-icon">&#x1F4DD;</span>
+      <span class="nav-icon" aria-hidden="true">&#x1F4DD;</span>
       <span>Test</span>
     </a>
     <a href="stats.html" class="nav-item">
-      <span class="nav-icon">&#x1F4CA;</span>
+      <span class="nav-icon" aria-hidden="true">&#x1F4CA;</span>
       <span>Stats</span>
     </a>
   </nav>
@@ -157,76 +304,132 @@
   <script src="js/app.js"></script>
   <script src="js/content.js"></script>
   <script>
-    (function () {
-      if (!Auth.requireAuth()) return;
+  (function () {
+    if (!Auth.requireAuth()) return;
 
-      const state   = State.load();
-      const today   = Plan.today();
-      const weekNum = Math.ceil((state.currentDay || 1) / 7);
+    var state = State.load();
+    var today = Plan.today();
+    var day   = state.currentDay || 1;
+    var week  = Math.ceil(day / 7);
+    var completed = state.completedDays || [];
 
-      // Progress card
-      document.getElementById('dayNum').textContent    = state.currentDay || 1;
-      document.getElementById('weekLabel').textContent = 'Settimana ' + weekNum + (today ? ' \u00b7 ' + today.topic : '');
-      document.getElementById('streakNum').textContent = '\u1F525 ' + (state.streak || 0);
+    // ─ Greeting
+    document.getElementById('dayLabel').textContent = 'Giorno ' + day + ' di 60';
+    var hour  = new Date().getHours();
+    var greet = hour < 12 ? 'Buongiorno' : hour < 18 ? 'Buon pomeriggio' : 'Buonasera';
+    var user  = Auth.getUser();
+    var name  = (user && user.email) ? user.email.split('@')[0] : '';
+    document.getElementById('greetingName').textContent = name ? greet + ', ' + name : greet;
 
-      // Today card
-      if (today) {
-        document.getElementById('todayPart').textContent    = today.part;
-        document.getElementById('todayTopic').textContent   = today.topic;
-        document.getElementById('todaySection').textContent = today.section;
+    // ─ Motivation line (data-driven)
+    var doneThisWeek = completed.filter(function(d) {
+      return d >= (week - 1) * 7 + 1 && d <= week * 7;
+    }).length;
+    var masteredCount = Adaptive.weakTopics(99).filter(function(t) { return t.pct >= 75; }).length;
+    var motivText;
+    if (masteredCount > 0) {
+      motivText = 'Hai padroneggiato ' + masteredCount + ' argomento' + (masteredCount > 1 ? ' grammaticale' : ' grammaticale') + ' questa settimana.';
+    } else if (doneThisWeek > 0) {
+      motivText = doneThisWeek + ' sessione' + (doneThisWeek > 1 ? ' completate' : ' completata') + ' questa settimana. Continua.';
+    } else {
+      motivText = 'Settimana ' + week + ' — la prima sessione è quella che conta di più.';
+    }
+    document.getElementById('motivLine').textContent = motivText;
+
+    // ─ Today topic
+    if (today) {
+      document.getElementById('ctaPart').textContent  = today.part  || 'Part 1';
+      document.getElementById('ctaTopic').textContent = today.topic || 'Verb Tenses';
+    }
+
+    // ─ CTA state
+    if (completed.includes(day)) {
+      var btn = document.getElementById('sessionBtn');
+      btn.textContent = '✓ Ripassa la sessione';
+      btn.style.background = 'var(--success)';
+      document.getElementById('ctaHint').textContent = 'Sessione di oggi già completata';
+    }
+
+    // ─ Session duration pills
+    var savedMin = localStorage.getItem('te_session_duration') || '20';
+    document.querySelectorAll('.session-pill').forEach(function(p) {
+      var isActive = p.dataset.min === savedMin;
+      p.classList.toggle('active', isActive);
+      p.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    document.getElementById('sessionPills').addEventListener('click', function(e) {
+      var pill = e.target.closest('.session-pill');
+      if (!pill) return;
+      document.querySelectorAll('.session-pill').forEach(function(p) {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
+      localStorage.setItem('te_session_duration', pill.dataset.min);
+    });
+
+    // ─ Stats
+    document.getElementById('statStreak').textContent = state.streak || 0;
+    document.getElementById('statLeft').textContent   = Math.max(0, 60 - day + 1);
+    var scores = state.topicScores || {};
+    var keys   = Object.keys(scores);
+    if (keys.length) {
+      var avg = Math.round(keys.reduce(function(s, k) { return s + scores[k]; }, 0) / keys.length);
+      document.getElementById('statAcc').textContent = avg + '%';
+    }
+
+    // ─ Weak areas
+    var weak = Adaptive.weakTopics(3);
+    if (weak.length) {
+      document.getElementById('weakSection').style.display = '';
+      document.getElementById('weakBadges').innerHTML = weak.map(function(t) {
+        return '<span class="badge badge-error">' + t.label + '</span>';
+      }).join('');
+    }
+
+    // ─ Streak grid
+    var grid     = document.getElementById('streakGrid');
+    var isMobile = window.innerWidth < 768;
+    var startDay, endDay;
+    if (isMobile) {
+      startDay = Math.max(1, day - 10);
+      endDay   = Math.min(60, startDay + 29);
+    } else {
+      startDay = 1;
+      endDay   = 60;
+    }
+
+    var doneIdx = 0;
+    for (var d = startDay; d <= endDay; d++) {
+      var cell = document.createElement('div');
+      var cls  = 'cal-day';
+      if (d === day)           cls += ' today';
+      else if (completed.includes(d)) { cls += ' done'; }
+      else if (d > day)        cls += ' future';
+
+      cell.className = cls;
+      cell.textContent = d;
+      cell.setAttribute('aria-label', 'Giorno ' + d +
+        (d === day ? ' — oggi' : completed.includes(d) ? ' — completato' : ''));
+
+      if (completed.includes(d)) {
+        cell.style.animationDelay = Math.min(doneIdx * 30, 900) + 'ms';
+        doneIdx++;
       }
 
-      // Weak topics
-      const weak     = Adaptive.weakTopics(4);
-      const weakList = document.getElementById('weakTopicsList');
-      if (weak.length) {
-        weakList.innerHTML = weak.map(function (t) {
-          const cls = UI.pctClass(t.pct);
-          return '<div class="topic-row" style="background:var(--surface2)">'
-            + '<span class="topic-name">' + t.label + '</span>'
-            + '<span class="topic-pct ' + cls + '">' + t.pct + '%</span>'
-            + '</div>';
-        }).join('');
-      }
+      grid.appendChild(cell);
+    }
 
-      // Calendar week chips + grid
-      const chipsEl  = document.getElementById('weekChips');
-      const calEl    = document.getElementById('calGrid');
-      let activeWeek = weekNum;
+    // Scroll today into view on mobile
+    if (isMobile) {
+      setTimeout(function() {
+        var todayCell = grid.querySelector('.today');
+        if (todayCell) todayCell.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+      }, 400);
+    }
 
-      function renderCalWeek(week) {
-        activeWeek = week;
-        // Update chip active state
-        chipsEl.querySelectorAll('.chip').forEach(function (c) {
-          c.classList.toggle('active', parseInt(c.dataset.week) === week);
-        });
-        const offset = (week - 1) * 7 + 1;
-        UI.buildCalendar(calEl, state.completedDays, state.currentDay, offset, 7);
-      }
-
-      // Build week chips (9 weeks covers 60 days)
-      var totalWeeks = Math.ceil(60 / 7);
-      for (var w = 1; w <= totalWeeks; w++) {
-        var chip = document.createElement('span');
-        chip.className = 'chip' + (w === weekNum ? ' active' : '');
-        chip.dataset.week = w;
-        chip.textContent = 'Sett. ' + w;
-        chip.addEventListener('click', (function (wk) {
-          return function () { renderCalWeek(wk); };
-        })(w));
-        chipsEl.appendChild(chip);
-      }
-
-      renderCalWeek(weekNum);
-
-      // Session button — if day already completed, show review option
-      if (state.completedDays && state.completedDays.includes(state.currentDay)) {
-        var btn = document.getElementById('sessionBtn');
-        btn.textContent = '\u2713 Sessione completata \u2014 Ripassa';
-        btn.style.background = 'var(--success)';
-      }
-
-    })();
+  })();
   </script>
 </body>
 </html>
