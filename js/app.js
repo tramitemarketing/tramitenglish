@@ -23,6 +23,7 @@ const Auth = {
     const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
     if (error) throw new Error(error.message);
     localStorage.setItem('te_user', JSON.stringify(data.user));
+    await State.syncFromCloud();   // pull errors saved on other devices
     return data.user;
   },
 
@@ -89,9 +90,62 @@ const State = {
   },
 
   recordError(errorObj) {
+    // 1. Save locally immediately (fast, works offline)
     const s = this.load();
     s.sessionErrors = [errorObj, ...s.sessionErrors].slice(0, 500);
     this.save(s);
+    // 2. Async push to Supabase (fire-and-forget — local copy is the fallback)
+    this._pushErrorToCloud(errorObj);
+  },
+
+  async _pushErrorToCloud(e) {
+    const user = Auth.getUser();
+    if (!user) return;
+    try {
+      await _supabase.from('user_errors').insert({
+        user_id:     user.id,
+        date:        e.date || new Date().toISOString(),
+        source:      e.source || 'session',
+        part:        e.part        || null,
+        question:    e.question    || null,
+        user_answer: e.userAnswer  || null,
+        correct:     e.correct     || null,
+        explanation: e.explanation || null
+      });
+    } catch (_) {
+      // silent — localStorage already has it
+    }
+  },
+
+  // Pull all errors for this user from Supabase into localStorage.
+  // Called on login so errors are available across devices/browsers.
+  async syncFromCloud() {
+    const user = Auth.getUser();
+    if (!user) return;
+    try {
+      const { data, error } = await _supabase
+        .from('user_errors')
+        .select('id, date, source, part, question, user_answer, correct, explanation')
+        .eq('user_id', user.id)
+        .order('date', { ascending: false })
+        .limit(500);
+      if (error || !data || data.length === 0) return;
+      const errors = data.map(function (r) {
+        return {
+          _id:         r.id,
+          date:        r.date,
+          source:      r.source,
+          part:        r.part,
+          question:    r.question,
+          userAnswer:  r.user_answer,
+          correct:     r.correct,
+          explanation: r.explanation
+        };
+      });
+      this.update({ sessionErrors: errors });
+    } catch (_) {
+      // silent — localStorage errors remain untouched
+    }
   },
 
   updateTopicScore(topicKey, correct) {
