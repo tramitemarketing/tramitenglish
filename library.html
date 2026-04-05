@@ -706,8 +706,8 @@
       // ── Story ──
       var storyHtml = '';
       if (exp.story_it) {
-        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
-          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
+        storyHtml = '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--subtext);margin:16px 0 6px">&#128218; Storia mnemonica</div>'
+          + '<div class="story-body open">' + escHtml(exp.story_it) + '</div>';
       }
 
       // ── Vocab column: vocabulary table ──
@@ -758,18 +758,6 @@
           mainCol.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
         });
       });
-
-      // Wire story toggle
-      var storyBtn = mainCol.querySelector('.story-toggle');
-      if (storyBtn) {
-        var sb = mainCol.querySelector('.story-body');
-        storyBtn.addEventListener('click', function() {
-          sb.classList.toggle('open');
-          storyBtn.innerHTML = sb.classList.contains('open')
-            ? '&#128218; Storia mnemonica &#9650;'
-            : '&#128218; Storia mnemonica &#9660;';
-        });
-      }
 
       // Wire IT reveal buttons (examples + vocab)
       body.querySelectorAll('.it-reveal-btn').forEach(function(btn) {
