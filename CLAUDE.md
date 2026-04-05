@@ -325,27 +325,101 @@ CREATE POLICY "Users own their sessions" ON diagnostic_sessions
 - App studio FCE B2: piano 60 giorni + esercizi adattativi per argomento debole
 - Test diagnostici (10 test completi) con unlock progressivo, review errori con spiegazioni grammaticali
 - Sessioni giornaliere: teoria + esercizi per ogni giorno del piano
-- Review adattiva: mostra spiegazioni grammaticali degli argomenti sbagliati (NON esercizi — prima le spiegazioni, poi l'utente sceglie se fare esercizi)
-- Library: spiegazioni grammaticali consultabili (53 regole)
+- Review adattiva: mostra spiegazioni grammaticali degli argomenti sbagliati + link a esercizi per argomento
+- Library: spiegazioni grammaticali consultabili (53 regole) — popup full-screen desktop, reveal IT ✅
 - Errori salvati per account (non solo localStorage) ✅ FATTO
+
+---
+
+### Sistema esercizi grammaticali — decisioni prese (2026-04-05)
+
+#### Separazione fondamentale
+- `exercises_part1-7.yaml` → esercizi FCE format per i **test diagnostici** (già implementati)
+- Esercizi grammaticali → contenuto **didattico per le sessioni 60 giorni** (da creare)
+- Sono due sistemi distinti con scopi diversi
+
+#### Tipi di esercizi confermati per sessioni grammaticali
+| Tipo | Descrizione | Auto-correggibile |
+|------|-------------|-------------------|
+| **Fill-in** | Scrivi la parola/forma mancante | ✅ array risposte accettate |
+| **Error correction** | Trova E correggi l'errore nella frase | ✅ |
+| **Part 4 transformation** | Riscrivi frase con keyword data | ✅ array |
+| **Traduzione IT→EN** | Data frase IT, scrivi EN corretta | ✅ array |
+| **Scelta binaria** | Scegli tra 2 opzioni (since/for, was/were) | ✅ |
+| **Completion con prompt** | Completa frase dato contesto/indizio | ✅ |
+
+Esclusi: MCQ 4 opzioni, riordina parole, abbinamento, sentence building da prompt.
+
+#### Distribuzione difficoltà (per ogni sessione/topic)
+```
+10%  Easy    → A2/B1 base, struttura chiara
+20%  Medium  → B1/B2, qualche eccezione
+50%  Hard    → B2 FCE-level, trappole comuni
+20%  C1      → C1 super difficile, uso nativo
+```
+La difficoltà sale progressivamente dentro ogni sessione giornaliera.
+
+#### Numero esercizi per sessione
+Da definire — minimo 6, massimo ~15. Progressione giornaliera all'interno del topic.
+
+#### Istruzioni degli esercizi
+In **inglese** (come FCE reale).
+
+#### Fonte degli esercizi
+Creazione collaborativa: ricerca su internet (≥30 siti per macro-topic) → raccolta esercizi → selezione e adattamento insieme all'utente. Si procede un macro-topic alla volta, partendo dai **Tempi Verbali**.
+
+#### Tag system (da definire dopo raccolta esercizi)
+Ogni esercizio avrà tag multipli che coprono tutti gli aspetti grammaticali della frase.
+Granularità da decidere: topic + pattern + difficoltà + tipo errore comune.
+I tag saranno condivisi con `grammar_explanations.yaml` per permettere il collegamento errore→spiegazione→esercizi.
+
+#### Storage esercizi grammaticali
+Da decidere. Opzioni: `content.js` statico, YAML con script, Supabase.
+**Decisione posticipata** a dopo la raccolta del materiale.
+
+#### Padronanza / spaced repetition
+TODO — da trattare dopo implementazione base esercizi.
+
+---
+
+### Flusso test → ripasso (da implementare)
+
+Dopo ogni test diagnostico, aggiungere in `diagnostic.html` (schermata risultati) un bottone CTA:
+**"Review mistakes — theory & practice"** (o simile in inglese)
+
+Comportamento:
+- Porta a `review.html` pre-filtrato per i topic degli errori del test
+- Appare sempre dopo il test (non condizionale a soglia minima di errori) — TBC
+- Nel ripasso: prima teoria (popup library), poi esercizi per topic — TBC
+- Dopo ripasso: destinazione TBC (risultati test / dashboard / scelta)
+
+**Domande aperte** sul flusso:
+1. Come si mappa domanda FCE → topic grammaticale? (mappatura manuale vs tag automatici)
+2. Bottone sempre visibile o solo sopra soglia errori?
+3. Flusso ripasso: teoria prima poi esercizi, o esercizi con teoria on-demand?
+4. Destinazione dopo ripasso completato?
 
 ---
 
 ### Prossimi step (in ordine di priorità)
 
-1. **Dark mode toggle** — `[data-theme="dark"]` è usato negli inline style di alcune pagine ma non esiste un bottone toggle nell'UI. Aggiungere in topbar di ogni pagina (o in settings.html).
+1. **Raccolta esercizi grammaticali online** — ricerca ≥30 siti per macro-topic, partendo da **Tempi Verbali**. Creare file con tutti gli esercizi trovati. Poi selezione + adattamento collaborativo con l'utente.
 
-2. **Library wired** — `library.html` deve fare fetch da Supabase `grammar_explanations`. Lo script `scripts/import_explanations.py` è già pronto per importare le 53 regole. Passi: (a) eseguire lo script import, (b) sostituire l'accordion statico in `library.html` con fetch dinamico.
+2. **Redirect test → ripasso** — aggiungere bottone CTA in `diagnostic.html` (schermata risultati) che porta a `review.html` pre-filtrato per topic degli errori. Dettagli flusso da definire (vedi domande aperte sopra).
 
-3. **Review adattiva wired** — `review.html` deve mostrare le spiegazioni grammaticali per gli argomenti degli errori recenti + link a esercizi per argomento. Logica: legge `state.sessionErrors`, estrae i `part`/`topic` più frequenti, fetch da `grammar_explanations` in Supabase.
+3. **Library wired** — `library.html` fa già fetch da Supabase (codice scritto) ma le 53 regole non sono ancora importate. Passi: (a) eseguire `scripts/import_explanations.py`, (b) eseguire migration SQL `003` e `004`.
 
-4. **content.js popolato** — `THEORY[]` e `EXERCISES[]` esistono solo per Day 1. I giorni 2–60 cadono in theory-only (nessun esercizio). Riempire almeno i primi 14 giorni.
+4. **Dark mode toggle** ✅ FATTO in settings.html — tema chiaro/auto/scuro con persistenza localStorage.
 
-5. **Script import exercises YAML→Supabase** — la tabella `exercises` esiste in Supabase ma la struttura colonne va verificata prima di importare. Usare `database/exercises_part1-7.yaml` come fonte.
+5. **content.js popolato** — THEORY[] e EXERCISES[] esistono solo per Day 1/2/8/15. Riempire giorni 3–60 con esercizi grammaticali (dipende da step 1).
 
-6. **Supabase sync test results** — creare tabella `diagnostic_sessions` (SQL sopra) + wiring in `diagnostic.js` per salvare risultati test sul server invece di solo localStorage.
+6. **Review adattiva wired** — `review.html` deve mostrare spiegazioni grammaticali errori + link esercizi. Dipende da step 1 (tag system) e step 2 (flusso).
 
-7. **user_state sync** — `localStorage('te_state')` (streak, completedDays, topicScores, ecc.) non viene sincronizzato su Supabase. Da fare dopo le priorità sopra.
+7. **Supabase sync test results** — tabella `diagnostic_sessions` (SQL già scritto) + wiring in `diagnostic.js`.
+
+8. **Padronanza / spaced repetition** — TODO dopo implementazione base esercizi.
+
+9. **user_state sync** — streak, completedDays, topicScores su Supabase. Ultima priorità.
 
 ---
 
