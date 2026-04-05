@@ -64,6 +64,35 @@
       color: var(--muted);
       margin-top: 32px;
     }
+
+    .theme-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+    .theme-toggle-group {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .theme-btn {
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--surface2);
+      color: var(--text2);
+      border: none;
+      cursor: pointer;
+      border-right: 1px solid var(--border);
+      transition: background .15s, color .15s;
+    }
+    .theme-btn:last-child { border-right: none; }
+    .theme-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -132,6 +161,24 @@
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:13px;font-weight:600;color:var(--text2)">Giorni completati</span>
           <span class="badge" id="completedBadge">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tema -->
+    <div class="settings-section">
+      <div class="form-section-title">Aspetto</div>
+      <div class="card">
+        <div class="theme-row">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text2)">Tema</div>
+            <div style="font-size:12px;color:var(--subtext);margin-top:2px" id="themeLabel">Automatico (sistema)</div>
+          </div>
+          <div class="theme-toggle-group">
+            <button class="theme-btn" data-theme="light" id="themeBtnLight">Chiaro</button>
+            <button class="theme-btn" data-theme="auto"  id="themeBtnAuto">Auto</button>
+            <button class="theme-btn" data-theme="dark"  id="themeBtnDark">Scuro</button>
+          </div>
         </div>
       </div>
     </div>
@@ -216,6 +263,27 @@
         document.getElementById('currentPw').value = '';
         document.getElementById('newPw').value     = '';
         document.getElementById('confirmPw').value = '';
+      });
+
+      // ── Theme toggle ───────────────────────────────────────────
+      var THEME_LABELS = { light: 'Sempre chiaro', auto: 'Automatico (sistema)', dark: 'Sempre scuro' };
+
+      function applyTheme(t) {
+        if (t === 'dark')       document.documentElement.setAttribute('data-theme', 'dark');
+        else if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else                    document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('te_theme', t);
+        document.getElementById('themeLabel').textContent = THEME_LABELS[t] || '';
+        document.querySelectorAll('.theme-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.dataset.theme === t);
+        });
+      }
+
+      var savedTheme = localStorage.getItem('te_theme') || 'auto';
+      applyTheme(savedTheme);
+
+      document.querySelectorAll('.theme-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() { applyTheme(btn.dataset.theme); });
       });
 
       // Logout

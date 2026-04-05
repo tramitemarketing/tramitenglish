@@ -27,13 +27,14 @@
 
     /* ── Topic chips ── */
     .topic-chips {
-      display: flex;
+      display: none;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
       margin-bottom: 16px;
       scrollbar-width: none;
     }
+    .topic-chips.visible { display: flex; }
     .topic-chips::-webkit-scrollbar { display: none; }
     .chip {
       flex-shrink: 0;
@@ -372,6 +373,56 @@
     }
     @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
+    /* ── Popup modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-inner {
+      background: var(--surface);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      animation: slideUp 0.22s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(60px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    @media (min-width: 600px) {
+      .modal-overlay { align-items: center; padding: 24px; }
+      .modal-inner { border-radius: 16px; max-width: 560px; max-height: 82vh; animation: fadeInScale 0.18s ease; }
+      @keyframes fadeInScale {
+        from { transform: scale(0.96); opacity: 0; }
+        to   { transform: scale(1);    opacity: 1; }
+      }
+    }
+    .modal-header {
+      position: sticky; top: 0;
+      background: var(--surface);
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      z-index: 1;
+    }
+    .modal-title-it { font-size: 16px; font-weight: 700; color: var(--text); }
+    .modal-title-en { font-size: 12px; color: var(--subtext); font-style: italic; margin-top: 3px; }
+    .modal-close {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 50%; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--text2); font-size: 14px;
+      flex-shrink: 0; margin-left: 12px; line-height: 1;
+    }
+    .modal-close:hover { background: var(--surface3, #e5e5e5); }
+    .modal-body { padding: 16px 20px 28px; }
+
     /* ── Desktop responsive ── */
     @media (min-width: 900px) {
       .page-content {
@@ -428,6 +479,20 @@
     <div class="no-results" id="noResults" style="display:none">Nessun risultato trovato.</div>
 
   </main>
+
+  <!-- Grammar popup modal -->
+  <div id="gramModal" class="modal-overlay" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-it" id="modalTitleIt"></div>
+          <div class="modal-title-en" id="modalTitleEn"></div>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Chiudi">&#10005;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
 
   <!-- Bottom nav -->
   <nav class="bottom-nav">
@@ -549,7 +614,101 @@
       return text;
     }
 
-    // ── Render a single grammar item ───────────────────────────────
+    // ── Build grammar content HTML (used by popup) ─────────────────
+    function buildGramContent(exp) {
+      var langHtml = '<div class="lang-tabs">'
+        + '<button class="lang-tab active" data-lang="it">IT</button>'
+        + '<button class="lang-tab" data-lang="en">EN</button>'
+        + '</div>';
+
+      var ruleHtml = '<div class="rule-block rule-it">' + mdToHtml(exp.rule_it) + '</div>'
+        + '<div class="rule-block rule-en" style="display:none">' + mdToHtml(exp.rule_en) + '</div>';
+
+      var exHtml = '';
+      if (exp.example_basic || exp.example_complex) {
+        exHtml += '<div class="examples-section"><h5>Esempi</h5>';
+        if (exp.example_basic) {
+          exHtml += '<div class="example-row"><span class="example-lang">IT</span>'
+            + '<span class="example-text">' + escHtml(exp.example_basic.it) + '</span></div>';
+          exHtml += '<div class="example-row" style="margin-bottom:12px"><span class="example-lang">EN</span>'
+            + '<span class="example-text">' + escHtml(exp.example_basic.en) + '</span></div>';
+        }
+        if (exp.example_complex) {
+          exHtml += '<div class="example-row example-complex"><span class="example-lang">IT</span>'
+            + '<span class="example-text">' + escHtml(exp.example_complex.it) + '</span></div>';
+          exHtml += '<div class="example-row example-complex" style="margin-bottom:4px"><span class="example-lang">EN</span>'
+            + '<span class="example-text">' + escHtml(exp.example_complex.en) + '</span></div>';
+        }
+        exHtml += '</div>';
+      }
+
+      var vocHtml = '';
+      if (exp.vocabulary && exp.vocabulary.length > 0) {
+        vocHtml += '<div class="vocab-section"><h5>Vocabolario</h5>'
+          + '<table class="vocab-table"><tr><th>Parola</th><th>IPA</th><th>Significato</th></tr>';
+        exp.vocabulary.forEach(function(v) {
+          vocHtml += '<tr>'
+            + '<td><span class="vocab-word">' + escHtml(v.word) + '</span>'
+            + (v.pos ? ' <span class="vocab-pos">' + escHtml(v.pos) + '</span>' : '') + '</td>'
+            + '<td><span class="vocab-ipa">' + escHtml(v.ipa || '') + '</span></td>'
+            + '<td>' + escHtml(v.meaning_it || '') + '</td></tr>';
+        });
+        vocHtml += '</table></div>';
+      }
+
+      var storyHtml = '';
+      if (exp.story_it) {
+        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
+          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
+      }
+
+      return langHtml + ruleHtml + exHtml + vocHtml + storyHtml;
+    }
+
+    // ── Popup open/close ───────────────────────────────────────────
+    function openPopup(exp) {
+      document.getElementById('modalTitleIt').textContent = exp.title_it;
+      document.getElementById('modalTitleEn').textContent = exp.title_en;
+
+      var body = document.getElementById('modalBody');
+      body.innerHTML = buildGramContent(exp);
+
+      // Wire lang tabs inside popup
+      body.querySelectorAll('.lang-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var lang = tab.dataset.lang;
+          body.querySelectorAll('.lang-tab').forEach(function(t){ t.classList.remove('active'); });
+          tab.classList.add('active');
+          body.querySelector('.rule-it').style.display = lang === 'it' ? '' : 'none';
+          body.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
+        });
+      });
+
+      // Wire story toggle
+      var storyBtn = body.querySelector('.story-toggle');
+      if (storyBtn) {
+        var sb = body.querySelector('.story-body');
+        storyBtn.addEventListener('click', function() {
+          sb.classList.toggle('open');
+          storyBtn.innerHTML = sb.classList.contains('open')
+            ? '&#128218; Storia mnemonica &#9650;'
+            : '&#128218; Storia mnemonica &#9660;';
+        });
+      }
+
+      var modal = document.getElementById('gramModal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      // scroll popup to top
+      modal.querySelector('.modal-inner').scrollTop = 0;
+    }
+
+    function closePopup() {
+      document.getElementById('gramModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // ── Render a single grammar item (click → popup) ───────────────
     function renderGramItem(exp) {
       var item = document.createElement('div');
       item.className = 'gram-item';
@@ -566,104 +725,11 @@
       header.className = 'gram-header';
       header.innerHTML = '<div style="flex:1"><div class="gram-title-it">' + exp.title_it + '</div>'
         + '<div class="gram-title-en">' + exp.title_en + '</div></div>'
-        + '<span class="gram-arrow">&#9660;</span>';
+        + '<span class="gram-arrow" style="font-size:16px;color:var(--subtext)">&#8250;</span>';
 
-      var body = document.createElement('div');
-      body.className = 'gram-body';
-
-      // Lang tabs
-      var langHtml = '<div class="lang-tabs">'
-        + '<button class="lang-tab active" data-lang="it">IT</button>'
-        + '<button class="lang-tab" data-lang="en">EN</button>'
-        + '</div>';
-
-      // Rule blocks
-      var ruleHtml = '<div class="rule-block rule-it">' + mdToHtml(exp.rule_it) + '</div>'
-        + '<div class="rule-block rule-en" style="display:none">' + mdToHtml(exp.rule_en) + '</div>';
-
-      // Examples
-      var exHtml = '';
-      if (exp.example_basic || exp.example_complex) {
-        exHtml += '<div class="examples-section"><h5>Esempi</h5>';
-        if (exp.example_basic) {
-          exHtml += '<div class="example-row">'
-            + '<span class="example-lang">IT</span>'
-            + '<span class="example-text">' + escHtml(exp.example_basic.it) + '</span></div>';
-          exHtml += '<div class="example-row" style="margin-bottom:12px">'
-            + '<span class="example-lang">EN</span>'
-            + '<span class="example-text">' + escHtml(exp.example_basic.en) + '</span></div>';
-        }
-        if (exp.example_complex) {
-          exHtml += '<div class="example-row example-complex">'
-            + '<span class="example-lang">IT</span>'
-            + '<span class="example-text">' + escHtml(exp.example_complex.it) + '</span></div>';
-          exHtml += '<div class="example-row example-complex" style="margin-bottom:4px">'
-            + '<span class="example-lang">EN</span>'
-            + '<span class="example-text">' + escHtml(exp.example_complex.en) + '</span></div>';
-        }
-        exHtml += '</div>';
-      }
-
-      // Vocabulary
-      var vocHtml = '';
-      if (exp.vocabulary && exp.vocabulary.length > 0) {
-        vocHtml += '<div class="vocab-section"><h5>Vocabolario</h5>'
-          + '<table class="vocab-table">'
-          + '<tr><th>Parola</th><th>IPA</th><th>Significato</th></tr>';
-        exp.vocabulary.forEach(function(v) {
-          vocHtml += '<tr>'
-            + '<td><span class="vocab-word">' + escHtml(v.word) + '</span>'
-            + (v.pos ? ' <span class="vocab-pos">' + escHtml(v.pos) + '</span>' : '') + '</td>'
-            + '<td><span class="vocab-ipa">' + escHtml(v.ipa || '') + '</span></td>'
-            + '<td>' + escHtml(v.meaning_it || '') + '</td>'
-            + '</tr>';
-        });
-        vocHtml += '</table></div>';
-      }
-
-      // Story
-      var storyHtml = '';
-      if (exp.story_it) {
-        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
-          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
-      }
-
-      body.innerHTML = langHtml + ruleHtml + exHtml + vocHtml + storyHtml;
-
-      // Events — header toggle
-      header.addEventListener('click', function() {
-        var isOpen = body.classList.contains('open');
-        body.classList.toggle('open', !isOpen);
-        header.classList.toggle('open', !isOpen);
-      });
-
-      // Events — lang tabs
-      body.querySelectorAll('.lang-tab').forEach(function(tab) {
-        tab.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var lang = tab.dataset.lang;
-          body.querySelectorAll('.lang-tab').forEach(function(t){ t.classList.remove('active'); });
-          tab.classList.add('active');
-          body.querySelector('.rule-it').style.display = lang === 'it' ? '' : 'none';
-          body.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
-        });
-      });
-
-      // Events — story toggle
-      var storyBtn = body.querySelector('.story-toggle');
-      if (storyBtn) {
-        storyBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var sb = body.querySelector('.story-body');
-          sb.classList.toggle('open');
-          storyBtn.innerHTML = sb.classList.contains('open')
-            ? '&#128218; Storia mnemonica &#9650;'
-            : '&#128218; Storia mnemonica &#9660;';
-        });
-      }
+      header.addEventListener('click', function() { openPopup(exp); });
 
       item.appendChild(header);
-      item.appendChild(body);
       return item;
     }
 
@@ -983,6 +1049,28 @@
         // altrimenti cade in applyFilters() client-side
         searchSupabase(q);
       }, 300);
+    });
+
+    // ── Chips — show on search focus, hide on blur (if empty) ──────
+    var searchInput = document.getElementById('searchInput');
+    var topicChips  = document.getElementById('topicChips');
+
+    searchInput.addEventListener('focus', function() {
+      topicChips.classList.add('visible');
+    });
+    searchInput.addEventListener('blur', function() {
+      setTimeout(function() {
+        if (!searchInput.value.trim()) topicChips.classList.remove('visible');
+      }, 200);
+    });
+
+    // ── Popup close events ─────────────────────────────────────────
+    document.getElementById('modalClose').addEventListener('click', closePopup);
+    document.getElementById('gramModal').addEventListener('click', function(e) {
+      if (e.target === this) closePopup();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePopup();
     });
 
     // ── Init ───────────────────────────────────────────────────────

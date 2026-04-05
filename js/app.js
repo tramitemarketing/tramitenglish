@@ -6,6 +6,14 @@
 
 'use strict';
 
+// ── Theme — apply saved preference immediately (before any render) ──
+(function() {
+  var t = localStorage.getItem('te_theme');
+  if (t === 'dark')  document.documentElement.setAttribute('data-theme', 'dark');
+  else if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  // 'auto' or unset → CSS media query decides
+})();
+
 // ── Supabase ──
 const SUPABASE_URL      = 'https://zmnjoiuvmyyyrveooxzp.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_qq2eXeCz5uDe63WTELIWrQ_mj4E-GH6';
