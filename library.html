@@ -483,7 +483,38 @@
     /* Vocab table meaning column alignment */
     .vocab-table td:last-child { vertical-align: middle; }
 
-    /* ── Desktop responsive ── */
+    /* ── Popup typography — desktop scale-up ── */
+    @media (min-width: 900px) {
+      .modal-header { padding: 28px 32px 20px; }
+      .modal-title-it { font-size: 22px; }
+      .modal-title-en { font-size: 14px; margin-top: 5px; }
+      .modal-close { width: 36px; height: 36px; font-size: 16px; }
+
+      .lang-tab { font-size: 13px; padding: 6px 18px; }
+      .lang-tabs { margin-bottom: 16px; }
+
+      .rule-block { font-size: 15px; line-height: 1.8; padding: 16px 18px; margin-bottom: 16px; }
+
+      .examples-section h5,
+      .vocab-section h5 { font-size: 12px; margin-bottom: 10px; }
+
+      .example-row { font-size: 15px; gap: 14px; margin-bottom: 10px; }
+      .example-lang { font-size: 11px; padding: 3px 8px; }
+      .example-text { font-size: 15px; line-height: 1.6; }
+
+      .vocab-table { font-size: 14px; }
+      .vocab-table th { font-size: 11px; padding: 7px 10px; }
+      .vocab-table td { font-size: 14px; padding: 9px 10px; }
+      .vocab-ipa { font-size: 13px; }
+      .vocab-pos { font-size: 11px; }
+
+      .story-body { font-size: 14px; line-height: 1.8; padding: 16px 18px; }
+
+      .it-reveal-btn { font-size: 11px; padding: 3px 10px; }
+      .it-blurred { font-size: 15px; }
+    }
+
+    /* ── Page list (accordion) responsive ── */
     @media (min-width: 900px) {
       .page-content {
         max-width: 1000px !important;
