@@ -483,35 +483,44 @@
     /* Vocab table meaning column alignment */
     .vocab-table td:last-child { vertical-align: middle; }
 
-    /* ── Popup typography — desktop scale-up ── */
+    /* ── Popup typography — desktop responsive (clamp scales with screen) ── */
     @media (min-width: 900px) {
       .modal-header { padding: 28px 32px 20px; }
-      .modal-title-it { font-size: 22px; }
-      .modal-title-en { font-size: 14px; margin-top: 5px; }
+      .modal-title-it { font-size: clamp(20px, 1.6vw, 28px); }
+      .modal-title-en { font-size: clamp(13px, 1vw, 16px); margin-top: 5px; }
       .modal-close { width: 36px; height: 36px; font-size: 16px; }
 
-      .lang-tab { font-size: 13px; padding: 6px 18px; }
+      /* Right column — rules: 2.5× base */
+      .lang-tab { font-size: clamp(12px, 0.9vw, 15px); padding: 6px 18px; }
       .lang-tabs { margin-bottom: 16px; }
+      .rule-block {
+        font-size: clamp(17px, 1.5vw, 24px);
+        line-height: 1.85;
+        padding: clamp(14px, 1.2vw, 20px) clamp(16px, 1.4vw, 22px);
+        margin-bottom: 20px;
+      }
 
-      .rule-block { font-size: 15px; line-height: 1.8; padding: 16px 18px; margin-bottom: 16px; }
+      /* Right column — examples + story: 2× base */
+      .examples-section h5 { font-size: clamp(11px, 0.8vw, 14px); margin-bottom: 10px; }
+      .example-row { gap: 14px; margin-bottom: 10px; }
+      .example-lang { font-size: clamp(10px, 0.7vw, 12px); padding: 3px 8px; }
+      .example-text { font-size: clamp(15px, 1.2vw, 19px); line-height: 1.65; }
+      .it-blurred    { font-size: clamp(15px, 1.2vw, 19px); }
+      .it-reveal-btn { font-size: clamp(10px, 0.8vw, 13px); padding: 3px 10px; }
+      .story-body {
+        font-size: clamp(14px, 1.1vw, 18px);
+        line-height: 1.85;
+        padding: clamp(13px, 1vw, 18px) clamp(14px, 1.1vw, 20px);
+      }
 
-      .examples-section h5,
-      .vocab-section h5 { font-size: 12px; margin-bottom: 10px; }
-
-      .example-row { font-size: 15px; gap: 14px; margin-bottom: 10px; }
-      .example-lang { font-size: 11px; padding: 3px 8px; }
-      .example-text { font-size: 15px; line-height: 1.6; }
-
-      .vocab-table { font-size: 14px; }
-      .vocab-table th { font-size: 11px; padding: 7px 10px; }
-      .vocab-table td { font-size: 14px; padding: 9px 10px; }
-      .vocab-ipa { font-size: 13px; }
-      .vocab-pos { font-size: 11px; }
-
-      .story-body { font-size: 14px; line-height: 1.8; padding: 16px 18px; }
-
-      .it-reveal-btn { font-size: 11px; padding: 3px 10px; }
-      .it-blurred { font-size: 15px; }
+      /* Left column — vocabulary: slightly larger, proportional */
+      .vocab-section h5 { font-size: clamp(11px, 0.8vw, 14px); margin-bottom: 10px; }
+      .vocab-table { font-size: clamp(13px, 1vw, 16px); }
+      .vocab-table th { font-size: clamp(10px, 0.75vw, 13px); padding: 8px 10px; }
+      .vocab-table td { font-size: clamp(13px, 1vw, 16px); padding: clamp(8px, 0.7vw, 12px) 10px; }
+      .vocab-ipa  { font-size: clamp(12px, 0.9vw, 15px); }
+      .vocab-pos  { font-size: clamp(10px, 0.7vw, 12px); }
+      .vocab-word { font-size: clamp(13px, 1vw, 16px); }
     }
 
     /* ── Page list (accordion) responsive ── */
