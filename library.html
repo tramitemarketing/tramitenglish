@@ -460,15 +460,12 @@
     .it-lang { background: var(--accent-light) !important; color: var(--accent) !important; }
     .it-reveal-wrap { display: inline-flex; align-items: center; gap: 8px; flex: 1; }
     .it-blurred {
-      filter: blur(5px);
-      user-select: none;
-      transition: filter .25s ease;
+      display: none;
       color: var(--text2);
       font-size: 13px;
       line-height: 1.5;
-      cursor: pointer;
     }
-    .it-blurred.revealed { filter: none; user-select: text; cursor: default; }
+    .it-blurred.revealed { display: inline; }
     .it-reveal-btn {
       flex-shrink: 0;
       font-size: 10px;
@@ -723,7 +720,7 @@
             + '<td><span class="vocab-word">' + escHtml(v.word) + '</span>'
             + (v.pos ? ' <span class="vocab-pos">' + escHtml(v.pos) + '</span>' : '') + '</td>'
             + '<td><span class="vocab-ipa">' + escHtml(v.ipa || '') + '</span></td>'
-            + '<td>' + buildReveal(v.meaning_it || '') + '</td></tr>';
+            + '<td>' + escHtml(v.meaning_it || '') + '</td></tr>';
         });
         vocHtml += '</table></div>';
       }
@@ -780,16 +777,6 @@
           var blurred = btn.previousElementSibling;
           blurred.classList.add('revealed');
           btn.classList.add('hidden');
-        });
-      });
-      // Also reveal on click of blurred text itself
-      body.querySelectorAll('.it-blurred').forEach(function(el) {
-        el.addEventListener('click', function() {
-          if (!el.classList.contains('revealed')) {
-            el.classList.add('revealed');
-            var btn = el.nextElementSibling;
-            if (btn) btn.classList.add('hidden');
-          }
         });
       });
 
