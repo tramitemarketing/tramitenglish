@@ -339,16 +339,33 @@ CREATE POLICY "Users own their sessions" ON diagnostic_sessions
 - Sono due sistemi distinti con scopi diversi
 
 #### Tipi di esercizi confermati per sessioni grammaticali
-| Tipo | Descrizione | Auto-correggibile |
-|------|-------------|-------------------|
-| **Fill-in** | Scrivi la parola/forma mancante | ✅ array risposte accettate |
-| **Error correction** | Trova E correggi l'errore nella frase | ✅ |
-| **Part 4 transformation** | Riscrivi frase con keyword data | ✅ array |
-| **Traduzione IT→EN** | Data frase IT, scrivi EN corretta | ✅ array |
-| **Scelta binaria** | Scegli tra 2 opzioni (since/for, was/were) | ✅ |
-| **Completion con prompt** | Completa frase dato contesto/indizio | ✅ |
 
-Esclusi: MCQ 4 opzioni, riordina parole, abbinamento, sentence building da prompt.
+| Tipo | Frequenza | Quando usarlo | Auto-correggibile |
+|------|-----------|---------------|-------------------|
+| **Fill-in / open cloze** | Alta | Core di ogni sessione | ✅ array risposte |
+| **Error correction** | Alta | Trappole B2, falsi amici | ✅ |
+| **Part 4 transformation** | Alta | Strutture equivalenti, riscrittura | ✅ array |
+| **Traduzione IT→EN** | Bassa | Dove IT/EN divergono strutturalmente; ANCHE come esercizio finale misto per riconoscere quale tempo usare | ✅ array |
+| **Scelta binaria** | Bassa | Coppie confuse (since/for, make/do, say/tell, still/yet/already) | ✅ |
+| **Completion con contesto** | Media | Frasi con time marker, sequenze temporali | ✅ |
+| **Error identification** (solo trova, non correggi) | Bassa | Adverb placement, agreement, doppia negazione | ✅ lettera A/B/C/D |
+| **Sentence building da prompt** | Bassa | Solo strutture (passive, reported, relative, wish) | ✅ array |
+
+Esclusi definitivamente: MCQ 4 opzioni, riordina parole, abbinamento.
+
+##### Micro-topic per traduzione IT→EN
+Present perfect vs passato prossimo · Passivo con "si" · Falsi amici strutturali (eventually/eventualmente) · Gerundio vs infinito · Discorso indiretto (backshift) · Condizionali tipo 2/3 · Articolo con nomi astratti
+
+##### Micro-topic per scelta binaria
+since/for · still/yet/already · make/do · say/tell · used to/would · by/until · during/while · in/at/on (tempo) · some/any · much/many/a lot of · a/the/Ø · raise/rise, lie/lay, bring/take
+
+##### Micro-topic per sentence building
+Domande indirette · Passive construction · Reported speech · Relative clauses · Frasi con wish
+
+##### Micro-topic per error identification
+Adverb placement · Subject-verb agreement (collective nouns) · Doppia negazione · Aggettivo/avverbio confusi · Articolo "the" con nomi geografici · Comparativi irregolari · Pronomi riflessivi superflui
+
+Esclusi: MCQ 4 opzioni, riordina parole, abbinamento.
 
 #### Distribuzione difficoltà (per ogni sessione/topic)
 ```
@@ -384,20 +401,38 @@ TODO — da trattare dopo implementazione base esercizi.
 
 ### Flusso test → ripasso (da implementare)
 
-Dopo ogni test diagnostico, aggiungere in `diagnostic.html` (schermata risultati) un bottone CTA:
-**"Review mistakes — theory & practice"** (o simile in inglese)
+#### UX decisa: "Struggled with" inline sotto i risultati completi
 
-Comportamento:
-- Porta a `review.html` pre-filtrato per i topic degli errori del test
-- Appare sempre dopo il test (non condizionale a soglia minima di errori) — TBC
-- Nel ripasso: prima teoria (popup library), poi esercizi per topic — TBC
-- Dopo ripasso: destinazione TBC (risultati test / dashboard / scelta)
+**Struttura schermata risultati di `diagnostic.html` dopo il test:**
+```
+[Score totale + breakdown per Part]          ← già esiste
+        ↓
+[Struggled with — sezione inline]            ← DA AGGIUNGERE
+  Per ogni errore:
+  - testo domanda + tua risposta + risposta corretta
+  - [Study this rule →]  ← apre popup library con spiegazione grammaticale
+  - [Practice similar exercises →]  ← porta a review.html filtrato
+```
 
-**Domande aperte** sul flusso:
-1. Come si mappa domanda FCE → topic grammaticale? (mappatura manuale vs tag automatici)
-2. Bottone sempre visibile o solo sopra soglia errori?
-3. Flusso ripasso: teoria prima poi esercizi, o esercizi con teoria on-demand?
-4. Destinazione dopo ripasso completato?
+**Comportamento deciso:**
+- La sezione "Struggled with" appare sempre sotto i risultati (nessuna soglia minima)
+- Ogni errore mostra domanda, risposta sbagliata, risposta corretta + 2 bottoni
+- Primo bottone "Study this rule" → apre popup library (teoria per quella regola)
+- Secondo bottone "Practice similar exercises" → porta a review.html filtrato per topic
+- Flusso ripasso: prima teoria (popup), poi esercizi
+- Dopo ripasso completato → torna a dashboard
+
+#### Mapping errore FCE → topic grammaticale (decisione PENDENTE)
+
+Il sistema deve sapere che "She ___ in London since 2015 (has lived)" riguarda "present_perfect".
+Attualmente questa info non esiste nel YAML.
+
+**3 opzioni spiegate:**
+- **Soluzione 1 — Tag manuale per domanda**: aggiungere `grammar: [present_perfect, for_since]` a ogni domanda nel YAML. Preciso, lavoro una volta sola su ~200 domande.
+- **Soluzione 2 — Mappatura per Part**: `Part 2 → [verb_tenses, prepositions]` automatica. Zero lavoro, approssimativa.
+- **Soluzione 3 — Ibrida**: Soluzione 2 ora come fallback + Soluzione 1 graduale.
+
+**Decisione utente**: TBD (da chiarire nella prossima sessione)
 
 ---
 
