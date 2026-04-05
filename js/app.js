@@ -103,14 +103,19 @@ const State = {
     if (!user) return;
     try {
       await _supabase.from('user_errors').insert({
-        user_id:     user.id,
-        date:        e.date || new Date().toISOString(),
-        source:      e.source || 'session',
-        part:        e.part        || null,
-        question:    e.question    || null,
-        user_answer: e.userAnswer  || null,
-        correct:     e.correct     || null,
-        explanation: e.explanation || null
+        user_id:      user.id,
+        exercise_id:  null,                              // not linked to exercises table yet
+        wrong_answer: e.userAnswer  || null,             // existing column
+        tags:         e.part ? [e.part] : [],            // existing column — store part tag
+        reviewed:     false,
+        error_count:  1,
+        last_seen_at: e.date || new Date().toISOString(),
+        source:       e.source      || 'session',        // new column (run ALTER TABLE)
+        part:         e.part        || null,             // new column
+        question:     e.question    || null,             // new column
+        user_answer:  e.userAnswer  || null,             // new column
+        correct:      e.correct     || null,             // new column
+        explanation:  e.explanation || null              // new column
       });
     } catch (_) {
       // silent — localStorage already has it
@@ -125,21 +130,22 @@ const State = {
     try {
       const { data, error } = await _supabase
         .from('user_errors')
-        .select('id, date, source, part, question, user_answer, correct, explanation')
+        .select('id, last_seen_at, source, part, question, user_answer, wrong_answer, correct, explanation, reviewed')
         .eq('user_id', user.id)
-        .order('date', { ascending: false })
+        .order('last_seen_at', { ascending: false })
         .limit(500);
       if (error || !data || data.length === 0) return;
       const errors = data.map(function (r) {
         return {
           _id:         r.id,
-          date:        r.date,
+          date:        r.last_seen_at,
           source:      r.source,
           part:        r.part,
           question:    r.question,
-          userAnswer:  r.user_answer,
+          userAnswer:  r.user_answer || r.wrong_answer,  // support both old and new column
           correct:     r.correct,
-          explanation: r.explanation
+          explanation: r.explanation,
+          reviewed:    r.reviewed
         };
       });
       this.update({ sessionErrors: errors });
