@@ -373,7 +373,7 @@
     }
     @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
-    /* ── Popup modal ── */
+    /* ── Popup modal — mobile (bottom sheet) ── */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -395,13 +395,42 @@
       from { transform: translateY(60px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
     }
-    @media (min-width: 600px) {
-      .modal-overlay { align-items: center; padding: 24px; }
-      .modal-inner { border-radius: 16px; max-width: 560px; max-height: 82vh; animation: fadeInScale 0.18s ease; }
-      @keyframes fadeInScale {
-        from { transform: scale(0.96); opacity: 0; }
-        to   { transform: scale(1);    opacity: 1; }
+    /* ── Popup modal — desktop (full screen) ── */
+    @media (min-width: 900px) {
+      .modal-overlay { align-items: stretch; padding: 0; }
+      .modal-inner {
+        border-radius: 0;
+        width: 100%;
+        max-height: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: fadeIn 0.18s ease;
       }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      .modal-body {
+        flex: 1;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        grid-template-rows: auto;
+        gap: 0;
+        padding: 0 !important;
+      }
+      .modal-content-vocab {
+        border-right: 1px solid var(--border);
+        padding: 28px 24px;
+        overflow-y: auto;
+        background: var(--surface2);
+      }
+      .modal-content-main {
+        padding: 28px 32px;
+        overflow-y: auto;
+      }
+    }
+    @media (min-width: 1280px) {
+      .modal-body { grid-template-columns: 380px 1fr; }
     }
     .modal-header {
       position: sticky; top: 0;
@@ -410,6 +439,7 @@
       padding: 20px 20px 14px;
       border-bottom: 1px solid var(--border);
       z-index: 1;
+      flex-shrink: 0;
     }
     .modal-title-it { font-size: 16px; font-weight: 700; color: var(--text); }
     .modal-title-en { font-size: 12px; color: var(--subtext); font-style: italic; margin-top: 3px; }
@@ -420,8 +450,41 @@
       cursor: pointer; color: var(--text2); font-size: 14px;
       flex-shrink: 0; margin-left: 12px; line-height: 1;
     }
-    .modal-close:hover { background: var(--surface3, #e5e5e5); }
+    .modal-close:hover { background: var(--border); }
+    /* Mobile: single column body */
     .modal-body { padding: 16px 20px 28px; }
+    .modal-content-vocab { margin-bottom: 8px; }
+    .modal-content-main { }
+
+    /* ── Italian reveal ── */
+    .it-lang { background: var(--accent-light) !important; color: var(--accent) !important; }
+    .it-reveal-wrap { display: inline-flex; align-items: center; gap: 8px; flex: 1; }
+    .it-blurred {
+      filter: blur(5px);
+      user-select: none;
+      transition: filter .25s ease;
+      color: var(--text2);
+      font-size: 13px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .it-blurred.revealed { filter: none; user-select: text; cursor: default; }
+    .it-reveal-btn {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .it-reveal-btn:hover { opacity: 0.8; }
+    .it-reveal-btn.hidden { display: none; }
+    /* Vocab table meaning column alignment */
+    .vocab-table td:last-child { vertical-align: middle; }
 
     /* ── Desktop responsive ── */
     @media (min-width: 900px) {
@@ -616,6 +679,7 @@
 
     // ── Build grammar content HTML (used by popup) ─────────────────
     function buildGramContent(exp) {
+      // ── Main column: lang tabs + rule + examples ──
       var langHtml = '<div class="lang-tabs">'
         + '<button class="lang-tab active" data-lang="it">IT</button>'
         + '<button class="lang-tab" data-lang="en">EN</button>'
@@ -628,20 +692,28 @@
       if (exp.example_basic || exp.example_complex) {
         exHtml += '<div class="examples-section"><h5>Esempi</h5>';
         if (exp.example_basic) {
-          exHtml += '<div class="example-row"><span class="example-lang">IT</span>'
-            + '<span class="example-text">' + escHtml(exp.example_basic.it) + '</span></div>';
-          exHtml += '<div class="example-row" style="margin-bottom:12px"><span class="example-lang">EN</span>'
+          exHtml += '<div class="example-row" style="margin-bottom:4px"><span class="example-lang">EN</span>'
             + '<span class="example-text">' + escHtml(exp.example_basic.en) + '</span></div>';
+          exHtml += '<div class="example-row" style="margin-bottom:12px"><span class="example-lang it-lang">IT</span>'
+            + buildReveal(exp.example_basic.it) + '</div>';
         }
         if (exp.example_complex) {
-          exHtml += '<div class="example-row example-complex"><span class="example-lang">IT</span>'
-            + '<span class="example-text">' + escHtml(exp.example_complex.it) + '</span></div>';
           exHtml += '<div class="example-row example-complex" style="margin-bottom:4px"><span class="example-lang">EN</span>'
             + '<span class="example-text">' + escHtml(exp.example_complex.en) + '</span></div>';
+          exHtml += '<div class="example-row example-complex" style="margin-bottom:4px"><span class="example-lang it-lang">IT</span>'
+            + buildReveal(exp.example_complex.it) + '</div>';
         }
         exHtml += '</div>';
       }
 
+      // ── Story ──
+      var storyHtml = '';
+      if (exp.story_it) {
+        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
+          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
+      }
+
+      // ── Vocab column: vocabulary table ──
       var vocHtml = '';
       if (exp.vocabulary && exp.vocabulary.length > 0) {
         vocHtml += '<div class="vocab-section"><h5>Vocabolario</h5>'
@@ -651,18 +723,23 @@
             + '<td><span class="vocab-word">' + escHtml(v.word) + '</span>'
             + (v.pos ? ' <span class="vocab-pos">' + escHtml(v.pos) + '</span>' : '') + '</td>'
             + '<td><span class="vocab-ipa">' + escHtml(v.ipa || '') + '</span></td>'
-            + '<td>' + escHtml(v.meaning_it || '') + '</td></tr>';
+            + '<td>' + buildReveal(v.meaning_it || '') + '</td></tr>';
         });
         vocHtml += '</table></div>';
       }
 
-      var storyHtml = '';
-      if (exp.story_it) {
-        storyHtml = '<button class="story-toggle">&#128218; Storia mnemonica &#9660;</button>'
-          + '<div class="story-body">' + escHtml(exp.story_it) + '</div>';
-      }
+      // Wrap in two columns (CSS grid on desktop, stacked on mobile)
+      return '<div class="modal-content-vocab">' + vocHtml + '</div>'
+           + '<div class="modal-content-main">' + langHtml + ruleHtml + exHtml + storyHtml + '</div>';
+    }
 
-      return langHtml + ruleHtml + exHtml + vocHtml + storyHtml;
+    // ── Build a reveal-on-click Italian text span ──────────────────
+    function buildReveal(text) {
+      if (!text) return '';
+      return '<span class="it-reveal-wrap">'
+        + '<span class="it-blurred">' + escHtml(text) + '</span>'
+        + '<button class="it-reveal-btn" aria-label="Rivela traduzione">Rivela</button>'
+        + '</span>';
     }
 
     // ── Popup open/close ───────────────────────────────────────────
@@ -673,21 +750,22 @@
       var body = document.getElementById('modalBody');
       body.innerHTML = buildGramContent(exp);
 
-      // Wire lang tabs inside popup
-      body.querySelectorAll('.lang-tab').forEach(function(tab) {
+      // Wire lang tabs
+      var mainCol = body.querySelector('.modal-content-main');
+      mainCol.querySelectorAll('.lang-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
           var lang = tab.dataset.lang;
-          body.querySelectorAll('.lang-tab').forEach(function(t){ t.classList.remove('active'); });
+          mainCol.querySelectorAll('.lang-tab').forEach(function(t){ t.classList.remove('active'); });
           tab.classList.add('active');
-          body.querySelector('.rule-it').style.display = lang === 'it' ? '' : 'none';
-          body.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
+          mainCol.querySelector('.rule-it').style.display = lang === 'it' ? '' : 'none';
+          mainCol.querySelector('.rule-en').style.display = lang === 'en' ? '' : 'none';
         });
       });
 
       // Wire story toggle
-      var storyBtn = body.querySelector('.story-toggle');
+      var storyBtn = mainCol.querySelector('.story-toggle');
       if (storyBtn) {
-        var sb = body.querySelector('.story-body');
+        var sb = mainCol.querySelector('.story-body');
         storyBtn.addEventListener('click', function() {
           sb.classList.toggle('open');
           storyBtn.innerHTML = sb.classList.contains('open')
@@ -696,10 +774,28 @@
         });
       }
 
+      // Wire IT reveal buttons (examples + vocab)
+      body.querySelectorAll('.it-reveal-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var blurred = btn.previousElementSibling;
+          blurred.classList.add('revealed');
+          btn.classList.add('hidden');
+        });
+      });
+      // Also reveal on click of blurred text itself
+      body.querySelectorAll('.it-blurred').forEach(function(el) {
+        el.addEventListener('click', function() {
+          if (!el.classList.contains('revealed')) {
+            el.classList.add('revealed');
+            var btn = el.nextElementSibling;
+            if (btn) btn.classList.add('hidden');
+          }
+        });
+      });
+
       var modal = document.getElementById('gramModal');
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-      // scroll popup to top
       modal.querySelector('.modal-inner').scrollTop = 0;
     }
 
