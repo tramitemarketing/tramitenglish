@@ -371,6 +371,36 @@
       animation: pulse 1.2s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* ── Desktop responsive ── */
+    @media (min-width: 900px) {
+      .page-content {
+        max-width: 1000px !important;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+      #grammarSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 24px;
+        align-items: start;
+      }
+      .topic-chips {
+        flex-wrap: wrap;
+        overflow-x: visible;
+      }
+      .search-wrap {
+        max-width: 480px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .page-content {
+        max-width: 1280px !important;
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -675,7 +705,7 @@
         groupContainer.dataset.topic = key;
 
         var groupHeader = document.createElement('div');
-        groupHeader.className = 'group-header';
+        groupHeader.className = 'group-header closed';
         groupHeader.innerHTML = icon + ' <span style="flex:1">' + label + '</span>'
           + '<span class="group-count">' + items.length + '</span>'
           + '<span class="group-arrow">&#9660;</span>';
@@ -684,7 +714,7 @@
         groupWrap.className = 'group-wrap';
 
         var groupBody = document.createElement('div');
-        groupBody.className = 'group-body';
+        groupBody.className = 'group-body hidden';
 
         items.forEach(function(exp) {
           groupBody.appendChild(renderGramItem(exp));
@@ -758,8 +788,10 @@
 
       renderGrammar(filtered);
 
-      // When searching, open all items
+      // When searching, open all groups and items
       if (q) {
+        document.querySelectorAll('.group-body').forEach(function(b){ b.classList.remove('hidden'); });
+        document.querySelectorAll('.group-header').forEach(function(h){ h.classList.remove('closed'); });
         document.querySelectorAll('.gram-body').forEach(function(b){ b.classList.add('open'); });
         document.querySelectorAll('.gram-header').forEach(function(h){ h.classList.add('open'); });
       }
