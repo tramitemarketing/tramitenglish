@@ -1050,3 +1050,197 @@ textarea {
 .mb-20 { margin-bottom: 20px; }
 .text-center { text-align: center; }
 .text-muted { color: var(--subtext); font-size: 13px; }
+
+/* ══ Dynamic Background System ══════════════════════════ */
+
+/* Fixed background layer with amber grid */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.page-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,158,11,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,158,11,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 65%, transparent 100%);
+}
+
+[data-theme="light"] .page-bg::before {
+  background-image:
+    linear-gradient(rgba(180,83,9,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,83,9,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .page-bg::before {
+    background-image:
+      linear-gradient(rgba(180,83,9,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180,83,9,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
+
+/* Glow blobs */
+.page-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: breathe-blob 5s ease-in-out infinite;
+}
+
+.page-glow-1 {
+  width: 360px;
+  height: 360px;
+  background: rgba(245,158,11,0.07);
+  top: -120px;
+  right: -80px;
+}
+
+.page-glow-2 {
+  width: 240px;
+  height: 240px;
+  background: rgba(245,158,11,0.05);
+  bottom: 80px;
+  left: -80px;
+  animation-delay: 2.5s;
+  animation-duration: 7s;
+}
+
+[data-theme="light"] .page-glow-1,
+[data-theme="light"] .page-glow-2 {
+  background: rgba(180,83,9,0.05);
+}
+
+@keyframes breathe-blob {
+  0%, 100% { transform: scale(1);     opacity: 1; }
+  50%       { transform: scale(1.18); opacity: 0.65; }
+}
+
+/* Floating particles */
+.particle {
+  position: fixed;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--op, 0.4);
+}
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0);     opacity: var(--op, 0.4); }
+  50%       { transform: translateY(-10px); opacity: calc(var(--op, 0.4) * 1.8); }
+}
+
+/* Day progress bar */
+.day-progress {
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.day-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #fbbf24);
+  border-radius: 1px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ══ Enhanced interactions ═════════════════════════════ */
+
+/* Card hover lift — only for .card.interactive */
+.card.interactive {
+  transition: border-color 0.15s, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card.interactive:hover {
+  border-color: var(--accent) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-shadow);
+}
+
+/* Primary button glow on hover */
+.btn-primary {
+  transition: opacity 0.15s, transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 1 !important;
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px var(--accent-shadow);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+/* Page fade-in */
+@keyframes page-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  animation: page-fade 0.2s ease-out;
+}
+
+/* Card staggered entrance */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-animate {
+  opacity: 0;
+  animation: card-in 0.3s ease-out forwards;
+}
+
+/* Accordion accordion hover indent */
+.accordion-header {
+  transition: background 0.15s, padding-left 0.15s !important;
+}
+
+.accordion-header:hover {
+  padding-left: 20px !important;
+}
+
+/* Option button slide-in on hover */
+.option-btn {
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.12s !important;
+}
+
+.option-btn:hover:not(:disabled):not(.selected):not(.correct):not(.wrong) {
+  transform: translateX(3px);
+}
+
+/* Ensure all page content stays above background elements */
+.topbar,
+.bottom-nav,
+.page-content,
+.session-topbar,
+main,
+header,
+footer,
+.settings-content,
+.stats-page,
+.login-wrap {
+  position: relative;
+  z-index: 1;
+}
