@@ -112,9 +112,18 @@
 </head>
 <body>
 
+<!-- Dynamic background -->
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-glow page-glow-1" aria-hidden="true"></div>
+<div class="page-glow page-glow-2" aria-hidden="true"></div>
+
   <header class="topbar">
     <span class="topbar-title">Practice Tests</span>
     <span id="completedCount" class="badge badge-neutral">0 / 10</span>
+    <div style="display:flex;align-items:center;gap:4px;">
+      <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema"></button>
+      <a href="settings.html" class="topbar-icon" aria-label="Impostazioni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></a>
+    </div>
   </header>
 
   <main class="page-content">
@@ -205,7 +214,7 @@
       var href = isLocked ? '#' : 'diagnostic.html?test=' + tid;
       var card = document.createElement('a');
       card.href      = href;
-      card.className = 'test-card ' + cardCls;
+      card.className = 'test-card ' + (isLocked ? '' : 'interactive ') + cardCls;
       card.setAttribute('aria-label', 'Practice Test ' + tid + (isLocked ? ' — locked' : isDone ? ' — completed' : ''));
       card.innerHTML =
         '<div class="test-num">' + tid + '</div>'
@@ -217,7 +226,50 @@
         + '<div class="test-arrow" aria-hidden="true">' + arrow + '</div>';
       grid.appendChild(card);
     });
+
+    // Theme toggle
+    (function () {
+      var SUN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      var MOON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      function isDark() {
+        var t = localStorage.getItem('te_theme') || 'auto';
+        if (t === 'dark') return true;
+        if (t === 'light') return false;
+        return window.matchMedia('(prefers-color-scheme:dark)').matches;
+      }
+      var btn = document.getElementById('themeBtn');
+      if (!btn) return;
+      btn.innerHTML = isDark() ? SUN : MOON;
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        localStorage.setItem('te_theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+        btn.innerHTML = isDark() ? SUN : MOON;
+      });
+    })();
+
   })();
   </script>
+<script>
+(function () {
+  var pts = [
+    {l:'10%',t:'22%',s:2,d:0,o:0.5},
+    {l:'35%',t:'48%',s:1.5,d:0.7,o:0.3},
+    {l:'60%',t:'15%',s:3,d:1.4,o:0.4},
+    {l:'80%',t:'58%',s:2,d:0.3,o:0.35},
+    {l:'22%',t:'72%',s:1.5,d:1.9,o:0.25},
+    {l:'90%',t:'33%',s:2.5,d:1,o:0.3}
+  ];
+  var f = document.createDocumentFragment();
+  pts.forEach(function (p) {
+    var el = document.createElement('div');
+    el.className = 'particle';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = 'left:'+p.l+';top:'+p.t+';width:'+p.s+'px;height:'+p.s+'px;--op:'+p.o+';animation:float-up '+(3+p.d)+'s ease-in-out '+p.d+'s infinite;';
+    f.appendChild(el);
+  });
+  document.body.appendChild(f);
+})();
+</script>
 </body>
 </html>
