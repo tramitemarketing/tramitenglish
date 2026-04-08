@@ -199,14 +199,27 @@
 </head>
 <body>
 
+<!-- Dynamic background -->
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-glow page-glow-1" aria-hidden="true"></div>
+<div class="page-glow page-glow-2" aria-hidden="true"></div>
+
   <!-- Topbar -->
   <header class="topbar">
     <a href="dashboard.html" class="topbar-logo">Tram<span>it</span>English</a>
-    <a href="settings.html" class="topbar-icon" aria-label="Impostazioni">&#9881;</a>
+    <div style="display:flex;align-items:center;gap:4px;">
+      <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema"></button>
+      <a href="settings.html" class="topbar-icon" aria-label="Impostazioni">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </a>
+    </div>
   </header>
 
   <!-- Main -->
   <main class="page-content">
+    <div class="day-progress" aria-label="Progresso piano 60 giorni" role="progressbar">
+      <div class="day-progress-fill" id="dayProgressFill"></div>
+    </div>
     <div class="dash-grid">
 
       <!-- LEFT: Greeting + Streak -->
@@ -216,7 +229,7 @@
         <p class="motivation-line" id="motivLine">Prima sessione della settimana. Inizia.</p>
 
         <!-- 60-day streak grid -->
-        <div class="card">
+        <div class="card card-animate" style="animation-delay:0.05s">
           <div class="card-label">Piano 60 giorni</div>
           <div class="streak-scroll" role="img" aria-label="Griglia progressi 60 giorni">
             <div class="streak-grid" id="streakGrid"></div>
@@ -228,7 +241,7 @@
       <div style="display:flex; flex-direction:column; gap:12px;">
 
         <!-- CTA card -->
-        <div class="card">
+        <div class="card card-animate interactive" style="animation-delay:0.1s">
           <div class="card-label">Sessione di oggi</div>
           <div class="today-meta">
             <span class="badge" id="ctaPart">Part 1</span>
@@ -248,7 +261,7 @@
         </div>
 
         <!-- Quick stats -->
-        <div class="card" aria-label="Statistiche">
+        <div class="card card-animate" style="animation-delay:0.15s" aria-label="Statistiche">
           <div class="card-label">Statistiche</div>
           <div class="stats-row">
             <div class="stat-cell">
@@ -429,7 +442,75 @@
       }, 400);
     }
 
+    // Day progress bar
+    var dayFill = document.getElementById('dayProgressFill');
+    if (dayFill) {
+      requestAnimationFrame(function () {
+        dayFill.style.width = ((state.currentDay || 1) / 60 * 100).toFixed(1) + '%';
+      });
+    }
+    // Count-up on streak stat
+    function countUp(el, target) {
+      if (!el || isNaN(target) || target === 0) return;
+      var step = Math.max(1, target / 20);
+      var cur = 0;
+      (function tick() {
+        cur = Math.min(cur + step, target);
+        el.textContent = Math.round(cur);
+        if (cur < target) requestAnimationFrame(tick);
+      })();
+    }
+    setTimeout(function () {
+      var streakEl = document.getElementById('statStreak');
+      if (streakEl) {
+        var val = parseInt(streakEl.textContent) || 0;
+        if (val > 0) countUp(streakEl, val);
+      }
+    }, 100);
+
+    // Theme toggle
+    (function () {
+      var SUN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      var MOON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      function isDark() {
+        var t = localStorage.getItem('te_theme') || 'auto';
+        if (t === 'dark') return true;
+        if (t === 'light') return false;
+        return window.matchMedia('(prefers-color-scheme:dark)').matches;
+      }
+      var btn = document.getElementById('themeBtn');
+      if (!btn) return;
+      btn.innerHTML = isDark() ? SUN : MOON;
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        localStorage.setItem('te_theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+        btn.innerHTML = isDark() ? SUN : MOON;
+      });
+    })();
+
   })();
   </script>
+  <script>
+(function () {
+  var pts = [
+    {l:'10%',t:'22%',s:2,d:0,o:0.5},
+    {l:'35%',t:'48%',s:1.5,d:0.7,o:0.3},
+    {l:'60%',t:'15%',s:3,d:1.4,o:0.4},
+    {l:'80%',t:'58%',s:2,d:0.3,o:0.35},
+    {l:'22%',t:'72%',s:1.5,d:1.9,o:0.25},
+    {l:'90%',t:'33%',s:2.5,d:1,o:0.3}
+  ];
+  var f = document.createDocumentFragment();
+  pts.forEach(function (p) {
+    var el = document.createElement('div');
+    el.className = 'particle';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = 'left:'+p.l+';top:'+p.t+';width:'+p.s+'px;height:'+p.s+'px;--op:'+p.o+';animation:float-up '+(3+p.d)+'s ease-in-out '+p.d+'s infinite;';
+    f.appendChild(el);
+  });
+  document.body.appendChild(f);
+})();
+</script>
 </body>
 </html>
