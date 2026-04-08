@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Autorizzazioni operative
+
+- **Push automatico**: Claude è autorizzato a fare `git push` direttamente su `main` senza chiedere conferma all'utente.
+- **Merge automatico**: Claude è autorizzato a fare merge di PR senza chiedere conferma all'utente.
+
 ## Project status (aggiornato 2026-04-05)
 
 ---
