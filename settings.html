@@ -97,6 +97,11 @@
 </head>
 <body>
 
+<!-- Dynamic background -->
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-glow page-glow-1" aria-hidden="true"></div>
+<div class="page-glow page-glow-2" aria-hidden="true"></div>
+
   <!-- Topbar -->
   <header class="topbar">
     <a href="dashboard.html" class="topbar-back">&#8592;</a>
@@ -294,5 +299,26 @@
 
     })();
   </script>
+<script>
+(function () {
+  var pts = [
+    {l:'10%',t:'22%',s:2,d:0,o:0.5},
+    {l:'35%',t:'48%',s:1.5,d:0.7,o:0.3},
+    {l:'60%',t:'15%',s:3,d:1.4,o:0.4},
+    {l:'80%',t:'58%',s:2,d:0.3,o:0.35},
+    {l:'22%',t:'72%',s:1.5,d:1.9,o:0.25},
+    {l:'90%',t:'33%',s:2.5,d:1,o:0.3}
+  ];
+  var f = document.createDocumentFragment();
+  pts.forEach(function (p) {
+    var el = document.createElement('div');
+    el.className = 'particle';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = 'left:'+p.l+';top:'+p.t+';width:'+p.s+'px;height:'+p.s+'px;--op:'+p.o+';animation:float-up '+(3+p.d)+'s ease-in-out '+p.d+'s infinite;';
+    f.appendChild(el);
+  });
+  document.body.appendChild(f);
+})();
+</script>
 </body>
 </html>
