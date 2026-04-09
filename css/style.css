@@ -1232,7 +1232,6 @@ body {
 
 /* Ensure all page content stays above background elements */
 .topbar,
-.bottom-nav,
 .page-content,
 .session-topbar,
 main,
@@ -1243,4 +1242,10 @@ footer,
 .login-wrap {
   position: relative;
   z-index: 1;
+}
+
+/* Bottom nav must stay fixed — do not override with position:relative */
+.bottom-nav {
+  position: fixed !important;
+  z-index: 100;
 }
