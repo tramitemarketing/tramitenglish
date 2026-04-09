@@ -7,7 +7,76 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Push automatico**: Claude è autorizzato a fare `git push` direttamente su `main` senza chiedere conferma all'utente.
 - **Merge automatico**: Claude è autorizzato a fare merge di PR senza chiedere conferma all'utente.
 
-## Project status (aggiornato 2026-04-05)
+## Come lavoriamo (workflow Claude Code)
+
+### Skill obbligatorie — leggere `docs/superpowers/SKILLS-REFERENCE.md` all'inizio di ogni sessione complessa
+
+| Situazione | Skill da invocare |
+|-----------|------------------|
+| Nuova feature/UI/componente | `superpowers:brainstorming` PRIMA di toccare codice |
+| Piano pronto da eseguire, task indipendenti | `superpowers:dispatching-parallel-agents` |
+| Piano pronto da eseguire, task sequenziali | `superpowers:executing-plans` |
+| Prima di dire "è fatto" o aprire PR | `superpowers:verification-before-completion` |
+| Bug o comportamento inatteso | `superpowers:systematic-debugging` |
+| Lavoro UI/UX significativo | `ui-ux-pro-max` → `brainstorming` → `writing-plans` |
+| Feature completata | `superpowers:requesting-code-review` |
+
+### Regole operative
+- Leggere sempre il file prima di editarlo
+- I subagenti NON hanno permesso Bash → commit va fatto dal coordinatore
+- Agenti paralleli: Tasks 2-N partono DOPO Task 1 se dipendono da file condivisi (CSS)
+- Push su main autorizzato direttamente senza conferma
+- `.superpowers/` e `.claude/` sono in `.gitignore` — non committarli
+
+## Design System (aggiornato 2026-04-09)
+
+### Stile attuale: Dark Editorial + Amber/Gold
+- **Tema default**: Dark (`#0a0a0a`) con toggle chiaro/scuro su ogni pagina
+- **Accent**: Amber `#f59e0b` (dark) / `#b45309` (light)
+- **Font**: DM Serif Display (display), Plus Jakarta Sans (UI), JetBrains Mono (mono/numeri)
+- **Background dinamico**: grid ambra 32×32px + glow blobs animati + particelle fluttuanti
+- **Animazioni**: page-fade 0.2s, card-in staggered, count-up su numeri, float-up particelle
+
+### Snippet pronti (vedi `docs/superpowers/SKILLS-REFERENCE.md`)
+- **Snippet A**: `<div class="page-bg">` + glow-1 + glow-2 → dopo `<body>`
+- **Snippet B**: Particles JS → prima di `</body>`
+- **Snippet C**: Topbar theme toggle + settings SVG → nel topbar
+- **Snippet D**: Theme toggle JS → dentro IIFE esistente
+- **Snippet E**: Count-up JS → per numeri statistici
+
+### Classi CSS chiave (nuove, da `css/style.css` dopo commit 65406c5)
+```css
+.page-bg          /* Grid ambra fixed in background */
+.page-glow-1/2    /* Blob glow animati */
+.particle         /* Punto fluttuante, usa --op e animation inline */
+.day-progress     /* Barra progresso piano 60 giorni */
+.day-progress-fill/* Fill animato 0→X% */
+.card-animate     /* Entrance animation fadeUp */
+.card.interactive /* Hover lift: translateY(-2px) + glow amber */
+.btn-primary      /* Hover: scale(1.02) + glow */
+.option-btn       /* Hover: translateX(3px) slide */
+```
+
+## Project status (aggiornato 2026-04-09)
+
+---
+
+### Completato ✅ — UI Redesign completo (2026-04-09)
+
+Redesign Dark Editorial/Amber su tutte le 11 pagine. Funzionalità intatte.
+
+**Cosa è cambiato:**
+- `css/style.css` — sistema background dinamico (grid, blobs, particelle, animazioni)
+- Ogni pagina HTML — Snippet A/B/C/D applicati
+- Theme toggle (sole/luna SVG) in ogni topbar
+- Progress bar giornaliera in dashboard (Day X/60)
+- Count-up animato su numeri statistici
+- Card lift hover (`translateY(-2px)` + glow amber) su card interattive
+- Button primary hover: `scale(1.02)` + glow shadow
+- Option buttons: `translateX(3px)` slide su hover
+- Page fade-in al caricamento
+
+**Commit range:** `65406c5` → `c96b78b`
 
 ---
 
