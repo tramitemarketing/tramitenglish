@@ -44,20 +44,58 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Snippet D**: Theme toggle JS → dentro IIFE esistente
 - **Snippet E**: Count-up JS → per numeri statistici
 
-### Classi CSS chiave (nuove, da `css/style.css` dopo commit 65406c5)
+### Classi CSS chiave (da `css/style.css`)
 ```css
+/* Background */
 .page-bg          /* Grid ambra fixed in background */
 .page-glow-1/2    /* Blob glow animati */
 .particle         /* Punto fluttuante, usa --op e animation inline */
-.day-progress     /* Barra progresso piano 60 giorni */
-.day-progress-fill/* Fill animato 0→X% */
+
+/* Layout */
+.day-progress / .day-progress-fill  /* Progress bar 60 giorni */
 .card-animate     /* Entrance animation fadeUp */
 .card.interactive /* Hover lift: translateY(-2px) + glow amber */
 .btn-primary      /* Hover: scale(1.02) + glow */
 .option-btn       /* Hover: translateX(3px) slide */
+
+/* Enhancements (2026-04-10) */
+.nav-pill         /* Amber pill animato nel bottom-nav */
+.toast / .toast-success / .toast-error / .toast-info
+.skeleton / .skeleton-text / .skeleton-card  /* Shimmer loading */
+.empty-state / .empty-state-icon / .empty-state-title / .empty-state-text
+.shake            /* Animazione errore: tremito orizzontale */
+.confetti-particle /* Coriandoli risposta corretta */
+.kbd / .kbd-hint  /* Hint scorciatoie tastiera */
 ```
 
-## Project status (aggiornato 2026-04-09)
+## Project status (aggiornato 2026-04-10)
+
+---
+
+### Completato ✅ — Enhancements (2026-04-10, commit b40cfb5)
+
+- **UI in English**: tutti gli 11 file HTML tradotti. Esercizi e spiegazioni bilingue invariati.
+- **PWA**: `manifest.json` + `sw.js` (cache-first, bypass Supabase/CDN) + `icons/icon.svg`
+- **Keyboard shortcuts**: `js/shortcuts.js` — H/S/T/L/P per navigazione, Esc→dashboard
+- **Page transitions**: `js/transitions.js` — fade-out 150ms su ogni link interno
+- **Toast notifications**: `js/toast.js` — slide-in con icona, auto-dismiss 3s, click-to-close
+- **Nav pill**: indicatore amber animato sul tab attivo (dashboard.html)
+- **Micro-feedback**: confetti su risposta corretta, shake su sbagliata (session.html)
+- **CSS**: classi `.nav-pill`, `.toast`, `.skeleton`, `.empty-state`, `.shake`, `.confetti-particle`
+- **Ogni pagina** include: `<link rel="manifest">` + toast/transitions/shortcuts + SW registration
+
+### Script da includere su ogni nuova pagina HTML
+```html
+<!-- in <head> -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f59e0b">
+
+<!-- prima di </body> -->
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
+```
 
 ---
 
