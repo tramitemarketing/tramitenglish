@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Accedi</title>
+  <title>TrainEnglish — Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <style>
     body {
       min-height: 100vh;
@@ -79,21 +82,21 @@
 <div class="page-glow page-glow-2" aria-hidden="true"></div>
 
   <div class="login-wrap">
-    <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema" style="position:fixed;top:16px;right:16px;z-index:10;background:var(--surface);border:1px solid var(--border);border-radius:8px;"></button>
+    <button class="topbar-icon" id="themeBtn" aria-label="Toggle theme" style="position:fixed;top:16px;right:16px;z-index:10;background:var(--surface);border:1px solid var(--border);border-radius:8px;"></button>
     <div class="login-logo">
       <div class="login-logo-text">Tram<span>it</span>English</div>
-      <div class="login-subtitle">60 giorni al B2 FCE</div>
+      <div class="login-subtitle">60 days to FCE B2</div>
     </div>
 
     <div class="login-card">
-      <h2>Accedi al tuo account</h2>
+      <h2>Sign in to your account</h2>
 
       <div id="loginError" class="alert alert-error"></div>
 
       <form id="loginForm" novalidate>
         <div class="input-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="nome@esempio.it" autocomplete="email" required>
+          <input type="email" id="email" placeholder="name@example.com" autocomplete="email" required>
         </div>
 
         <div class="input-group">
@@ -103,20 +106,24 @@
 
         <div class="checkbox-row">
           <input type="checkbox" id="remember" name="remember">
-          <label for="remember">Ricordami</label>
+          <label for="remember">Remember me</label>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="loginBtn">Accedi</button>
+        <button type="submit" class="btn btn-primary" id="loginBtn">Sign in</button>
       </form>
     </div>
 
     <div class="login-footer">
-      TrainEnglish &mdash; Il tuo piano personale per il FCE
+      TrainEnglish &mdash; Your personal plan for FCE B2
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/app.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/shortcuts.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
   <script>
 (function () {
   var pts = [
@@ -158,16 +165,16 @@
 
         errorDiv.style.display = 'none';
         loginBtn.disabled      = true;
-        loginBtn.textContent   = 'Accesso in corso...';
+        loginBtn.textContent   = 'Signing in...';
 
         try {
           await Auth.login(email, password);
           window.location.replace('dashboard.html');
         } catch (err) {
-          errorDiv.textContent   = err.message || 'Credenziali non valide. Riprova.';
+          errorDiv.textContent   = err.message || 'Invalid email or password.';
           errorDiv.style.display = 'block';
           loginBtn.disabled      = false;
-          loginBtn.textContent   = 'Accedi';
+          loginBtn.textContent   = 'Sign in';
         }
       });
 

@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Libreria</title>
+  <title>TrainEnglish — Library</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     /* ── Search ── */
     .search-wrap {
@@ -563,7 +565,7 @@
 
   <!-- Topbar -->
   <header class="topbar">
-    <span class="topbar-title">Libreria</span>
+    <span class="topbar-title">Library</span>
     <div style="display:flex;align-items:center;gap:4px;">
       <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema"></button>
       <a href="settings.html" class="topbar-icon" aria-label="Impostazioni">
@@ -577,16 +579,16 @@
 
     <div class="search-wrap">
       <span class="search-icon">&#128269;</span>
-      <input type="text" id="searchInput" placeholder="Cerca regola, esempio, parola...">
+      <input type="text" id="searchInput" placeholder="Search topics...">
     </div>
 
     <div class="topic-chips" id="topicChips"></div>
 
     <div id="grammarSection">
-      <div class="loading-msg"><span>Caricamento spiegazioni...</span></div>
+      <div class="loading-msg"><span>Loading...</span></div>
     </div>
 
-    <div class="no-results" id="noResults" style="display:none">Nessun risultato trovato.</div>
+    <div class="no-results" id="noResults" style="display:none">No results found.</div>
 
   </main>
 
@@ -612,15 +614,15 @@
     </a>
     <a href="session.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5 3.5-5 3.5V8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span>Sessione</span>
+      <span>Session</span>
     </a>
     <a href="test.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h5M8 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      <span>Test</span>
+      <span>Tests</span>
     </a>
     <a href="library.html" class="nav-item active">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span>Libreria</span>
+      <span>Library</span>
     </a>
     <a href="stats.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -785,7 +787,7 @@
       if (!text) return '';
       return '<span class="it-reveal-wrap">'
         + '<span class="it-blurred">' + escHtml(text) + '</span>'
-        + '<button class="it-reveal-btn" aria-label="Rivela traduzione">Rivela</button>'
+        + '<button class="it-reveal-btn" aria-label="Show translation">Show</button>'
         + '</span>';
     }
 
@@ -875,7 +877,7 @@
       });
 
       if (orderedKeys.length === 0) {
-        container.innerHTML = '<div class="no-results">Nessuna spiegazione trovata.</div>';
+        container.innerHTML = '<div class="no-results">No results found.</div>';
         return;
       }
 
@@ -926,7 +928,7 @@
 
       var allChip = document.createElement('span');
       allChip.className = 'chip active';
-      allChip.textContent = 'Tutti';
+      allChip.textContent = 'All rules';
       allChip.dataset.topic = 'all';
       chipsEl.appendChild(allChip);
 
@@ -1106,7 +1108,7 @@
         if (error) throw error;
         if (!data || data.length === 0) {
           document.getElementById('grammarSection').innerHTML =
-            '<div class="no-results">Nessuna spiegazione grammaticale trovata nel database.</div>';
+            '<div class="no-results">No grammar explanations found in database.</div>';
           return;
         }
 
@@ -1116,14 +1118,14 @@
       } catch (err) {
         console.error('Supabase error:', err);
         document.getElementById('grammarSection').innerHTML =
-          '<div class="no-results">Errore caricamento: ' + escHtml(err.message || String(err)) + '</div>';
+          '<div class="no-results">Load error: ' + escHtml(err.message || String(err)) + '</div>';
       }
     }
 
     // ── Search Supabase (FTS + trigram fallback) ───────────────────
     async function searchSupabase(q) {
       var container = document.getElementById('grammarSection');
-      container.innerHTML = '<div class="loading-msg"><span>Ricerca in corso...</span></div>';
+      container.innerHTML = '<div class="loading-msg"><span>Searching...</span></div>';
 
       try {
         // 1. Prova FTS (plainto_tsquery su search_vector)
@@ -1241,5 +1243,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

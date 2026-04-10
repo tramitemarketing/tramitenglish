@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Ripasso Errori</title>
+  <title>TrainEnglish — Review</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     body {
       background: var(--bg);
@@ -74,7 +76,7 @@
   <!-- Session topbar -->
   <header class="session-topbar">
     <a href="stats.html" class="topbar-back">&#8592;</a>
-    <span class="session-title">Ripasso Errori</span>
+    <span class="session-title">Review</span>
     <div style="display:flex;align-items:center;gap:4px;">
       <span class="session-timer" id="timerEl">0:00</span>
       <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema"></button>
@@ -89,8 +91,8 @@
       <div class="card">
         <div class="empty-review">
           <div class="icon">&#x2705;</div>
-          <p>Nessun errore da ripassare! Completa alcune sessioni per accumulare errori da rivedere.</p>
-          <a href="session.html" class="btn btn-primary">Vai alla sessione</a>
+          <p>All caught up! Complete some sessions to accumulate errors to review.</p>
+          <a href="session.html" class="btn btn-primary">Go to session</a>
         </div>
       </div>
     </div>
@@ -106,10 +108,10 @@
         <div id="optionsArea"></div>
         <div id="fillArea" style="display:none">
           <div id="keywordBadge" style="display:none;margin-bottom:12px">
-            <span style="font-size:11px;font-weight:600;color:var(--subtext)">Parola chiave: </span>
+            <span style="font-size:11px;font-weight:600;color:var(--subtext)">Keyword: </span>
             <span class="badge" id="keywordText"></span>
           </div>
-          <input type="text" class="fill-input" id="fillInput" placeholder="Scrivi la tua risposta...">
+          <input type="text" class="fill-input" id="fillInput" placeholder="Write your answer...">
         </div>
         <div class="feedback" id="feedbackArea">
           <strong id="feedbackTitle"></strong>
@@ -118,36 +120,36 @@
       </div>
 
       <div class="mt-12">
-        <button class="btn btn-primary" id="confirmBtn" disabled>Conferma</button>
+        <button class="btn btn-primary" id="confirmBtn" disabled>Confirm</button>
       </div>
       <div class="mt-8" id="nextBtnWrap" style="display:none">
-        <button class="btn btn-secondary" id="nextBtn">Prossimo &rarr;</button>
+        <button class="btn btn-secondary" id="nextBtn">Next &rarr;</button>
       </div>
     </div>
 
     <!-- Recap step -->
     <div class="step" id="stepRecap">
       <div class="card" style="text-align:center">
-        <div class="card-label">Ripasso completato</div>
+        <div class="card-label">Review complete</div>
         <div style="font-size:52px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-2px;margin:12px 0" id="recapScore">-</div>
         <p id="recapMessage" style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6"></p>
         <div class="divider"></div>
         <div style="display:flex;gap:12px;justify-content:center">
           <div>
             <div class="stat-num" id="recapCorrect" style="font-size:28px">0</div>
-            <div class="stat-label">Corrette</div>
+            <div class="stat-label">Correct</div>
           </div>
           <div>
             <div class="stat-num" id="recapWrong" style="font-size:28px;color:var(--error)">0</div>
-            <div class="stat-label">Errate</div>
+            <div class="stat-label">Wrong</div>
           </div>
         </div>
       </div>
       <div class="mt-16">
-        <a href="dashboard.html" class="btn btn-primary">Torna alla dashboard</a>
+        <a href="dashboard.html" class="btn btn-primary">Back to dashboard</a>
       </div>
       <div class="mt-8">
-        <a href="stats.html" class="btn btn-secondary">Vedi errori e statistiche</a>
+        <a href="stats.html" class="btn btn-secondary">View errors and stats</a>
       </div>
     </div>
 
@@ -182,7 +184,7 @@
 
       document.getElementById('stepEmpty').classList.remove('active');
       document.getElementById('stepExercise').classList.add('active');
-      document.getElementById('reviewSubtitle').textContent = 'Ripasso di ' + exercises.length + ' errori recenti';
+      document.getElementById('reviewSubtitle').textContent = 'Reviewing ' + exercises.length + ' recent errors';
 
       // Dots
       function buildDots() {
@@ -237,7 +239,7 @@
 
         var confirmBtn = document.getElementById('confirmBtn');
         confirmBtn.disabled    = true;
-        confirmBtn.textContent = 'Conferma';
+        confirmBtn.textContent = 'Confirm';
 
         fillInput.addEventListener('input', function () {
           confirmBtn.disabled = fillInput.value.trim().length === 0;
@@ -271,7 +273,7 @@
         var feedback  = document.getElementById('feedbackArea');
         feedback.className    = 'feedback ' + (correct ? 'feedback-correct' : 'feedback-wrong') + ' show';
         feedback.style.display = 'block';
-        document.getElementById('feedbackTitle').textContent      = correct ? 'Corretto! ' : 'Errato. Risposta: ' + (Array.isArray(ex.answer) ? ex.answer[0] : ex.answer) + '. ';
+        document.getElementById('feedbackTitle').textContent      = correct ? 'Correct! ' : 'Wrong. Answer: ' + (Array.isArray(ex.answer) ? ex.answer[0] : ex.answer) + '. ';
         document.getElementById('feedbackExplanation').textContent = ex.explanation || '';
 
         document.getElementById('confirmBtn').disabled    = true;
@@ -297,10 +299,10 @@
         document.getElementById('recapWrong').textContent   = wrongCount;
 
         var msg = pct >= 80
-          ? 'Ottimo ripasso! Stai migliorando.'
+          ? 'Great review! You are improving.'
           : pct >= 60
-            ? 'Buon risultato. Continua a ripassare.'
-            : 'Questi argomenti hanno bisogno di pi\u00f9 pratica.';
+            ? 'Good result. Keep reviewing.'
+            : 'These topics need more practice.';
         document.getElementById('recapMessage').textContent = msg;
       }
 
@@ -350,5 +352,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

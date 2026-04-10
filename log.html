@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Log Errori</title>
+  <title>TrainEnglish — Error Log</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     .log-meta {
       font-size: 11px;
@@ -69,7 +71,7 @@
 
   <!-- Topbar -->
   <header class="topbar">
-    <span class="topbar-title">Log Errori</span>
+    <span class="topbar-title">Error Log</span>
     <div style="display:flex;align-items:center;gap:4px;">
       <span id="errorCount" class="badge" style="font-size:11px">0</span>
       <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema"></button>
@@ -82,7 +84,7 @@
 
     <!-- Filter chips -->
     <div class="chips-row" id="filterChips">
-      <span class="chip active" data-filter="all">Tutti</span>
+      <span class="chip active" data-filter="all">All</span>
       <span class="chip" data-filter="Part 1">Part 1</span>
       <span class="chip" data-filter="Part 2">Part 2</span>
       <span class="chip" data-filter="Part 3">Part 3</span>
@@ -96,7 +98,7 @@
 
   <!-- FAB -->
   <a href="review.html" class="fab" id="reviewFab" style="display:none">
-    &#x21BA; Ripassa errori
+    &#x21BA; Review errors
   </a>
 
   <!-- Bottom nav -->
@@ -107,7 +109,7 @@
     </a>
     <a href="session.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5 3.5-5 3.5V8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span>Sessione</span>
+      <span>Session</span>
     </a>
     <a href="test.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h5M8 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -115,7 +117,7 @@
     </a>
     <a href="library.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span>Libreria</span>
+      <span>Library</span>
     </a>
     <a href="stats.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -155,27 +157,27 @@
           listEl.innerHTML = '<div class="empty-log">'
             + '<div class="empty-icon">&#x2705;</div>'
             + '<p>' + (filter === 'all'
-                ? 'Nessun errore registrato ancora.<br>Completa alcune sessioni per vedere i tuoi errori qui.'
-                : 'Nessun errore per ' + filter + '.') + '</p>'
+                ? 'No errors recorded yet.<br>Complete some sessions to see your errors here.'
+                : 'No errors for ' + filter + '.') + '</p>'
             + '</div>';
           return;
         }
 
-        listEl.innerHTML = '<div class="log-count">' + filtered.length + ' error' + (filtered.length === 1 ? 'e' : 'i') + '</div>';
+        listEl.innerHTML = '<div class="log-count">' + filtered.length + ' error' + (filtered.length === 1 ? '' : 's') + '</div>';
 
         filtered.forEach(function (e) {
           var card = document.createElement('div');
           card.className = 'card error-card';
 
           card.innerHTML = '<div class="log-meta">'
-            + '<span class="badge">' + (e.part || 'N/D') + '</span>'
-            + ' &nbsp; Giorno ' + (e.day || '?')
+            + '<span class="badge">' + (e.part || 'N/A') + '</span>'
+            + ' &nbsp; Day ' + (e.day || '?')
             + (e.date ? ' &middot; ' + formatDate(e.date) : '')
             + '</div>'
             + '<div class="error-question">' + (e.question || '') + '</div>'
             + '<div class="error-answers">'
-            + '<div class="answer-row"><span class="answer-label">La tua risposta:</span> <span class="answer-wrong">' + (e.userAnswer || '—') + '</span></div>'
-            + '<div class="answer-row"><span class="answer-label">Risposta corretta:</span> <span class="answer-correct">' + (e.correct || '—') + '</span></div>'
+            + '<div class="answer-row"><span class="answer-label">Your answer:</span> <span class="answer-wrong">' + (e.userAnswer || '—') + '</span></div>'
+            + '<div class="answer-row"><span class="answer-label">Correct answer:</span> <span class="answer-correct">' + (e.correct || '—') + '</span></div>'
             + '</div>'
             + '<div class="error-explanation">' + (e.explanation || '') + '</div>';
 
@@ -242,5 +244,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

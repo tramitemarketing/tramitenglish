@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Sessione</title>
+  <title>TrainEnglish — Session</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     body { min-height: 100vh; }
 
@@ -335,6 +337,32 @@
       margin-bottom: 20px; line-height: 1.5;
     }
     .exit-dialog-btns { display: flex; gap: 8px; }
+
+    /* ── Confetti particle ── */
+    @keyframes confettiBurst {
+      0%   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(-80px) scale(0.4) rotate(180deg); }
+    }
+    .confetti-particle {
+      position: fixed;
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confettiBurst 0.8s ease-out forwards;
+    }
+
+    /* ── Shake animation ── */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      15%       { transform: translateX(-6px); }
+      30%       { transform: translateX(6px); }
+      45%       { transform: translateX(-4px); }
+      60%       { transform: translateX(4px); }
+      75%       { transform: translateX(-2px); }
+      90%       { transform: translateX(2px); }
+    }
+    .shake { animation: shake 0.5s ease-out both; }
   </style>
 </head>
 <body>
@@ -352,10 +380,10 @@
     </div>
     <div class="session-right">
       <div style="display:flex;align-items:center;gap:6px;min-width:60px;justify-content:flex-end;">
-        <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema" style="flex-shrink:0;"></button>
+        <button class="topbar-icon" id="themeBtn" aria-label="Toggle theme" style="flex-shrink:0;"></button>
         <span class="session-timer" id="timerEl">0:00</span>
       </div>
-      <button class="exit-btn" id="exitBtn" aria-label="Esci dalla sessione">Esci</button>
+      <button class="exit-btn" id="exitBtn" aria-label="Exit session">Exit</button>
     </div>
   </header>
 
@@ -364,12 +392,12 @@
     <!-- STEP 0: Theory -->
     <div class="step active" id="stepTheory">
       <div class="card">
-        <div class="card-label" id="theoryLabel">Teoria</div>
+        <div class="card-label" id="theoryLabel">Theory</div>
         <div class="theory-body" id="theoryBody"></div>
       </div>
       <div class="mt-20">
-        <button class="btn btn-primary btn-cta" id="startBtn">Inizia esercizi</button>
-        <button class="btn btn-secondary mt-8" id="skipBtn" style="opacity:.65">Salta teoria</button>
+        <button class="btn btn-primary btn-cta" id="startBtn">Start exercises</button>
+        <button class="btn btn-secondary mt-8" id="skipBtn" style="opacity:.65">Skip theory</button>
       </div>
     </div>
 
@@ -380,10 +408,10 @@
         <!-- Meta: tag + difficulty + adaptive hint -->
         <div class="ex-meta">
           <span class="badge" id="exTag">Grammar</span>
-          <div class="diff-dots" id="diffDots" aria-label="Difficoltà">
+          <div class="diff-dots" id="diffDots" aria-label="Difficulty">
             <span class="on"></span><span class="on"></span><span></span>
           </div>
-          <span class="adaptive-hint">Calibrato sui tuoi errori</span>
+          <span class="adaptive-hint">Calibrated to your errors</span>
         </div>
 
         <!-- Question -->
@@ -391,18 +419,18 @@
 
         <!-- Keyword badge (transform only) -->
         <div class="keyword-row" id="kwRow" style="display:none">
-          Parola chiave: <span class="badge" id="kwText"></span>
+          Keyword: <span class="badge" id="kwText"></span>
         </div>
 
         <!-- Type A: Fill -->
         <div id="fillArea" style="display:none">
           <div class="fill-wrap">
             <input class="fill-large" id="fillInput" type="text"
-              placeholder="Scrivi la risposta..."
+              placeholder="Type your answer..."
               autocomplete="off" autocorrect="off" spellcheck="false"
-              aria-label="Risposta">
+              aria-label="Answer">
           </div>
-          <div class="enter-hint">↵ per confermare</div>
+          <div class="enter-hint">↵ to confirm</div>
         </div>
 
         <!-- Type B: Multiple choice -->
@@ -410,10 +438,10 @@
 
         <!-- Type C: Word reorder -->
         <div id="reorderArea" style="display:none">
-          <div class="zone-label">Parole disponibili</div>
-          <div class="word-bank" id="wordBank" role="group" aria-label="Parole da usare"></div>
-          <div class="zone-label">La tua risposta</div>
-          <div class="answer-zone" id="answerZone" role="group" aria-label="Risposta composta"></div>
+          <div class="zone-label">Available words</div>
+          <div class="word-bank" id="wordBank" role="group" aria-label="Words to use"></div>
+          <div class="zone-label">Your answer</div>
+          <div class="answer-zone" id="answerZone" role="group" aria-label="Composed answer"></div>
           <div class="correct-order" id="correctOrder" style="display:none"></div>
         </div>
 
@@ -427,7 +455,7 @@
           <div class="fb-correct-ans" id="fbCorrectAns" style="display:none"></div>
           <div class="fb-explanation" id="fbExplanation"></div>
           <button class="focus-link" id="focusLink" style="display:none">
-            + Aggiungi ai focus della prossima sessione
+            + Add to next session focus
           </button>
         </div>
 
@@ -436,7 +464,7 @@
       <!-- Sticky CTA -->
       <div class="sticky-cta">
         <button class="btn btn-primary btn-cta" id="confirmBtn" disabled
-          aria-label="Conferma risposta">Conferma</button>
+          aria-label="Confirm answer">Confirm</button>
       </div>
     </div>
 
@@ -449,43 +477,43 @@
               stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h1 class="cmp-title">Sessione completata</h1>
-        <p class="cmp-sub" id="cmpSub">Ottima sessione.</p>
+        <h1 class="cmp-title">Session complete</h1>
+        <p class="cmp-sub" id="cmpSub">Great session.</p>
       </div>
 
       <div class="cmp-stats" aria-label="Risultati">
         <div class="cmp-stat">
           <div class="cmp-val" id="cmpAcc">—</div>
-          <div class="cmp-lbl">Accuratezza</div>
+          <div class="cmp-lbl">Accuracy</div>
         </div>
         <div class="cmp-stat">
           <div class="cmp-val" id="cmpDone">0</div>
-          <div class="cmp-lbl">Esercizi</div>
+          <div class="cmp-lbl">Exercises</div>
         </div>
         <div class="cmp-stat">
           <div class="cmp-val" id="cmpTime">0</div>
-          <div class="cmp-lbl">Minuti</div>
+          <div class="cmp-lbl">Minutes</div>
         </div>
       </div>
 
       <div id="weakSection" style="display:none">
-        <div class="section-title">Aree da ripassare</div>
+        <div class="section-title">Areas to review</div>
         <div class="weak-tags" id="weakTags"></div>
       </div>
 
       <div id="errSection" class="mt-16" style="display:none">
-        <div class="section-title">Errori di oggi</div>
+        <div class="section-title">Today's errors</div>
         <div id="errItems"></div>
       </div>
 
       <div class="mt-20">
         <button class="btn btn-primary btn-cta" id="reviewBtn" style="display:none">
-          Rivedi gli errori
+          Review errors
         </button>
         <button class="btn btn-primary btn-cta" id="completeBtn" style="display:none">
-          Completa la giornata
+          Complete the day
         </button>
-        <a href="dashboard.html" class="btn btn-secondary mt-8">Torna alla home</a>
+        <a href="dashboard.html" class="btn btn-secondary mt-8">Go to dashboard</a>
       </div>
     </div>
 
@@ -495,11 +523,11 @@
   <div class="exit-overlay" id="exitOverlay"
     role="dialog" aria-modal="true" aria-labelledby="exitDlgTitle">
     <div class="exit-dialog">
-      <h3 id="exitDlgTitle">Uscire dalla sessione?</h3>
-      <p>I progressi di questa sessione non verranno salvati.</p>
+      <h3 id="exitDlgTitle">Exit session?</h3>
+      <p>Progress from this session will not be saved.</p>
       <div class="exit-dialog-btns">
-        <button class="btn btn-secondary" style="flex:1" id="cancelExitBtn">Continua</button>
-        <a href="dashboard.html" class="btn btn-danger" style="flex:1">Esci</a>
+        <button class="btn btn-secondary" style="flex:1" id="cancelExitBtn">Continue</button>
+        <a href="dashboard.html" class="btn btn-danger" style="flex:1">Exit</a>
       </div>
     </div>
   </div>
@@ -519,7 +547,7 @@
     Timer.start(document.getElementById('timerEl'));
 
     // Theory
-    document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Teoria';
+    document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Theory';
     document.getElementById('theoryBody').innerHTML    = getTheoryFor(day);
 
     // Step switcher
@@ -557,6 +585,26 @@
     var sessionErrs  = [];
     var answered     = false;
     var confirmBtn   = document.getElementById('confirmBtn');
+
+    function triggerConfetti(originEl) {
+      var colors = ['#f59e0b','#fbbf24','#f97316','#34d399','#60a5fa','#a78bfa'];
+      var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      if (originEl) { var r = originEl.getBoundingClientRect(); cx = r.left + r.width/2; cy = r.top + r.height/2; }
+      for (var i = 0; i < 14; i++) {
+        (function(i) {
+          var p = document.createElement('div');
+          p.className = 'confetti-particle';
+          p.style.cssText = 'left:'+(cx+(Math.random()-0.5)*80)+'px;top:'+cy+'px;background:'+colors[i%colors.length]+';transform:rotate('+(Math.random()*360)+'deg);animation-delay:'+(Math.random()*0.15)+'s;animation-duration:'+(0.5+Math.random()*0.3)+'s';
+          document.body.appendChild(p);
+          setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p);},900);
+        })(i);
+      }
+    }
+    function triggerShake(el) {
+      if (!el) return;
+      el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake');
+      setTimeout(function(){el.classList.remove('shake');},500);
+    }
 
     function initExercises(list) {
       exercises = list; exIndex = 0;
@@ -608,11 +656,11 @@
       document.getElementById('fbCorrectAns').style.display = 'none';
       document.getElementById('focusLink').style.display    = 'none';
       document.getElementById('focusLink').disabled         = false;
-      document.getElementById('focusLink').textContent      = '+ Aggiungi ai focus della prossima sessione';
+      document.getElementById('focusLink').textContent      = '+ Add to next session focus';
 
       // Reset confirm
       confirmBtn.disabled    = true;
-      confirmBtn.textContent = 'Conferma';
+      confirmBtn.textContent = 'Confirm';
 
       // Hide all input areas
       ['fillArea','optArea','reorderArea'].forEach(function(id) {
@@ -641,7 +689,7 @@
         var btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.dataset.index = i;
-        btn.setAttribute('aria-label', 'Opzione ' + (i+1) + ': ' + opt);
+        btn.setAttribute('aria-label', 'Option ' + (i+1) + ': ' + opt);
         btn.innerHTML = '<span class="opt-key">' + keys[i] + '</span><span>' + opt + '</span>';
         btn.addEventListener('click', function() {
           if (answered) return;
@@ -736,7 +784,7 @@
         zone.className = 'answer-zone ' + (ok ? 'zone-ok' : 'zone-bad');
         if (!ok) {
           var co = document.getElementById('correctOrder');
-          co.style.display = ''; co.textContent = 'Ordine corretto: ' + correctAns;
+          co.style.display = ''; co.textContent = 'Correct order: ' + correctAns;
         }
 
       } else {
@@ -764,8 +812,13 @@
       }
 
       showFeedback(ok, correctAns, ex.explanation);
+      if (ok) {
+        triggerConfetti(document.getElementById('confirmBtn') || document.querySelector('button'));
+      } else {
+        triggerShake(document.getElementById('mainContent') || document.querySelector('.card'));
+      }
       confirmBtn.disabled    = false;
-      confirmBtn.textContent = ok ? 'Avanti →' : 'Capito →';
+      confirmBtn.textContent = ok ? 'Next →' : 'Got it →';
     }
 
     function showFeedback(ok, correctAns, explanation) {
@@ -778,12 +831,12 @@
       } else {
         icon.innerHTML = '<path d="M15 5L5 15M5 5l10 10" stroke="var(--error)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
       }
-      document.getElementById('fbTitle').textContent = ok ? 'Corretto' : 'Non corretto';
+      document.getElementById('fbTitle').textContent = ok ? 'Correct' : 'Incorrect';
 
       if (!ok && correctAns) {
         var ca = document.getElementById('fbCorrectAns');
         ca.style.display = '';
-        ca.innerHTML = 'Risposta corretta: <strong>' + correctAns + '</strong>';
+        ca.innerHTML = 'Correct answer: <strong>' + correctAns + '</strong>';
         document.getElementById('focusLink').style.display = '';
       }
       document.getElementById('fbExplanation').textContent = explanation || '';
@@ -791,7 +844,7 @@
 
     document.getElementById('focusLink').addEventListener('click', function() {
       State.updateTopicScore(topicKey, false);
-      this.textContent = '✓ Aggiunto ai focus';
+      this.textContent = '✓ Added to focus';
       this.style.opacity = '0.5'; this.disabled = true;
     });
 
@@ -809,10 +862,10 @@
       document.getElementById('cmpDone').textContent = total;
       document.getElementById('cmpTime').textContent = minutes;
 
-      var sub = total === 0   ? 'Hai letto la teoria. Torna per gli esercizi.' :
-                pct >= 80    ? 'Ottima sessione. Continua così.' :
-                pct >= 60    ? 'Buona sessione. Ripassa gli errori.' :
-                               'Qualche difficoltà. Fa parte del processo.';
+      var sub = total === 0   ? 'Theory read. Come back for exercises.' :
+                pct >= 80    ? 'Great session. Keep it up.' :
+                pct >= 60    ? 'Good session. Review your errors.' :
+                               'Some difficulty. Part of the process.';
       document.getElementById('cmpSub').textContent = sub;
 
       // Weak areas
@@ -830,8 +883,8 @@
         document.getElementById('errItems').innerHTML = errors.map(function(e) {
           return '<div class="card error-card mb-8">'
             + '<div class="error-question">' + e.question + '</div>'
-            + '<div class="error-answer-row"><span>Tua: </span>' + e.userAnswer + '</div>'
-            + '<div class="error-answer-row"><span>Corretta: </span>' + e.correct + '</div>'
+            + '<div class="error-answer-row"><span>Yours: </span>' + e.userAnswer + '</div>'
+            + '<div class="error-answer-row"><span>Correct: </span>' + e.correct + '</div>'
             + (e.explanation ? '<div class="error-explanation">' + e.explanation + '</div>' : '')
             + '</div>';
         }).join('');
@@ -846,7 +899,7 @@
       });
       document.getElementById('completeBtn').addEventListener('click', function() {
         State.markDayComplete(day, minutes);
-        UI.toast('Giornata completata!');
+        UI.toast('Day complete!');
         setTimeout(function() { window.location.replace('dashboard.html'); }, 800);
       });
     }
@@ -929,5 +982,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

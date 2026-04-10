@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Impostazioni</title>
+  <title>TrainEnglish — Settings</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     .settings-content {
       padding-top: calc(var(--topbar-h) + 16px);
@@ -105,7 +107,7 @@
   <!-- Topbar -->
   <header class="topbar">
     <a href="dashboard.html" class="topbar-back">&#8592;</a>
-    <span class="topbar-title">Impostazioni</span>
+    <span class="topbar-title">Settings</span>
     <span style="width:36px"></span>
   </header>
 
@@ -115,7 +117,7 @@
     <!-- User profile -->
     <div class="user-avatar" id="userAvatar">?</div>
     <div class="user-email" id="userEmail">caricamento...</div>
-    <div class="user-role">Piano 60 giorni — FCE B2</div>
+    <div class="user-role">60-day plan — FCE B2</div>
 
     <!-- Account section -->
     <div class="settings-section">
@@ -126,63 +128,63 @@
           <div class="readonly-field" id="emailField">—</div>
         </div>
         <div class="input-group" style="margin-bottom:0">
-          <label>Stato account</label>
-          <div class="readonly-field">Attivo &#10003;</div>
+          <label>Account status</label>
+          <div class="readonly-field">Active &#10003;</div>
         </div>
       </div>
     </div>
 
     <!-- Change password section -->
     <div class="settings-section">
-      <div class="form-section-title">Cambia Password</div>
+      <div class="form-section-title">Change Password</div>
       <div class="card">
         <div id="pwAlert" style="display:none;margin-bottom:12px"></div>
         <div class="input-group">
-          <label for="currentPw">Password attuale</label>
+          <label for="currentPw">Current password</label>
           <input type="password" id="currentPw" placeholder="••••••••" autocomplete="current-password">
         </div>
         <div class="input-group">
-          <label for="newPw">Nuova password</label>
+          <label for="newPw">New password</label>
           <input type="password" id="newPw" placeholder="••••••••" autocomplete="new-password">
         </div>
         <div class="input-group" style="margin-bottom:0">
-          <label for="confirmPw">Conferma nuova password</label>
+          <label for="confirmPw">Confirm new password</label>
           <input type="password" id="confirmPw" placeholder="••••••••" autocomplete="new-password">
         </div>
         <div class="mt-16">
-          <button class="btn btn-secondary" id="changePwBtn">Aggiorna password</button>
+          <button class="btn btn-secondary" id="changePwBtn">Update password</button>
         </div>
       </div>
     </div>
 
     <!-- Progress section -->
     <div class="settings-section">
-      <div class="form-section-title">Progresso</div>
+      <div class="form-section-title">Progress</div>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <span style="font-size:13px;font-weight:600;color:var(--text2)">Giorno corrente</span>
+          <span style="font-size:13px;font-weight:600;color:var(--text2)">Current day</span>
           <span class="badge" id="currentDayBadge">1 / 60</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <span style="font-size:13px;font-weight:600;color:var(--text2)">Giorni completati</span>
+          <span style="font-size:13px;font-weight:600;color:var(--text2)">Days completed</span>
           <span class="badge" id="completedBadge">0</span>
         </div>
       </div>
     </div>
 
-    <!-- Tema -->
+    <!-- Appearance -->
     <div class="settings-section">
-      <div class="form-section-title">Aspetto</div>
+      <div class="form-section-title">Appearance</div>
       <div class="card">
         <div class="theme-row">
           <div>
-            <div style="font-size:14px;font-weight:600;color:var(--text2)">Tema</div>
-            <div style="font-size:12px;color:var(--subtext);margin-top:2px" id="themeLabel">Automatico (sistema)</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text2)">Theme</div>
+            <div style="font-size:12px;color:var(--subtext);margin-top:2px" id="themeLabel">System default</div>
           </div>
           <div class="theme-toggle-group">
-            <button class="theme-btn" data-theme="light" id="themeBtnLight">Chiaro</button>
+            <button class="theme-btn" data-theme="light" id="themeBtnLight">Light</button>
             <button class="theme-btn" data-theme="auto"  id="themeBtnAuto">Auto</button>
-            <button class="theme-btn" data-theme="dark"  id="themeBtnDark">Scuro</button>
+            <button class="theme-btn" data-theme="dark"  id="themeBtnDark">Dark</button>
           </div>
         </div>
       </div>
@@ -190,25 +192,25 @@
 
     <!-- Notifications (future) -->
     <div class="settings-section">
-      <div class="form-section-title">Notifiche</div>
+      <div class="form-section-title">Notifications</div>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div>
-            <div style="font-size:14px;font-weight:600;color:var(--text2)">Promemoria giornaliero</div>
-            <div style="font-size:12px;color:var(--subtext);margin-top:2px">Prossimamente disponibile</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text2)">Daily reminder</div>
+            <div style="font-size:12px;color:var(--subtext);margin-top:2px">Coming soon</div>
           </div>
-          <div class="tag">Presto</div>
+          <div class="tag">Soon</div>
         </div>
       </div>
     </div>
 
     <!-- Logout -->
     <div class="settings-section">
-      <div class="form-section-title">Sessione</div>
-      <button class="btn btn-danger" id="logoutBtn">Esci dall'account</button>
+      <div class="form-section-title">Session</div>
+      <button class="btn btn-danger" id="logoutBtn">Sign out</button>
     </div>
 
-    <div class="version-tag">TrainEnglish v0.1.0 &mdash; 60 giorni al B2 FCE</div>
+    <div class="version-tag">TrainEnglish v0.1.0 &mdash; 60 days to FCE B2</div>
 
   </main>
 
@@ -241,28 +243,28 @@
 
         if (!curr || !newPw || !confirm) {
           alertEl.className = 'alert alert-error';
-          alertEl.textContent = 'Compila tutti i campi.';
+          alertEl.textContent = 'Please fill in all fields.';
           alertEl.style.display = '';
           return;
         }
 
         if (newPw !== confirm) {
           alertEl.className = 'alert alert-error';
-          alertEl.textContent = 'Le nuove password non coincidono.';
+          alertEl.textContent = 'Passwords do not match.';
           alertEl.style.display = '';
           return;
         }
 
         if (newPw.length < 8) {
           alertEl.className = 'alert alert-error';
-          alertEl.textContent = 'La password deve essere di almeno 8 caratteri.';
+          alertEl.textContent = 'Password must be at least 8 characters.';
           alertEl.style.display = '';
           return;
         }
 
         // TODO: await _supabase.auth.updateUser({ password: newPw })
         alertEl.className = 'alert alert-success';
-        alertEl.textContent = 'Password aggiornata con successo. (stub)';
+        alertEl.textContent = 'Password updated successfully. (stub)';
         alertEl.style.display = '';
 
         document.getElementById('currentPw').value = '';
@@ -271,7 +273,7 @@
       });
 
       // ── Theme toggle ───────────────────────────────────────────
-      var THEME_LABELS = { light: 'Sempre chiaro', auto: 'Automatico (sistema)', dark: 'Sempre scuro' };
+      var THEME_LABELS = { light: 'Always light', auto: 'System default', dark: 'Always dark' };
 
       function applyTheme(t) {
         if (t === 'dark')       document.documentElement.setAttribute('data-theme', 'dark');
@@ -293,7 +295,7 @@
 
       // Logout
       document.getElementById('logoutBtn').addEventListener('click', function () {
-        if (!confirm('Sei sicuro di voler uscire?')) return;
+        if (!confirm('Sign out of your account?')) return;
         Auth.logout();
       });
 
@@ -320,5 +322,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

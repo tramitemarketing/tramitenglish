@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrainEnglish — Dashboard</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     /* ── Dashboard layout ── */
     .dash-grid {
@@ -217,21 +219,21 @@
 
   <!-- Main -->
   <main class="page-content">
-    <div class="day-progress" aria-label="Progresso piano 60 giorni" role="progressbar">
+    <div class="day-progress" aria-label="60-day plan progress" role="progressbar">
       <div class="day-progress-fill" id="dayProgressFill"></div>
     </div>
     <div class="dash-grid">
 
       <!-- LEFT: Greeting + Streak -->
       <div>
-        <div class="greeting-label" id="dayLabel">Giorno 1 di 60</div>
-        <h1 class="greeting-name" id="greetingName">Bentornato</h1>
-        <p class="motivation-line" id="motivLine">Prima sessione della settimana. Inizia.</p>
+        <div class="greeting-label" id="dayLabel">Day 1 of 60</div>
+        <h1 class="greeting-name" id="greetingName">Welcome back</h1>
+        <p class="motivation-line" id="motivLine">First session of the week. Let's go.</p>
 
         <!-- 60-day streak grid -->
         <div class="card card-animate" style="animation-delay:0.05s">
-          <div class="card-label">Piano 60 giorni</div>
-          <div class="streak-scroll" role="img" aria-label="Griglia progressi 60 giorni">
+          <div class="card-label">60-day plan</div>
+          <div class="streak-scroll" role="img" aria-label="60-day progress grid">
             <div class="streak-grid" id="streakGrid"></div>
           </div>
         </div>
@@ -242,27 +244,27 @@
 
         <!-- CTA card -->
         <div class="card card-animate interactive" style="animation-delay:0.1s">
-          <div class="card-label">Sessione di oggi</div>
+          <div class="card-label">Today's session</div>
           <div class="today-meta">
             <span class="badge" id="ctaPart">Part 1</span>
             <span class="today-topic" id="ctaTopic">Verb Tenses</span>
           </div>
 
-          <div class="session-pills" id="sessionPills" role="group" aria-label="Durata sessione">
+          <div class="session-pills" id="sessionPills" role="group" aria-label="Session duration">
             <button class="session-pill" data-min="20" aria-pressed="false">20 min</button>
             <button class="session-pill" data-min="30" aria-pressed="false">30 min</button>
             <button class="session-pill" data-min="40" aria-pressed="false">40 min</button>
           </div>
 
           <a href="session.html" class="btn btn-primary btn-cta" id="sessionBtn" role="button">
-            Inizia la sessione
+            Start session
           </a>
-          <p class="cta-hint" id="ctaHint">Calibrata sui tuoi errori recenti</p>
+          <p class="cta-hint" id="ctaHint">Tailored to your recent errors</p>
         </div>
 
         <!-- Quick stats -->
         <div class="card card-animate" style="animation-delay:0.15s" aria-label="Statistiche">
-          <div class="card-label">Statistiche</div>
+          <div class="card-label">Stats</div>
           <div class="stats-row">
             <div class="stat-cell">
               <div class="stat-val" id="statStreak">0</div>
@@ -270,11 +272,11 @@
             </div>
             <div class="stat-cell">
               <div class="stat-val" id="statAcc">—</div>
-              <div class="stat-lbl">Accuratezza</div>
+              <div class="stat-lbl">Accuracy</div>
             </div>
             <div class="stat-cell">
               <div class="stat-val" id="statLeft">60</div>
-              <div class="stat-lbl">Giorni rimasti</div>
+              <div class="stat-lbl">Days left</div>
             </div>
           </div>
         </div>
@@ -282,7 +284,7 @@
         <!-- Weak areas (hidden until data exists) -->
         <div id="weakSection" style="display:none;">
           <div class="section-title">Focus areas</div>
-          <div class="focus-badges" id="weakBadges" aria-label="Argomenti da ripassare"></div>
+          <div class="focus-badges" id="weakBadges" aria-label="Topics to review"></div>
         </div>
 
       </div>
@@ -297,7 +299,7 @@
     </a>
     <a href="session.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5 3.5-5 3.5V8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span>Sessione</span>
+      <span>Session</span>
     </a>
     <a href="test.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h5M8 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -305,7 +307,7 @@
     </a>
     <a href="library.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span>Libreria</span>
+      <span>Library</span>
     </a>
     <a href="stats.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -327,9 +329,9 @@
     var completed = state.completedDays || [];
 
     // ─ Greeting
-    document.getElementById('dayLabel').textContent = 'Giorno ' + day + ' di 60';
+    document.getElementById('dayLabel').textContent = 'Day ' + day + ' of 60';
     var hour  = new Date().getHours();
-    var greet = hour < 12 ? 'Buongiorno' : hour < 18 ? 'Buon pomeriggio' : 'Buonasera';
+    var greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
     var user  = Auth.getUser();
     var name  = (user && user.email) ? user.email.split('@')[0] : '';
     document.getElementById('greetingName').textContent = name ? greet + ', ' + name : greet;
@@ -341,11 +343,11 @@
     var masteredCount = Adaptive.weakTopics(99).filter(function(t) { return t.pct >= 75; }).length;
     var motivText;
     if (masteredCount > 0) {
-      motivText = 'Hai padroneggiato ' + masteredCount + ' argomento' + (masteredCount > 1 ? ' grammaticale' : ' grammaticale') + ' questa settimana.';
+      motivText = 'You mastered ' + masteredCount + ' grammar topic' + (masteredCount > 1 ? 's' : '') + ' this week.';
     } else if (doneThisWeek > 0) {
-      motivText = doneThisWeek + ' sessione' + (doneThisWeek > 1 ? ' completate' : ' completata') + ' questa settimana. Continua.';
+      motivText = doneThisWeek + ' session' + (doneThisWeek > 1 ? 's' : '') + ' completed this week. Keep going.';
     } else {
-      motivText = 'Settimana ' + week + ' — la prima sessione è quella che conta di più.';
+      motivText = 'Week ' + week + ' — the first session is the one that counts most.';
     }
     document.getElementById('motivLine').textContent = motivText;
 
@@ -358,9 +360,9 @@
     // ─ CTA state
     if (completed.includes(day)) {
       var btn = document.getElementById('sessionBtn');
-      btn.textContent = '✓ Ripassa la sessione';
+      btn.textContent = '✓ Review session';
       btn.style.background = 'var(--success)';
-      document.getElementById('ctaHint').textContent = 'Sessione di oggi già completata';
+      document.getElementById('ctaHint').textContent = "Today's session already completed";
     }
 
     // ─ Session duration pills
@@ -423,8 +425,8 @@
 
       cell.className = cls;
       cell.textContent = d;
-      cell.setAttribute('aria-label', 'Giorno ' + d +
-        (d === day ? ' — oggi' : completed.includes(d) ? ' — completato' : ''));
+      cell.setAttribute('aria-label', 'Day ' + d +
+        (d === day ? ' — today' : completed.includes(d) ? ' — completed' : ''));
 
       if (completed.includes(d)) {
         cell.style.animationDelay = Math.min(doneIdx * 30, 900) + 'ms';
@@ -512,5 +514,37 @@
   document.body.appendChild(f);
 })();
 </script>
+<script>
+(function() {
+  var nav = document.querySelector('.bottom-nav');
+  if (!nav) return;
+  var pill = document.createElement('div');
+  pill.className = 'nav-pill';
+  nav.style.position = 'relative';
+  nav.insertBefore(pill, nav.firstChild);
+  var page = window.location.pathname.split('/').pop() || 'dashboard.html';
+  if (!page) page = 'dashboard.html';
+  var active = null;
+  nav.querySelectorAll('.nav-item').forEach(function(item) {
+    var href = (item.getAttribute('href') || '').split('/').pop();
+    if (href === page || (page === 'dashboard.html' && href.includes('dashboard'))) {
+      item.classList.add('active');
+      active = item;
+    }
+  });
+  if (active) {
+    requestAnimationFrame(function() {
+      var r = active.getBoundingClientRect();
+      var nr = nav.getBoundingClientRect();
+      pill.style.left = (r.left - nr.left) + 'px';
+      pill.style.width = r.width + 'px';
+    });
+  }
+})();
+</script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrainEnglish — Practice Test</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     body { background: var(--bg); min-height: 100vh; }
 
@@ -555,7 +557,7 @@
   <header id="diagHeader">
     <div class="diag-left">
       <button id="backBtn" aria-label="Back to tests">&#8592;</button>
-      <button class="topbar-icon" id="themeBtn" aria-label="Cambia tema" style="flex-shrink:0;"></button>
+      <button class="topbar-icon" id="themeBtn" aria-label="Toggle theme" style="flex-shrink:0;"></button>
       <span id="headerTitle">Test 1 &middot; Part 1 of 7</span>
     </div>
     <div class="diag-center">
@@ -695,5 +697,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TrainEnglish — Practice Tests</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
   <style>
     /* ── Info strip ── */
     .exam-strip {
@@ -137,7 +139,7 @@
       </div>
     </div>
 
-    <div class="section-title">Tutti i test</div>
+    <div class="section-title">All Tests</div>
     <div class="tests-grid" id="testsGrid"></div>
 
   </main>
@@ -149,7 +151,7 @@
     </a>
     <a href="session.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5 3.5-5 3.5V8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      <span>Sessione</span>
+      <span>Session</span>
     </a>
     <a href="test.html" class="nav-item active">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h5M8 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -157,7 +159,7 @@
     </a>
     <a href="library.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span>Libreria</span>
+      <span>Library</span>
     </a>
     <a href="stats.html" class="nav-item">
       <svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -271,5 +273,9 @@
   document.body.appendChild(f);
 })();
 </script>
+<script src="js/toast.js"></script>
+<script src="js/transitions.js"></script>
+<script src="js/shortcuts.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 </body>
 </html>
