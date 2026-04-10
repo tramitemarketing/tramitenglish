@@ -1,6 +1,6 @@
 {
-  "name": "TrainEnglish",
-  "short_name": "TrainEnglish",
+  "name": "TramitEnglish",
+  "short_name": "TramitEnglish",
   "description": "60-day FCE B2 English study plan",
   "start_url": "/dashboard.html",
   "display": "standalone",

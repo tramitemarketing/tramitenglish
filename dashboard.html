@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Dashboard</title>
+  <title>TramitEnglish — Dashboard</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f59e0b">
@@ -251,9 +251,9 @@
           </div>
 
           <div class="session-pills" id="sessionPills" role="group" aria-label="Session duration">
+            <button class="session-pill" data-min="5" aria-pressed="false">5 min</button>
+            <button class="session-pill" data-min="10" aria-pressed="false">10 min</button>
             <button class="session-pill" data-min="20" aria-pressed="false">20 min</button>
-            <button class="session-pill" data-min="30" aria-pressed="false">30 min</button>
-            <button class="session-pill" data-min="40" aria-pressed="false">40 min</button>
           </div>
 
           <a href="session.html" class="btn btn-primary btn-cta" id="sessionBtn" role="button">
@@ -366,7 +366,7 @@
     }
 
     // ─ Session duration pills
-    var savedMin = localStorage.getItem('te_session_duration') || '20';
+    var savedMin = localStorage.getItem('te_session_duration') || '10';
     document.querySelectorAll('.session-pill').forEach(function(p) {
       var isActive = p.dataset.min === savedMin;
       p.classList.toggle('active', isActive);
@@ -388,9 +388,11 @@
     document.getElementById('statStreak').textContent = state.streak || 0;
     document.getElementById('statLeft').textContent   = Math.max(0, 60 - day + 1);
     var scores = state.topicScores || {};
-    var keys   = Object.keys(scores);
+    var keys   = Object.keys(scores).filter(function(k) { return scores[k].total > 0; });
     if (keys.length) {
-      var avg = Math.round(keys.reduce(function(s, k) { return s + scores[k]; }, 0) / keys.length);
+      var totCorrect = keys.reduce(function(s, k) { return s + (scores[k].correct || 0); }, 0);
+      var totTotal   = keys.reduce(function(s, k) { return s + (scores[k].total   || 0); }, 0);
+      var avg = totTotal > 0 ? Math.round(totCorrect / totTotal * 100) : 0;
       document.getElementById('statAcc').textContent = avg + '%';
     }
 

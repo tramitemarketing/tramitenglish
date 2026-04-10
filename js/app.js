@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   TrainEnglish — Core Application JS
+   TramitEnglish — Core Application JS
    No framework, no build step, localStorage state
    Supabase: wire up after adding supabase-js script
 ══════════════════════════════════════════ */

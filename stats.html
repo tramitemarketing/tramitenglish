@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrainEnglish — Progress</title>
+  <title>TramitEnglish — Progress</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
@@ -1253,7 +1253,7 @@
         content = rows.map(function (r) { return r.map(function (c) { return '"' + c + '"'; }).join(','); }).join('\n');
         mime = 'text/csv;charset=utf-8;'; ext = 'csv';
       } else {
-        var lines = ['TrainEnglish — Error Log — ' + date, '='.repeat(48), ''];
+        var lines = ['TramitEnglish — Error Log — ' + date, '='.repeat(48), ''];
         errors.forEach(function (e, i) {
           lines.push((i + 1) + '. [' + (e.part || '?') + '] ' + (e.date || '').slice(0, 10));
           lines.push('   Q  : ' + (e.question || '').replace(/<[^>]+>/g, ''));
