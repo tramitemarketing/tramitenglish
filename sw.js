@@ -1,4 +1,4 @@
-var CACHE = 'te-v1';
+var CACHE = 'te-v2';
 var ASSETS = [
   '/index.html', '/dashboard.html', '/session.html',
   '/test.html', '/stats.html', '/library.html', '/review.html',
