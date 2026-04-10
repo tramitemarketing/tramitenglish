@@ -70,7 +70,7 @@
 
     @media (max-width: 767px) {
       .streak-grid {
-        grid-template-columns: repeat(30, 26px);
+        grid-template-columns: repeat(60, 26px);
         width: max-content;
       }
     }
@@ -324,12 +324,14 @@
 
     var state = State.load();
     var today = Plan.today();
+    var devOffset  = parseInt(localStorage.getItem('te_dev_day_offset') || '0');
     var day   = state.currentDay || 1;
-    var week  = Math.ceil(day / 7);
+    var displayDay = Math.min(60, day + devOffset);
+    var week  = Math.ceil(displayDay / 7);
     var completed = state.completedDays || [];
 
     // ─ Greeting
-    document.getElementById('dayLabel').textContent = 'Day ' + day + ' of 60';
+    document.getElementById('dayLabel').textContent = 'Day ' + displayDay + ' of 60';
     var hour  = new Date().getHours();
     var greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
     var user  = Auth.getUser();
@@ -358,7 +360,7 @@
     }
 
     // ─ CTA state
-    if (completed.includes(day)) {
+    if (completed.includes(displayDay)) {
       var btn = document.getElementById('sessionBtn');
       btn.textContent = '✓ Review session';
       btn.style.background = 'var(--success)';
@@ -386,7 +388,7 @@
 
     // ─ Stats
     document.getElementById('statStreak').textContent = state.streak || 0;
-    document.getElementById('statLeft').textContent   = Math.max(0, 60 - day + 1);
+    document.getElementById('statLeft').textContent   = Math.max(0, 60 - displayDay + 1);
     var scores = state.topicScores || {};
     var keys   = Object.keys(scores).filter(function(k) { return scores[k].total > 0; });
     if (keys.length) {
@@ -405,34 +407,36 @@
       }).join('');
     }
 
-    // ─ Streak grid
+    // ─ Streak grid — always 60 cells
     var grid     = document.getElementById('streakGrid');
     var isMobile = window.innerWidth < 768;
-    var startDay, endDay;
-    if (isMobile) {
-      startDay = Math.max(1, day - 10);
-      endDay   = Math.min(60, startDay + 29);
-    } else {
-      startDay = 1;
-      endDay   = 60;
-    }
 
     var doneIdx = 0;
-    for (var d = startDay; d <= endDay; d++) {
+    for (var d = 1; d <= 60; d++) {
       var cell = document.createElement('div');
       var cls  = 'cal-day';
-      if (d === day)           cls += ' today';
+      if (d === displayDay)           cls += ' today';
       else if (completed.includes(d)) { cls += ' done'; }
-      else if (d > day)        cls += ' future';
+      else if (d > displayDay)        cls += ' future';
 
       cell.className = cls;
       cell.textContent = d;
       cell.setAttribute('aria-label', 'Day ' + d +
-        (d === day ? ' — today' : completed.includes(d) ? ' — completed' : ''));
+        (d === displayDay ? ' — today' : completed.includes(d) ? ' — completed' : ''));
 
       if (completed.includes(d)) {
         cell.style.animationDelay = Math.min(doneIdx * 30, 900) + 'ms';
         doneIdx++;
+      }
+
+      // Clickable: past and current days navigate to that session
+      if (d <= displayDay) {
+        cell.style.cursor = 'pointer';
+        (function(dayNum) {
+          cell.addEventListener('click', function() {
+            window.location.href = 'session.html?day=' + dayNum;
+          });
+        })(d);
       }
 
       grid.appendChild(cell);
@@ -450,7 +454,7 @@
     var dayFill = document.getElementById('dayProgressFill');
     if (dayFill) {
       requestAnimationFrame(function () {
-        dayFill.style.width = ((state.currentDay || 1) / 60 * 100).toFixed(1) + '%';
+        dayFill.style.width = (displayDay / 60 * 100).toFixed(1) + '%';
       });
     }
     // Count-up on streak stat
@@ -548,5 +552,50 @@
 <script src="js/transitions.js"></script>
 <script src="js/shortcuts.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
+
+<div id="devBar" style="display:none;position:fixed;bottom:76px;left:0;right:0;background:#1a1a2e;border-top:1px solid #f59e0b;padding:8px 16px;z-index:200;font-family:monospace;font-size:12px;color:#f59e0b;align-items:center;gap:12px">
+  <span style="font-weight:700">DEV</span>
+  <label style="display:flex;align-items:center;gap:6px">
+    Day offset:
+    <input type="range" id="devDaySlider" min="0" max="59" value="0" style="width:120px">
+    <span id="devDayVal">+0</span>
+  </label>
+  <button id="devReset" style="background:#f59e0b;color:#000;border:none;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:11px">Reset</button>
+</div>
+<script>
+(function() {
+  var bar = document.getElementById('devBar');
+  if (!bar) return;
+  var offset = parseInt(localStorage.getItem('te_dev_day_offset') || '0');
+  var slider = document.getElementById('devDaySlider');
+  var val = document.getElementById('devDayVal');
+
+  function showBar() { bar.style.display = 'flex'; }
+
+  if (location.search.indexOf('dev=1') !== -1) showBar();
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === 'D') showBar();
+  });
+
+  if (slider) {
+    slider.value = offset;
+    if (val) val.textContent = '+' + offset;
+    slider.addEventListener('input', function() {
+      var v = parseInt(this.value);
+      localStorage.setItem('te_dev_day_offset', v);
+      if (val) val.textContent = '+' + v;
+      location.reload();
+    });
+  }
+
+  var resetBtn = document.getElementById('devReset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      localStorage.setItem('te_dev_day_offset', '0');
+      location.reload();
+    });
+  }
+})();
+</script>
 </body>
 </html>

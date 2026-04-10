@@ -63,7 +63,8 @@ const State = {
     completedDays: [],
     topicScores:   {},
     sessionErrors: [],
-    notes:         []
+    notes:         [],
+    regDate:       null
   },
 
   load() {
@@ -93,7 +94,6 @@ const State = {
       s.lastStudied = today;
     }
     s.totalMinutes  = (s.totalMinutes || 0) + (minutesSpent || 0);
-    s.currentDay    = Math.min(60, day + 1);
     this.save(s);
   },
 
@@ -174,6 +174,25 @@ const State = {
       s.topicScores[topicKey].wrong++;
     }
     this.save(s);
+  },
+
+  getCurrentDay() {
+    const s = this.load();
+    if (!s.regDate) return s.currentDay || 1;
+    var diff = Math.floor((Date.now() - new Date(s.regDate).getTime()) / 86400000);
+    return Math.min(60, diff + 1);
+  },
+
+  isUnlocked(day) {
+    return day <= this.getCurrentDay();
+  },
+
+  setRegDateIfMissing() {
+    const s = this.load();
+    if (!s.regDate) {
+      s.regDate = new Date().toISOString().slice(0, 10);
+      this.save(s);
+    }
   }
 };
 

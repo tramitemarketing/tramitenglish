@@ -593,12 +593,58 @@
   (function () {
     if (!Auth.requireAuth()) return;
 
-    var state    = State.load();
-    var plan     = Plan.today();
-    var day      = state.currentDay || 1;
-    var topicKey = topicKeyForDay(day);
+    var params    = new URLSearchParams(window.location.search);
+    var targetDay = parseInt(params.get('day') || '0') || null;
+    var state     = State.load();
+    var plan      = Plan.today();
+    var day       = targetDay || (state.currentDay || 1);
+    var topicKey  = topicKeyForDay(day);
 
-    Timer.start(document.getElementById('timerEl'));
+    // ---- Countdown timer ----
+    var dur = parseInt(localStorage.getItem('te_session_duration') || '10', 10);
+    var _countdown = dur * 60; // seconds remaining
+    var _timerEl   = document.getElementById('timerEl');
+    var _timerInterval = null;
+
+    function _formatCountdown(s) {
+      var m = Math.floor(s / 60);
+      var sec = s % 60;
+      return m + ':' + String(sec).padStart(2, '0');
+    }
+
+    function _startCountdown() {
+      if (_timerEl) _timerEl.textContent = _formatCountdown(_countdown);
+      clearInterval(_timerInterval);
+      _timerInterval = setInterval(function () {
+        _countdown--;
+        if (_timerEl) _timerEl.textContent = _formatCountdown(Math.max(_countdown, 0));
+        if (_countdown <= 0) {
+          clearInterval(_timerInterval);
+          // Time's up — auto-complete session
+          if (typeof window.toast === 'function') window.toast("Time's up!", 'info');
+          else if (window.UI && UI.toast) UI.toast("Time's up!");
+          // Trigger complete if still in exercise or theory step
+          var stepEx = document.getElementById('stepExercise');
+          var stepTh = document.getElementById('stepTheory');
+          var stepIn = document.getElementById('stepIntro');
+          if ((stepEx && stepEx.classList.contains('active')) ||
+              (stepTh && stepTh.classList.contains('active')) ||
+              (stepIn && stepIn.classList.contains('active'))) {
+            showComplete(correctCount, wrongCount, sessionErrs);
+          }
+        }
+      }, 1000);
+    }
+
+    // Patch Timer.stop so showComplete can still read elapsed minutes
+    var _sessionStart = Date.now();
+    var _origTimerStop = Timer.stop.bind(Timer);
+    Timer.stop = function () {
+      clearInterval(_timerInterval);
+      return Math.floor((Date.now() - _sessionStart) / 60000);
+    };
+
+    _startCountdown();
 
     // Theory
     document.getElementById('theoryLabel').textContent = plan ? plan.section : 'Theory';
@@ -642,15 +688,14 @@
     // ---- Exercise state ----
     var exercises    = getExercisesFor(day) || [];
 
-    // Limit exercises by session duration
-    var dur = parseInt(localStorage.getItem('te_session_duration') || '10', 10);
-    var maxEx = dur === 5 ? 5 : dur === 10 ? 10 : 20;
+    // Limit exercises by session duration (dur already declared above)
+    var maxEx = dur <= 5 ? 5 : dur <= 10 ? 10 : 20;
     if (exercises.length > maxEx) {
       exercises = exercises.slice(0, maxEx);
     }
 
     // Populate intro screen
-    document.getElementById('introDayLabel').textContent = 'Day ' + (state.currentDay || 1);
+    document.getElementById('introDayLabel').textContent = 'Day ' + day;
     document.getElementById('introDuration').textContent = dur + ' min';
     document.getElementById('introCount').textContent = exercises.length + (exercises.length === 1 ? ' exercise' : ' exercises');
     (function() {
