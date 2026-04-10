@@ -1,4 +1,4 @@
-var CACHE = 'te-v2';
+var CACHE = 'te-v3';
 var ASSETS = [
   '/index.html', '/dashboard.html', '/session.html',
   '/test.html', '/stats.html', '/library.html', '/review.html',
@@ -26,29 +26,21 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   if (e.request.method !== 'GET') return;
+  // Never intercept page navigations — let browser handle them directly
+  if (e.request.mode === 'navigate') return;
   var url = e.request.url;
-  // Never intercept external resources
-  if (url.includes('supabase') || url.includes('googleapis') ||
-      url.includes('jsdelivr') || url.includes('gstatic') ||
-      url.includes('fonts.') || !url.startsWith('https://tramitenglish')) {
-    return;
-  }
+  // Only cache same-origin static assets
+  if (!url.startsWith(self.location.origin)) return;
   e.respondWith(
     caches.match(e.request).then(function(cached) {
-      var net = fetch(e.request).then(function(res) {
+      if (cached) return cached;
+      return fetch(e.request).then(function(res) {
         if (res && res.ok) {
           var clone = res.clone();
-          caches.open(CACHE).then(function(c) { c.put(e.request, clone); });
+          caches.open(CACHE).then(function(c) { c.put(e.request, clone).catch(function(){}); });
         }
         return res;
-      }).catch(function() {
-        // Network failed — return cache or offline page
-        return cached || new Response('Offline — please reconnect', {
-          status: 503,
-          headers: { 'Content-Type': 'text/plain' }
-        });
       });
-      return cached || net;
     })
   );
 });
