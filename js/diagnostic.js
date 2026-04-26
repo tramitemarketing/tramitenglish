@@ -137,6 +137,7 @@ let _session = null;   /* {
 } */
 let _timerInterval  = null;
 let _partTimerStart = null;   // ms timestamp when current part started
+let _isPaused       = false;  // true = manual pause overlay visible
 
 function sessionKey(id)  { return `te_test_session_${id}`; }
 function resultsKey(id)  { return `te_test_results_${id}`; }
@@ -164,6 +165,10 @@ function diagInit() {
   var saved = localStorage.getItem(sessionKey(testId));
   if (saved) {
     _session = JSON.parse(saved);
+    // Detect manual pause: globalStartTs null, not submitted, not on strategy card
+    if (!_session.globalStartTs && !_session.submittedAt && _session.phase !== 'strategy') {
+      _isPaused = true;
+    }
   } else {
     _session = {
       testId:       testId,
@@ -186,12 +191,21 @@ function diagInit() {
   startGlobalTimer();
   startPartTimer();
   renderPage();
+
+  // Restore pause overlay if was paused when page closed
+  if (_isPaused) {
+    var overlay = document.getElementById('pauseOverlay');
+    if (overlay) overlay.style.display = 'flex';
+    var pauseBtn = document.getElementById('pauseBtn');
+    if (pauseBtn) pauseBtn.setAttribute('data-paused', 'true');
+  }
 }
 
 // ── Timer ─────────────────────────────────────────────────────
 function startGlobalTimer() {
   clearInterval(_timerInterval);
   _timerInterval = setInterval(function() {
+    if (!_session || !_session.globalStartTs) return;
     var elapsed = Math.floor((Date.now() - _session.globalStartTs) / 1000) + (_session.totalElapsed || 0);
     var el = document.getElementById('headerTimer');
     if (el) el.textContent = formatTime(elapsed);
@@ -208,6 +222,48 @@ function stopPartTimer() {
   var elapsed = Math.floor((Date.now() - _partTimerStart) / 1000);
   _session.timeByPart[partNum] = (_session.timeByPart[partNum] || 0) + elapsed;
   _partTimerStart = null;
+}
+
+// ── Pause helpers ─────────────────────────────────────────────
+function _freezeTimer() {
+  if (_session.globalStartTs) {
+    _session.totalElapsed = Math.floor((Date.now() - _session.globalStartTs) / 1000) + (_session.totalElapsed || 0);
+    _session.globalStartTs = null;
+  }
+  saveSession();
+}
+
+function _unfreezeTimer() {
+  _session.globalStartTs = Date.now();
+  saveSession();
+}
+
+function pauseTest() {
+  if (_isPaused || _session.phase === 'strategy') return;
+  _isPaused = true;
+  _freezeTimer();
+  var overlay = document.getElementById('pauseOverlay');
+  if (overlay) overlay.style.display = 'flex';
+  var btn = document.getElementById('pauseBtn');
+  if (btn) btn.setAttribute('data-paused', 'true');
+}
+
+function resumeTest() {
+  if (!_isPaused) return;
+  _isPaused = false;
+  _unfreezeTimer();
+  startGlobalTimer();
+  var overlay = document.getElementById('pauseOverlay');
+  if (overlay) overlay.style.display = 'none';
+  var btn = document.getElementById('pauseBtn');
+  if (btn) btn.removeAttribute('data-paused');
+}
+
+function updatePauseButton() {
+  var btn = document.getElementById('pauseBtn');
+  if (!btn) return;
+  var ph = _session.phase;
+  btn.style.display = (ph === 'strategy' || ph === 'results' || ph === 'errors') ? 'none' : '';
 }
 
 function formatTime(seconds) {
@@ -265,6 +321,7 @@ function renderPage() {
 
   updateNavButtons();
   updateAnsweredCount();
+  updatePauseButton();
 }
 
 function updateHeader() {
@@ -355,26 +412,37 @@ function renderStrategy() {
   var el   = document.getElementById('phase-strategy');
   if (!el || !s) { _session.phase = 'questions'; renderPage(); return; }
 
-  var html = '<div class="strat-header">'
+  // Freeze timer while reading strategy tips
+  _freezeTimer();
+
+  var html = '<div class="strat-pause-notice">'
+    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'
+    + ' Timer paused — read these tips before starting</div>'
+    + '<div class="strat-header">'
     + '<div class="strat-part-label">Part ' + part.num + ' — Estimated time: <strong>' + s.estimated + '</strong></div>'
     + '<h2 class="strat-title">' + s.title + '</h2>'
     + '<p class="strat-subtitle">' + s.subtitle + '</p>'
     + '</div>'
+    + '<div class="strat-tips-heading">Tips for doing your best:</div>'
     + '<div class="strat-tips">';
   s.tips.forEach(function(tip, i) {
     html += '<div class="strat-tip"><span class="strat-num">' + (i+1) + '</span><span>' + tip + '</span></div>';
   });
   html += '</div>'
-    + '<div class="strat-overview"><strong>General overview:</strong> ' + STRATEGY.overview.note + '</div>';
+    + '<div class="strat-overview"><strong>General strategy:</strong> ' + STRATEGY.overview.note + '</div>';
 
   el.innerHTML = html;
 
-  // next button for strategy = start part
+  // next button for strategy = start part (and unfreeze timer)
   var next = document.getElementById('nextBtn');
   if (next) {
     next.onclick = function() {
       _session.phase = 'questions';
       saveSession();
+      if (!_isPaused) {
+        _unfreezeTimer();
+        startGlobalTimer();
+      }
       renderPage();
     };
   }
@@ -1005,4 +1073,6 @@ function renderErrors() {
 }
 
 // ── Expose ────────────────────────────────────────────────────
-window.diagInit = diagInit;
+window.diagInit   = diagInit;
+window.pauseTest  = pauseTest;
+window.resumeTest = resumeTest;

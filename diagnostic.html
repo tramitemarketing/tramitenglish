@@ -71,6 +71,20 @@
       letter-spacing: 0.08em; margin-top: 1px;
     }
 
+    /* Pause button in header */
+    .diag-pause-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px; cursor: pointer;
+      color: var(--text2);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      flex-shrink: 0;
+    }
+    .diag-pause-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .diag-pause-btn[data-paused] { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+
     /* Submit button in header */
     .diag-submit-btn {
       font-size: 11px; font-weight: 700;
@@ -473,6 +487,55 @@
       border-radius: var(--radius);
     }
 
+    /* ── Pause overlay ── */
+    #pauseOverlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.72);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .pause-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px; max-width: 300px; width: 88%;
+      text-align: center;
+    }
+    .pause-icon { color: var(--accent); margin-bottom: 14px; display: flex; justify-content: center; }
+    .pause-title {
+      font-family: var(--font-display);
+      font-size: 26px; color: var(--text);
+      margin-bottom: 8px; letter-spacing: -0.3px;
+    }
+    .pause-sub { font-size: 13px; color: var(--subtext); margin-bottom: 24px; line-height: 1.6; }
+    .pause-resume-btn {
+      width: 100%; padding: 12px 16px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius);
+      font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: var(--font-ui);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity 0.15s;
+    }
+    .pause-resume-btn:hover { opacity: 0.88; }
+    [data-theme="dark"] .pause-resume-btn { color: #0c0c0c; }
+
+    /* ── Strategy tips enhancements ── */
+    .strat-pause-notice {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(217,119,6,0.08);
+      border: 1px solid rgba(217,119,6,0.22);
+      border-radius: var(--radius);
+      padding: 9px 13px; margin-bottom: 18px;
+      font-size: 12px; font-weight: 600;
+      color: var(--warning);
+    }
+    .strat-tips-heading {
+      font-size: 10px; font-weight: 700;
+      color: var(--subtext); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 8px;
+    }
+
     /* ── Errors ── */
     .errors-title {
       font-family: var(--font-display);
@@ -565,6 +628,11 @@
       <div class="diag-timer-label">elapsed</div>
     </div>
     <div class="diag-right">
+      <button id="pauseBtn" class="diag-pause-btn" title="Pause test" aria-label="Pause test" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+        </svg>
+      </button>
       <button class="diag-submit-btn" id="headerSubmitBtn" aria-label="Go to review">Review &amp; Submit</button>
     </div>
   </header>
@@ -589,6 +657,23 @@
     <div id="phase-errors" class="phase"></div>
   </main>
 
+  <!-- Pause overlay -->
+  <div id="pauseOverlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Test paused">
+    <div class="pause-modal">
+      <div class="pause-icon">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+        </svg>
+      </div>
+      <h2 class="pause-title">Test Paused</h2>
+      <p class="pause-sub">Your progress is saved. Resume whenever you're ready to continue.</p>
+      <button id="resumeBtn" class="pause-resume-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Resume Test
+      </button>
+    </div>
+  </div>
+
   <!-- Bottom footer -->
   <div id="diagFooter">
     <button id="prevBtn" style="display:none">&#8592; Back</button>
@@ -607,6 +692,16 @@
     // Back button
     document.getElementById('backBtn').addEventListener('click', function () {
       window.location.href = 'test.html';
+    });
+
+    // Pause button
+    document.getElementById('pauseBtn').addEventListener('click', function () {
+      if (typeof pauseTest === 'function') pauseTest();
+    });
+
+    // Resume button (inside pause overlay)
+    document.getElementById('resumeBtn').addEventListener('click', function () {
+      if (typeof resumeTest === 'function') resumeTest();
     });
 
     // Review button (footer)
