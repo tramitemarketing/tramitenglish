@@ -110,6 +110,73 @@
       font-family: var(--font-mono);
       font-size: 12px;
     }
+
+    /* Stats bar */
+    .tests-stats-bar {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .stat-cell {
+      flex: 1; padding: 12px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: 17px; font-weight: 700;
+      color: var(--accent); line-height: 1; margin-bottom: 3px;
+    }
+    .stat-lbl {
+      font-size: 10px; font-weight: 600;
+      color: var(--subtext); text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* In-progress detail */
+    .test-progress {
+      font-size: 11px; color: var(--warning);
+      font-family: var(--font-mono); font-weight: 600; margin-top: 3px;
+    }
+
+    /* Completed: date under score */
+    .test-date { font-size: 11px; color: var(--subtext); margin-top: 2px; }
+
+    /* Retake button */
+    .test-retake-btn {
+      display: inline-block; margin-top: 7px;
+      font-size: 11px; color: var(--subtext); font-weight: 600;
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 3px 9px;
+      cursor: pointer; font-family: var(--font-ui);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .test-retake-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Exam parts breakdown */
+    .exam-parts-toggle {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; color: var(--accent);
+      cursor: pointer; margin-top: 8px; list-style: none; user-select: none;
+    }
+    .exam-parts-toggle::marker, .exam-parts-toggle::-webkit-details-marker { display: none; }
+    .exam-parts-caret { transition: transform 0.2s; display: inline-block; }
+    details[open] .exam-parts-caret { transform: rotate(90deg); }
+    .exam-parts-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5px 16px; margin-top: 10px;
+    }
+    .exam-part-row {
+      font-size: 11px; color: var(--text2);
+      display: flex; gap: 6px; align-items: baseline;
+    }
+    .exam-part-num {
+      font-family: var(--font-mono); font-weight: 700;
+      color: var(--accent); min-width: 14px; flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -136,6 +203,35 @@
         <strong>52 questions</strong> &middot; 7 parts &middot; 75 min &middot;
         Complete each test to unlock the next.
         You can pause and resume at any time.
+      </div>
+      <details>
+        <summary class="exam-parts-toggle">
+          <span class="exam-parts-caret">&#9658;</span> Show format
+        </summary>
+        <div class="exam-parts-grid">
+          <div class="exam-part-row"><span class="exam-part-num">1</span>Multiple-Choice Cloze &middot; 8 q &middot; 10 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">2</span>Open Cloze &middot; 8 q &middot; 10 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">3</span>Word Formation &middot; 8 q &middot; 10 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">4</span>Key-Word Transformation &middot; 6 q &middot; 12 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">5</span>Reading Multiple Choice &middot; 6 q &middot; 12 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">6</span>Gapped Text &middot; 6 q &middot; 12 min</div>
+          <div class="exam-part-row"><span class="exam-part-num">7</span>Multiple Matching &middot; 10 q &middot; 12 min</div>
+        </div>
+      </details>
+    </div>
+
+    <div id="statsBar" class="tests-stats-bar" style="display:none">
+      <div class="stat-cell">
+        <div class="stat-val" id="statAvgScore">—</div>
+        <div class="stat-lbl">Avg score</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" id="statBest">—</div>
+        <div class="stat-lbl">Best score</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" id="statAvgTime">—</div>
+        <div class="stat-lbl">Avg time</div>
       </div>
     </div>
 
@@ -177,15 +273,53 @@
     var completed = JSON.parse(localStorage.getItem('te_completed_tests') || '[]');
     document.getElementById('completedCount').textContent = completed.length + ' / 10';
 
-    var grid = document.getElementById('testsGrid');
+    // ── Helpers ──────────────────────────────────────────────
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function fmtSecs(s) { return pad(Math.floor(s / 60)) + ':' + pad(s % 60); }
+    function fmtDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    }
+    function countAnswers(session) {
+      if (!session || !session.answers) return 0;
+      return Object.keys(session.answers).reduce(function (s, k) {
+        return s + Object.keys(session.answers[k]).length;
+      }, 0);
+    }
+
+    // ── Stats bar ─────────────────────────────────────────────
+    var allResults = completed.map(function (tid) {
+      return JSON.parse(localStorage.getItem('te_test_results_' + tid) || 'null');
+    }).filter(Boolean);
+
+    if (allResults.length > 0) {
+      var pcts     = allResults.map(function (r) { return Math.round(r.totalCorrect / r.totalQ * 100); });
+      var avgPct   = Math.round(pcts.reduce(function (s, v) { return s + v; }, 0) / pcts.length);
+      var bestPct  = Math.max.apply(null, pcts);
+      var avgSecs  = Math.round(allResults.reduce(function (s, r) { return s + (r.totalElapsed || 0); }, 0) / allResults.length);
+      document.getElementById('statAvgScore').textContent = avgPct + '%';
+      document.getElementById('statBest').textContent     = bestPct + '%';
+      document.getElementById('statAvgTime').textContent  = fmtSecs(avgSecs);
+      document.getElementById('statsBar').style.display   = '';
+    }
+
+    // ── Build cards ───────────────────────────────────────────
+    var grid     = document.getElementById('testsGrid');
+    var LOCK_SVG  = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    var ARROW_SVG = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
     DIAGNOSTIC_TESTS.forEach(function (test) {
-      var tid     = test.id;
+      var tid      = test.id;
       var isLocked = tid > 1 && !completed.includes(tid - 1);
       var isDone   = completed.includes(tid);
       var session  = JSON.parse(localStorage.getItem('te_test_session_' + tid) || 'null');
-      var inProg   = session && !session.submittedAt && session.partIdx > 0;
       var results  = JSON.parse(localStorage.getItem('te_test_results_' + tid) || 'null');
+
+      // Fixed: also check answers at partIdx 0
+      var inProg = session && !session.submittedAt && (
+        session.partIdx > 0 || countAnswers(session) > 0
+      );
 
       var statusHtml, cardCls;
       if (isLocked) {
@@ -202,16 +336,23 @@
         cardCls    = '';
       }
 
-      var scoreHtml = '';
-      if (results) {
+      var extraHtml = '';
+      if (inProg && session) {
+        var ans = countAnswers(session);
+        extraHtml = '<div class="test-progress">Part ' + (session.partIdx + 1) + ' of 7'
+          + (ans > 0 ? ' &middot; ' + ans + ' answered' : '') + '</div>';
+      }
+      if (isDone && results) {
         var pct = Math.round(results.totalCorrect / results.totalQ * 100);
         var cls = pct >= 75 ? 'score-good' : pct >= 50 ? 'score-mid' : 'score-bad';
-        scoreHtml = '<div class="test-score ' + cls + '">' + results.totalCorrect + '/' + results.totalQ + ' · ' + pct + '%</div>';
+        var dt  = fmtDate(results.completedAt);
+        extraHtml = '<div class="test-score ' + cls + '">'
+          + results.totalCorrect + '/' + results.totalQ + ' &middot; ' + pct + '%'
+          + (results.totalElapsed ? ' &middot; ' + fmtSecs(results.totalElapsed) : '')
+          + '</div>'
+          + (dt ? '<div class="test-date">' + dt + '</div>' : '')
+          + '<button class="test-retake-btn" data-tid="' + tid + '">Retake</button>';
       }
-
-      var arrow = isLocked
-        ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
-        : '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
       var href = isLocked ? '#' : 'diagnostic.html?test=' + tid;
       var card = document.createElement('a');
@@ -221,12 +362,27 @@
       card.innerHTML =
         '<div class="test-num">' + tid + '</div>'
         + '<div class="test-body">'
-        + '<div class="test-title">Practice Test ' + tid + '</div>'
-        + '<div class="test-meta">' + statusHtml + '</div>'
-        + scoreHtml
+        +   '<div class="test-title">Practice Test ' + tid + '</div>'
+        +   '<div class="test-meta">' + statusHtml + '</div>'
+        +   extraHtml
         + '</div>'
-        + '<div class="test-arrow" aria-hidden="true">' + arrow + '</div>';
+        + '<div class="test-arrow" aria-hidden="true">' + (isLocked ? LOCK_SVG : ARROW_SVG) + '</div>';
       grid.appendChild(card);
+    });
+
+    // Retake — stop propagation, confirm, wipe localStorage entries for that test
+    grid.addEventListener('click', function (e) {
+      var btn = e.target.closest('.test-retake-btn');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var tid = parseInt(btn.dataset.tid, 10);
+      if (!confirm('Retake Test ' + tid + '? Your current score will be removed.')) return;
+      localStorage.removeItem('te_test_session_' + tid);
+      localStorage.removeItem('te_test_results_' + tid);
+      var done = JSON.parse(localStorage.getItem('te_completed_tests') || '[]');
+      localStorage.setItem('te_completed_tests', JSON.stringify(done.filter(function (id) { return id !== tid; })));
+      location.reload();
     });
 
     // Theme toggle
