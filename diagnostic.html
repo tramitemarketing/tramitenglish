@@ -519,6 +519,16 @@
     }
     .pause-resume-btn:hover { opacity: 0.88; }
     [data-theme="dark"] .pause-resume-btn { color: #0c0c0c; }
+    .pause-save-btn {
+      width: 100%; padding: 10px 16px; margin-top: 8px;
+      background: none; color: var(--text2);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-ui);
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .pause-save-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 
     /* ── Strategy tips enhancements ── */
     .strat-pause-notice {
@@ -671,6 +681,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Resume Test
       </button>
+      <button id="saveLaterBtn" class="pause-save-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save &amp; resume later
+      </button>
     </div>
   </div>
 
@@ -702,6 +716,11 @@
     // Resume button (inside pause overlay)
     document.getElementById('resumeBtn').addEventListener('click', function () {
       if (typeof resumeTest === 'function') resumeTest();
+    });
+
+    // Save & resume later — session already persisted, just go back to test list
+    document.getElementById('saveLaterBtn').addEventListener('click', function () {
+      window.location.href = 'test.html';
     });
 
     // Review button (footer)
